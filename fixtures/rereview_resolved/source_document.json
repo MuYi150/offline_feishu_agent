@@ -1,0 +1,9 @@
+{
+  "schema_version": "2.0",
+  "document_id": "doc-rereview_resolved",
+  "title": "复审已修正文档",
+  "author": "Fixture 投稿人",
+  "wiki_name": "科研团队知识库",
+  "review_round": 2,
+  "source_pdf": "source.pdf"
+}

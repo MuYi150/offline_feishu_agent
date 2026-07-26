@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "document_id": "doc-rereview_resolved",
+  "review_round": 1,
+  "result": "need_revision",
+  "issues": [
+    {
+      "issue_id": "old-1",
+      "level": "major",
+      "category": "reproducibility",
+      "problem": "缺少命令输出。",
+      "suggestion": "补充输出。"
+    },
+    {
+      "issue_id": "old-minor",
+      "level": "minor",
+      "category": "format",
+      "problem": "空格问题。",
+      "suggestion": "调整空格。"
+    }
+  ]
+}

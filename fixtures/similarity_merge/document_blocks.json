@@ -1,0 +1,20 @@
+[
+  {
+    "type": "heading",
+    "text": "实验记录",
+    "level": 1
+  },
+  {
+    "type": "paragraph",
+    "text": "本文记录依赖安装、实际命令、观察到的结果和故障排查过程。"
+  },
+  {
+    "type": "code",
+    "text": "python -m pytest -q\n# 12 passed",
+    "language": "powershell"
+  },
+  {
+    "type": "paragraph",
+    "text": "结论：调整输入校验后，异常被稳定复现并修复。"
+  }
+]

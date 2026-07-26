@@ -1,0 +1,12 @@
+{
+  "schema_version": "2.0",
+  "document_id": "doc-partial_pages",
+  "title": "部分页面不可用",
+  "author": "Fixture 投稿人",
+  "wiki_name": "科研团队知识库",
+  "review_round": 1,
+  "source_pdf": "source.pdf",
+  "render_fail_pages": [
+    2
+  ]
+}

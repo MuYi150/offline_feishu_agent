@@ -1,0 +1,20 @@
+[
+  {
+    "document_id": "existing-1",
+    "title": "已有部署手册",
+    "wiki_name": "工程知识库",
+    "link": "fixture://existing-1",
+    "status": "已公示",
+    "score": 0.91,
+    "content": "同一工具的完整部署步骤和故障处理。"
+  },
+  {
+    "document_id": "doc-similarity_merge",
+    "title": "已有部署手册",
+    "wiki_name": "工程知识库",
+    "link": "fixture://existing-1",
+    "status": "已公示",
+    "score": 0.99,
+    "content": "同一工具的完整部署步骤和故障处理。"
+  }
+]

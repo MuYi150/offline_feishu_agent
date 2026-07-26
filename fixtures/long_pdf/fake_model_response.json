@@ -1,0 +1,97 @@
+{
+  "review": {
+    "result": "pass",
+    "summary": "文档达到科研知识库最低质量标准。",
+    "pass_reason": "内容清晰、证据充分且可复现。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "no_similar",
+      "decision": "keep_independent",
+      "summary": "未发现明显相似文章。",
+      "candidate_count": 0,
+      "candidates_considered": []
+    },
+    "learning_trace_assessment": "包含明确的操作过程、观察和结论。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "evidence_used": [],
+      "limitations": []
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {
+      "resolutions": []
+    }
+  },
+  "visual_batches": [
+    {
+      "batch_summary": "检查第 1-8 页。",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "evidence": [
+        {
+          "evidence_id": "page-1",
+          "page": 1,
+          "observation": "页面包含实际命令和验证结果。",
+          "supports": [
+            "reproducibility"
+          ]
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "batch_summary": "检查第 9-16 页。",
+      "pages_reviewed": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "evidence": [
+        {
+          "evidence_id": "page-9",
+          "page": 9,
+          "observation": "页面包含实际命令和验证结果。",
+          "supports": [
+            "reproducibility"
+          ]
+        }
+      ],
+      "limitations": []
+    }
+  ]
+}

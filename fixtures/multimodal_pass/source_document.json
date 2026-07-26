@@ -1,0 +1,9 @@
+{
+  "schema_version": "2.0",
+  "document_id": "doc-multimodal_pass",
+  "title": "包含命令和表格的多模态记录",
+  "author": "Fixture 投稿人",
+  "wiki_name": "科研团队知识库",
+  "review_round": 1,
+  "source_pdf": "source.pdf"
+}
