@@ -25,7 +25,16 @@ def test_extractor_preserves_markdown_table() -> None:
 
 def test_prompt_has_composable_sections_and_no_base64() -> None:
     prompt = ReviewPromptBuilder("标准").build(
-        source=SourceDocument(document_id="d", title="t", author="a"),
+        source=SourceDocument(
+            case_id="case",
+            document_id="d",
+            node_token="node",
+            title="t",
+            wiki_name="wiki",
+            author_id="author-id",
+            author="a",
+            link="https://example.invalid/wiki/d",
+        ),
         content="正文",
         manifest=VisualManifest(source="unavailable"),
         coverage=InputCoverage(structured_text_available=True, visual_pages_complete=False),

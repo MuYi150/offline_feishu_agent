@@ -2,7 +2,7 @@
 
 ## 边界
 
-系统只有一个核心 `ReviewAgent` 工作流。LangGraph 负责节点顺序、条件边和 checkpoint；规则、PDF、Prompt、模型、校验、通知和存储都是可以脱离 Graph 单测的普通 Python 组件。Fixture 是本阶段唯一文档来源，本地目录是唯一结果落点。
+系统只有一个核心 `ReviewAgent` 工作流。LangGraph 负责节点顺序、条件边和 checkpoint；规则、PDF、Prompt、模型、校验、通知和存储都是可以脱离 Graph 单测的普通 Python 组件。Fixture 是本阶段唯一文档来源，本地目录是唯一结果落点。Fixture adapter 在边界保留 v1 的 source 字段、原始飞书 Blocks 包装、附件包装和 mock behavior 文件，再统一转换为 v2 内部 DTO；业务组件不依赖测试文件的传输形态。
 
 ```mermaid
 flowchart TD
@@ -46,4 +46,3 @@ flowchart TD
 - Key 使用 `SecretStr`，安全配置快照只记录 Key 是否存在。
 - Prompt、日志、trace 和请求摘要不保存 Base64、Authorization、完整请求头或 reasoning content。
 - 认证错误、模型空响应、非 JSON 和 Schema 错误不会生成业务状态或通知。
-

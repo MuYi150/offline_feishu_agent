@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-invalid_model_output",
-  "title": "非法模型输出案例",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "case_id": "invalid_model_output",
+  "document_id": "test_doc_invalid_model_output",
+  "node_token": "test_node_invalid_model_output",
+  "title": "笔记_JSON解析测试-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_007",
+  "author": "测试用户007",
+  "link": "https://example.invalid/wiki/test_doc_invalid_model_output",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

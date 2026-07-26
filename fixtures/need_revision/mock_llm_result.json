@@ -1,12 +1,23 @@
 {
-  "review": {
-    "result": "recommend_human_review",
-    "summary": "内容涉及需要领域专家判断的敏感结论。",
+  "behavior": "return",
+  "response": {
+    "result": "need_revision",
+    "summary": "已有实践痕迹，但无法复现。",
     "pass_reason": "",
     "blocking_count": 0,
-    "major_count": 0,
+    "major_count": 1,
     "minor_count": 0,
-    "issues": [],
+    "issues": [
+      {
+        "issue_id": "issue-1",
+        "level": "major",
+        "category": "reproducibility",
+        "position": "全文",
+        "problem": "缺少输入样例和关键输出。",
+        "suggestion": "补充最小输入、命令与输出。",
+        "evidence_ids": []
+      }
+    ],
     "similarity_check": {
       "status": "no_similar",
       "decision": "keep_independent",
@@ -23,8 +34,10 @@
       "evidence_used": [],
       "limitations": []
     },
-    "revision_priority": [],
-    "suggested_next_action": "human_review",
+    "revision_priority": [
+      "缺少输入样例和关键输出。"
+    ],
+    "suggested_next_action": "author_revise",
     "re_review_assessment": {
       "resolutions": []
     }

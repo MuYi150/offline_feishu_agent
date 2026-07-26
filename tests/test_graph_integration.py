@@ -69,8 +69,8 @@ def test_long_pdf_uses_batches_and_key_pages(settings) -> None:
 def test_rereview_prompt_only_contains_previous_blocking_major(settings) -> None:
     summary = ReviewRunner(settings).run_case("rereview_resolved")
     prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
-    assert "old-1" in prompt
-    assert "old-minor" not in prompt
+    assert "previous-1" in prompt
+    assert "previous-2" not in prompt
     assert "复审不重新召回相似候选" in prompt
 
 
@@ -108,4 +108,3 @@ def test_checkpoint_resume_replays_only_failed_save_node(settings, monkeypatch) 
     assert resumed.ok
     request = json.loads((resumed.output_dir / "model_request_summary.json").read_text(encoding="utf-8"))
     assert [call["phase"] for call in request["calls"]] == ["final_review"]
-

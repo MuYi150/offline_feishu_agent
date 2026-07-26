@@ -7,7 +7,7 @@ import fitz
 
 from .config import Settings
 from .errors import PdfError
-from .models import SourceDocument, VisualManifest, VisualPage
+from .models import FixtureOptions, SourceDocument, VisualManifest, VisualPage
 from .storage import sha256_file
 
 
@@ -20,19 +20,23 @@ class PdfPageRenderer:
         case_path: Path,
         output_dir: Path,
         source: SourceDocument,
+        options: FixtureOptions,
         content: str,
     ) -> tuple[VisualManifest, str]:
         pages_source = case_path / "pages"
-        if pages_source.is_dir() and source.source_pdf is None:
-            return self._copy_fixture_pages(pages_source, output_dir, source), ""
+        conventional_pdf = case_path / "source.pdf"
+        configured_pdf = options.source_pdf
+        if pages_source.is_dir() and not configured_pdf and not conventional_pdf.exists():
+            return self._copy_fixture_pages(pages_source, output_dir, options), ""
 
-        if source.pdf_required and not source.source_pdf:
+        if options.pdf_required and not configured_pdf and not conventional_pdf.exists():
             return self._unavailable("Fixture 要求提供 PDF，但未声明 source_pdf"), "要求的 PDF 未提供"
 
-        if source.source_pdf:
-            pdf_path = case_path / source.source_pdf
+        if configured_pdf or conventional_pdf.exists():
+            pdf_name = configured_pdf or "source.pdf"
+            pdf_path = case_path / pdf_name
             if not pdf_path.exists():
-                return self._unavailable(f"声明的 PDF 不存在：{source.source_pdf}"), "声明的 PDF 不存在"
+                return self._unavailable(f"声明的 PDF 不存在：{pdf_name}"), "声明的 PDF 不存在"
             if pdf_path.stat().st_size > self.settings.max_pdf_bytes:
                 return self._unavailable("PDF 文件大小超过安全上限"), "PDF 文件大小超过安全上限"
             kind = "pdf"
@@ -44,7 +48,7 @@ class PdfPageRenderer:
             kind = "generated_pdf"
 
         try:
-            manifest = self.render_pdf(pdf_path, output_dir / "pages", source.render_fail_pages, kind)
+            manifest = self.render_pdf(pdf_path, output_dir / "pages", options.render_fail_pages, kind)
             reason = "" if manifest.rendered_pages else "PDF 没有可用页面"
             return manifest, reason
         except PdfError as exc:
@@ -120,7 +124,7 @@ class PdfPageRenderer:
         finally:
             document.close()
 
-    def _copy_fixture_pages(self, source_dir: Path, output_dir: Path, source: SourceDocument) -> VisualManifest:
+    def _copy_fixture_pages(self, source_dir: Path, output_dir: Path, options: FixtureOptions) -> VisualManifest:
         files = sorted(path for path in source_dir.iterdir() if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"})
         if len(files) > self.settings.max_pdf_pages:
             return self._unavailable(f"页面数 {len(files)} 超过上限 {self.settings.max_pdf_pages}")
@@ -129,7 +133,7 @@ class PdfPageRenderer:
         pages: list[VisualPage] = []
         failed: list[int] = []
         for index, item in enumerate(files, 1):
-            if index in source.render_fail_pages:
+            if index in options.render_fail_pages:
                 failed.append(index)
                 continue
             target = target_dir / f"page-{index:04d}{item.suffix.lower()}"

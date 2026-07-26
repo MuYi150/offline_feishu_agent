@@ -1,5 +1,6 @@
 {
-  "review": {
+  "behavior": "return",
+  "response": {
     "result": "pass",
     "summary": "文档达到科研知识库最低质量标准。",
     "pass_reason": "内容清晰、证据充分且可复现。",
@@ -28,6 +29,5 @@
     "re_review_assessment": {
       "resolutions": []
     }
-  },
-  "raw": "这不是 JSON"
+  }
 }

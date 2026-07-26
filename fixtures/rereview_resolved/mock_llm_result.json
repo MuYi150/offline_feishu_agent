@@ -1,5 +1,6 @@
 {
-  "review": {
+  "behavior": "return",
+  "response": {
     "result": "pass",
     "summary": "文档达到科研知识库最低质量标准。",
     "pass_reason": "内容清晰、证据充分且可复现。",
@@ -8,9 +9,9 @@
     "minor_count": 0,
     "issues": [],
     "similarity_check": {
-      "status": "no_similar",
+      "status": "not_applicable",
       "decision": "keep_independent",
-      "summary": "未发现明显相似文章。",
+      "summary": "存在需要处理的相似内容。",
       "candidate_count": 0,
       "candidates_considered": []
     },
@@ -26,7 +27,13 @@
     "revision_priority": [],
     "suggested_next_action": "admin_confirm",
     "re_review_assessment": {
-      "resolutions": []
+      "resolutions": [
+        {
+          "issue_id": "old-1",
+          "status": "resolved",
+          "evidence": "正文新增命令和测试输出。"
+        }
+      ]
     }
   }
 }

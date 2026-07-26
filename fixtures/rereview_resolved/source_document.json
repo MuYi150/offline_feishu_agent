@@ -1,9 +1,29 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-rereview_resolved",
+  "case_id": "rereview_resolved",
+  "document_id": "test_doc_rereview_resolved",
+  "node_token": "test_node_rereview_resolved",
   "title": "复审已修正文档",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 2,
-  "source_pdf": "source.pdf"
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_rereview_resolved",
+  "author": "测试用户_rereview_resolved",
+  "link": "https://example.invalid/wiki/test_doc_rereview_resolved",
+  "review_method": "AI",
+  "status": "需修改",
+  "review_round": 1,
+  "updated_at": "2026/07/02 10:00:00",
+  "last_ai_review_at": "2026/07/01 10:00:00",
+  "previous_issues": [
+    {
+      "level": "major",
+      "category": "reproducibility",
+      "problem": "缺少命令输出。",
+      "suggestion": "补充输出。"
+    },
+    {
+      "level": "minor",
+      "category": "format",
+      "problem": "空格问题。",
+      "suggestion": "调整空格。"
+    }
+  ]
 }

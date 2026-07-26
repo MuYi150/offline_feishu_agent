@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-reject_ai_generated",
-  "title": "包含 AI 回复残留的投稿",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "case_id": "reject_ai_generated",
+  "document_id": "test_doc_reject_ai_generated",
+  "node_token": "test_node_reject_ai_generated",
+  "title": "笔记_通用编程概念整理-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_003",
+  "author": "测试用户003",
+  "link": "https://example.invalid/wiki/test_doc_reject_ai_generated",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

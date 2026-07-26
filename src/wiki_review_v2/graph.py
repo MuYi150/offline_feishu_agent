@@ -14,6 +14,7 @@ from .fixtures import DocumentExtractor, FixtureDocumentSource
 from .model import ModelRequest, ReviewModel, request_summary
 from .models import (
     InputCoverage,
+    FixtureOptions,
     ModelReviewPayload,
     PreviousReview,
     ReviewGraphState,
@@ -181,38 +182,40 @@ class ReviewWorkflow:
         bundle = self.fixture_source.load(Path(state.case_path))
         return {
             "source_document": bundle.source_document.model_dump(mode="json"),
-            "blocks": [item.model_dump(mode="json") for item in bundle.blocks],
+            "blocks": bundle.blocks,
             "attachments": bundle.attachments,
             "similarity_candidates": [item.model_dump(mode="json") for item in bundle.similarity_candidates],
             "previous_review": bundle.previous_review.model_dump(mode="json") if bundle.previous_review else None,
+            "fixture_options": bundle.fixture_options.model_dump(mode="json"),
             "fake_model_response": bundle.fake_model_response,
             "expected_result": bundle.expected_result,
         }
 
     def extract_document(self, state: ReviewGraphState) -> dict[str, Any]:
-        from .models import DocumentBlock
-
-        extracted = self.extractor.extract([DocumentBlock.model_validate(item) for item in state.blocks])
+        extracted = self.extractor.extract(state.blocks)
         return {"extracted_content": extracted}
 
     def prepare_pdf_pages(self, state: ReviewGraphState) -> dict[str, Any]:
         source = SourceDocument.model_validate(state.source_document)
+        options = FixtureOptions.model_validate(state.fixture_options)
         manifest, reason = self.pdf.prepare(
             Path(state.case_path),
             Path(state.output_dir),
             source,
+            options,
             str(state.extracted_content.get("content_markdown", "")),
         )
         return {"visual_manifest": manifest.model_dump(mode="json"), "technical_incomplete_reason": reason}
 
     def build_input_coverage(self, state: ReviewGraphState) -> dict[str, Any]:
         source = SourceDocument.model_validate(state.source_document)
+        options = FixtureOptions.model_validate(state.fixture_options)
         manifest = VisualManifest.model_validate(state.visual_manifest)
         coverage, reason = calculate_input_coverage(
             str(state.extracted_content.get("content_markdown", "")),
             manifest,
             attachments=state.attachments,
-            attachment_content_required=source.attachment_content_required,
+            attachment_content_required=options.attachment_content_required,
             max_text_chars=self.settings.max_structured_text_chars,
         )
         return {
@@ -450,7 +453,7 @@ class ReviewWorkflow:
             source.document_id,
             {
                 "run_id": state.run_id,
-                "review_round": source.review_round,
+                "review_round": source.review_round + 1,
                 "result": result.model_dump(mode="json"),
             },
         )

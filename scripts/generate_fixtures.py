@@ -89,6 +89,59 @@ def make_pdf(path: Path, page_texts: list[str]) -> None:
         doc.close()
 
 
+def text_block(content: str, block_type: str = "text") -> dict[str, object]:
+    return {block_type: {"elements": [{"text_run": {"content": content}}]}, "block_type": block_type}
+
+
+def to_v1_blocks(blocks: list[dict[str, object]]) -> dict[str, object]:
+    converted: list[dict[str, object]] = []
+    image_index = 0
+    for block in blocks:
+        kind = str(block["type"])
+        if kind == "heading":
+            converted.append(text_block(str(block.get("text", "")), f"heading{int(block.get('level', 1))}"))
+        elif kind == "code":
+            item = text_block(str(block.get("text", "")), "code")
+            item["code"]["language"] = str(block.get("language", ""))
+            converted.append(item)
+        elif kind == "table":
+            lines = [line.strip() for line in str(block.get("markdown", block.get("text", ""))).splitlines() if line.strip()]
+            rows = [
+                [cell.strip() for cell in line.strip("|").split("|")]
+                for line in lines
+                if not all(set(cell.strip()) <= {"-", ":"} for cell in line.strip("|").split("|"))
+            ]
+            columns = max((len(row) for row in rows), default=0)
+            children: list[dict[str, object]] = []
+            for row_index, row in enumerate(rows):
+                for column_index in range(columns):
+                    children.append(
+                        {
+                            "block_type": "table_cell",
+                            "table_cell": {"location": {"row": row_index, "column": column_index}},
+                            "children": [text_block(row[column_index] if column_index < len(row) else "")],
+                        }
+                    )
+            converted.append(
+                {
+                    "block_type": "table",
+                    "table": {"column_size": columns},
+                    "children": children,
+                }
+            )
+        elif kind == "image":
+            image_index += 1
+            converted.append(
+                {
+                    "block_type": "image",
+                    "image": {"token": f"fixture_image_{image_index:03d}"},
+                }
+            )
+        else:
+            converted.append(text_block(str(block.get("text", ""))))
+    return {"blocks": converted}
+
+
 def write_case(
     root: Path,
     case_id: str,
@@ -102,27 +155,74 @@ def write_case(
     previous: dict[str, object] | None = None,
     fake_extra: dict[str, object] | None = None,
     pdf_pages: list[str] | None = None,
+    fixture_options: dict[str, object] | None = None,
 ) -> None:
     case = root / case_id
     case.mkdir(parents=True, exist_ok=False)
     source = {
-        "schema_version": "2.0",
-        "document_id": f"doc-{case_id}",
+        "case_id": case_id,
+        "document_id": f"test_doc_{case_id}",
+        "node_token": f"test_node_{case_id}",
         "title": title,
-        "author": "Fixture 投稿人",
-        "wiki_name": "科研团队知识库",
-        "review_round": 1,
+        "wiki_name": "离线测试知识库",
+        "author_id": f"test_user_{case_id}",
+        "author": f"测试用户_{case_id}",
+        "link": f"https://example.invalid/wiki/test_doc_{case_id}",
+        "review_method": "AI",
+        "status": "AI审稿中",
+        "review_round": 0,
+        "updated_at": "2026/07/01 09:00:00",
+        "last_ai_review_at": "",
     }
     source.update(source_extra or {})
+    if previous:
+        source["previous_issues"] = [
+            {key: value for key, value in item.items() if key != "issue_id"}
+            for item in previous.get("issues", [])
+        ]
     dump(case / "source_document.json", source)
-    dump(case / "document_blocks.json", blocks)
-    dump(case / "attachment_metadata.json", [])
-    dump(case / "similarity_candidates.json", candidates or [])
-    dump(case / "previous_review.json", previous)
-    fake = {"review": response}
-    fake.update(fake_extra or {})
-    dump(case / "fake_model_response.json", fake)
-    dump(case / "expected_result.json", {"result": expected})
+    dump(case / "document_blocks.json", to_v1_blocks(blocks))
+    dump(case / "attachment_metadata.json", {"document_id": source["document_id"], "attachments": []})
+    dump(
+        case / "similarity_candidates.json",
+        {"document_id": source["document_id"], "similar_documents": candidates or []},
+    )
+    extra = fake_extra or {}
+    if "raw" in extra:
+        mock = {"behavior": "raw", "raw_output": extra["raw"]}
+    elif "raise" in extra:
+        mock = {"behavior": "raise", "error_type": extra["raise"]}
+    else:
+        mock = {"behavior": "return", "response": response}
+    if "visual_batches" in extra:
+        mock["visual_batches"] = extra["visual_batches"]
+    dump(case / "mock_llm_result.json", mock)
+    review_round = int(source["review_round"]) + 1
+    failed = expected == "failure"
+    status_map = {
+        "pass": "AI通过待确认",
+        "need_revision": "需修改",
+        "recommend_human_review": "待分配人工审稿",
+        "incomplete_review": "待分配人工审稿",
+        "reject": "已拒稿",
+    }
+    dump(
+        case / "expected_result.json",
+        {
+            "exit_code": 1 if failed else 0,
+            "result": None if failed else expected,
+            "table_status": "" if failed else status_map[expected],
+            "review_mode": "re_review" if int(source["review_round"]) > 0 else "initial_review",
+            "review_round": review_round,
+            "ocr_success": False,
+            "table_count": sum(item["type"] == "table" for item in blocks),
+            "failure_stage": ("model_output_parse" if "raw" in extra else "model_call") if failed else "",
+            "notifications_generated": not failed,
+            "modified_document_detected": int(source["review_round"]) > 0,
+        },
+    )
+    if fixture_options:
+        dump(case / "fixture_options.json", fixture_options)
     if pdf_pages is not None:
         make_pdf(case / "source.pdf", pdf_pages)
 
@@ -149,24 +249,34 @@ def main() -> int:
         {"type": "code", "text": "python -m pytest -q\n# 12 passed", "language": "powershell"},
         {"type": "paragraph", "text": "结论：调整输入校验后，异常被稳定复现并修复。"},
     ]
-    write_case(root, "basic_pass", title="可复现的实验记录", blocks=base_blocks, response=review("pass"), expected="pass")
+    write_case(
+        root,
+        "basic_pass",
+        title="笔记_Python基础实践-v1.0",
+        blocks=base_blocks,
+        response=review("pass"),
+        expected="pass",
+        source_extra={"author_id": "test_user_001", "author": "测试用户001"},
+    )
     major = issue("issue-1", "major", "reproducibility", "缺少输入样例和关键输出。", "补充最小输入、命令与输出。")
     write_case(
         root,
         "need_revision",
-        title="不完整的实验记录",
+        title="项目_Python日志分析练习-v1.0",
         blocks=[{"type": "paragraph", "text": "我们运行了脚本，效果不错。"}],
         response=review("need_revision", issues=[major], summary="已有实践痕迹，但无法复现。"),
         expected="need_revision",
+        source_extra={"author_id": "test_user_002", "author": "测试用户002"},
     )
     blocking = issue("issue-ai", "blocking", "ai_generation_artifact", "正文保留了模型面向用户的回答前缀。", "删除 AI 回复残留并重写为个人实践记录。")
     write_case(
         root,
         "reject_ai_generated",
-        title="包含 AI 回复残留的投稿",
+        title="笔记_通用编程概念整理-v1.0",
         blocks=[{"type": "paragraph", "text": "当然可以，下面是为你生成的完整文章。"}],
         response=review("reject", issues=[blocking], summary="存在明确的 AI 回复残留。"),
         expected="reject",
+        source_extra={"author_id": "test_user_003", "author": "测试用户003"},
     )
     candidate = {
         "document_id": "existing-1",
@@ -229,7 +339,12 @@ def main() -> int:
         blocks=base_blocks,
         response=review("pass", similarity_status="not_applicable", rereview=rereview),
         expected="pass",
-        source_extra={"review_round": 2, "source_pdf": "source.pdf"},
+        source_extra={
+            "review_round": 1,
+            "status": "需修改",
+            "updated_at": "2026/07/02 10:00:00",
+            "last_ai_review_at": "2026/07/01 10:00:00",
+        },
         previous=previous,
         pdf_pages=["复审页面：命令 python -m pytest -q\n结果：12 passed"],
     )
@@ -253,7 +368,7 @@ def main() -> int:
         blocks=multimodal_blocks,
         response=multimodal_review,
         expected="pass",
-        source_extra={"source_pdf": "source.pdf"},
+        fixture_options={"pdf_required": True},
         pdf_pages=["实验配置表\ntimeout = 30", "命令：python -m pytest -q\n结果：12 passed"],
     )
     write_case(
@@ -263,7 +378,7 @@ def main() -> int:
         blocks=base_blocks,
         response=review("pass", visual_pages=[1]),
         expected="incomplete_review",
-        source_extra={"source_pdf": "source.pdf", "render_fail_pages": [2]},
+        fixture_options={"pdf_required": True, "render_fail_pages": [2]},
         pdf_pages=["第一页可读", "第二页模拟渲染失败"],
     )
     long_response = review("pass", visual_pages=list(range(1, 17)))
@@ -290,7 +405,6 @@ def main() -> int:
         blocks=base_blocks,
         response=long_response,
         expected="pass",
-        source_extra={"source_pdf": "source.pdf"},
         fake_extra={"visual_batches": long_batches},
         pdf_pages=[f"第 {page} 页：命令、参数、日志和阶段结论。" for page in range(1, 17)],
     )
@@ -306,11 +420,12 @@ def main() -> int:
     write_case(
         root,
         "invalid_model_output",
-        title="非法模型输出案例",
+        title="笔记_JSON解析测试-v1.0",
         blocks=base_blocks,
         response=review("pass"),
         expected="failure",
         fake_extra={"raw": "这不是 JSON"},
+        source_extra={"author_id": "test_user_007", "author": "测试用户007"},
     )
     write_case(
         root,

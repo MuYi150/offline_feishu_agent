@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-need_revision",
-  "title": "不完整的实验记录",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "case_id": "need_revision",
+  "document_id": "test_doc_need_revision",
+  "node_token": "test_node_need_revision",
+  "title": "项目_Python日志分析练习-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_002",
+  "author": "测试用户002",
+  "link": "https://example.invalid/wiki/test_doc_need_revision",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

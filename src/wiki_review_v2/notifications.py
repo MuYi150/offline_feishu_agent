@@ -5,7 +5,7 @@ from .models import ReviewOutcome, ReviewResult, SourceDocument
 
 class NotificationRenderer:
     def render(self, source: SourceDocument, result: ReviewResult) -> tuple[str, str]:
-        heading = f"《{source.title}》第 {source.review_round} 轮审稿"
+        heading = f"《{source.title}》第 {source.review_round + 1} 轮审稿"
         issue_lines = [
             f"{index}. [{issue.level.value}/{issue.category}] {issue.problem}\n   建议：{issue.suggestion}"
             for index, issue in enumerate(result.issues, 1)

@@ -41,12 +41,23 @@ class SuggestedNextAction(StrEnum):
 
 
 class SourceDocument(StrictModel):
-    schema_version: str = "2.0"
+    case_id: str
     document_id: str
+    node_token: str
     title: str
+    wiki_name: str
+    author_id: str
     author: str
-    wiki_name: str = "科研团队知识库"
-    review_round: int = Field(default=1, ge=1)
+    link: str
+    review_method: str = "AI"
+    status: str = "AI审稿中"
+    review_round: int = Field(default=0, ge=0)
+    updated_at: str = ""
+    last_ai_review_at: str = ""
+    previous_issues: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class FixtureOptions(StrictModel):
     source_pdf: str | None = None
     pdf_required: bool = False
     render_fail_pages: list[int] = Field(default_factory=list)
@@ -90,10 +101,11 @@ class PreviousReview(StrictModel):
 
 class FixtureBundle(StrictModel):
     source_document: SourceDocument
-    blocks: list[DocumentBlock]
+    blocks: list[dict[str, Any]]
     attachments: list[dict[str, Any]] = Field(default_factory=list)
     similarity_candidates: list[SimilarityCandidate] = Field(default_factory=list)
     previous_review: PreviousReview | None = None
+    fixture_options: FixtureOptions = Field(default_factory=FixtureOptions)
     fake_model_response: dict[str, Any] = Field(default_factory=dict)
     expected_result: dict[str, Any] = Field(default_factory=dict)
 
@@ -241,6 +253,7 @@ class ReviewGraphState(StrictModel):
     attachments: list[dict[str, Any]] = Field(default_factory=list)
     similarity_candidates: list[dict[str, Any]] = Field(default_factory=list)
     previous_review: dict[str, Any] | None = None
+    fixture_options: dict[str, Any] = Field(default_factory=dict)
     fake_model_response: dict[str, Any] = Field(default_factory=dict)
     expected_result: dict[str, Any] = Field(default_factory=dict)
     extracted_content: dict[str, Any] = Field(default_factory=dict)

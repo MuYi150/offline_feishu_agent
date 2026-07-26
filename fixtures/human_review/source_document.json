@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-human_review",
+  "case_id": "human_review",
+  "document_id": "test_doc_human_review",
+  "node_token": "test_node_human_review",
   "title": "需要领域专家判断",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_human_review",
+  "author": "测试用户_human_review",
+  "link": "https://example.invalid/wiki/test_doc_human_review",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

@@ -5,7 +5,7 @@ from .models import PreviousReview, SimilarityCandidate
 
 class ReviewModePolicy:
     def decide(self, review_round: int, previous_review: PreviousReview | None) -> str:
-        return "rereview" if review_round > 1 or previous_review is not None else "initial"
+        return "rereview" if review_round > 0 or previous_review is not None else "initial"
 
 
 class SimilarityService:
@@ -36,4 +36,3 @@ class ReviewHistoryPolicy:
             for issue in review.issues
             if issue.level.value in {"blocking", "major"}
         ]
-

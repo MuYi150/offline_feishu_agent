@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-api_failure",
+  "case_id": "api_failure",
+  "document_id": "test_doc_api_failure",
+  "node_token": "test_node_api_failure",
   "title": "模型 API 故障案例",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_api_failure",
+  "author": "测试用户_api_failure",
+  "link": "https://example.invalid/wiki/test_doc_api_failure",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

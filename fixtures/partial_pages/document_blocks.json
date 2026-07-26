@@ -1,20 +1,53 @@
-[
-  {
-    "type": "heading",
-    "text": "实验记录",
-    "level": 1
-  },
-  {
-    "type": "paragraph",
-    "text": "本文记录依赖安装、实际命令、观察到的结果和故障排查过程。"
-  },
-  {
-    "type": "code",
-    "text": "python -m pytest -q\n# 12 passed",
-    "language": "powershell"
-  },
-  {
-    "type": "paragraph",
-    "text": "结论：调整输入校验后，异常被稳定复现并修复。"
-  }
-]
+{
+  "blocks": [
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "实验记录"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本文记录依赖安装、实际命令、观察到的结果和故障排查过程。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "code": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "python -m pytest -q\n# 12 passed"
+            }
+          }
+        ],
+        "language": "powershell"
+      },
+      "block_type": "code"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "结论：调整输入校验后，异常被稳定复现并修复。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    }
+  ]
+}

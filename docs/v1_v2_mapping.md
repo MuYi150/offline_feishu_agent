@@ -4,7 +4,7 @@
 |---|---|---|
 | Docx Blocks/raw_content 提取 | `DocumentExtractor` 读取 Fixture Blocks | 表格保留为 Markdown；`【表格】` 不再视为占位符 |
 | PDF 导出与 OCR | Fixture PDF、正文生成 PDF、PyMuPDF 页面渲染 | Kimi 直接理解页面图，不以 OCR 为主流程 |
-| 第一轮/复审判断 | `ReviewModePolicy` | review_round>1 或存在 previous_review 即复审 |
+| 第一轮/复审判断 | `ReviewModePolicy` | 沿用 v1 轮次：`review_round=0` 为首轮，`review_round>0` 或存在上一轮记录为复审 |
 | 第一轮相似召回 | `SimilarityService` | 排除自身、无效状态、空内容和低分项，阈值 0.35、Top-5 |
 | 复审历史 | `ReviewHistoryPolicy` | 只带入上一轮 blocking/major，不重复召回 |
 | AI 审稿 | `KimiMultimodalModel` / `FakeReviewModel` | OpenAI-compatible K3 严格 Schema；Fake 默认无网络 |
@@ -12,7 +12,7 @@
 | 状态映射 | `ReviewOutcomeMapper` | 保持五种结果和原中文状态语义 |
 | 投稿人/管理员消息 | `NotificationRenderer` | 两类消息由确定性代码分别生成，不采用模型自由文本 |
 | 审稿历史与审计 | 原子 JSON 历史、run trace、SQLite checkpoint | 每次运行唯一目录，不覆盖历史结果 |
-| Fixture + Mock | 11 个 v2 Fixture 和 Fake Graph 测试 | Fake 响应与 expected 断言分离 |
+| Fixture + Mock | 11 个 v1 兼容 Fixture 和 Fake Graph 测试 | source、Blocks、附件、`mock_llm_result`、expected 均沿用 v1 文件名和包装；Fake 响应与 expected 断言分离 |
 | 在线飞书 source/sink | 第一阶段不实现 | 下一阶段通过公开 source/sink 接口接入 |
 
 ## 有意修复的历史问题
@@ -26,3 +26,6 @@
 - 页面缺失、PDF 损坏和输入超限不再静默处理；覆盖不足禁止 pass/reject。
 - 排序、阈值、Top-N 和状态过滤由公开策略及测试明确固定。
 
+## Fixture 迁移边界
+
+v2 把 v1 Fixture 视为输入传输格式：`FixtureDocumentSource` 读取原始飞书风格 Blocks 和 v1 mock 包装后，再转换为内部 Pydantic 模型。因此后续接入飞书时可直接替换 source adapter，无需批量重写现有测试数据。多模态渲染故障等只属于 v2 测试控制的字段单独放在 `fixture_options.json`，不会加入 `source_document.json`。

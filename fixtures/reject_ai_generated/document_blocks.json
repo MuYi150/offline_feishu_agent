@@ -1,6 +1,16 @@
-[
-  {
-    "type": "paragraph",
-    "text": "当然可以，下面是为你生成的完整文章。"
-  }
-]
+{
+  "blocks": [
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "当然可以，下面是为你生成的完整文章。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    }
+  ]
+}

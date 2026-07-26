@@ -1,0 +1,6 @@
+{
+  "pdf_required": true,
+  "render_fail_pages": [
+    2
+  ]
+}

@@ -1,8 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-basic_pass",
-  "title": "可复现的实验记录",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1
+  "case_id": "basic_pass",
+  "document_id": "test_doc_basic_pass",
+  "node_token": "test_node_basic_pass",
+  "title": "笔记_Python基础实践-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_001",
+  "author": "测试用户001",
+  "link": "https://example.invalid/wiki/test_doc_basic_pass",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

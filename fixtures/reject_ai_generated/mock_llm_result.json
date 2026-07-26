@@ -1,19 +1,20 @@
 {
-  "review": {
-    "result": "need_revision",
-    "summary": "已有实践痕迹，但无法复现。",
+  "behavior": "return",
+  "response": {
+    "result": "reject",
+    "summary": "存在明确的 AI 回复残留。",
     "pass_reason": "",
-    "blocking_count": 0,
-    "major_count": 1,
+    "blocking_count": 1,
+    "major_count": 0,
     "minor_count": 0,
     "issues": [
       {
-        "issue_id": "issue-1",
-        "level": "major",
-        "category": "reproducibility",
+        "issue_id": "issue-ai",
+        "level": "blocking",
+        "category": "ai_generation_artifact",
         "position": "全文",
-        "problem": "缺少输入样例和关键输出。",
-        "suggestion": "补充最小输入、命令与输出。",
+        "problem": "正文保留了模型面向用户的回答前缀。",
+        "suggestion": "删除 AI 回复残留并重写为个人实践记录。",
         "evidence_ids": []
       }
     ],
@@ -34,9 +35,9 @@
       "limitations": []
     },
     "revision_priority": [
-      "缺少输入样例和关键输出。"
+      "正文保留了模型面向用户的回答前缀。"
     ],
-    "suggested_next_action": "author_revise",
+    "suggested_next_action": "reject",
     "re_review_assessment": {
       "resolutions": []
     }

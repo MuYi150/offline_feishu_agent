@@ -16,7 +16,7 @@ conda run --no-capture-output -n feishu-api python -m unittest discover -s tests
 conda run --no-capture-output -n feishu-api python -m pytest -q
 ```
 
-结果：`38 passed, 2 skipped`，耗时 8.86 秒。两个 skipped 均为下述真实 Kimi 案例。验证范围包括纯规则、PDF/Prompt/原子写入、五种业务结果、首轮相似性、复审、完整/部分多模态、长 PDF 分批、PDF 缺失/损坏/页数与大小超限、正文为空/超限、非法/空 JSON、API 失败、429/5xx 重试、认证预检、历史损坏隔离、敏感信息扫描、输出冲突和 checkpoint 恢复。
+结果：`43 passed, 2 skipped`，耗时 6.81 秒。两个 skipped 均为下述真实 Kimi 案例。验证范围包括纯规则、全部 Fixture 的 v1 source 基础字段和文件名兼容、原始飞书 Blocks/表格提取、PDF/Prompt/原子写入、五种业务结果、首轮相似性、复审、完整/部分多模态、长 PDF 分批、PDF 缺失/损坏/页数与大小超限、正文为空/超限、非法/空 JSON、API 失败、429/5xx 重试、认证预检、历史损坏隔离、敏感信息扫描、输出冲突和 checkpoint 恢复。
 
 另外执行了 CLI Fake 验证：
 

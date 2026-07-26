@@ -48,9 +48,11 @@ def test_page_count_pdf_size_and_text_limits_are_explicit(settings, tmp_path: Pa
     assert size_result.result == "incomplete_review"
 
     text_settings, case = clone_case(settings, tmp_path / "text", "basic_pass")
-    blocks = json.loads((case / "document_blocks.json").read_text(encoding="utf-8"))
-    blocks.append({"type": "paragraph", "text": "x" * 2000})
-    (case / "document_blocks.json").write_text(json.dumps(blocks, ensure_ascii=False), encoding="utf-8")
+    blocks_file = json.loads((case / "document_blocks.json").read_text(encoding="utf-8"))
+    blocks_file["blocks"].append(
+        {"block_type": "text", "text": {"elements": [{"text_run": {"content": "x" * 2000}}]}}
+    )
+    (case / "document_blocks.json").write_text(json.dumps(blocks_file, ensure_ascii=False), encoding="utf-8")
     text_settings = text_settings.model_copy(update={"max_structured_text_chars": 1000})
     text_result = ReviewRunner(text_settings).run_case("basic_pass")
     assert text_result.result == "incomplete_review"
@@ -59,7 +61,9 @@ def test_page_count_pdf_size_and_text_limits_are_explicit(settings, tmp_path: Pa
 
 def test_empty_model_content_and_bad_fixture_fail_without_notification(settings, tmp_path: Path) -> None:
     empty_settings, case = clone_case(settings, tmp_path / "empty", "basic_pass")
-    (case / "fake_model_response.json").write_text('{"raw":""}', encoding="utf-8")
+    (case / "mock_llm_result.json").write_text(
+        '{"behavior":"raw","raw_output":""}', encoding="utf-8"
+    )
     summary = ReviewRunner(empty_settings).run_case("basic_pass")
     assert summary.failure["code"] == "model_non_json"
     assert not (summary.output_dir / "submitter_notification.txt").exists()
@@ -72,7 +76,7 @@ def test_empty_model_content_and_bad_fixture_fail_without_notification(settings,
 
 def test_empty_structured_text_without_visual_input_is_incomplete(settings, tmp_path: Path) -> None:
     empty_settings, case = clone_case(settings, tmp_path, "basic_pass")
-    (case / "document_blocks.json").write_text("[]", encoding="utf-8")
+    (case / "document_blocks.json").write_text('{"blocks":[]}', encoding="utf-8")
     summary = ReviewRunner(empty_settings).run_case("basic_pass")
     assert summary.result == "incomplete_review"
     coverage = json.loads((summary.output_dir / "input_coverage.json").read_text(encoding="utf-8"))

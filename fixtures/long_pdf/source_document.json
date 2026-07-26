@@ -1,9 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-long_pdf",
+  "case_id": "long_pdf",
+  "document_id": "test_doc_long_pdf",
+  "node_token": "test_node_long_pdf",
   "title": "长篇实验记录",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1,
-  "source_pdf": "source.pdf"
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_long_pdf",
+  "author": "测试用户_long_pdf",
+  "link": "https://example.invalid/wiki/test_doc_long_pdf",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

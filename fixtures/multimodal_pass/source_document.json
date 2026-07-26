@@ -1,9 +1,15 @@
 {
-  "schema_version": "2.0",
-  "document_id": "doc-multimodal_pass",
+  "case_id": "multimodal_pass",
+  "document_id": "test_doc_multimodal_pass",
+  "node_token": "test_node_multimodal_pass",
   "title": "包含命令和表格的多模态记录",
-  "author": "Fixture 投稿人",
-  "wiki_name": "科研团队知识库",
-  "review_round": 1,
-  "source_pdf": "source.pdf"
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_multimodal_pass",
+  "author": "测试用户_multimodal_pass",
+  "link": "https://example.invalid/wiki/test_doc_multimodal_pass",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/01 09:00:00",
+  "last_ai_review_at": ""
 }

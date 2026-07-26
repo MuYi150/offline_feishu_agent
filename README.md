@@ -79,7 +79,16 @@ conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --resum
 
 ## 添加 Fixture
 
-每个案例放在 `fixtures/<case_id>/`，至少包含 `source_document.json`、`document_blocks.json`、`fake_model_response.json` 和 `expected_result.json`；可增加 `source.pdf` 或 `pages/`、附件元数据、相似候选和上一轮审稿。Fake 响应与 expected 文件必须分离，避免测试自证。
+每个案例放在 `fixtures/<case_id>/`。为方便后续从 v1 平移，v2 沿用 v1 的 Fixture 外部契约，不把简化 DTO 写进测试数据：
+
+- `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`；复审案例可像 v1 一样内嵌 `previous_issues`。其中 `review_round=0` 表示尚未完成首轮，本次审稿轮次为 1；大于 0 表示复审。
+- `document_blocks.json` 保持 `{"blocks": [...]}` 包装，内部使用飞书风格的 `block_type`、`text.elements[].text_run.content`、表格子块等原始结构。
+- `attachment_metadata.json` 保持 `{"document_id": "...", "attachments": [...]}`。
+- `mock_llm_result.json` 保持 v1 的 `behavior=return/raw/raise` 包装；Fake 响应与 `expected_result.json` 始终分离，避免测试自证。
+- `expected_result.json` 保持 v1 的预期摘要字段。相似候选是 v2 扩展，采用 `similarity_candidates.json` 的 `similar_documents` 包装。
+- 页面素材继续使用约定文件 `source.pdf` 或 `pages/`。仅 v2 才需要的“固定 PDF、模拟缺页”等测试控制放入可选 `fixture_options.json`，不污染 v1 的 source 格式。
+
+Loader 也兼容早期 v2 的简化 Blocks、列表式附件/相似候选、`fake_model_response.json` 和独立 `previous_review.json`，但新建 Fixture 应优先使用上面的 v1 格式。
 
 仓库中的示例由下列命令可重复生成；命令默认拒绝覆盖，重新生成必须显式传 `--force`：
 
