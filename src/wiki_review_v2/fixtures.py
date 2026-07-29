@@ -18,7 +18,7 @@ from .models import (
 )
 
 
-def _read_json(path: Path, *, required: bool, default: Any) -> Any:
+def _read_json(path: Path, *, required: bool, default: Any) -> Any:                    #读取json文件
     if not path.exists():
         if required:
             raise FixtureError(f"Fixture 缺少文件：{path.name}")
@@ -30,12 +30,12 @@ def _read_json(path: Path, *, required: bool, default: Any) -> Any:
 
 
 class FixtureDocumentSource:
-    def list_cases(self, root: Path) -> list[str]:
+    def list_cases(self, root: Path) -> list[str]:                                     #列出案例
         if not root.exists():
             return []
         return sorted(path.name for path in root.iterdir() if path.is_dir() and (path / "source_document.json").exists())
 
-    def load(self, case_path: Path) -> FixtureBundle:
+    def load(self, case_path: Path) -> FixtureBundle:                                          #读取器
         if not case_path.is_dir():
             raise FixtureError(f"Fixture 不存在：{case_path}")
         try:
@@ -126,7 +126,7 @@ class FixtureDocumentSource:
 
 
 class DocumentExtractor:
-    def extract(self, blocks: list[DocumentBlock | dict[str, Any]]) -> dict[str, Any]:
+    def extract(self, blocks: list[DocumentBlock | dict[str, Any]]) -> dict[str, Any]:                #提取器
         parts: list[str] = []
         table_count = 0
         image_count = 0

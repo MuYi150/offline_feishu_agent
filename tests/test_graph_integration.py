@@ -64,6 +64,9 @@ def test_long_pdf_uses_batches_and_key_pages(settings) -> None:
     assert [call["phase"] for call in request["calls"]] == ["visual_batch", "visual_batch", "final_review"]
     assert request["requests"][-1]["image_count"] <= settings.final_key_page_limit
     assert json.loads((summary.output_dir / "visual_manifest.json").read_text(encoding="utf-8"))["total_pages"] == 16
+    prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
+    assert "## BatchedVisualEvidence" in prompt
+    assert "## OutputRequirements" in prompt
 
 
 def test_rereview_prompt_only_contains_previous_blocking_major(settings) -> None:
@@ -72,6 +75,9 @@ def test_rereview_prompt_only_contains_previous_blocking_major(settings) -> None
     assert "previous-1" in prompt
     assert "previous-2" not in prompt
     assert "复审不重新召回相似候选" in prompt
+    assert "## ReReviewGuide" in prompt
+    assert "resolved、partially_resolved 或 unresolved" in prompt
+    assert "## InitialReviewSimilarityGuide" not in prompt
 
 
 def test_outputs_do_not_contain_base64_or_authorization(settings) -> None:

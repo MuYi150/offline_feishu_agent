@@ -61,8 +61,8 @@ def _trace(state: ReviewGraphState | dict[str, Any]) -> list[dict[str, Any]]:
 
 
 class ReviewWorkflow:
-    def __init__(self, settings: Settings, model: ReviewModel) -> None:
-        self.settings = settings
+    def __init__(self, settings: Settings, model: ReviewModel) -> None:   
+        self.settings = settings                                                  #初始化组件
         self.model = model
         self.fixture_source = FixtureDocumentSource()
         self.extractor = DocumentExtractor()
@@ -83,8 +83,9 @@ class ReviewWorkflow:
         self.audit = AuditStore()
         self.history = ReviewHistoryStore(settings.state_root)
 
-    def compile(self, checkpointer: Any) -> Any:
+    def compile(self, checkpointer: Any) -> Any:                                    #创建 StateGraph 图
         builder = StateGraph(ReviewGraphState)
+
         nodes: dict[str, Callable[[ReviewGraphState], dict[str, Any]]] = {
             "load_fixture": self._guard("load_fixture", self.load_fixture),
             "extract_document": self._guard("extract_document", self.extract_document),
@@ -108,15 +109,15 @@ class ReviewWorkflow:
             "record_safe_failure": self.record_safe_failure,
         }
         for name, node in nodes.items():
-            builder.add_node(name, node)
-        builder.add_edge(START, "load_fixture")
+            builder.add_node(name, node)                                           #创建节点
+        builder.add_edge(START, "load_fixture")                                    #注册条件路线
         ordinary = [
             ("load_fixture", "extract_document"),
             ("extract_document", "prepare_pdf_pages"),
             ("prepare_pdf_pages", "build_input_coverage"),
             ("build_input_coverage", "route_review_mode"),
         ]
-        for current, nxt in ordinary:
+        for current, nxt in ordinary: #首审复审条件边
             builder.add_conditional_edges(current, self._failure_route, {"ok": nxt, "failure": "record_safe_failure"})
         builder.add_conditional_edges(
             "route_review_mode",
@@ -178,7 +179,7 @@ class ReviewWorkflow:
             return "failure"
         return str(_get(state, "review_mode"))
 
-    def load_fixture(self, state: ReviewGraphState) -> dict[str, Any]:
+    def load_fixture(self, state: ReviewGraphState) -> dict[str, Any]:                          #第一个业务节点
         bundle = self.fixture_source.load(Path(state.case_path))
         return {
             "source_document": bundle.source_document.model_dump(mode="json"),
@@ -191,14 +192,14 @@ class ReviewWorkflow:
             "expected_result": bundle.expected_result,
         }
 
-    def extract_document(self, state: ReviewGraphState) -> dict[str, Any]:
-        extracted = self.extractor.extract(state.blocks)
+    def extract_document(self, state: ReviewGraphState) -> dict[str, Any]:                      #第二个业务节点   
+        extracted = self.extractor.extract(state.blocks)                                        #Blocks 转换markdown
         return {"extracted_content": extracted}
 
-    def prepare_pdf_pages(self, state: ReviewGraphState) -> dict[str, Any]:
-        source = SourceDocument.model_validate(state.source_document)
+    def prepare_pdf_pages(self, state: ReviewGraphState) -> dict[str, Any]:                     #第三个
+        source = SourceDocument.model_validate(state.source_document)  #PDF渲染需要的源文档信息
         options = FixtureOptions.model_validate(state.fixture_options)
-        manifest, reason = self.pdf.prepare(
+        manifest, reason = self.pdf.prepare(              #pdf渲染
             Path(state.case_path),
             Path(state.output_dir),
             source,
@@ -207,7 +208,7 @@ class ReviewWorkflow:
         )
         return {"visual_manifest": manifest.model_dump(mode="json"), "technical_incomplete_reason": reason}
 
-    def build_input_coverage(self, state: ReviewGraphState) -> dict[str, Any]:
+    def build_input_coverage(self, state: ReviewGraphState) -> dict[str, Any]: #交给模型的材料是否完善
         source = SourceDocument.model_validate(state.source_document)
         options = FixtureOptions.model_validate(state.fixture_options)
         manifest = VisualManifest.model_validate(state.visual_manifest)
@@ -223,12 +224,12 @@ class ReviewWorkflow:
             "technical_incomplete_reason": reason or state.technical_incomplete_reason,
         }
 
-    def route_review_mode(self, state: ReviewGraphState) -> dict[str, Any]:
+    def route_review_mode(self, state: ReviewGraphState) -> dict[str, Any]: #a分支：判断是初审还是复审
         source = SourceDocument.model_validate(state.source_document)
         previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
         return {"review_mode": self.mode_policy.decide(source.review_round, previous)}
 
-    def retrieve_similar_documents(self, state: ReviewGraphState) -> dict[str, Any]:
+    def retrieve_similar_documents(self, state: ReviewGraphState) -> dict[str, Any]:#筛选相似文章
         from .models import SimilarityCandidate
 
         source = SourceDocument.model_validate(state.source_document)
@@ -242,7 +243,7 @@ class ReviewWorkflow:
             }
         }
 
-    def load_previous_issues(self, state: ReviewGraphState) -> dict[str, Any]:
+    def load_previous_issues(self, state: ReviewGraphState) -> dict[str, Any]: #a分支：读取上一轮结果
         previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
         return {
             "rereview_context": {
@@ -251,12 +252,12 @@ class ReviewWorkflow:
             }
         }
 
-    def build_multimodal_request(self, state: ReviewGraphState) -> dict[str, Any]:
+    def build_multimodal_request(self, state: ReviewGraphState) -> dict[str, Any]:#下一步，组合模型请求
         source = SourceDocument.model_validate(state.source_document)
         manifest = VisualManifest.model_validate(state.visual_manifest)
         coverage = InputCoverage.model_validate(state.input_coverage)
-        pages = [item.model_dump(mode="json") for item in manifest.rendered_pages]
-        prompt = self.prompt_builder.build(
+        pages = [item.model_dump(mode="json") for item in manifest.rendered_pages]#页面png
+        prompt = self.prompt_builder.build(                 #prompt组合
             source=source,
             content=str(state.extracted_content.get("content_markdown", "")),
             manifest=manifest,
@@ -268,7 +269,7 @@ class ReviewWorkflow:
         )
         return {"prompt": prompt, "selected_pages": pages}
 
-    def invoke_kimi(self, state: ReviewGraphState) -> dict[str, Any]:
+    def invoke_kimi(self, state: ReviewGraphState) -> dict[str, Any]:     #决定是否调用模型
         if state.technical_incomplete_reason:
             payload = incomplete_payload(state.technical_incomplete_reason)
             return {
@@ -286,7 +287,7 @@ class ReviewWorkflow:
         summaries = list(state.request_summaries)
         evidence_batches: list[dict[str, Any]] = []
 
-        if len(pages) > self.settings.direct_page_limit:
+        if len(pages) > self.settings.direct_page_limit:                #长pdf判断
             for offset in range(0, len(pages), self.settings.vision_batch_size):
                 batch = pages[offset : offset + self.settings.vision_batch_size]
                 request = ModelRequest(
@@ -331,7 +332,7 @@ class ReviewWorkflow:
                 visual_evidence={"batches": evidence_batches},
             )
 
-        request = ModelRequest(
+        request = ModelRequest(            #请求
             phase="final_review",
             prompt=prompt,
             pages=pages,
@@ -356,7 +357,7 @@ class ReviewWorkflow:
             "request_summaries": summaries,
         }
 
-    def parse_result(self, state: ReviewGraphState) -> dict[str, Any]:
+    def parse_result(self, state: ReviewGraphState) -> dict[str, Any]:#解析模型返回的 JSON
         raw = str(state.raw_model_output.get("content", ""))
         last_error: ReviewError | None = None
         calls = list(state.model_calls)
@@ -389,7 +390,7 @@ class ReviewWorkflow:
                 raw = response.content
         raise last_error or ModelSchemaError("模型结果解析失败")
 
-    def normalize_result(self, state: ReviewGraphState) -> dict[str, Any]:
+    def normalize_result(self, state: ReviewGraphState) -> dict[str, Any]:   #结果修正
         payload = ModelReviewPayload.model_validate(state.parsed_review_result)
         coverage = InputCoverage.model_validate(state.input_coverage)
         result = self.normalizer.normalize(
@@ -402,18 +403,18 @@ class ReviewWorkflow:
         )
         return {"parsed_review_result": result.model_dump(mode="json")}
 
-    def validate_result(self, state: ReviewGraphState) -> dict[str, Any]:
+    def validate_result(self, state: ReviewGraphState) -> dict[str, Any]: #一致性检测
         result = ReviewResult.model_validate(state.parsed_review_result)
         self.validator.validate(result)
         return {}
 
-    def project_status(self, state: ReviewGraphState) -> dict[str, Any]:
+    def project_status(self, state: ReviewGraphState) -> dict[str, Any]:#审稿结论映射为业务状态
         result = ReviewResult.model_validate(state.parsed_review_result)
         status = self.mapper.map(result.result)
         result.local_status = status
         return {"projected_status": status, "parsed_review_result": result.model_dump(mode="json")}
 
-    def render_notifications(self, state: ReviewGraphState) -> dict[str, Any]:
+    def render_notifications(self, state: ReviewGraphState) -> dict[str, Any]: #生成投稿人和管理员通知
         source = SourceDocument.model_validate(state.source_document)
         result = ReviewResult.model_validate(state.parsed_review_result)
         submitter, admin = self.notifications.render(source, result)

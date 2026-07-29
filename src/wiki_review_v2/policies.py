@@ -3,12 +3,12 @@ from __future__ import annotations
 from .models import PreviousReview, SimilarityCandidate
 
 
-class ReviewModePolicy:
+class ReviewModePolicy:                    #判断初复审
     def decide(self, review_round: int, previous_review: PreviousReview | None) -> str:
         return "rereview" if review_round > 0 or previous_review is not None else "initial"
 
 
-class SimilarityService:
+class SimilarityService:                   #相似文章选择条件
     EFFECTIVE_STATUSES = {"已公示", "待审核", "published", "under_review", "active"}
 
     def __init__(self, *, min_score: float = 0.35, top_n: int = 5) -> None:
@@ -27,7 +27,7 @@ class SimilarityService:
         return sorted(valid, key=lambda item: (-item.score, item.document_id))[: self.top_n]
 
 
-class ReviewHistoryPolicy:
+class ReviewHistoryPolicy:#筛选需要重点复查的问题
     def blocking_context(self, review: PreviousReview | None) -> list[dict[str, object]]:
         if review is None:
             return []

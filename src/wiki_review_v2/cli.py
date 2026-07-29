@@ -41,7 +41,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.resume:
             summary = runner.resume(args.resume, explicit_real_authorization=args.real_model)
         else:
-            summary = runner.run_case(
+            summary = runner.run_case(  #进行实际工作
                 args.case,
                 real_model=args.real_model,
                 explicit_real_authorization=args.real_model,

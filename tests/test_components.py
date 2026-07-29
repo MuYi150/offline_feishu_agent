@@ -43,9 +43,23 @@ def test_prompt_has_composable_sections_and_no_base64() -> None:
         rereview_context={},
         attachments=[],
     )
-    for heading in ("SystemRole", "ReviewStandard", "StructuredContent", "VisualManifest", "DecisionRules", "OutputSchema"):
+    for heading in (
+        "SystemRole",
+        "ReviewStandard",
+        "InputSemantics",
+        "StructuredContent",
+        "VisualInputGuide",
+        "VisualManifest",
+        "AttachmentGuide",
+        "InputCoverageGuide",
+        "DecisionRules",
+        "OutputRequirements",
+    ):
         assert f"## {heading}" in prompt
     assert ";base64," not in prompt
+    assert "Authorization" not in prompt
+    assert "Bearer" not in prompt
+    assert "API Key" not in prompt
 
 
 def test_atomic_write_refuses_non_identical_overwrite(tmp_path: Path) -> None:

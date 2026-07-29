@@ -48,11 +48,13 @@ class ReviewRunner:
         run_id: str | None = None,
         model_override: ReviewModel | None = None,
     ) -> RunSummary:
+        
         case_path = self.settings.fixtures_root / case_id
-        bundle = self.source.load(case_path)
+        bundle = self.source.load(case_path)                         #读取fixture包 
         run_id = run_id or utc_run_id()
         root = (output_root or self.settings.output_root).resolve()
-        output_dir = root / case_id / run_id
+        output_dir = root / case_id / run_id                         #输出目录
+
         try:
             output_dir.mkdir(parents=True, exist_ok=False)
         except FileExistsError as exc:
@@ -69,7 +71,7 @@ class ReviewRunner:
             "model_mode": mode,
             "settings": self.settings.safe_dict(),
         }
-        atomic_write_json(output_dir / "run_metadata.json", metadata)
+        atomic_write_json(output_dir / "run_metadata.json", metadata)           #记录运行
         try:
             model = model_override or self._make_model(
                 real_model, bundle.fake_model_response, explicit_real_authorization
@@ -82,7 +84,8 @@ class ReviewRunner:
                 [{"node": "model_preflight", "status": "failed", "details": {"error": failure}}],
             )
             return RunSummary(output_dir=output_dir, run_id=run_id, result=None, failure=failure)
-        initial = ReviewGraphState(
+        
+        initial = ReviewGraphState(                      #LangGraph 共用的状态对象，随着工作流状态增加
             case_id=case_id,
             case_path=str(case_path.resolve()),
             output_dir=str(output_dir),
@@ -90,7 +93,7 @@ class ReviewRunner:
             thread_id=thread_id,
             model_mode=mode,
         )
-        return self._invoke(output_dir, initial.model_dump(mode="json"), model, resume=False)
+        return self._invoke(output_dir, initial.model_dump(mode="json"), model, resume=False)             #调用 LangGraph,返回运行结果
 
     def resume(self, run_dir: Path, *, explicit_real_authorization: bool = False) -> RunSummary:
         output_dir = run_dir.resolve()
@@ -123,6 +126,7 @@ class ReviewRunner:
     ) -> RunSummary:
         metadata = json.loads((output_dir / "run_metadata.json").read_text(encoding="utf-8"))
         os.environ.setdefault("LANGGRAPH_STRICT_MSGPACK", "true")
+        
         connection = sqlite3.connect(output_dir / "checkpoint.sqlite", check_same_thread=False)
         try:
             checkpointer = SqliteSaver(connection)

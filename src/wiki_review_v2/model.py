@@ -40,7 +40,7 @@ class ReviewModel(Protocol):
     def invoke(self, request: ModelRequest) -> ModelResponse: ...
 
 
-class FakeReviewModel:
+class FakeReviewModel:                      #fake模型，直接返回fixture中的内容
     def __init__(self, fixture_response: dict[str, Any]) -> None:
         self.fixture_response = fixture_response
         self.call_count = 0
@@ -96,7 +96,7 @@ class FakeReviewModel:
         return ModelResponse(content=content, record=record)
 
 
-class KimiMultimodalModel:
+class KimiMultimodalModel:                        #真实模型，调用Kimi API
     def __init__(self, settings: Settings, *, sleeper: Callable[[float], None] = time.sleep) -> None:
         if settings.kimi_api_key is None:
             raise ModelAuthenticationError("真实模型需要 KIMI_API_KEY 或 MOONSHOT_API_KEY")
@@ -113,7 +113,7 @@ class KimiMultimodalModel:
             max_retries=0,
         )
 
-    def invoke(self, request: ModelRequest) -> ModelResponse:
+    def invoke(self, request: ModelRequest) -> ModelResponse:   #调用Kimi API
         content = self._content_parts(request)
         started = time.perf_counter()
         last_error: BaseException | None = None
@@ -127,13 +127,13 @@ class KimiMultimodalModel:
                         {"role": "system", "content": "你是严格输出结构化 JSON 的科研知识库审稿助手。"},
                         {"role": "user", "content": content},
                     ],
-                    response_format={
+                    response_format={                #规定模型输出格式
                         "type": "json_schema",
                         "json_schema": {
                             "name": request.schema_name,
                             "strict": True,
                             "schema": strict_json_schema(request.json_schema),
-                        },
+                        },                                                  
                     },
                 )
                 choice = completion.choices[0]
@@ -145,7 +145,7 @@ class KimiMultimodalModel:
                     "total_tokens": int(getattr(usage_obj, "total_tokens", 0) or 0),
                 }
                 elapsed = int((time.perf_counter() - started) * 1000)
-                record = ModelCallRecord(
+                record = ModelCallRecord(#创建调用记录
                     phase=request.phase,
                     model=self.settings.kimi_model,
                     attempt_count=attempt,
@@ -165,16 +165,17 @@ class KimiMultimodalModel:
                 self.sleeper(min(2 ** (attempt - 1), 8))
         raise ModelCallError("Kimi 调用失败") from last_error
 
-    def _content_parts(self, request: ModelRequest) -> list[dict[str, Any]]:
+#最终组合
+    def _content_parts(self, request: ModelRequest) -> list[dict[str, Any]]:#把 Prompt 和 PNG 组成多模态消息
         parts: list[dict[str, Any]] = [{"type": "text", "text": request.prompt}]
         total = len(request.prompt.encode("utf-8"))
         for page in request.pages:
             path = Path(page["path"])
-            raw = path.read_bytes()
+            raw = path.read_bytes()          #png原始字节
             total += len(raw)
             if total > self.settings.max_request_bytes:
                 raise ModelCallError("多模态请求体超过安全上限")
-            mime = mimetypes.guess_type(path.name)[0] or "image/png"
+            mime = mimetypes.guess_type(path.name)[0] or "image/png"   #判断MIME类型
             encoded = base64.b64encode(raw).decode("ascii")
             parts.append(
                 {
@@ -221,7 +222,7 @@ def request_summary(request: ModelRequest) -> dict[str, Any]:
     }
 
 
-def strict_json_schema(schema: dict[str, Any]) -> dict[str, Any]:
+def strict_json_schema(schema: dict[str, Any]) -> dict[str, Any]:#规定输出格式
     """Return a copy suitable for Kimi/OpenAI strict structured output."""
     value = json.loads(json.dumps(schema))
 
