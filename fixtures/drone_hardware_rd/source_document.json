@@ -1,0 +1,15 @@
+{
+  "case_id": "drone_hardware_rd",
+  "document_id": "test_doc_drone_hardware_rd",
+  "node_token": "test_node_drone_hardware_rd",
+  "title": "无人机硬件研发文档",
+  "wiki_name": "离线测试知识库",
+  "author_id": "fixture_docx_importer",
+  "author": "DOCX Fixture 导入",
+  "link": "https://example.invalid/wiki/test_doc_drone_hardware_rd",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/07/30 10:58:39",
+  "last_ai_review_at": ""
+}

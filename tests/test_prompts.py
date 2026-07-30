@@ -177,7 +177,7 @@ def test_decision_and_output_requirements_explain_business_fields_safely() -> No
     for result in ("incomplete_review", "recommend_human_review", "reject"):
         assert result in prompt
     assert "输入不完整 → incomplete_review" in prompt
-    assert "输入完整但需要专家判断 → recommend_human_review" in prompt
+    assert "输入完整但确有资质/职责边界 → recommend_human_review" in prompt
     for field in (
         "result",
         "summary",
@@ -197,3 +197,28 @@ def test_decision_and_output_requirements_explain_business_fields_safely() -> No
     assert "不得在 JSON 外输出解释、Markdown 围栏" in prompt
     for sensitive in (";base64,", "Authorization", "Bearer", "API Key"):
         assert sensitive not in prompt
+
+
+def test_complete_visual_input_reduces_unnecessary_human_review() -> None:
+    prompt = _build(
+        manifest=VisualManifest(
+            source="pdf",
+            total_pages=2,
+            rendered_pages=[_page(1), _page(2)],
+        ),
+        coverage=InputCoverage(
+            structured_text_available=True,
+            visual_pages_complete=True,
+            attachments_opened=False,
+        ),
+    )
+    assert "不得沿用 v1“图片不可读”的假设" in prompt
+    assert "图片数量多" in prompt
+    assert "硬件/电路" in prompt
+    assert "都不能单独成为转人工复审的理由" in prompt
+    assert "不得因为主题专业" in prompt
+    assert "设计目标、器件或方案选择、布局/布线依据、完整设计图、测试计划和迭代方向" in prompt
+    assert "不得仅因尚未给出实测数据而转人工复审" in prompt
+    assert "输入完整但确有资质/职责边界 → recommend_human_review" in prompt
+    assert "应直接在 pass、need_revision 或 reject 中选择" in prompt
+    assert "不能单独证明内容伪造或构成直接拒稿" in prompt

@@ -1,0 +1,56 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "pass",
+    "summary": "文档系统说明无人机主控板的设计目标、器件布局、PCB 布线、电源与 EMC 方案，并提供完整硬件视觉材料、测试计划和迭代方向。",
+    "pass_reason": "结构化正文与 3D 渲染图、PCB 布线图相互印证，设计逻辑、测试计划和迭代方向完整，达到知识库设计类研发文档的审稿标准。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "no_similar",
+      "decision": "keep_independent",
+      "summary": "本 Fixture 未提供有效相似候选。",
+      "candidate_count": 0,
+      "candidates_considered": []
+    },
+    "learning_trace_assessment": "文档描述了硬件方案、测试要点和迭代方向，但没有提供测试数据，且文末声明部分内容可能由 AI 生成。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "evidence_used": [
+        {
+          "evidence_id": "page-3",
+          "page": 3,
+          "observation": "页面包含无人机主控板 3D 渲染图。",
+          "supports": [
+            "hardware_layout"
+          ]
+        },
+        {
+          "evidence_id": "page-5",
+          "page": 5,
+          "observation": "页面包含 PCB 布线工程图。",
+          "supports": [
+            "pcb_routing"
+          ]
+        }
+      ],
+      "limitations": []
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {
+      "resolutions": []
+    }
+  }
+}

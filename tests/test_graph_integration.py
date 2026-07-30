@@ -21,6 +21,7 @@ from wiki_review_v2.runner import ReviewRunner
         ("similarity_merge", "need_revision"),
         ("rereview_resolved", "pass"),
         ("multimodal_pass", "pass"),
+        ("drone_hardware_rd", "pass"),
     ],
 )
 def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
