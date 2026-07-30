@@ -111,6 +111,8 @@ conda run --no-capture-output -n feishu-api python -m pytest -q -m real_kimi
 
 更多说明见 [架构](docs/architecture.md)、[v1→v2 能力映射](docs/v1_v2_mapping.md)、[已知限制](docs/known_limitations.md) 和 [验证报告](docs/validation_report.md)。
 
-## 为什么当前不连接飞书
 
-第一阶段要先把审稿业务规则、多模态证据、模型边界、可恢复性和离线回归测试稳定下来。Fixture 明确替代飞书提供元数据、Blocks、PDF、附件元数据、相似候选和历史；因此代码中没有飞书 SDK、凭据或生产私有函数依赖。下一阶段只需在稳定公开接口前增加 Feishu source/sink adapter，无需改写审稿核心。
+## 可以优化的地方
+
+1.前主要依赖视觉审稿，将文档blocks和文档照片一起传入kimi大模型，消耗量较大，可以尝试的地方，更改Prompt组合方式，利用deepseek审稿，将视觉图片传入Kimi返回图片信息，多模型协同。
+

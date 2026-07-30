@@ -46,6 +46,7 @@ def test_prompt_has_composable_sections_and_no_base64() -> None:
     for heading in (
         "SystemRole",
         "ReviewStandard",
+        "ReviewProcedure",
         "InputSemantics",
         "StructuredContent",
         "VisualInputGuide",

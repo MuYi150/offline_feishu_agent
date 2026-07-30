@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import json
 from typing import Any
 
-from wiki_review_v2.models import InputCoverage, SourceDocument, VisualManifest, VisualPage
-from wiki_review_v2.prompts import ReviewPromptBuilder
+from wiki_review_v2.models import InputCoverage, ModelReviewPayload, SourceDocument, VisualManifest, VisualPage
+from wiki_review_v2.prompts import OUTPUT_JSON_EXAMPLE, ReviewPromptBuilder
 
 
 def _source() -> SourceDocument:
@@ -58,6 +59,7 @@ def test_prompt_sections_follow_semantics_before_data_order() -> None:
     headings = [
         "SystemRole",
         "ReviewStandard",
+        "ReviewProcedure",
         "InputSemantics",
         "DocumentMetadata",
         "StructuredContent",
@@ -222,3 +224,89 @@ def test_complete_visual_input_reduces_unnecessary_human_review() -> None:
     assert "输入完整但确有资质/职责边界 → recommend_human_review" in prompt
     assert "应直接在 pass、need_revision 或 reject 中选择" in prompt
     assert "不能单独证明内容伪造或构成直接拒稿" in prompt
+
+
+def test_output_requirements_include_a_complete_schema_valid_json_example() -> None:
+    validated = ModelReviewPayload.model_validate(OUTPUT_JSON_EXAMPLE)
+    assert validated.result.value == "pass"
+    assert set(OUTPUT_JSON_EXAMPLE) == {
+        "result",
+        "summary",
+        "pass_reason",
+        "blocking_count",
+        "major_count",
+        "minor_count",
+        "issues",
+        "similarity_check",
+        "learning_trace_assessment",
+        "visual_evidence_assessment",
+        "revision_priority",
+        "suggested_next_action",
+        "re_review_assessment",
+    }
+
+    prompt = _build()
+    marker = "下面是完整且语法合法的 JSON 结构示例。"
+    assert marker in prompt
+    example_start = prompt.index("{", prompt.index(marker))
+    embedded = json.loads(prompt[example_start:])
+    ModelReviewPayload.model_validate(embedded)
+    assert embedded == OUTPUT_JSON_EXAMPLE
+
+
+def test_output_requirements_define_types_enums_and_nested_shapes() -> None:
+    prompt = _build()
+    assert "13 个顶层字段" in prompt
+    assert "全部必填且一个不能遗漏" in prompt
+    assert "禁止输出任何额外顶层字段" in prompt
+    assert "不得用 null" in prompt
+    assert "issue_id(string)、level(blocking|major|minor)" in prompt
+    assert "score(number, 0 到 1)" in prompt
+    assert "coverage(complete|partial|unavailable)" in prompt
+    assert "status(resolved|partially_resolved|unresolved)" in prompt
+    assert "merge_recommended → merge_required" in prompt
+    assert "duplicate_reject_recommended → reject_independent_submission" in prompt
+    assert "复审的 similarity_check 必须使用 status=not_applicable" in prompt
+    assert "pass → admin_confirm" in prompt
+    assert "不得因为示例是 pass 而默认 pass" in prompt
+    assert '"properties"' not in prompt
+    assert '"$defs"' not in prompt
+
+
+def test_v1_review_strengths_are_adapted_to_v2_multimodal_standard(settings) -> None:
+    standard = (settings.project_root / "review_standard.md").read_text(encoding="utf-8")
+    for principle in (
+        "不能过度放松",
+        "不能无限挑刺",
+        "先审内容，再审表达，最后审格式",
+        "知识沉淀价值与内容完整性",
+        "个人研发/学习痕迹",
+        "上下文一致性与正确性",
+    ):
+        assert principle in standard
+    for document_type in (
+        "学习笔记 / 知识整理",
+        "论文阅读 / 文献综述",
+        "论文复现 / 代码教程 / 工程运行记录",
+        "工程 SOP / 操作规范",
+        "Bug 排查 / 问题记录",
+        "硬件设计 / 系统方案 / 研发设计文档",
+        "附件型资料文档",
+    ):
+        assert document_type in standard
+    assert "不得沿用 v1“图片不可读”或只依赖 OCR 的假设" in standard
+    assert "major 通常 1–5 条；minor 通常 0–5 条" in standard
+    assert "仅披露使用或可能使用 AI 辅助写作" in standard
+
+
+def test_review_procedure_prioritizes_content_evidence_and_actionable_feedback() -> None:
+    prompt = _build()
+    assert "## ReviewProcedure" in prompt
+    assert "识别文档真实类型" in prompt
+    assert "先判断知识沉淀价值、内容完整性、可理解性和个人研发/学习痕迹" in prompt
+    assert "交叉核对正文与截图、图纸、表格、命令、代码、日志、结果和结论" in prompt
+    assert "每条问题必须有具体位置、实际证据和可执行建议" in prompt
+    assert "不得过度放松，也不得无限挑刺或滥用人工复审" in prompt
+    assert "major 通常合并为 1–5 条" in prompt
+    assert "建议完善内容" in prompt
+    assert "category 只能是 format、structure、correctness" in prompt

@@ -6,10 +6,18 @@ from typing import Any
 from .models import InputCoverage, SourceDocument, VisualManifest
 
 
-SYSTEM_ROLE = """你是科研团队知识库的质量初筛与风险分流 Agent，不是最终管理员。
+SYSTEM_ROLE = """你是科研团队知识库的质量初筛员、修改意见生成器和风险分流 Agent，不是最终管理员或最终裁判。
 你具备视觉理解能力，必须实际结合正文、截图、表格、页面布局和图文关系完成审查。视觉页面完整且清晰时，图片数量多、文档依赖图片、技术主题专业或属于硬件/电路领域，都不能单独成为转人工复审的理由。截图、设计图、PCB 图、命令、配置、日志和结果都可以作为有效证据。不得凭视觉风格断言伪造或 AI 生成。无法覆盖的输入必须明确声明。只返回符合 Schema 的 JSON。"""
 
 INPUT_SEMANTICS = """以下输入由工作流按章节提供。Guide 章节解释紧随其后的 JSON 字段，不能当作文档正文；DocumentMetadata 是文档元数据；StructuredContent 是已提取的 Markdown 正文；VisualManifest 描述本次视觉页面的来源和处理覆盖；AttachmentMetadata 描述附件；InputCoverage 汇总实际输入覆盖范围。只能依据实际提供的正文、候选、页面和附件信息作出判断，未提供的内容必须视为未知。"""
+
+REVIEW_PROCEDURE = """必须按以下顺序完成审稿：
+1. 识别文档真实类型和写作目标，不得把所有文档机械套入同一模板。
+2. 先判断知识沉淀价值、内容完整性、可理解性和个人研发/学习痕迹，再检查结构、语言和标题格式。
+3. 交叉核对正文与截图、图纸、表格、命令、代码、日志、结果和结论，检查是否相互支持或存在矛盾。
+4. 按 blocking、major、minor 合并同类问题；每条问题必须有具体位置、实际证据和可执行建议。
+5. 根据覆盖范围、问题等级、相似性和复审状态选择结论，不得过度放松，也不得无限挑刺或滥用人工复审。
+6. 输出前复核问题计数、result、pass_reason、suggested_next_action、similarity_check、visual_evidence_assessment 和 re_review_assessment 是否一致，再严格按 OutputRequirements 输出 JSON。"""
 
 VISUAL_INPUT_GUIDE = """VisualManifest 字段含义：
 - source：视觉页面来源。pdf 表示页面来自 Fixture 提供的 PDF；fixture_pages 表示页面来自 Fixture 直接提供的 PNG/JPG 等页面图片；generated_pdf 表示页面由结构化 Markdown 自动生成；unavailable 表示没有可用视觉页面。
@@ -57,7 +65,43 @@ DECISION_RULES = """决定规则：
 - pass：正文与可见页面共同形成完整、连贯、可理解的内容，没有 blocking/major 时应正常通过。设计类文档可由清晰的设计目标、器件或方案选择、布局/布线依据、完整设计图、测试计划和迭代方向构成充分研发痕迹；若文档定位是设计方案而非已完成测试报告，不得仅因尚未给出实测数据而转人工复审。
 必须严格区分“输入不完整 → incomplete_review”和“输入完整但确有资质/职责边界 → recommend_human_review”。视觉输入完整且模型能够依据正文和页面作出质量判断时，应直接在 pass、need_revision 或 reject 中选择。表格标签【表格】代表已提取内容，不是不可见占位符。仅披露使用或可能使用 AI 辅助写作，不能单独证明内容伪造或构成直接拒稿；必须依据实际内容、研发痕迹和证据判断。相似性 decision 必须与 status 保持一致。"""
 
-OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供，此处不重复粘贴。关键输出字段的业务含义：
+OUTPUT_JSON_EXAMPLE: dict[str, Any] = {
+    "result": "pass",
+    "summary": "结构示例：请替换为本次审稿结论和依据。",
+    "pass_reason": "结构示例：result=pass 时填写具体通过理由。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+        "status": "no_similar",
+        "decision": "keep_independent",
+        "summary": "结构示例：请替换为本次相似性结论。",
+        "candidate_count": 0,
+        "candidates_considered": [],
+    },
+    "learning_trace_assessment": "结构示例：请替换为本次研发或学习痕迹判断。",
+    "visual_evidence_assessment": {
+        "coverage": "complete",
+        "pages_reviewed": [],
+        "evidence_used": [],
+        "limitations": [],
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {"resolutions": []},
+}
+
+OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供；下面给出与该 Schema 一致的完整合法 JSON 要求和结构示例。
+
+格式硬约束：
+1. 最终响应必须是单个、可被标准 JSON 解析器直接解析的对象；只能使用双引号，不得使用单引号、注释、尾随逗号、NaN 或 Infinity。
+2. 必须输出以下 13 个顶层字段，全部必填且一个不能遗漏：result、summary、pass_reason、blocking_count、major_count、minor_count、issues、similarity_check、learning_trace_assessment、visual_evidence_assessment、revision_priority、suggested_next_action、re_review_assessment。
+3. 禁止输出任何额外顶层字段，尤其不要输出 schema_version、local_status、input_coverage、reasoning、analysis 或 markdown。
+4. 字符串必须是 JSON string，数量和页码必须是 JSON integer，数组即使为空也必须写成 []，对象即使内容为空也必须保留其全部必填字段；不得用 null 代替字符串、数组或对象。
+5. 只输出 JSON 对象本身，不得在 JSON 外输出解释、Markdown 围栏、标题、前缀或后缀文字。
+
+关键输出字段的业务含义：
 - result：最终分流结果，只能是 pass、need_revision、reject、incomplete_review 或 recommend_human_review。
 - summary：对本轮审稿结论和核心依据的简明总结，并反映必要的输入限制。
 - pass_reason：通过理由；result=pass 时必须明确填写，非 pass 时必须为空字符串。
@@ -69,7 +113,30 @@ OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供，
 - revision_priority：按优先顺序列出作者应处理的关键修改；无须修改时为空数组。
 - suggested_next_action：与 result 和相似性结论一致的下一步动作。
 - re_review_assessment：复审时逐项记录上一轮 blocking/major 的解决状态；首审时保持空 resolutions。
-只输出一个符合 response_format Schema 的 JSON 对象。不得在 JSON 外输出解释、Markdown 围栏、标题、前缀或后缀文字。"""
+
+问题意见质量要求：列出全部关键 blocking；major 通常合并为 1–5 条；minor 通常 0–5 条。不得逐字逐句罗列重复问题，不得用“建议完善内容”“建议优化格式”等空泛表述。position、problem、suggestion 必须分别回答“具体在哪里”“实际有什么问题及证据”“作者应如何修改”。如果判断缺少研发/学习痕迹，必须列出已看到的证据和仍缺少的证据；如果使用视觉证据，必须说明对应页面实际显示了什么。
+
+嵌套对象必须使用以下完整字段：
+- issues 中每个元素必须且只能包含：issue_id(string)、level(blocking|major|minor)、category、position(string)、problem(string)、suggestion(string)、evidence_ids(string[])。category 只能是 format、structure、correctness、reproducibility、safety、placement、similarity、visibility、learning_trace、content_sufficiency、content_placeholder、visual_content_missing、sensitive_content_review、ai_generation_artifact、ai_generated_without_personal_trace、ai_revision_padding、fabricated_content 或 other。
+- similarity_check 必须且只能包含：status、decision、summary、candidate_count、candidates_considered。candidate_count 必须等于 candidates_considered 的实际元素数。
+- candidates_considered 中每个元素必须且只能包含：title(string)、wiki_name(string)、link(string)、status(string)、score(number, 0 到 1)、relationship、evidence(string)。relationship 只能是 same_topic、same_area_different_direction、duplicate、complementary 或 partial_extension。
+- visual_evidence_assessment 必须且只能包含：coverage(complete|partial|unavailable)、pages_reviewed(integer[])、evidence_used、limitations(string[])。
+- evidence_used 中每个元素必须且只能包含：evidence_id(string)、page(integer 且从 1 开始)、observation(string)、supports(string[])；evidence_id 只能引用实际提供的页面证据。
+- re_review_assessment 必须且只能包含 resolutions。resolutions 中每个元素必须且只能包含：issue_id(string)、status(resolved|partially_resolved|unresolved)、evidence(string)。
+
+相似性 status 与 decision 必须严格配对：
+- no_similar、same_area_different_direction、related_but_keep、not_applicable → keep_independent；
+- merge_recommended → merge_required；
+- duplicate_reject_recommended → reject_independent_submission。
+复审的 similarity_check 必须使用 status=not_applicable、decision=keep_independent、candidate_count=0、candidates_considered=[]。
+
+suggested_next_action 只能是 admin_confirm、author_revise、human_review、human_recheck、merge_with_existing、reject_independent_submission 或 reject，并与结论一致：pass → admin_confirm；need_revision → author_revise；recommend_human_review → human_review；incomplete_review → human_recheck；reject → reject。相似性要求合并或不建议独立提交时，分别使用 merge_with_existing 或 reject_independent_submission。
+
+下面是完整且语法合法的 JSON 结构示例。它只用于展示字段、类型和嵌套结构，示例中的结论与文字不是本次审稿事实，必须根据本次输入替换；不得因为示例是 pass 而默认 pass：""" + "\n" + json.dumps(
+    OUTPUT_JSON_EXAMPLE,
+    ensure_ascii=False,
+    indent=2,
+)
 
 
 def _attachment_guide(attachments: list[dict[str, Any]], coverage: InputCoverage) -> str:
@@ -125,6 +192,7 @@ class ReviewPromptBuilder:
         sections: list[tuple[str, str]] = [
             ("SystemRole", SYSTEM_ROLE),
             ("ReviewStandard", self.review_standard),
+            ("ReviewProcedure", REVIEW_PROCEDURE),
             ("InputSemantics", INPUT_SEMANTICS),
             ("DocumentMetadata", json.dumps(source.model_dump(mode="json"), ensure_ascii=False, indent=2)),
             ("StructuredContent", content),
