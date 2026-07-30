@@ -34,6 +34,7 @@ def _page(page: int = 1) -> VisualPage:
 
 def _build(
     *,
+    source: SourceDocument | None = None,
     manifest: VisualManifest | None = None,
     coverage: InputCoverage | None = None,
     attachments: list[dict[str, Any]] | None = None,
@@ -42,7 +43,7 @@ def _build(
     rereview_context: dict[str, Any] | None = None,
 ) -> str:
     return ReviewPromptBuilder("审稿标准").build(
-        source=_source(),
+        source=source or _source(),
         content="# 实验记录\n运行测试并观察结果。",
         manifest=manifest or VisualManifest(source="unavailable"),
         coverage=coverage
@@ -172,6 +173,30 @@ def test_rereview_guide_requires_each_blocking_major_resolution() -> None:
     assert "复审不重新召回相似候选" in prompt
     assert "不得为了延长流程而随意增加无关 minor" in prompt
     assert "## InitialReviewSimilarityContext" not in prompt
+
+
+def test_rereview_document_metadata_does_not_repeat_unfiltered_previous_issues() -> None:
+    source = _source().model_copy(
+        update={
+            "review_round": 1,
+            "previous_issues": [
+                {"issue_id": "minor-history-id", "level": "minor", "problem": "旧格式问题"}
+            ],
+        }
+    )
+    prompt = _build(
+        source=source,
+        review_mode="rereview",
+        rereview_context={
+            "previous_review_round": 1,
+            "blocking_major_issues": [{"issue_id": "major-history-id", "level": "major"}],
+        },
+    )
+    metadata = prompt.split("## DocumentMetadata\n", 1)[1].split("\n\n## StructuredContent", 1)[0]
+
+    assert "previous_issues" not in metadata
+    assert "minor-history-id" not in prompt
+    assert "major-history-id" in prompt
 
 
 def test_decision_and_output_requirements_explain_business_fields_safely() -> None:

@@ -1,0 +1,1000 @@
+{
+  "blocks": [
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "无人机硬件研发文档"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "一、主板整体概述"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本款无人机主控硬件板为一体化飞控核心主板，集成姿态解算、动力驱动、外设通信与定位导航电路。当前处于工程样机详细设计阶段：原理图框架、PCB布局布线和接口分区已经形成，核心器件按下述候选方案进入定型。第六章所列数据均为待验证的设计目标，第七章给出样机验收方法；完成样机测试前，不将目标值表述为实测性能。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "附图1为主板3D实物渲染效果图，附图2为PCB布线工程图，完整展示硬件结构与线路设计逻辑。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "1.1 设计目标"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "高度集成：单块PCB承载MCU主控、IMU惯性单元、GPS定位接口、电机驱动、无线通信、电源管理全部电路，减少外接分板，降低整机装配复杂度；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "小型化：方形紧凑布线，缩减整机内部占用空间，适配便携无人机机身；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "强稳定性：分层PCB布线、分区电源、模拟数字地分割，抑制电机电磁干扰，保障姿态数据精准；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "拓展性：预留标准化插接端子，支持图传、数传、云台、外部LED、备用传感器快速拓展。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "二、硬件布局与器件说明（对应3D渲染图）"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "2.1 核心主控芯片"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "工程样机候选主控为STM32F405VGT6（Cortex-M4F，168MHz，1MB Flash，192KB SRAM，LQFP100）。候选依据是其具备浮点运算单元、多路SPI/I2C/UART、充足的定时器PWM通道和成熟飞控生态，可覆盖1kHz IMU采样与500Hz控制环的设计目标。定型条件为台架测试中控制任务CPU占用率不高于60%、RAM保留不少于30%，并连续运行30分钟无控制周期超时。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "负责陀螺仪、加速度计磁力计原始数据采集与姿态解算；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "接收遥控信号，输出四路PWM电机调速信号；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "解析GPS定位数据，实现定点悬停、航线飞行；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "处理串口通信、SPI高速外设、I2C传感器数据交互。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "初步资源分配为：SPI1连接IMU，UART1连接GPS，UART2连接433MHz数传，I2C1用于扩展传感器，TIM1/TIM8提供六路PWM资源；当前PCB布出四路电机输出，并为另外两路保留测试点，六轴应用须在后续板版完成布线与验证。SWD调试口和关键串口均保留测试点。芯片周围通过铺铜与过孔散热，高速数字线与传感器区域隔离。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "2.2 外设接口分区（板边标准化插座）"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "沿PCB四边排布多组插接端子，丝印标注功能，装配识别清晰，具体接口配置如下："
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "GPS接口：板底丝印GPS端子，配套卫星定位模块，提供经纬度、高度、速度定位信息；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "SPI接口：丝印SPI插座，高速通信总线，外接外置存储、光流定位模块；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "433射频接口：专用无线数传接口，支持远距离遥控、地面站数据回传；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "动力输出端子：侧边多组大功率插座，输出四路无刷电机驱动控制信号，预留电源供电引脚；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "电源输入端子：标注3.3V、电池供电接口，集成多级降压、防反接、过流保护电路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "拓展接口：预留云台控制、图传视频输出、LED指示灯、备用传感器扩展插座。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "2.3 辅助功能器件"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "电源管理芯片：板侧多颗稳压IC、滤波电容、功率电阻，将锂电池电压转换为主控、传感器、外设所需3.3V/5V稳定电压；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "驱动与信号隔离芯片：独立信号转换芯片，隔离电机大电流噪声，避免干扰惯性传感器；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "无源器件：大面积贴片电容、磁珠，用于电源滤波，降低电源纹波；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "安装定位孔：四角金属化固定孔，可直接螺丝锁附至无人机机身，孔位增加接地过孔，实现整机静电泄放。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "block_type": "image",
+      "image": {
+        "token": "fixture_image_001"
+      }
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "三、PCB布线工程设计（对应PCB分层图）"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "附图2为本板PCB布线工程视图，红色区域为顶层走线/铺铜，蓝色为底层线路，核心设计要点如下："
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3.1 分层与地平面分割"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "PCB采用四层板结构，分别为顶层信号层、电源层、地层、底层信号层。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "采用数字地、模拟地单点连接分割设计，主控、无线、电机驱动为数字地，IMU惯性传感器、GPS射频电路为模拟地，分开铺铜，大幅降低电机电磁干扰对姿态传感器的漂移影响；同时通过完整地层大面积铺铜，形成屏蔽层，有效隔绝外部电磁辐射。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3.2 走线规则"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "高速信号线（SPI、GPS射频、MCU晶振）短而粗，采用差分对等长布线，减少信号衰减与干扰；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "大电流动力线路加宽铜箔，有效降低线路压降与工作发热；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "传感器信号线远离电机电源走线，规避平行长距离耦合干扰问题；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "所有电源引脚就近配置滤波电容，缩短电流回流路径，优化供电稳定性。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3.3 分区布局规范"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "PCB严格执行分区布线原则，各功能区域线路互不交叉干扰，具体分区如下："
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "中心区域：布置MCU主控核心电路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "左下区域：布局SPI、射频通信外设电路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "右下区域：布置GPS定位相关电路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "左右侧边：排布动力输出、电源输入大功率电路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "四角区域：设置安装孔与接地屏蔽区域。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "四、电源系统设计"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "输入防护：输入范围按2S~4S锂电池的6.0V~16.8V设计。工程样机候选链路为3A自恢复保险丝、耐压不低于40V的反接保护MOSFET和SMBJ18A TVS。选型以16.8V最高持续输入、20%以上耐压余量及浪涌钳位后不超过后级36V耐压为约束，样机阶段通过反接、短路和浪涌测试确认器件定型。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "多级降压：5V负载预算为GPS 0.15A、433MHz数传峰值0.50A、外设0.80A及0.35A余量，设计电流1.80A，候选TPS5430（36V输入、3A输出）；3.3V负载预算为MCU 0.12A、IMU 0.02A、逻辑与扩展0.36A，设计电流0.50A，候选TPS62162（由5V母线输入、1A输出），IMU另设低噪声3.3V LDO。验收目标为满载效率不低于85%、5V纹波不高于50mVpp、数字3.3V纹波不高于30mVpp、IMU电源纹波不高于10mVpp，25℃环境满载30分钟后关键器件表面温度不高于85℃。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "电源隔离：电机功率回路不经过传感器供电支路，5V主电源、数字3.3V和IMU低噪声3.3V分别滤波；功率地与信号地在电源入口附近单点汇接，电机控制信号旁配置连续回流路径。以电机阶跃负载时各电源轨不超出上述纹波和电压容差作为布局定型依据。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "block_type": "image",
+      "image": {
+        "token": "fixture_image_002"
+      }
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "五、电磁兼容（EMC）优化方案"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "采用模拟、数字地分割设计，有效抑制电路共模干扰；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "射频、传感器核心区域外围增设接地屏蔽铜皮，强化电磁屏蔽效果；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "电机PWM输出端配置RC滤波电路，削弱高频开关工作噪声；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "全部外接插座外壳接地，整机装配后形成完整屏蔽回路；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "关键信号回路加装磁珠、穿心电容，实现多级滤波降噪。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "六、硬件性能与应用场景"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.1 设计目标指标（待样机验证）"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "姿态解算刷新率设计目标≥500Hz：依据STM32F405VGT6 168MHz主频和IMU经SPI1以1kHz采样的候选方案估算；须通过任务周期日志证明CPU占用率≤60%，连续30分钟无周期超时后方可转为实测指标；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "GPS定点、定高、自动返航和航线规划为软件与接口设计目标；本版仅完成GPS/UART接口预留，功能状态为待固件联调和试飞验证；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "当前PCB提供四路独立无刷电机PWM输出，目标适配四轴无人机；MCU资源预留六路PWM，但六轴适配需增加两路板级输出并完成负载与试飞验证，不作为本版已实现能力；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "多串口、SPI和I2C总线已作为扩展接口预留；光流、避障、云台和图传属于兼容性目标，须分别通过接口电平、带宽和连续通信测试；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "电源输入设计范围为6.0V~16.8V，对应2S~4S锂电池；须完成低压、标称电压、满充电压和浪涌测试后确认支持范围。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.2 适用场景"
+            }
+          }
+        ]
+      },
+      "block_type": "heading2"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "消费级航拍无人机；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "小型园区巡检、河道巡查、环境监测工业无人机；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "高校、培训机构无人机研发教学实训开源飞控平台；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "小型测绘、微型植保作业飞行器。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "七、研发测试要点"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "上电电源测试：在6.0V、7.4V、11.1V、14.8V和16.8V输入下分别测试空载、50%负载和满载；使用20MHz带宽限制及短接地弹簧测量5V、数字3.3V和IMU 3.3V测试点。通过条件为稳态电压误差≤±3%，纹波分别≤50mVpp、30mVpp和10mVpp，满载连续30分钟无复位且关键器件表面温度≤85℃。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "控制周期与传感器测试：在-10℃、25℃和60℃各恒温20分钟后静置采集10分钟IMU数据，验证1kHz采样与500Hz控制环。通过条件为校准后陀螺仪三轴零偏绝对值≤0.5°/s、加速度模长误差≤0.03g、连续30分钟控制周期超时次数为0，并记录CPU占用率和RAM峰值以完成MCU定型。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "EMC干扰测试：四路电机依次在0%、50%、80%占空比和0%→80%阶跃工况运行，每个稳态工况采集5分钟IMU与电源数据。相对电机停转基线，陀螺仪噪声RMS增幅应≤20%，控制器不得复位，5V与3.3V电源不得超出第一项纹波及电压容差。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "接口可靠性测试：连接器完成100次插拔后，UART以1Mbps、SPI以8MHz、I2C以400kHz分别连续传输30分钟。通过条件为无断连、无锁死，误码或丢包率≤1×10^-5，接触电阻变化≤20mΩ；所有测试记录固件版本、线缆长度和错误计数。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "整机装机试飞：先在防护网和系留条件下完成解锁、低油门、悬停、定点、返航和中速机动，再进入空旷场地测试。单架次悬停不少于10分钟；通过条件为全程无复位或电机失步、姿态跟踪误差RMS≤3°、GPS良好条件下定点水平误差≤1.5m，并完整保存电源、IMU、控制周期、GPS状态和故障日志。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "八、迭代优化方向"
+            }
+          }
+        ]
+      },
+      "block_type": "heading1"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "硬件集成优化：下一版本可集成内置IMU惯性单元，取消外部传感器接线，简化整机装配结构，减少线路故障隐患；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "体积优化：进一步优化PCB布局走线，缩小主板整体尺寸，适配更小体积无人机机身；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "功能拓展：新增CAN总线通信接口，支持多设备协同通信，适配工业级无人机多模块拓展需求；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "散热优化：在主控、稳压芯片等高发热器件区域预留散热焊盘，可搭配散热贴片，提升高负载工况下硬件稳定性；"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "防护升级：优化板边布线与器件布局，增加三防工艺适配性，提升无人机户外复杂环境作业的防潮、防尘、防腐蚀能力。"
+            }
+          }
+        ]
+      },
+      "block_type": "ordered"
+    },
+    {
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "注：本文部分文字在AI辅助下整理，硬件设计方案、图纸与技术判断由研发人员完成并负责核验。"
+            }
+          }
+        ]
+      },
+      "block_type": "text"
+    }
+  ]
+}

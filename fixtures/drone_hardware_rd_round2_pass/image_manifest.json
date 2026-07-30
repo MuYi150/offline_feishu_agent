@@ -1,0 +1,27 @@
+{
+  "schema_version": "2.0",
+  "source_document": "source.docx",
+  "image_count": 2,
+  "images": [
+    {
+      "token": "fixture_image_001",
+      "path": "images/image1.png",
+      "source_part": "word/media/image1.png",
+      "byte_size": 152945,
+      "sha256": "c1953dff2cf5d9f3540194fe6e903423a669f7627aea8b382e13ec1437f33d70",
+      "paragraph_indexes": [
+        30
+      ]
+    },
+    {
+      "token": "fixture_image_002",
+      "path": "images/image2.png",
+      "source_part": "word/media/image2.png",
+      "byte_size": 417448,
+      "sha256": "4e669792a8ba7076c78d8dd3c26e869e454a8c26db6f942e03c3291f0dd42e11",
+      "paragraph_indexes": [
+        52
+      ]
+    }
+  ]
+}

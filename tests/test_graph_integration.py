@@ -22,6 +22,7 @@ from wiki_review_v2.runner import ReviewRunner
         ("rereview_resolved", "pass"),
         ("multimodal_pass", "pass"),
         ("drone_hardware_rd", "pass"),
+        ("drone_hardware_rd_round2_pass", "pass"),
     ],
 )
 def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
@@ -79,6 +80,24 @@ def test_rereview_prompt_only_contains_previous_blocking_major(settings) -> None
     assert "## ReReviewGuide" in prompt
     assert "resolved、partially_resolved 或 unresolved" in prompt
     assert "## InitialReviewSimilarityGuide" not in prompt
+
+
+def test_drone_round2_uses_real_round1_major_issue_ids(settings) -> None:
+    summary = ReviewRunner(settings).run_case("drone_hardware_rd_round2_pass")
+    assert summary.ok
+    assert summary.result == "pass"
+    prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
+    result = json.loads((summary.output_dir / "parsed_review_result.json").read_text(encoding="utf-8"))
+
+    assert "major-1" in prompt
+    assert "major-2" in prompt
+    assert "minor-1" not in prompt
+    assert "## ReReviewGuide" in prompt
+    assert result["similarity_check"]["status"] == "not_applicable"
+    assert {item["issue_id"] for item in result["re_review_assessment"]["resolutions"]} == {
+        "major-1",
+        "major-2",
+    }
 
 
 def test_outputs_do_not_contain_base64_or_authorization(settings) -> None:

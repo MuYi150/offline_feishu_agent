@@ -1,0 +1,93 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "need_revision",
+    "summary": "文档已说明无人机主控板的功能分区、PCB 布线、电源架构和应用场景，并提供完整硬件图；但关键器件选型、电源设计参数和测试验收标准仍处于待补充状态，暂不具备可复现、可验收的研发文档完整度。",
+    "pass_reason": "",
+    "blocking_count": 0,
+    "major_count": 3,
+    "minor_count": 0,
+    "issues": [
+      {
+        "issue_id": "drone-major-mcu-selection",
+        "level": "major",
+        "category": "reproducibility",
+        "position": "第 2.1 节“核心主控芯片”",
+        "problem": "主控芯片仅描述为高性能 MCU，具体型号、主频、存储容量、封装和关键引脚分配均未确定，无法核验其是否满足 500Hz 姿态解算和外设接口需求。",
+        "suggestion": "补充 MCU 型号及关键规格，说明算力、存储、接口数量与实时姿态解算目标之间的选型依据，并列出关键引脚分配。",
+        "evidence_ids": [
+          "page-1"
+        ]
+      },
+      {
+        "issue_id": "drone-major-power-design",
+        "level": "major",
+        "category": "technical_correctness",
+        "position": "第四节“电源系统设计”第 1、2 项",
+        "problem": "输入保护器件、动作阈值、稳压芯片、额定输出电流、效率、纹波及热设计参数均未完成，无法判断 2S~4S 输入范围下的供电安全性和稳定性。",
+        "suggestion": "补充输入电压边界、负载预算、保护器件与阈值、5V/3.3V 稳压方案、效率和热耗散计算，并给出纹波设计目标。",
+        "evidence_ids": [
+          "page-3"
+        ]
+      },
+      {
+        "issue_id": "drone-major-verification-criteria",
+        "level": "major",
+        "category": "verification",
+        "position": "第七节“研发测试要点”",
+        "problem": "五类测试均缺少完整工况、测量方法、量化阈值或通过条件，文档中的性能与可靠性声明无法据此复现和验收。",
+        "suggestion": "为电源、传感器、EMC、接口可靠性和试飞分别补充测试环境、仪器与步骤、采样时长、记录项、风险边界、量化阈值和通过标准。",
+        "evidence_ids": [
+          "page-4"
+        ]
+      }
+    ],
+    "similarity_check": {
+      "status": "no_similar",
+      "decision": "keep_independent",
+      "summary": "本 Fixture 未提供有效相似候选，不能据此声称存在重复文章。",
+      "candidate_count": 0,
+      "candidates_considered": []
+    },
+    "learning_trace_assessment": "文档展现了硬件方案和迭代方向，但关键选型论证与可执行验证标准尚未完成，当前研发过程记录不足以支持复现和验收。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "evidence_used": [
+        {
+          "evidence_id": "page-2",
+          "page": 2,
+          "observation": "页面包含无人机主控板 3D 渲染图，可确认板级布局和接口分布，但图中未提供完整器件型号。",
+          "supports": [
+            "hardware_layout",
+            "mcu_selection_gap"
+          ]
+        },
+        {
+          "evidence_id": "page-3",
+          "page": 3,
+          "observation": "页面包含 PCB 布线工程图及电源设计文字，可确认已形成布线方案，但电源选型和阈值仍标为待补充。",
+          "supports": [
+            "pcb_routing",
+            "power_design_gap"
+          ]
+        }
+      ],
+      "limitations": []
+    },
+    "revision_priority": [
+      "补齐主控芯片选型及其与性能目标的设计依据。",
+      "完成电源负载预算、器件选型、保护阈值、纹波和热设计参数。",
+      "将研发测试要点扩展为具有量化通过条件的可执行验收方案。"
+    ],
+    "suggested_next_action": "author_revise",
+    "re_review_assessment": {
+      "resolutions": []
+    }
+  }
+}

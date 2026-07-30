@@ -194,7 +194,10 @@ class ReviewPromptBuilder:
             ("ReviewStandard", self.review_standard),
             ("ReviewProcedure", REVIEW_PROCEDURE),
             ("InputSemantics", INPUT_SEMANTICS),
-            ("DocumentMetadata", json.dumps(source.model_dump(mode="json"), ensure_ascii=False, indent=2)),
+            (
+                "DocumentMetadata",
+                json.dumps(source.model_dump(mode="json", exclude={"previous_issues"}), ensure_ascii=False, indent=2),
+            ),
             ("StructuredContent", content),
             ("VisualInputGuide", VISUAL_INPUT_GUIDE),
             ("VisualManifest", json.dumps(_visual_manifest_payload(manifest), ensure_ascii=False, indent=2)),

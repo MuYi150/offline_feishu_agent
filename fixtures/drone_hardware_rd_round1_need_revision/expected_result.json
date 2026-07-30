@@ -1,0 +1,12 @@
+{
+  "exit_code": 0,
+  "result": "need_revision",
+  "table_status": "需修改",
+  "review_mode": "initial_review",
+  "review_round": 1,
+  "ocr_success": false,
+  "table_count": 0,
+  "failure_stage": "",
+  "notifications_generated": true,
+  "modified_document_detected": false
+}

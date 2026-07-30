@@ -1,0 +1,12 @@
+{
+  "exit_code": 0,
+  "result": "pass",
+  "table_status": "AI通过待确认",
+  "review_mode": "re_review",
+  "review_round": 2,
+  "ocr_success": false,
+  "table_count": 0,
+  "failure_stage": "",
+  "notifications_generated": true,
+  "modified_document_detected": true
+}
