@@ -1,0 +1,36 @@
+{
+  "blocks": [
+    {
+      "heading1": {"elements": [{"text_run": {"content": "四旋翼飞控硬件目标与架构"}}]},
+      "block_type": "heading1"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "本方案面向 2 kg 级科研四旋翼无人机，飞控主处理器选择 STM32H743。硬件划分为惯性测量、电源管理、通信接口和执行器输出四个部分，重点保证振动环境下的采样稳定性与接口可复现性。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "传感器与通信接口"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "惯性测量采用 ICM-42688-P，通过 SPI 以 1 kHz 采样；气压高度使用 BMP388，导航接口连接 u-blox M10 GNSS。机载扩展总线采用 CAN-FD，调试和遥测分别保留 UART 与 USB 接口。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "电源树与电路板约束"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "整机使用 6S 22.2 V 锂电池输入，一级降压产生 5 V 5 A 电源，低噪声 LDO 再生成 3.3 V 1.5 A 传感器电源。四层 PCB 将高速数字区与模拟传感器区分开布置，目标纹波低于 50 mV，并为 CAN-FD 增加终端匹配与浪涌保护。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "台架验证计划"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "首板焊接后依次测量 5 V 和 3.3 V 电源轨，执行 IMU 六面标定、CAN-FD 环回测试、PWM 输出检查和 30 min 温升测试。最后在振动台记录 ICM-42688-P 零偏与丢包率，并保存示波器波形、串口日志和故障修订记录。"}}]},
+      "block_type": "text"
+    }
+  ]
+}

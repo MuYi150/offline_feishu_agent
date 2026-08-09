@@ -7,11 +7,12 @@
 ```mermaid
 flowchart TD
     F["FixtureDocumentSource"] --> E["DocumentExtractor"]
-    E --> P["PDF 生成或读取"]
+    E --> T["SimilarityProfile：Blocks → 原生 PDF 文字"]
+    T --> P["PDF 生成或读取"]
     P --> R["PdfPageRenderer"]
     R --> C["InputCoverage"]
     C --> M{"首轮或复审"}
-    M -->|首轮| S["SimilarityService"]
+    M -->|首轮| S["SQLite 历史摘要 + 本地 TF-IDF 召回"]
     M -->|复审| H["上一轮 blocking/major"]
     S --> B["Prompt + MultimodalInput"]
     H --> B
@@ -22,6 +23,7 @@ flowchart TD
     K --> J["Parser → Normalizer → Validator"]
     J --> O["OutcomeMapper + Notifications"]
     O --> A["Atomic Artifacts + History"]
+    A --> U["合格 pass 画像 UPSERT"]
     C -->|关键输入不可用| I["确定性 incomplete_review"]
     I --> J
     K -->|API/JSON 失败| X["Safe failure trace，无状态/通知"]
@@ -29,13 +31,19 @@ flowchart TD
 
 ## 数据契约
 
-`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。公开 DTO 包括 SourceDocument、InputCoverage、VisualManifest、VisualEvidenceAssessment、SimilarityAssessment、ReReviewAssessment、ReviewIssue、ReviewResult 和 ModelCallRecord。
+`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。文字召回增加 `SimilarityProfile`、`SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `similarity_candidates.json`，但 Graph 不使用其中的数据，正式候选只来自本地索引。
 
 模型原始输出必须匹配 `ModelReviewPayload` 的严格 JSON Schema。模型不负责生成通知和本地状态；最终结果必须依次经过 JSON Parser、类别/等级/计数归一化、覆盖和结论一致性校验，然后才能映射状态。
 
+## 文字相似性数据流
+
+画像构建位于正文提取之后。有效 Blocks 优先；否则只读取 Fixture 原始 PDF 文字层，不读取生成 PDF、PNG、渲染页面或内嵌图片，也不执行 OCR。摘要以标题、章节、可读关键词、技术实体、参数和原文代表句组成，最大长度由配置控制。
+
+SQLite 查询在 SQL 层排除当前 document_id。正文摘要使用字符 2～4 gram TF-IDF 余弦，标题使用规范化字符相似度，关键词和技术实体使用 Jaccard；固定权重为 `0.70/0.15/0.10/0.05`。超过阈值的 Top-K 摘要进入 Prompt，模型仍负责判断主题独立、重复关系和修改必要性。
+
 ## 可恢复性与副作用
 
-每个运行目录持有独立 `checkpoint.sqlite` 和 thread ID。节点边界形成 checkpoint；恢复时定位失败节点之前的最近快照并以相同 thread ID 继续。模型调用与落盘分属不同节点，因此落盘中断不会重新调用已完成模型。
+每个运行目录持有独立 `checkpoint.sqlite` 和 thread ID。节点边界形成 checkpoint；恢复时定位失败节点之前的最近快照并以相同 thread ID 继续。模型调用、产物落盘和相似画像持久化分属不同节点，因此索引 UPSERT 中断时不会重新调用模型。
 
 所有正式 JSON 产物先写同目录临时文件、刷新并 `os.replace`。普通产物只允许首次写入或内容完全相同的幂等写入；持续更新的 trace 使用原子替换。历史文件保留 records 数组，损坏的历史会被隔离为带时间戳的 `.corrupt-*` 文件。
 

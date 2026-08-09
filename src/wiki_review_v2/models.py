@@ -139,6 +139,62 @@ class InputCoverage(StrictModel):
     limitations: list[str] = Field(default_factory=list)
 
 
+class SimilarityProfile(StrictModel):
+    schema_version: str = "1.0"
+    document_id: str
+    title: str
+    source: Literal["blocks", "pdf", "unavailable"]
+    content: str = ""
+    headings: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    technical_entities: list[str] = Field(default_factory=list)
+    parameters: list[str] = Field(default_factory=list)
+    source_character_count: int = Field(default=0, ge=0)
+    summary_character_count: int = Field(default=0, ge=0)
+    limitations: list[str] = Field(default_factory=list)
+
+
+class SimilarityScoreDetails(StrictModel):
+    text_tfidf: float = Field(ge=0, le=1)
+    title_similarity: float = Field(ge=0, le=1)
+    keyword_jaccard: float = Field(ge=0, le=1)
+    entity_jaccard: float = Field(ge=0, le=1)
+    final_score: float = Field(ge=0, le=1)
+
+
+class SimilarityScoredCandidate(StrictModel):
+    document_id: str
+    title: str
+    wiki_name: str = ""
+    link: str = ""
+    status: str = ""
+    score_details: SimilarityScoreDetails
+    above_threshold: bool
+    selected_for_prompt: bool
+
+
+class SimilarityPromptCandidate(StrictModel):
+    document_id: str
+    title: str
+    wiki_name: str = ""
+    link: str = ""
+    status: str = ""
+    similarity_score: float = Field(ge=0, le=1)
+    score_details: SimilarityScoreDetails
+    content: str
+
+
+class SimilarityRetrievalAudit(StrictModel):
+    schema_version: str = "1.0"
+    query_document_id: str
+    index_candidate_count: int = Field(default=0, ge=0)
+    threshold: float = Field(ge=0, le=1)
+    top_k: int = Field(ge=1)
+    scored_candidates: list[SimilarityScoredCandidate] = Field(default_factory=list)
+    prompt_candidates: list[SimilarityPromptCandidate] = Field(default_factory=list)
+    skipped_reason: str = ""
+
+
 class VisualEvidence(StrictModel):
     evidence_id: str
     page: int = Field(ge=1)
@@ -259,6 +315,9 @@ class ReviewGraphState(StrictModel):
     extracted_content: dict[str, Any] = Field(default_factory=dict)
     visual_manifest: dict[str, Any] = Field(default_factory=dict)
     input_coverage: dict[str, Any] = Field(default_factory=dict)
+    similarity_profile: dict[str, Any] = Field(default_factory=dict)
+    similarity_retrieval: dict[str, Any] = Field(default_factory=dict)
+    similarity_profile_persisted: bool = False
     review_mode: Literal["initial", "rereview"] = "initial"
     similarity_context: dict[str, Any] = Field(default_factory=dict)
     rereview_context: dict[str, Any] = Field(default_factory=dict)

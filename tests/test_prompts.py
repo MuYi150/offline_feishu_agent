@@ -147,15 +147,47 @@ def test_attachment_guide_distinguishes_empty_and_unopened_metadata() -> None:
 
 def test_initial_similarity_guide_explains_upstream_score_and_empty_candidates() -> None:
     prompt = _build(
-        similarity_context={"threshold": 0.35, "top_n": 5, "effective_candidates": []}
+        similarity_context={"threshold": 0.35, "top_k": 5, "effective_candidates": []}
     )
-    for field in ("threshold", "top_n", "effective_candidates"):
+    for field in ("threshold", "top_k", "effective_candidates"):
         assert f"- {field}：" in prompt
-    assert "score 是上游提供的候选分数" in prompt
-    assert "当前工作流不负责计算该分数" in prompt
-    assert "空数组表示本次没有有效候选" in prompt
-    assert "不能只根据 score 直接决定合并或拒绝" in prompt
+    assert "本地确定性算法" in prompt
+    assert "similarity_candidates.json 不参与召回" in prompt
+    assert "可读文字摘要，不是完整正文" in prompt
+    assert "不能仅凭分数认定抄袭" in prompt
+    assert "effective_candidates 为空" in prompt
     assert "## ReReviewGuide" not in prompt
+
+
+def test_initial_similarity_context_contains_local_score_and_summary() -> None:
+    prompt = _build(
+        similarity_context={
+            "threshold": 0.35,
+            "top_k": 5,
+            "effective_candidates": [
+                {
+                    "document_id": "history-1",
+                    "title": "历史无人机硬件方案",
+                    "wiki_name": "历史库",
+                    "link": "https://example.invalid/history-1",
+                    "status": "AI通过待确认",
+                    "similarity_score": 0.72,
+                    "score_details": {
+                        "text_tfidf": 0.75,
+                        "title_similarity": 0.5,
+                        "keyword_jaccard": 0.8,
+                        "entity_jaccard": 1.0,
+                        "final_score": 0.72,
+                    },
+                    "content": "标题：无人机硬件方案\n代表内容：使用 STM32H743 完成 CAN-FD 测试。",
+                }
+            ],
+        }
+    )
+    assert '"document_id": "history-1"' in prompt
+    assert '"similarity_score": 0.72' in prompt
+    assert "使用 STM32H743 完成 CAN-FD 测试" in prompt
+    assert "不能仅凭分数认定抄袭" in prompt
 
 
 def test_rereview_guide_requires_each_blocking_major_resolution() -> None:

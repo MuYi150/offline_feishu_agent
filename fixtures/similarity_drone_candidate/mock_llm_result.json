@@ -1,0 +1,39 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "pass",
+    "summary": "六旋翼控制器与历史四旋翼方案主题和技术栈相近，但载荷、采样频率、电源容量、气压计型号及测试时长存在实质差异。",
+    "pass_reason": "文章给出了独立的设计参数和验证计划，相似内容属于同类硬件平台的合理技术共性。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "same_area_different_direction",
+      "decision": "keep_independent",
+      "summary": "候选与当前文章均讨论无人机飞控硬件，但当前方案有独立的六旋翼约束和参数选择。",
+      "candidate_count": 1,
+      "candidates_considered": [
+        {
+          "title": "设计_四旋翼飞控硬件平台研发方案-v1.0",
+          "wiki_name": "离线测试知识库",
+          "link": "https://example.invalid/wiki/test_doc_similarity_drone_source",
+          "status": "AI通过待确认",
+          "score": 0.413698,
+          "relationship": "same_area_different_direction",
+          "evidence": "两文共享 STM32H743、ICM-42688-P、CAN-FD 和 6S 电源架构，但机型、部分器件、额定参数和验证时长不同。"
+        }
+      ]
+    },
+    "learning_trace_assessment": "文档包含样机上电检查、标定、环回、温升和振动测试的明确执行顺序。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [1],
+      "evidence_used": [],
+      "limitations": []
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {"resolutions": []}
+  }
+}

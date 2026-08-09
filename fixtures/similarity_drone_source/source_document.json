@@ -1,0 +1,15 @@
+{
+  "case_id": "similarity_drone_source",
+  "document_id": "test_doc_similarity_drone_source",
+  "node_token": "test_node_similarity_drone_source",
+  "title": "设计_四旋翼飞控硬件平台研发方案-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_similarity_drone_source",
+  "author": "测试用户_无人机方案甲",
+  "link": "https://example.invalid/wiki/test_doc_similarity_drone_source",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/08/08 09:00:00",
+  "last_ai_review_at": ""
+}

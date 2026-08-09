@@ -5,9 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from wiki_review_v2.errors import OutputConflictError
+from wiki_review_v2.errors import OutputConflictError, SimilarityIndexError
 from wiki_review_v2.graph import ReviewWorkflow
 from wiki_review_v2.runner import ReviewRunner
+from wiki_review_v2.similarity_index import SimilarityIndexStore
 
 
 @pytest.mark.parametrize(
@@ -18,7 +19,7 @@ from wiki_review_v2.runner import ReviewRunner
         ("reject_ai_generated", "reject"),
         ("human_review", "recommend_human_review"),
         ("partial_pages", "incomplete_review"),
-        ("similarity_merge", "need_revision"),
+        ("similarity_merge", "pass"),
         ("rereview_resolved", "pass"),
         ("multimodal_pass", "pass"),
         ("drone_hardware_rd", "pass"),
@@ -37,6 +38,8 @@ def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
         "visual_manifest.json",
         "visual_evidence.json",
         "input_coverage.json",
+        "similarity_profile.json",
+        "similarity_retrieval.json",
         "prompt.txt",
         "model_request_summary.json",
         "raw_model_output.json",
@@ -134,3 +137,91 @@ def test_checkpoint_resume_replays_only_failed_save_node(settings, monkeypatch) 
     assert resumed.ok
     request = json.loads((resumed.output_dir / "model_request_summary.json").read_text(encoding="utf-8"))
     assert [call["phase"] for call in request["calls"]] == ["final_review"]
+
+
+def test_legacy_fixture_candidates_are_ignored(settings) -> None:
+    summary = ReviewRunner(settings).run_case("similarity_merge")
+    assert summary.ok and summary.result == "pass"
+    audit = json.loads((summary.output_dir / "similarity_retrieval.json").read_text(encoding="utf-8"))
+    prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
+    assert audit["index_candidate_count"] == 0
+    assert audit["prompt_candidates"] == []
+    assert "existing-1" not in prompt
+
+
+def test_two_drone_fixtures_recall_from_local_index_only(settings) -> None:
+    runner = ReviewRunner(settings)
+    source_run = runner.run_case("similarity_drone_source", run_id="source")
+    assert source_run.ok and source_run.result == "pass"
+    source_profile = json.loads(
+        (source_run.output_dir / "similarity_profile.json").read_text(encoding="utf-8")
+    )
+    source_audit = json.loads(
+        (source_run.output_dir / "similarity_retrieval.json").read_text(encoding="utf-8")
+    )
+    assert source_profile["source"] == "blocks"
+    assert source_audit["prompt_candidates"] == []
+    assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 1
+    source_requests = json.loads(
+        (source_run.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert [call["phase"] for call in source_requests["calls"]] == ["final_review"]
+
+    candidate_run = runner.run_case("similarity_drone_candidate", run_id="candidate")
+    assert candidate_run.ok and candidate_run.result == "pass"
+    audit = json.loads(
+        (candidate_run.output_dir / "similarity_retrieval.json").read_text(encoding="utf-8")
+    )
+    prompt = (candidate_run.output_dir / "prompt.txt").read_text(encoding="utf-8")
+    assert audit["index_candidate_count"] == 1
+    assert len(audit["prompt_candidates"]) == 1
+    recalled = audit["prompt_candidates"][0]
+    assert recalled["document_id"] == "test_doc_similarity_drone_source"
+    assert recalled["similarity_score"] >= settings.similarity_threshold
+    assert recalled["content"] == source_profile["content"]
+    assert recalled["score_details"]["final_score"] == recalled["similarity_score"]
+    assert "test_doc_similarity_drone_source" in prompt
+    assert "设计_四旋翼飞控硬件平台研发方案-v1.0" in prompt
+    context_text = prompt.split("## InitialReviewSimilarityContext\n", 1)[1].split(
+        "\n\n## DecisionRules", 1
+    )[0]
+    context = json.loads(context_text)
+    assert context["effective_candidates"][0]["content"] == source_profile["content"]
+    assert f'"similarity_score": {recalled["similarity_score"]}' in prompt
+    assert "source.pdf" not in prompt and "page-0001.png" not in prompt
+    assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 2
+
+
+def test_non_pass_and_model_failure_do_not_enter_index(settings) -> None:
+    runner = ReviewRunner(settings)
+    revision = runner.run_case("need_revision")
+    failure = runner.run_case("api_failure")
+    assert revision.ok and revision.result == "need_revision"
+    assert not failure.ok
+    assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 0
+
+
+def test_checkpoint_resume_retries_only_similarity_upsert(settings, monkeypatch) -> None:
+    original = SimilarityIndexStore.upsert
+    calls = {"count": 0}
+
+    def fail_once(self, **kwargs):
+        calls["count"] += 1
+        if calls["count"] == 1:
+            raise SimilarityIndexError("injected index failure")
+        return original(self, **kwargs)
+
+    monkeypatch.setattr(SimilarityIndexStore, "upsert", fail_once)
+    runner = ReviewRunner(settings)
+    first = runner.run_case("basic_pass", run_id="resume-similarity-index")
+    assert not first.ok
+    assert first.failure["code"] == "similarity_index_error"
+    assert (first.output_dir / "parsed_review_result.json").exists()
+    resumed = runner.resume(first.output_dir)
+    assert resumed.ok
+    requests = json.loads(
+        (resumed.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert [call["phase"] for call in requests["calls"]] == ["final_review"]
+    assert calls["count"] == 2
+    assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 1

@@ -38,8 +38,10 @@ class Settings(BaseModel):
     max_pdf_bytes: int = Field(default=100 * 1024 * 1024, ge=1)
     max_request_bytes: int = Field(default=90 * 1024 * 1024, ge=1024 * 1024)
     max_structured_text_chars: int = Field(default=500_000, ge=1_000)
-    similarity_min_score: float = Field(default=0.35, ge=0, le=1)
-    similarity_top_n: int = Field(default=5, ge=1, le=50)
+    similarity_threshold: float = Field(default=0.35, ge=0, le=1)
+    similarity_top_k: int = Field(default=5, ge=1, le=50)
+    similarity_summary_max_chars: int = Field(default=1200, ge=200, le=5000)
+    similarity_index_path: Path = Path("local_state/similarity_index/articles.sqlite")
 
     @field_validator("kimi_reasoning_effort")
     @classmethod
@@ -53,6 +55,14 @@ class Settings(BaseModel):
     def from_env(cls, project_root: Path | None = None) -> "Settings":
         root = (project_root or Path(__file__).resolve().parents[2]).resolve()
         key = os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY")
+        configured_index = Path(
+            os.getenv(
+                "SIMILARITY_INDEX_PATH",
+                root / "local_state" / "similarity_index" / "articles.sqlite",
+            )
+        )
+        if not configured_index.is_absolute():
+            configured_index = root / configured_index
         return cls(
             project_root=root,
             fixtures_root=Path(os.getenv("WIKI_V2_FIXTURES_ROOT", root / "fixtures")),
@@ -76,9 +86,27 @@ class Settings(BaseModel):
             max_pdf_bytes=int(os.getenv("MAX_PDF_BYTES", str(100 * 1024 * 1024))),
             max_request_bytes=int(os.getenv("MAX_REQUEST_BYTES", str(90 * 1024 * 1024))),
             max_structured_text_chars=int(os.getenv("MAX_STRUCTURED_TEXT_CHARS", "500000")),
-            similarity_min_score=float(os.getenv("SIMILARITY_MIN_SCORE", "0.35")),
-            similarity_top_n=int(os.getenv("SIMILARITY_TOP_N", "5")),
+            similarity_threshold=float(
+                os.getenv("SIMILARITY_THRESHOLD", os.getenv("SIMILARITY_MIN_SCORE", "0.35"))
+            ),
+            similarity_top_k=int(
+                os.getenv("SIMILARITY_TOP_K", os.getenv("SIMILARITY_TOP_N", "5"))
+            ),
+            similarity_summary_max_chars=int(
+                os.getenv("SIMILARITY_SUMMARY_MAX_CHARS", "1200")
+            ),
+            similarity_index_path=configured_index,
         )
+
+    @property
+    def similarity_min_score(self) -> float:
+        """Compatibility alias for callers using the original setting name."""
+        return self.similarity_threshold
+
+    @property
+    def similarity_top_n(self) -> int:
+        """Compatibility alias for callers using the original setting name."""
+        return self.similarity_top_k
 
     def safe_dict(self) -> dict[str, object]:
         data = self.model_dump(exclude={"kimi_api_key"}, mode="json")

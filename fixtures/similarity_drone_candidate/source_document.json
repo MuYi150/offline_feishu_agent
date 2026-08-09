@@ -1,0 +1,15 @@
+{
+  "case_id": "similarity_drone_candidate",
+  "document_id": "test_doc_similarity_drone_candidate",
+  "node_token": "test_node_similarity_drone_candidate",
+  "title": "实践_六旋翼控制器硬件设计与验证-v1.0",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_similarity_drone_candidate",
+  "author": "测试用户_无人机方案乙",
+  "link": "https://example.invalid/wiki/test_doc_similarity_drone_candidate",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/08/08 10:00:00",
+  "last_ai_review_at": ""
+}

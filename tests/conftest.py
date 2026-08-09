@@ -17,6 +17,7 @@ def settings(tmp_path: Path) -> Settings:
         update={
             "output_root": tmp_path / "outputs",
             "state_root": tmp_path / "state",
+            "similarity_index_path": tmp_path / "state" / "similarity_index" / "articles.sqlite",
             "kimi_schema_retry_attempts": 1,
         }
     )

@@ -13,6 +13,12 @@ from .runner import ReviewRunner
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="科研团队知识库本地多模态审稿 Agent v2")
     parser.add_argument("--list-cases", action="store_true", help="列出本地 Fixture")
+    parser.add_argument(
+        "--init-similarity-index", action="store_true", help="初始化本地文字相似性索引"
+    )
+    parser.add_argument(
+        "--similarity-index-info", action="store_true", help="查看本地文字相似性索引"
+    )
     parser.add_argument("--case", help="运行指定 Fixture case_id")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--fake-model", action="store_true", help="使用离线 Fake 模型（默认）")
@@ -27,13 +33,40 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     settings = Settings.from_env()
     runner = ReviewRunner(settings)
+    if args.resume and args.case:
+        print(json.dumps({"error": "--resume 与 --case 不能同时使用"}, ensure_ascii=False))
+        return 2
+    action_count = sum(
+        bool(value)
+        for value in (
+            args.list_cases,
+            args.init_similarity_index,
+            args.similarity_index_info,
+            args.case,
+            args.resume,
+        )
+    )
+    if action_count > 1:
+        print(json.dumps({"error": "一次只能指定一个操作"}, ensure_ascii=False))
+        return 2
     if args.list_cases:
         for case_id in runner.list_cases():
             print(case_id)
         return 0
-    if args.resume and args.case:
-        print(json.dumps({"error": "--resume 与 --case 不能同时使用"}, ensure_ascii=False))
-        return 2
+    if args.init_similarity_index:
+        try:
+            print(json.dumps(runner.initialize_similarity_index(), ensure_ascii=False))
+        except ReviewError as exc:
+            print(json.dumps({"ok": False, "failure": classify_exception(exc)}, ensure_ascii=False))
+            return 1
+        return 0
+    if args.similarity_index_info:
+        try:
+            print(json.dumps(runner.similarity_index_info(), ensure_ascii=False))
+        except ReviewError as exc:
+            print(json.dumps({"ok": False, "failure": classify_exception(exc)}, ensure_ascii=False))
+            return 1
+        return 0
     if not args.resume and not args.case:
         print(json.dumps({"error": "请传入 --case、--resume 或 --list-cases"}, ensure_ascii=False))
         return 2

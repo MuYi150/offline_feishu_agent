@@ -15,6 +15,7 @@ from .fixtures import FixtureDocumentSource
 from .graph import ReviewWorkflow
 from .model import FakeReviewModel, KimiMultimodalModel, ReviewModel
 from .models import ReviewGraphState
+from .similarity_index import SimilarityIndexStore
 from .storage import AuditStore, atomic_write_json, utc_run_id
 
 
@@ -34,6 +35,14 @@ class ReviewRunner:
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
         self.source = FixtureDocumentSource()
+
+    def initialize_similarity_index(self) -> dict[str, object]:
+        store = SimilarityIndexStore(self.settings.similarity_index_path)
+        store.initialize()
+        return store.info()
+
+    def similarity_index_info(self) -> dict[str, object]:
+        return SimilarityIndexStore(self.settings.similarity_index_path).info()
 
     def list_cases(self) -> list[str]:
         return self.source.list_cases(self.settings.fixtures_root)

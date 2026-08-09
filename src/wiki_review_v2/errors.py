@@ -64,6 +64,10 @@ class OutputConflictError(ReviewError):
     code = "output_conflict"
 
 
+class SimilarityIndexError(ReviewError):
+    code = "similarity_index_error"
+
+
 def classify_exception(exc: BaseException) -> dict[str, object]:
     if isinstance(exc, ReviewError):
         return {

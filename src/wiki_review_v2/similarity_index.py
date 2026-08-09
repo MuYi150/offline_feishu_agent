@@ -1,0 +1,357 @@
+from __future__ import annotations
+
+import json
+import math
+import re
+import sqlite3
+from collections import Counter
+from contextlib import contextmanager
+from dataclasses import dataclass
+from datetime import UTC, datetime
+from difflib import SequenceMatcher
+from pathlib import Path
+
+from .config import Settings
+from .errors import SimilarityIndexError
+from .models import (
+    ReviewOutcome,
+    SimilarityProfile,
+    SimilarityPromptCandidate,
+    SimilarityRetrievalAudit,
+    SimilarityScoreDetails,
+    SimilarityScoredCandidate,
+    SourceDocument,
+)
+
+
+SCHEMA_VERSION = "1"
+
+
+@dataclass(frozen=True)
+class IndexedSimilarityArticle:
+    document_id: str
+    title: str
+    wiki_name: str
+    node_token: str
+    link: str
+    content: str
+    keywords: list[str]
+    technical_entities: list[str]
+    source: str
+    review_result: str
+    local_status: str
+    source_updated_at: str
+    indexed_at: str
+
+
+class SimilarityIndexStore:
+    def __init__(self, path: Path) -> None:
+        self.path = Path(path)
+
+    def _connect(self) -> sqlite3.Connection:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        connection = sqlite3.connect(self.path, timeout=5)
+        connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA busy_timeout = 5000")
+        return connection
+
+    @contextmanager
+    def _connection(self):
+        connection = self._connect()
+        try:
+            with connection:
+                yield connection
+        finally:
+            connection.close()
+
+    def initialize(self) -> None:
+        try:
+            with self._connection() as connection:
+                connection.execute(
+                    "CREATE TABLE IF NOT EXISTS similarity_index_metadata "
+                    "(key TEXT PRIMARY KEY, value TEXT NOT NULL)"
+                )
+                existing = connection.execute(
+                    "SELECT value FROM similarity_index_metadata WHERE key='schema_version'"
+                ).fetchone()
+                if existing is not None and existing["value"] != SCHEMA_VERSION:
+                    raise SimilarityIndexError(
+                        f"相似性索引 Schema 版本不兼容：{existing['value']} != {SCHEMA_VERSION}"
+                    )
+                connection.execute(
+                    "INSERT OR IGNORE INTO similarity_index_metadata(key, value) VALUES('schema_version', ?)",
+                    (SCHEMA_VERSION,),
+                )
+                connection.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS similarity_articles (
+                        document_id TEXT PRIMARY KEY,
+                        title TEXT NOT NULL,
+                        wiki_name TEXT NOT NULL,
+                        node_token TEXT NOT NULL,
+                        link TEXT NOT NULL,
+                        content TEXT NOT NULL,
+                        keywords_json TEXT NOT NULL,
+                        technical_entities_json TEXT NOT NULL,
+                        source TEXT NOT NULL,
+                        review_result TEXT NOT NULL,
+                        local_status TEXT NOT NULL,
+                        source_updated_at TEXT NOT NULL,
+                        indexed_at TEXT NOT NULL
+                    )
+                    """
+                )
+        except SimilarityIndexError:
+            raise
+        except (OSError, sqlite3.Error) as exc:
+            raise SimilarityIndexError("无法初始化本地相似性索引") from exc
+
+    def info(self) -> dict[str, object]:
+        self.initialize()
+        try:
+            with self._connection() as connection:
+                version = connection.execute(
+                    "SELECT value FROM similarity_index_metadata WHERE key='schema_version'"
+                ).fetchone()["value"]
+                count = connection.execute(
+                    "SELECT COUNT(*) AS count FROM similarity_articles"
+                ).fetchone()["count"]
+            return {
+                "path": str(self.path.resolve()),
+                "schema_version": version,
+                "record_count": count,
+            }
+        except (OSError, sqlite3.Error) as exc:
+            raise SimilarityIndexError("无法读取本地相似性索引信息") from exc
+
+    def upsert(
+        self,
+        *,
+        source: SourceDocument,
+        profile: SimilarityProfile,
+        review_result: ReviewOutcome | str,
+        local_status: str,
+    ) -> None:
+        result = review_result.value if isinstance(review_result, ReviewOutcome) else str(review_result)
+        if result != ReviewOutcome.PASS.value:
+            raise SimilarityIndexError("只有审稿通过的文章可以写入相似性索引")
+        if profile.source not in {"blocks", "pdf"} or not profile.content.strip():
+            raise SimilarityIndexError("只有包含可靠文字摘要的文章可以写入相似性索引")
+        self.initialize()
+        try:
+            with self._connection() as connection:
+                connection.execute(
+                    """
+                    INSERT INTO similarity_articles(
+                        document_id, title, wiki_name, node_token, link, content,
+                        keywords_json, technical_entities_json, source, review_result,
+                        local_status, source_updated_at, indexed_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(document_id) DO UPDATE SET
+                        title=excluded.title,
+                        wiki_name=excluded.wiki_name,
+                        node_token=excluded.node_token,
+                        link=excluded.link,
+                        content=excluded.content,
+                        keywords_json=excluded.keywords_json,
+                        technical_entities_json=excluded.technical_entities_json,
+                        source=excluded.source,
+                        review_result=excluded.review_result,
+                        local_status=excluded.local_status,
+                        source_updated_at=excluded.source_updated_at,
+                        indexed_at=excluded.indexed_at
+                    """,
+                    (
+                        source.document_id,
+                        source.title,
+                        source.wiki_name,
+                        source.node_token,
+                        source.link,
+                        profile.content,
+                        json.dumps(profile.keywords, ensure_ascii=False),
+                        json.dumps(profile.technical_entities, ensure_ascii=False),
+                        profile.source,
+                        result,
+                        local_status,
+                        source.updated_at,
+                        datetime.now(UTC).isoformat(),
+                    ),
+                )
+        except (OSError, sqlite3.Error) as exc:
+            raise SimilarityIndexError("无法写入本地相似性索引") from exc
+
+    def query(self, *, exclude_document_id: str) -> list[IndexedSimilarityArticle]:
+        self.initialize()
+        try:
+            with self._connection() as connection:
+                rows = connection.execute(
+                    "SELECT * FROM similarity_articles WHERE document_id <> ? "
+                    "AND review_result = 'pass' ORDER BY document_id",
+                    (exclude_document_id,),
+                ).fetchall()
+            return [
+                IndexedSimilarityArticle(
+                    document_id=row["document_id"],
+                    title=row["title"],
+                    wiki_name=row["wiki_name"],
+                    node_token=row["node_token"],
+                    link=row["link"],
+                    content=row["content"],
+                    keywords=list(json.loads(row["keywords_json"])),
+                    technical_entities=list(json.loads(row["technical_entities_json"])),
+                    source=row["source"],
+                    review_result=row["review_result"],
+                    local_status=row["local_status"],
+                    source_updated_at=row["source_updated_at"],
+                    indexed_at=row["indexed_at"],
+                )
+                for row in rows
+            ]
+        except (OSError, sqlite3.Error, TypeError, ValueError, json.JSONDecodeError) as exc:
+            raise SimilarityIndexError("无法查询本地相似性索引") from exc
+
+
+class TextSimilarityScorer:                                         #相似度计算
+    TEXT_WEIGHT = 0.70
+    TITLE_WEIGHT = 0.15
+    KEYWORD_WEIGHT = 0.10
+    ENTITY_WEIGHT = 0.05
+
+    def score_all(
+        self, current: SimilarityProfile, candidates: list[IndexedSimilarityArticle]
+    ) -> list[tuple[IndexedSimilarityArticle, SimilarityScoreDetails]]:
+        text_scores = self._tfidf_scores(current.content, [item.content for item in candidates])
+        scored: list[tuple[IndexedSimilarityArticle, SimilarityScoreDetails]] = []
+        for candidate, text_score in zip(candidates, text_scores, strict=True):
+            title_score = SequenceMatcher(
+                None, _normalize(current.title), _normalize(candidate.title)
+            ).ratio()
+            keyword_score = _jaccard(current.keywords, candidate.keywords)
+            entity_score = _jaccard(current.technical_entities, candidate.technical_entities)
+            final = (
+                self.TEXT_WEIGHT * text_score
+                + self.TITLE_WEIGHT * title_score
+                + self.KEYWORD_WEIGHT * keyword_score
+                + self.ENTITY_WEIGHT * entity_score
+            )
+            scored.append(
+                (
+                    candidate,
+                    SimilarityScoreDetails(
+                        text_tfidf=_score(text_score),
+                        title_similarity=_score(title_score),
+                        keyword_jaccard=_score(keyword_score),
+                        entity_jaccard=_score(entity_score),
+                        final_score=_score(final),
+                    ),
+                )
+            )
+        return scored
+
+    @staticmethod
+    def _tfidf_scores(current: str, candidates: list[str]) -> list[float]:
+        documents = [_character_ngrams(current), *(_character_ngrams(item) for item in candidates)]
+        if not candidates or not documents[0]:
+            return [0.0] * len(candidates)
+        document_count = len(documents)
+        document_frequency: Counter[str] = Counter()
+        for grams in documents:
+            document_frequency.update(set(grams))
+        vectors: list[dict[str, float]] = []
+        for grams in documents:
+            total = sum(grams.values()) or 1
+            vectors.append(
+                {
+                    token: count / total
+                    * (math.log((1 + document_count) / (1 + document_frequency[token])) + 1)
+                    for token, count in grams.items()
+                }
+            )
+        return [_cosine(vectors[0], item) for item in vectors[1:]]
+
+
+class LocalSimilarityRetriever:
+    def __init__(self, settings: Settings, store: SimilarityIndexStore) -> None:
+        self.settings = settings
+        self.store = store
+        self.scorer = TextSimilarityScorer()
+
+    def retrieve(
+        self, *, current_document_id: str, current_profile: SimilarityProfile
+    ) -> tuple[list[SimilarityPromptCandidate], SimilarityRetrievalAudit]:
+        indexed = self.store.query(exclude_document_id=current_document_id)
+        scored = self.scorer.score_all(current_profile, indexed) if current_profile.content else []
+        scored.sort(key=lambda item: (-item[1].final_score, item[0].document_id))
+        above = [
+            item for item in scored if item[1].final_score >= self.settings.similarity_threshold
+        ]
+        selected = above[: self.settings.similarity_top_k]
+        selected_ids = {item[0].document_id for item in selected}
+        prompt_candidates = [
+            SimilarityPromptCandidate(
+                document_id=article.document_id,
+                title=article.title,
+                wiki_name=article.wiki_name,
+                link=article.link,
+                status=article.local_status,
+                similarity_score=details.final_score,
+                score_details=details,
+                content=article.content,
+            )
+            for article, details in selected
+        ]
+        audit = SimilarityRetrievalAudit(
+            query_document_id=current_document_id,
+            index_candidate_count=len(indexed),
+            threshold=self.settings.similarity_threshold,
+            top_k=self.settings.similarity_top_k,
+            scored_candidates=[
+                SimilarityScoredCandidate(
+                    document_id=article.document_id,
+                    title=article.title,
+                    wiki_name=article.wiki_name,
+                    link=article.link,
+                    status=article.local_status,
+                    score_details=details,
+                    above_threshold=details.final_score >= self.settings.similarity_threshold,
+                    selected_for_prompt=article.document_id in selected_ids,
+                )
+                for article, details in scored
+            ],
+            prompt_candidates=prompt_candidates,
+        )
+        return prompt_candidates, audit
+
+
+def _normalize(value: str) -> str:
+    return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", value.lower())
+
+
+def _character_ngrams(value: str) -> Counter[str]:
+    normalized = _normalize(value)
+    grams: Counter[str] = Counter()
+    for size in range(2, 5):
+        grams.update(
+            normalized[index : index + size]
+            for index in range(max(0, len(normalized) - size + 1))
+        )
+    return grams
+
+
+def _jaccard(left: list[str], right: list[str]) -> float:
+    first = {_normalize(item) for item in left if _normalize(item)}
+    second = {_normalize(item) for item in right if _normalize(item)}
+    return len(first & second) / len(first | second) if first and second else 0.0
+
+
+def _cosine(left: dict[str, float], right: dict[str, float]) -> float:
+    if not left or not right:
+        return 0.0
+    dot = sum(value * right.get(token, 0.0) for token, value in left.items())
+    left_norm = math.sqrt(sum(value * value for value in left.values()))
+    right_norm = math.sqrt(sum(value * value for value in right.values()))
+    return dot / (left_norm * right_norm) if left_norm and right_norm else 0.0
+
+
+def _score(value: float) -> float:
+    return round(max(0.0, min(1.0, value)), 6)

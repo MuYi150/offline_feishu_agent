@@ -10,13 +10,19 @@
 conda run --no-capture-output -n feishu-api python -m pip install -e ".[dev]"
 ```
 
+文字相似性画像从原生 PDF 提取文字时使用 PyMuPDF；如需单独安装：
+
+```powershell
+conda run --no-capture-output -n feishu-api python -m pip install "PyMuPDF>=1.24,<2"
+```
+
 ## 配置 Kimi
 
 复制 `.env.example` 中需要的变量到当前终端环境。程序不会自动读取或修改 `.env`，也不会把 Key 写入日志或产物。
 
 ```powershell
 $env:KIMI_API_KEY = "your-key"
-$env:KIMI_BASE_URL = "https://api.moonshot.ai/v1"
+$env:KIMI_BASE_URL = "https://api.moonshot.cn/v1"
 $env:KIMI_MODEL = "kimi-k3"
 ```
 
@@ -50,6 +56,53 @@ conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --resum
 
 恢复使用 `run_metadata.json` 中的 case、模式和 thread ID，从 SQLite checkpoint 中失败节点之前的最近快照继续。已完成的模型节点不会重复运行；输出写入采用摘要一致的幂等检查。
 
+## 本地文字相似性索引
+
+初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层，再生成可读摘要并与本地 SQLite 历史摘要比较。图片、PNG、渲染页面和 OCR 完全不参与相似性计算；历史文章只把摘要和分数放入 Prompt，不发送历史 PDF、图片或完整正文。
+
+默认配置如下，程序仍沿用现有环境变量读取方式，不会自动加载 `.env`：
+
+```powershell
+$env:SIMILARITY_INDEX_PATH = Join-Path $PWD "local_state\similarity_index\articles.sqlite"
+$env:SIMILARITY_THRESHOLD = "0.35"
+$env:SIMILARITY_TOP_K = "5"
+$env:SIMILARITY_SUMMARY_MAX_CHARS = "1200"
+```
+
+摘要字符 2～4 gram TF-IDF、标题、关键词和技术实体的固定权重分别为 `0.70/0.15/0.10/0.05`。只有经过完整结果校验、最终为 `pass`、摘要来源是 Blocks/PDF、正文未截断且没有缺失来源的文章才会 UPSERT；相同 `document_id` 更新原记录。
+
+初始化和查看索引：
+
+```powershell
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --init-similarity-index
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --similarity-index-info
+```
+
+连续运行两个无人机 Fixture。下面使用专门的演示索引和输出目录，不影响默认索引或已有 outputs：
+
+```powershell
+$env:SIMILARITY_INDEX_PATH = Join-Path $PWD "local_state\similarity_demo\articles.sqlite"
+$env:WIKI_V2_OUTPUT_ROOT = Join-Path $PWD "local_state\similarity_demo_outputs"
+Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force -ErrorAction SilentlyContinue
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --init-similarity-index
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --case similarity_drone_source --fake-model --run-id source
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --case similarity_drone_candidate --fake-model --run-id candidate
+conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --similarity-index-info
+```
+
+查看第二次召回审计和实际 Prompt：
+
+```powershell
+Get-Content -Raw -Encoding UTF8 "$env:WIKI_V2_OUTPUT_ROOT\similarity_drone_candidate\candidate\similarity_retrieval.json"
+Get-Content -Raw -Encoding UTF8 "$env:WIKI_V2_OUTPUT_ROOT\similarity_drone_candidate\candidate\prompt.txt"
+```
+
+清空演示索引时只删除显式配置的测试文件，不要对 `local_state` 或项目目录做递归删除：
+
+```powershell
+Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
+```
+
 ## 多模态页面如何进入模型
 
 正文 Block 首先被转换为 Markdown。PDF 由 PyMuPDF 逐页渲染，每页获得稳定的 `page-N` evidence ID、一基页码、尺寸、字节数和 SHA-256。Prompt Builder 只生成文字和视觉清单；Kimi 适配器在内存中把页面标签以及对应的 `image_url` 数据项加入 `message.content` 数组，Base64 不会拼进 Prompt 或写入产物。
@@ -66,6 +119,8 @@ conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --resum
 - `visual_manifest.json`：页面、evidence ID、尺寸、哈希和失败页。
 - `visual_evidence.json`：长 PDF 分批视觉证据。
 - `input_coverage.json`：本次实际可见范围及限制。
+- `similarity_profile.json`：当前文章的文字来源、可读摘要、关键词、技术实体和字符数。
+- `similarity_retrieval.json`：本地索引候选数、四项分数、阈值判断和最终 Prompt 候选。
 - `prompt.txt`：纯文字 Prompt，不含图片 Base64。
 - `model_request_summary.json`：模型、阶段、耗时、token 和图片摘要，不含认证信息。
 - `raw_model_output.json`：仅保存最终 message content 和安全响应元数据，不保存推理内容或完整 SDK 响应。
@@ -115,4 +170,6 @@ conda run --no-capture-output -n feishu-api python -m pytest -q -m real_kimi
 ## 可以优化的地方
 
 1.前主要依赖视觉审稿，将文档blocks和文档照片一起传入kimi大模型，消耗量较大，可以尝试的地方，更改Prompt组合方式，利用deepseek审稿，将视觉图片传入Kimi返回图片信息，多模型协同。
+
+2.摘要归为本地索引的时间需要改为已公式后，目前为了测试方便改为ai通过后。
 

@@ -19,14 +19,18 @@ from .models import (
     PreviousReview,
     ReviewGraphState,
     ReviewResult,
+    SimilarityProfile,
+    SimilarityRetrievalAudit,
     SourceDocument,
     VisualEvidenceBatch,
     VisualManifest,
 )
 from .notifications import NotificationRenderer
 from .pdf import PdfPageRenderer, calculate_input_coverage
-from .policies import ReviewHistoryPolicy, ReviewModePolicy, SimilarityService
+from .policies import ReviewHistoryPolicy, ReviewModePolicy
 from .prompts import ReviewPromptBuilder
+from .similarity_index import LocalSimilarityRetriever, SimilarityIndexStore
+from .similarity_profile import SimilarityProfileBuilder
 from .result import (
     ReviewOutcomeMapper,
     ReviewResultNormalizer,
@@ -68,9 +72,9 @@ class ReviewWorkflow:
         self.extractor = DocumentExtractor()
         self.pdf = PdfPageRenderer(settings)
         self.mode_policy = ReviewModePolicy()
-        self.similarity = SimilarityService(
-            min_score=settings.similarity_min_score, top_n=settings.similarity_top_n
-        )
+        self.similarity_profiles = SimilarityProfileBuilder(settings)
+        self.similarity_index = SimilarityIndexStore(settings.similarity_index_path)
+        self.similarity = LocalSimilarityRetriever(settings, self.similarity_index)
         self.history_policy = ReviewHistoryPolicy()
         standard_path = settings.project_root / "review_standard.md"
         standard = standard_path.read_text(encoding="utf-8") if standard_path.exists() else "按科研知识库最低质量标准审稿。"
@@ -89,6 +93,9 @@ class ReviewWorkflow:
         nodes: dict[str, Callable[[ReviewGraphState], dict[str, Any]]] = {
             "load_fixture": self._guard("load_fixture", self.load_fixture),
             "extract_document": self._guard("extract_document", self.extract_document),
+            "build_similarity_profile": self._guard(
+                "build_similarity_profile", self.build_similarity_profile
+            ),
             "prepare_pdf_pages": self._guard("prepare_pdf_pages", self.prepare_pdf_pages),
             "build_input_coverage": self._guard("build_input_coverage", self.build_input_coverage),
             "route_review_mode": self._guard("route_review_mode", self.route_review_mode),
@@ -106,6 +113,9 @@ class ReviewWorkflow:
             "project_status": self._guard("project_status", self.project_status),
             "render_notifications": self._guard("render_notifications", self.render_notifications),
             "save_artifacts": self._guard("save_artifacts", self.save_artifacts),
+            "persist_similarity_profile": self._guard(
+                "persist_similarity_profile", self.persist_similarity_profile
+            ),
             "record_safe_failure": self.record_safe_failure,
         }
         for name, node in nodes.items():
@@ -113,7 +123,8 @@ class ReviewWorkflow:
         builder.add_edge(START, "load_fixture")                                    #注册条件路线
         ordinary = [
             ("load_fixture", "extract_document"),
-            ("extract_document", "prepare_pdf_pages"),
+            ("extract_document", "build_similarity_profile"),
+            ("build_similarity_profile", "prepare_pdf_pages"),
             ("prepare_pdf_pages", "build_input_coverage"),
             ("build_input_coverage", "route_review_mode"),
         ]
@@ -149,7 +160,16 @@ class ReviewWorkflow:
         ]
         for current, nxt in tail:
             builder.add_conditional_edges(current, self._failure_route, {"ok": nxt, "failure": "record_safe_failure"})
-        builder.add_edge("save_artifacts", END)
+        builder.add_conditional_edges(
+            "save_artifacts",
+            self._failure_route,
+            {"ok": "persist_similarity_profile", "failure": "record_safe_failure"},
+        )
+        builder.add_conditional_edges(
+            "persist_similarity_profile",
+            self._failure_route,
+            {"ok": END, "failure": "record_safe_failure"},
+        )
         builder.add_edge("record_safe_failure", END)
         return builder.compile(checkpointer=checkpointer)
 
@@ -196,6 +216,15 @@ class ReviewWorkflow:
         extracted = self.extractor.extract(state.blocks)                                        #Blocks 转换markdown
         return {"extracted_content": extracted}
 
+    def build_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
+        profile = self.similarity_profiles.build(
+            source=SourceDocument.model_validate(state.source_document),
+            extracted_content=state.extracted_content,
+            case_path=Path(state.case_path),
+            options=FixtureOptions.model_validate(state.fixture_options),
+        )
+        return {"similarity_profile": profile.model_dump(mode="json")}
+
     def prepare_pdf_pages(self, state: ReviewGraphState) -> dict[str, Any]:                     #第三个
         source = SourceDocument.model_validate(state.source_document)  #PDF渲染需要的源文档信息
         options = FixtureOptions.model_validate(state.fixture_options)
@@ -230,15 +259,16 @@ class ReviewWorkflow:
         return {"review_mode": self.mode_policy.decide(source.review_round, previous)}
 
     def retrieve_similar_documents(self, state: ReviewGraphState) -> dict[str, Any]:#筛选相似文章
-        from .models import SimilarityCandidate
-
         source = SourceDocument.model_validate(state.source_document)
-        candidates = [SimilarityCandidate.model_validate(item) for item in state.similarity_candidates]
-        selected = self.similarity.retrieve(source.document_id, candidates)
+        selected, audit = self.similarity.retrieve(
+            current_document_id=source.document_id,
+            current_profile=SimilarityProfile.model_validate(state.similarity_profile),
+        )
         return {
+            "similarity_retrieval": audit.model_dump(mode="json"),
             "similarity_context": {
-                "threshold": self.settings.similarity_min_score,
-                "top_n": self.settings.similarity_top_n,
+                "threshold": self.settings.similarity_threshold,
+                "top_k": self.settings.similarity_top_k,
                 "effective_candidates": [item.model_dump(mode="json") for item in selected],
             }
         }
@@ -246,6 +276,12 @@ class ReviewWorkflow:
     def load_previous_issues(self, state: ReviewGraphState) -> dict[str, Any]: #a分支：读取上一轮结果
         previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
         return {
+            "similarity_retrieval": SimilarityRetrievalAudit(
+                query_document_id=SourceDocument.model_validate(state.source_document).document_id,
+                threshold=self.settings.similarity_threshold,
+                top_k=self.settings.similarity_top_k,
+                skipped_reason="rereview_does_not_recall_candidates",
+            ).model_dump(mode="json"),
             "rereview_context": {
                 "previous_review_round": previous.review_round if previous else None,
                 "blocking_major_issues": self.history_policy.blocking_context(previous),
@@ -424,13 +460,15 @@ class ReviewWorkflow:
         output = Path(state.output_dir)
         result = ReviewResult.model_validate(state.parsed_review_result)
         source = SourceDocument.model_validate(state.source_document)
-        final_trace = _trace(state) + [_event("save_artifacts", "completed")]
+        interim_trace = _trace(state)
         documents: dict[str, Any] = {
             "source_document.json": state.source_document,
             "extracted_content.json": state.extracted_content,
             "visual_manifest.json": state.visual_manifest,
             "visual_evidence.json": state.visual_evidence,
             "input_coverage.json": state.input_coverage,
+            "similarity_profile.json": state.similarity_profile,
+            "similarity_retrieval.json": state.similarity_retrieval,
             "model_request_summary.json": {
                 "model": self.settings.kimi_model if state.model_mode == "real" else "fake-kimi",
                 "calls": state.model_calls,
@@ -449,7 +487,7 @@ class ReviewWorkflow:
         atomic_write_text(output / "prompt.txt", state.prompt, allow_identical=True)
         atomic_write_text(output / "submitter_notification.txt", state.submitter_notification, allow_identical=True)
         atomic_write_text(output / "admin_notification.txt", state.admin_notification, allow_identical=True)
-        atomic_replace_json(output / "run_trace.json", {"events": final_trace, "result": result.result.value})
+        atomic_replace_json(output / "run_trace.json", {"events": interim_trace, "result": result.result.value})
         self.history.append(
             source.document_id,
             {
@@ -458,7 +496,35 @@ class ReviewWorkflow:
                 "result": result.model_dump(mode="json"),
             },
         )
-        return {"trace": final_trace}
+        return {}
+
+    def persist_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
+        output = Path(state.output_dir)
+        source = SourceDocument.model_validate(state.source_document)
+        result = ReviewResult.model_validate(state.parsed_review_result)
+        coverage = InputCoverage.model_validate(state.input_coverage)
+        profile = SimilarityProfile.model_validate(state.similarity_profile)
+        eligible = (
+            result.result.value == "pass"
+            and profile.source in {"blocks", "pdf"}
+            and bool(profile.content.strip())
+            and not coverage.input_truncated
+            and not coverage.missing_sources
+        )
+        if eligible:
+            self.similarity_index.upsert(
+                source=source,
+                profile=profile,
+                review_result=result.result,
+                local_status=result.local_status,
+            )
+        final_trace = _trace(state) + [
+            _event("persist_similarity_profile", "completed", persisted=eligible)
+        ]
+        atomic_replace_json(
+            output / "run_trace.json", {"events": final_trace, "result": result.result.value}
+        )
+        return {"similarity_profile_persisted": eligible}
 
     def record_safe_failure(self, state: ReviewGraphState) -> dict[str, Any]:
         failure = state.failure or {

@@ -1,0 +1,29 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "pass",
+    "summary": "四旋翼飞控方案包含明确的器件选择、电源参数、接口设计和分阶段验证计划。",
+    "pass_reason": "设计目标、关键器件、参数依据和可执行测试方法完整，具备清晰的个人研发痕迹。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "no_similar",
+      "decision": "keep_independent",
+      "summary": "本地索引中没有达到阈值的历史候选。",
+      "candidate_count": 0,
+      "candidates_considered": []
+    },
+    "learning_trace_assessment": "文档记录了架构选择、具体器件、电源约束以及首板验证顺序。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [1],
+      "evidence_used": [],
+      "limitations": []
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {"resolutions": []}
+  }
+}

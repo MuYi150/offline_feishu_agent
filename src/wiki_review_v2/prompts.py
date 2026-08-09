@@ -44,11 +44,14 @@ INPUT_COVERAGE_GUIDE = """InputCoverage 字段含义：
 6. limitations 中的内容必须反映到 visual_evidence_assessment 或 summary、pass_reason 等最终审稿说明中。"""
 
 INITIAL_REVIEW_SIMILARITY_GUIDE = """InitialReviewSimilarityContext 字段含义：
-- threshold：上游候选进入本次比较的最低相似分数。
-- top_n：最多提交给模型的候选数量。
-- effective_candidates：经过状态、正文、分数和当前文档排除规则筛选后的有效候选。
-- effective_candidates 中的 score 是上游提供的候选分数，当前工作流不负责计算该分数。
-空数组表示本次没有有效候选，不允许凭空声称存在重复文章。必须结合候选正文判断关系，不能只根据 score 直接决定合并或拒绝。"""
+- threshold：本地候选进入本次模型比较的最低相似分数。
+- top_k：最多提交给模型的候选数量。
+- effective_candidates：从本地 SQLite 历史摘要索引计算、排除当前 document_id、经过阈值和 Top-K 筛选后的候选；Fixture 的 similarity_candidates.json 不参与召回。
+- similarity_score：本地确定性算法根据摘要字符 TF-IDF、标题、关键词和技术实体计算的 0～1 分数，不是模型生成的结论。
+- score_details：上述四项分数及 final_score，输出 candidates_considered 时应把 similarity_score 对应填写到 score 字段。
+- content：历史文章的可读文字摘要，不是完整正文，也不包含历史 PDF、PNG 或页面图片。
+每个候选同时提供 document_id、标题、链接、状态、分数和摘要。算法分数只表示可能相似，不能仅凭分数认定抄袭、重复、必须合并或拒稿。必须结合当前文章正文和候选摘要，分别判断是否主题相似但内容独立、是否明显重复、是否需要作者修改，并写明判断依据。
+effective_candidates 为空表示本次没有达到阈值的本地候选，不允许凭空声称存在重复文章。"""
 
 REREVIEW_GUIDE = """ReReviewHistoryContext 字段含义：
 - previous_review_round：上一轮审稿轮次。

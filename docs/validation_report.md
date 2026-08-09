@@ -1,6 +1,6 @@
 # 验证报告
 
-验证日期：2026-07-26；环境：Windows，Conda `feishu-api`，Python 3.11.15。
+验证日期：2026-08-08；环境：Windows，Conda `feishu-api`，Python 3.11.15。
 
 ## 已执行基线
 
@@ -16,7 +16,7 @@ conda run --no-capture-output -n feishu-api python -m unittest discover -s tests
 conda run --no-capture-output -n feishu-api python -m pytest -q
 ```
 
-结果：`43 passed, 2 skipped`，耗时 6.81 秒。两个 skipped 均为下述真实 Kimi 案例。验证范围包括纯规则、全部 Fixture 的 v1 source 基础字段和文件名兼容、原始飞书 Blocks/表格提取、PDF/Prompt/原子写入、五种业务结果、首轮相似性、复审、完整/部分多模态、长 PDF 分批、PDF 缺失/损坏/页数与大小超限、正文为空/超限、非法/空 JSON、API 失败、429/5xx 重试、认证预检、历史损坏隔离、敏感信息扫描、输出冲突和 checkpoint 恢复。
+结果：`77 passed, 2 skipped`，耗时 11.35 秒。两个 skipped 均为下述真实 Kimi 案例。新增覆盖包括 Blocks 优先、原生 PDF 文字回退、PNG/图片忽略、可读摘要去重与长度限制、技术实体和参数、字符 2～4 gram TF-IDF、四项权重公式、SQLite 自动建表/UPSERT/自身排除、阈值与 Top-K、旧 Fixture 固定候选禁用、Prompt 只携带历史摘要、pass 入库规则和索引节点 checkpoint 恢复。
 
 另外执行了 CLI Fake 验证：
 
@@ -26,6 +26,19 @@ conda run --no-capture-output -n feishu-api python -m pytest -q
 - `basic_pass --real-model`（无 Key）：退出码 1，错误分类 `model_authentication_error`，生成安全失败 trace，不产生通知。
 - `pip check`：`No broken requirements found.`
 - 输出敏感信息扫描：未发现 `;base64,`、Authorization 或 Bearer 内容。
+
+## 连续相似性 Fixture 验收
+
+使用独立临时索引及输出目录执行：初始化 → `similarity_drone_source` → 查看索引 → `similarity_drone_candidate` → 查看索引。
+
+- 初始化记录数：0。
+- 第一篇结果：`pass`；画像来源：`blocks`；摘要 893 字符；运行后记录数：1。
+- 第二篇结果：`pass`；召回 `test_doc_similarity_drone_source`；运行后记录数：2。
+- 分项分数：摘要 TF-IDF `0.383671`、标题 `0.444444`、关键词 `0.4`、技术实体 `0.769231`。
+- 最终分数：`0.413698`，超过默认阈值 `0.35`，且 `selected_for_prompt=true`。
+- 第二篇 Prompt 已实际包含第一篇 document_id、标题、`similarity_score` 和完整本地摘要。
+- 新增产物及 SQLite 扫描未发现 `;base64,`、Authorization、Bearer 或测试 Key。
+- `pip check`：`No broken requirements found.`；`git diff --check` 通过。
 
 ## 真实 Kimi
 
