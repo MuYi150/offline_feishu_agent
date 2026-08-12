@@ -87,8 +87,10 @@ class PreviousIssue(StrictModel):
     issue_id: str
     level: IssueLevel
     category: str
+    position: str = ""
     problem: str
     suggestion: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
 
 
 class PreviousReview(StrictModel):
@@ -278,6 +280,28 @@ class ReviewResult(ModelReviewPayload):
     input_coverage: InputCoverage
 
 
+class ReviewHistoryRecord(StrictModel):
+    schema_version: str = "2.0"
+    run_id: str = Field(min_length=1)
+    review_round: int = Field(ge=1)
+    completed_at: str = ""
+    result: ReviewResult
+
+
+class ReviewHistoryLookupAudit(StrictModel):
+    schema_version: str = "2.0"
+    document_id: str
+    lookup_status: Literal["ok", "error"] = "ok"
+    history_found: bool = False
+    source: Literal["local_history", "none"] = "none"
+    selected_run_id: str | None = None
+    selected_review_round: int | None = None
+    selected_result: ReviewOutcome | None = None
+    total_history_records: int = Field(default=0, ge=0)
+    blocking_major_issue_count: int = Field(default=0, ge=0)
+    error_code: str | None = None
+
+
 class VisualEvidenceBatch(StrictModel):
     batch_summary: str
     pages_reviewed: list[int]
@@ -309,6 +333,11 @@ class ReviewGraphState(StrictModel):
     attachments: list[dict[str, Any]] = Field(default_factory=list)
     similarity_candidates: list[dict[str, Any]] = Field(default_factory=list)
     previous_review: dict[str, Any] | None = None
+    previous_history_record: dict[str, Any] | None = None
+    review_history_lookup: dict[str, Any] = Field(default_factory=dict)
+    current_review_round: int = Field(default=1, ge=1)
+    review_completed_at: str = ""
+    review_history_persisted: bool = False
     fixture_options: dict[str, Any] = Field(default_factory=dict)
     fake_model_response: dict[str, Any] = Field(default_factory=dict)
     expected_result: dict[str, Any] = Field(default_factory=dict)

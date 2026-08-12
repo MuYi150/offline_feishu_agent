@@ -97,12 +97,18 @@ def test_drone_round2_fixture_resolves_real_review_issues(settings) -> None:
     assert source["node_token"] == round1_source["node_token"]
     assert source["status"] == "需修改"
     assert source["review_round"] == 1
-    assert [item["issue_id"] for item in source["previous_issues"]] == ["major-1", "major-2", "minor-1"]
+    assert "previous_issues" not in source
     assert [item["sha256"] for item in round2_images] == [item["sha256"] for item in round1_images]
 
     bundle = FixtureDocumentSource().load(round2)
-    assert bundle.previous_review is not None
-    assert [item.issue_id for item in bundle.previous_review.issues] == ["major-1", "major-2", "minor-1"]
+    assert bundle.previous_review is None
+    assert {
+        item["issue_id"] for item in mock["re_review_assessment"]["resolutions"]
+    } == {
+        "drone-major-mcu-selection",
+        "drone-major-power-design",
+        "drone-major-verification-criteria",
+    }
     extracted = DocumentExtractor().extract(bundle.blocks)
     content = extracted["content_markdown"]
     assert "STM32F405VGT6" in content
@@ -121,6 +127,7 @@ def test_drone_round2_fixture_resolves_real_review_issues(settings) -> None:
     assert mock["result"] == "pass"
     assert mock["similarity_check"]["status"] == "not_applicable"
     assert {item["issue_id"] for item in mock["re_review_assessment"]["resolutions"]} == {
-        "major-1",
-        "major-2",
+        "drone-major-mcu-selection",
+        "drone-major-power-design",
+        "drone-major-verification-criteria",
     }

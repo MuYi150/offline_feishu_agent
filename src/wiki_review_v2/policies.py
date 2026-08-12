@@ -4,8 +4,8 @@ from .models import PreviousReview
 
 
 class ReviewModePolicy:                    #判断初复审
-    def decide(self, review_round: int, previous_review: PreviousReview | None) -> str:
-        return "rereview" if review_round > 0 or previous_review is not None else "initial"
+    def decide(self, previous_review: PreviousReview | None) -> str:
+        return "rereview" if previous_review is not None else "initial"
 
 
 class ReviewHistoryPolicy:#筛选需要重点复查的问题

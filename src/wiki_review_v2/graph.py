@@ -9,7 +9,7 @@ from langgraph.graph import END, START, StateGraph
 from pydantic import ValidationError
 
 from .config import Settings
-from .errors import ModelJsonError, ModelSchemaError, ReviewError, classify_exception
+from .errors import ModelJsonError, ModelSchemaError, ReviewError, ReviewHistoryError, classify_exception
 from .fixtures import DocumentExtractor, FixtureDocumentSource
 from .model import ModelRequest, ReviewModel, request_summary
 from .models import (
@@ -18,6 +18,8 @@ from .models import (
     ModelReviewPayload,
     PreviousReview,
     ReviewGraphState,
+    ReviewHistoryLookupAudit,
+    ReviewHistoryRecord,
     ReviewResult,
     SimilarityProfile,
     SimilarityRetrievalAudit,
@@ -93,6 +95,7 @@ class ReviewWorkflow:
         nodes: dict[str, Callable[[ReviewGraphState], dict[str, Any]]] = {
             "load_fixture": self._guard("load_fixture", self.load_fixture),
             "extract_document": self._guard("extract_document", self.extract_document),
+            "load_review_history": self._guard("load_review_history", self.load_review_history),
             "build_similarity_profile": self._guard(
                 "build_similarity_profile", self.build_similarity_profile
             ),
@@ -113,6 +116,9 @@ class ReviewWorkflow:
             "project_status": self._guard("project_status", self.project_status),
             "render_notifications": self._guard("render_notifications", self.render_notifications),
             "save_artifacts": self._guard("save_artifacts", self.save_artifacts),
+            "persist_review_history": self._guard(
+                "persist_review_history", self.persist_review_history
+            ),
             "persist_similarity_profile": self._guard(
                 "persist_similarity_profile", self.persist_similarity_profile
             ),
@@ -123,7 +129,8 @@ class ReviewWorkflow:
         builder.add_edge(START, "load_fixture")                                    #注册条件路线
         ordinary = [
             ("load_fixture", "extract_document"),
-            ("extract_document", "build_similarity_profile"),
+            ("extract_document", "load_review_history"),
+            ("load_review_history", "build_similarity_profile"),
             ("build_similarity_profile", "prepare_pdf_pages"),
             ("prepare_pdf_pages", "build_input_coverage"),
             ("build_input_coverage", "route_review_mode"),
@@ -162,6 +169,11 @@ class ReviewWorkflow:
             builder.add_conditional_edges(current, self._failure_route, {"ok": nxt, "failure": "record_safe_failure"})
         builder.add_conditional_edges(
             "save_artifacts",
+            self._failure_route,
+            {"ok": "persist_review_history", "failure": "record_safe_failure"},
+        )
+        builder.add_conditional_edges(
+            "persist_review_history",
             self._failure_route,
             {"ok": "persist_similarity_profile", "failure": "record_safe_failure"},
         )
@@ -206,7 +218,9 @@ class ReviewWorkflow:
             "blocks": bundle.blocks,
             "attachments": bundle.attachments,
             "similarity_candidates": [item.model_dump(mode="json") for item in bundle.similarity_candidates],
-            "previous_review": bundle.previous_review.model_dump(mode="json") if bundle.previous_review else None,
+            # Fixture history remains parseable for v1 compatibility, but production routing
+            # is exclusively driven by ReviewHistoryStore in load_review_history.
+            "previous_review": None,
             "fixture_options": bundle.fixture_options.model_dump(mode="json"),
             "fake_model_response": bundle.fake_model_response,
             "expected_result": bundle.expected_result,
@@ -215,6 +229,59 @@ class ReviewWorkflow:
     def extract_document(self, state: ReviewGraphState) -> dict[str, Any]:                      #第二个业务节点   
         extracted = self.extractor.extract(state.blocks)                                        #Blocks 转换markdown
         return {"extracted_content": extracted}
+
+    def load_review_history(self, state: ReviewGraphState) -> dict[str, Any]:
+        source = SourceDocument.model_validate(state.source_document)
+        try:
+            latest = self.history.load_latest(source.document_id)
+            total = self.history.record_count(source.document_id)
+        except ReviewHistoryError:
+            audit = ReviewHistoryLookupAudit(
+                document_id=source.document_id,
+                lookup_status="error",
+                error_code=ReviewHistoryError.code,
+            )
+            atomic_replace_json(
+                Path(state.output_dir) / "review_history_lookup.json",
+                audit.model_dump(mode="json"),
+            )
+            raise
+
+        previous = None
+        blocking_major_count = 0
+        if latest is not None:
+            previous = PreviousReview(
+                document_id=source.document_id,
+                review_round=latest.review_round,
+                result=latest.result.result,
+                issues=[
+                    issue.model_dump(mode="json")
+                    for issue in latest.result.issues
+                ],
+            )
+            blocking_major_count = sum(
+                issue.level.value in {"blocking", "major"} for issue in previous.issues
+            )
+        audit = ReviewHistoryLookupAudit(
+            document_id=source.document_id,
+            history_found=latest is not None,
+            source="local_history" if latest is not None else "none",
+            selected_run_id=latest.run_id if latest else None,
+            selected_review_round=latest.review_round if latest else None,
+            selected_result=latest.result.result if latest else None,
+            total_history_records=total,
+            blocking_major_issue_count=blocking_major_count,
+        )
+        atomic_replace_json(
+            Path(state.output_dir) / "review_history_lookup.json",
+            audit.model_dump(mode="json"),
+        )
+        return {
+            "previous_review": previous.model_dump(mode="json") if previous else None,
+            "previous_history_record": latest.model_dump(mode="json") if latest else None,
+            "review_history_lookup": audit.model_dump(mode="json"),
+            "current_review_round": (latest.review_round + 1) if latest else 1,
+        }
 
     def build_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
         profile = self.similarity_profiles.build(
@@ -254,9 +321,8 @@ class ReviewWorkflow:
         }
 
     def route_review_mode(self, state: ReviewGraphState) -> dict[str, Any]: #a分支：判断是初审还是复审
-        source = SourceDocument.model_validate(state.source_document)
         previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
-        return {"review_mode": self.mode_policy.decide(source.review_round, previous)}
+        return {"review_mode": self.mode_policy.decide(previous)}
 
     def retrieve_similar_documents(self, state: ReviewGraphState) -> dict[str, Any]:#筛选相似文章
         source = SourceDocument.model_validate(state.source_document)
@@ -289,7 +355,9 @@ class ReviewWorkflow:
         }
 
     def build_multimodal_request(self, state: ReviewGraphState) -> dict[str, Any]:#下一步，组合模型请求
-        source = SourceDocument.model_validate(state.source_document)
+        source = SourceDocument.model_validate(state.source_document).model_copy(
+            update={"review_round": state.current_review_round - 1}
+        )
         manifest = VisualManifest.model_validate(state.visual_manifest)
         coverage = InputCoverage.model_validate(state.input_coverage)
         pages = [item.model_dump(mode="json") for item in manifest.rendered_pages]#页面png
@@ -441,19 +509,31 @@ class ReviewWorkflow:
 
     def validate_result(self, state: ReviewGraphState) -> dict[str, Any]: #一致性检测
         result = ReviewResult.model_validate(state.parsed_review_result)
-        self.validator.validate(result)
+        required_issue_ids = None
+        if state.review_mode == "rereview":
+            required_issue_ids = [
+                str(issue["issue_id"])
+                for issue in state.rereview_context.get("blocking_major_issues", [])
+            ]
+        self.validator.validate(result, required_rereview_issue_ids=required_issue_ids)
         return {}
 
     def project_status(self, state: ReviewGraphState) -> dict[str, Any]:#审稿结论映射为业务状态
         result = ReviewResult.model_validate(state.parsed_review_result)
         status = self.mapper.map(result.result)
         result.local_status = status
-        return {"projected_status": status, "parsed_review_result": result.model_dump(mode="json")}
+        return {
+            "projected_status": status,
+            "parsed_review_result": result.model_dump(mode="json"),
+            "review_completed_at": state.review_completed_at or datetime.now(UTC).isoformat(),
+        }
 
     def render_notifications(self, state: ReviewGraphState) -> dict[str, Any]: #生成投稿人和管理员通知
         source = SourceDocument.model_validate(state.source_document)
         result = ReviewResult.model_validate(state.parsed_review_result)
-        submitter, admin = self.notifications.render(source, result)
+        submitter, admin = self.notifications.render(
+            source, result, review_round=state.current_review_round
+        )
         return {"submitter_notification": submitter, "admin_notification": admin}
 
     def save_artifacts(self, state: ReviewGraphState) -> dict[str, Any]:
@@ -469,6 +549,7 @@ class ReviewWorkflow:
             "input_coverage.json": state.input_coverage,
             "similarity_profile.json": state.similarity_profile,
             "similarity_retrieval.json": state.similarity_retrieval,
+            "review_history_lookup.json": state.review_history_lookup,
             "model_request_summary.json": {
                 "model": self.settings.kimi_model if state.model_mode == "real" else "fake-kimi",
                 "calls": state.model_calls,
@@ -478,8 +559,13 @@ class ReviewWorkflow:
             "parsed_review_result.json": state.parsed_review_result,
             "review_history.json": {
                 "document_id": source.document_id,
-                "previous_review": state.previous_review,
-                "current_review": state.parsed_review_result,
+                "previous_review": state.previous_history_record,
+                "current_review": ReviewHistoryRecord(
+                    run_id=state.run_id,
+                    review_round=state.current_review_round,
+                    completed_at=state.review_completed_at,
+                    result=result,
+                ).model_dump(mode="json"),
             },
         }
         for name, payload in documents.items():
@@ -488,15 +574,18 @@ class ReviewWorkflow:
         atomic_write_text(output / "submitter_notification.txt", state.submitter_notification, allow_identical=True)
         atomic_write_text(output / "admin_notification.txt", state.admin_notification, allow_identical=True)
         atomic_replace_json(output / "run_trace.json", {"events": interim_trace, "result": result.result.value})
-        self.history.append(
-            source.document_id,
-            {
-                "run_id": state.run_id,
-                "review_round": source.review_round + 1,
-                "result": result.model_dump(mode="json"),
-            },
-        )
         return {}
+
+    def persist_review_history(self, state: ReviewGraphState) -> dict[str, Any]:
+        source = SourceDocument.model_validate(state.source_document)
+        record = ReviewHistoryRecord(
+            run_id=state.run_id,
+            review_round=state.current_review_round,
+            completed_at=state.review_completed_at,
+            result=ReviewResult.model_validate(state.parsed_review_result),
+        )
+        self.history.append(source.document_id, record)
+        return {"review_history_persisted": True}
 
     def persist_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
         output = Path(state.output_dir)

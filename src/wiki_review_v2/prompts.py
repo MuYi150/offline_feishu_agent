@@ -56,7 +56,7 @@ effective_candidates 为空表示本次没有达到阈值的本地候选，不�
 REREVIEW_GUIDE = """ReReviewHistoryContext 字段含义：
 - previous_review_round：上一轮审稿轮次。
 - blocking_major_issues：上一轮需要重点复查的 blocking/major 问题。
-复审必须针对列表中的每一项，根据当前正文和证据判断 resolved、partially_resolved 或 unresolved，并写入 re_review_assessment。复审不重新召回相似候选。不得为了延长流程而随意增加无关 minor。"""
+复审必须针对列表中的每一项，根据当前正文和证据判断 resolved、partially_resolved 或 unresolved，并写入 re_review_assessment。resolutions 必须完整且仅覆盖上述 blocking/major issue_id，不得遗漏、重复或添加无关 issue_id。复审不重新召回相似候选。不得为了延长流程而随意增加无关 minor。"""
 
 DECISION_RULES = """决定规则：
 - blocking：严重问题，但不一定直接拒稿。只有明确属于直接拒稿条件的 blocking 才允许 result=reject；其他可修正 blocking 应为 need_revision。

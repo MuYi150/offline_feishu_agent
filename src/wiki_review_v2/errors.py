@@ -68,6 +68,10 @@ class SimilarityIndexError(ReviewError):
     code = "similarity_index_error"
 
 
+class ReviewHistoryError(ReviewError):
+    code = "review_history_error"
+
+
 def classify_exception(exc: BaseException) -> dict[str, object]:
     if isinstance(exc, ReviewError):
         return {

@@ -9,6 +9,7 @@ from wiki_review_v2.errors import OutputConflictError, SimilarityIndexError
 from wiki_review_v2.graph import ReviewWorkflow
 from wiki_review_v2.runner import ReviewRunner
 from wiki_review_v2.similarity_index import SimilarityIndexStore
+from wiki_review_v2.storage import ReviewHistoryStore
 
 
 @pytest.mark.parametrize(
@@ -40,6 +41,7 @@ def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
         "input_coverage.json",
         "similarity_profile.json",
         "similarity_retrieval.json",
+        "review_history_lookup.json",
         "prompt.txt",
         "model_request_summary.json",
         "raw_model_output.json",
@@ -74,33 +76,78 @@ def test_long_pdf_uses_batches_and_key_pages(settings) -> None:
     assert "## OutputRequirements" in prompt
 
 
-def test_rereview_prompt_only_contains_previous_blocking_major(settings) -> None:
+def test_fixture_review_round_without_local_history_remains_initial(settings) -> None:
     summary = ReviewRunner(settings).run_case("rereview_resolved")
     prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
-    assert "previous-1" in prompt
-    assert "previous-2" not in prompt
-    assert "复审不重新召回相似候选" in prompt
-    assert "## ReReviewGuide" in prompt
-    assert "resolved、partially_resolved 或 unresolved" in prompt
-    assert "## InitialReviewSimilarityGuide" not in prompt
+    lookup = json.loads(
+        (summary.output_dir / "review_history_lookup.json").read_text(encoding="utf-8")
+    )
+    assert lookup["history_found"] is False
+    assert "previous-1" not in prompt
+    assert "## InitialReviewSimilarityGuide" in prompt
+    assert "## ReReviewGuide" not in prompt
 
 
 def test_drone_round2_uses_real_round1_major_issue_ids(settings) -> None:
-    summary = ReviewRunner(settings).run_case("drone_hardware_rd_round2_pass")
+    runner = ReviewRunner(settings)
+    first = runner.run_case("drone_hardware_rd_round1_need_revision", run_id="drone-round1")
+    assert first.ok and first.result == "need_revision"
+    summary = runner.run_case("drone_hardware_rd_round2_pass", run_id="drone-round2")
     assert summary.ok
     assert summary.result == "pass"
     prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
     result = json.loads((summary.output_dir / "parsed_review_result.json").read_text(encoding="utf-8"))
+    lookup = json.loads(
+        (summary.output_dir / "review_history_lookup.json").read_text(encoding="utf-8")
+    )
+    history = json.loads(
+        (settings.state_root / "review_history" / "test_doc_drone_hardware_rd.json").read_text(
+            encoding="utf-8"
+        )
+    )
 
-    assert "major-1" in prompt
-    assert "major-2" in prompt
-    assert "minor-1" not in prompt
+    expected_ids = {
+        "drone-major-mcu-selection",
+        "drone-major-power-design",
+        "drone-major-verification-criteria",
+    }
+    assert all(issue_id in prompt for issue_id in expected_ids)
+    first_result = json.loads(
+        (first.output_dir / "parsed_review_result.json").read_text(encoding="utf-8")
+    )
+    expected_issues = [
+        issue for issue in first_result["issues"] if issue["level"] in {"blocking", "major"}
+    ]
+    history_context_text = prompt.split("## ReReviewHistoryContext\n", 1)[1].split(
+        "\n\n## DecisionRules", 1
+    )[0]
+    history_context = json.loads(history_context_text)
+    assert history_context["blocking_major_issues"] == expected_issues
+    for issue in expected_issues:
+        assert issue["problem"] in prompt
+        assert issue["suggestion"] in prompt
+        assert issue["position"] in prompt
+        assert all(evidence_id in prompt for evidence_id in issue["evidence_ids"])
     assert "## ReReviewGuide" in prompt
     assert result["similarity_check"]["status"] == "not_applicable"
-    assert {item["issue_id"] for item in result["re_review_assessment"]["resolutions"]} == {
-        "major-1",
-        "major-2",
+    assert {item["issue_id"] for item in result["re_review_assessment"]["resolutions"]} == expected_ids
+    assert lookup == {
+        "schema_version": "2.0",
+        "document_id": "test_doc_drone_hardware_rd",
+        "lookup_status": "ok",
+        "history_found": True,
+        "source": "local_history",
+        "selected_run_id": "drone-round1",
+        "selected_review_round": 1,
+        "selected_result": "need_revision",
+        "total_history_records": 1,
+        "blocking_major_issue_count": 3,
+        "error_code": None,
     }
+    assert [(item["run_id"], item["review_round"]) for item in history["records"]] == [
+        ("drone-round1", 1),
+        ("drone-round2", 2),
+    ]
 
 
 def test_outputs_do_not_contain_base64_or_authorization(settings) -> None:
@@ -137,6 +184,8 @@ def test_checkpoint_resume_replays_only_failed_save_node(settings, monkeypatch) 
     assert resumed.ok
     request = json.loads((resumed.output_dir / "model_request_summary.json").read_text(encoding="utf-8"))
     assert [call["phase"] for call in request["calls"]] == ["final_review"]
+    history = ReviewHistoryStore(settings.state_root)
+    assert history.record_count("test_doc_basic_pass") == 1
 
 
 def test_legacy_fixture_candidates_are_ignored(settings) -> None:
@@ -225,3 +274,32 @@ def test_checkpoint_resume_retries_only_similarity_upsert(settings, monkeypatch)
     assert [call["phase"] for call in requests["calls"]] == ["final_review"]
     assert calls["count"] == 2
     assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 1
+
+
+def test_checkpoint_resume_after_history_write_does_not_duplicate_record(
+    settings, monkeypatch
+) -> None:
+    original = ReviewHistoryStore.append
+    calls = {"count": 0}
+
+    def append_then_fail_once(self, document_id, record):
+        calls["count"] += 1
+        saved = original(self, document_id, record)
+        if calls["count"] == 1:
+            raise RuntimeError("injected interruption after history replace")
+        return saved
+
+    monkeypatch.setattr(ReviewHistoryStore, "append", append_then_fail_once)
+    runner = ReviewRunner(settings)
+    first = runner.run_case("basic_pass", run_id="resume-history")
+    assert not first.ok
+    assert ReviewHistoryStore(settings.state_root).record_count("test_doc_basic_pass") == 1
+
+    resumed = runner.resume(first.output_dir)
+    assert resumed.ok
+    assert calls["count"] == 2
+    assert ReviewHistoryStore(settings.state_root).record_count("test_doc_basic_pass") == 1
+    request = json.loads(
+        (resumed.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert [call["phase"] for call in request["calls"]] == ["final_review"]

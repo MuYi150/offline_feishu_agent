@@ -56,6 +56,25 @@ conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --resum
 
 恢复使用 `run_metadata.json` 中的 case、模式和 thread ID，从 SQLite checkpoint 中失败节点之前的最近快照继续。已完成的模型节点不会重复运行；输出写入采用摘要一致的幂等检查。
 
+## 本地审稿历史与自动复审
+
+跨运行复审由 `local_state/review_history/<document_id>.json` 驱动，不使用每次输出目录中的 `checkpoint.sqlite`。新稿进入 Graph 后会先按 `document_id` 查询本地历史：没有历史自动进入初审；有历史自动加载最后一条有效完成记录并进入复审，只把其中的 blocking/major 问题交给模型。Fixture 的 `review_round` 和旧 `previous_issues` 仍可被 Loader 解析，但不会决定生产工作流的初审/复审模式。
+
+新历史记录包含 `run_id`、系统推导的 `review_round`、`completed_at` 和完整审稿结果。相同 `run_id` 重试采用幂等写入；旧记录没有时间字段时按 records 数组顺序，以最后一条为最新。历史文件损坏或 Schema 不合法会产生 `review_history_error` 并停止，不会静默降级为初审，也不会移动或覆盖原历史文件。
+
+无人机两轮 Fake 验收可先只删除该测试文章的历史，再依次运行：
+
+```powershell
+$history = "D:\NEU\feishu\WIKI_V2\local_state\review_history\test_doc_drone_hardware_rd.json"
+Remove-Item -LiteralPath $history -Force -ErrorAction SilentlyContinue
+$stamp = Get-Date -Format "yyyyMMddTHHmmss"
+
+& "E:\tools\conda\envs\feishu-api\python.exe" -m wiki_review_v2.cli --case drone_hardware_rd_round1_need_revision --run-id "history-round1-$stamp"
+& "E:\tools\conda\envs\feishu-api\python.exe" -m wiki_review_v2.cli --case drone_hardware_rd_round2_pass --run-id "history-round2-$stamp"
+```
+
+每次运行的 `review_history_lookup.json` 记录是否命中历史及选中轮次；`review_history.json` 区分本次运行前加载的 `previous_review` 和本次产生的 `current_review`。
+
 ## 本地文字相似性索引
 
 初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层，再生成可读摘要并与本地 SQLite 历史摘要比较。图片、PNG、渲染页面和 OCR 完全不参与相似性计算；历史文章只把摘要和分数放入 Prompt，不发送历史 PDF、图片或完整正文。
@@ -127,6 +146,7 @@ Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
 - `parsed_review_result.json`：经过 Parser、Normalizer、Validator 的最终结果。
 - `submitter_notification.txt` / `admin_notification.txt`：由代码确定性生成的两类消息草稿。
 - `review_history.json`：本次运行的历史快照。
+- `review_history_lookup.json`：按 document_id 查询本地历史的命中与选中记录审计。
 - `run_trace.json`：节点、分支、失败分类和诊断轨迹。
 - `checkpoint.sqlite`：LangGraph 本地 checkpoint。
 
@@ -136,7 +156,7 @@ Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
 
 每个案例放在 `fixtures/<case_id>/`。为方便后续从 v1 平移，v2 沿用 v1 的 Fixture 外部契约，不把简化 DTO 写进测试数据：
 
-- `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`；复审案例可像 v1 一样内嵌 `previous_issues`。其中 `review_round=0` 表示尚未完成首轮，本次审稿轮次为 1；大于 0 表示复审。
+- `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`。旧 Fixture 可继续携带 `previous_issues` 供 Loader 兼容解析，但 Graph 不使用它；实际模式和轮次只由本地历史确定。
 - `document_blocks.json` 保持 `{"blocks": [...]}` 包装，内部使用飞书风格的 `block_type`、`text.elements[].text_run.content`、表格子块等原始结构。
 - `attachment_metadata.json` 保持 `{"document_id": "...", "attachments": [...]}`。
 - `mock_llm_result.json` 保持 v1 的 `behavior=return/raw/raise` 包装；Fake 响应与 `expected_result.json` 始终分离，避免测试自证。
@@ -173,4 +193,4 @@ conda run --no-capture-output -n feishu-api python -m pytest -q -m real_kimi
 
 2.摘要归为本地索引的时间需要改为已公式后，目前为了测试方便改为ai通过后。
 
-3.为了测试方便，初审和复审都采用了给定信息的fixture形式，应该在本地记录初审情况，如果不是初审查找以前本地审查结果，把上次检查到的问题交给大模型。当前代码“会自动保存历史”，但“不会在新一次复审运行时自动读取本地历史”。
+3. 当前本地历史采用按 document_id 分文件的 JSON records 数组，适合单机顺序运行；多进程并发写同一文档仍需后续升级为带事务锁的数据库存储。

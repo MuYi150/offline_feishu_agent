@@ -7,7 +7,8 @@
 ```mermaid
 flowchart TD
     F["FixtureDocumentSource"] --> E["DocumentExtractor"]
-    E --> T["SimilarityProfile：Blocks → 原生 PDF 文字"]
+    E --> D["ReviewHistoryStore：按 document_id 查询"]
+    D --> T["SimilarityProfile：Blocks → 原生 PDF 文字"]
     T --> P["PDF 生成或读取"]
     P --> R["PdfPageRenderer"]
     R --> C["InputCoverage"]
@@ -22,8 +23,9 @@ flowchart TD
     V --> K
     K --> J["Parser → Normalizer → Validator"]
     J --> O["OutcomeMapper + Notifications"]
-    O --> A["Atomic Artifacts + History"]
-    A --> U["合格 pass 画像 UPSERT"]
+    O --> A["Atomic Artifacts"]
+    A --> H2["幂等追加 Review History"]
+    H2 --> U["合格 pass 画像 UPSERT"]
     C -->|关键输入不可用| I["确定性 incomplete_review"]
     I --> J
     K -->|API/JSON 失败| X["Safe failure trace，无状态/通知"]
@@ -31,7 +33,13 @@ flowchart TD
 
 ## 数据契约
 
-`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。文字召回增加 `SimilarityProfile`、`SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `similarity_candidates.json`，但 Graph 不使用其中的数据，正式候选只来自本地索引。
+`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。历史查询增加严格的 `ReviewHistoryRecord` 与 `ReviewHistoryLookupAudit`；文字召回使用 `SimilarityProfile`、`SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `previous_issues` 和 `similarity_candidates.json`，但 Graph 不使用这些 Fixture 数据决定复审或候选，正式历史与候选都来自本地状态。
+
+## 审稿历史数据流
+
+Graph 在正文提取后读取 `local_state/review_history/<safe_document_id>.json`。文件不存在时进入初审并使用第 1 轮；存在时按 records 数组倒序选中最后一条可验证完成记录，转换成 `PreviousReview`，下一轮为 `latest.review_round + 1`。只有 blocking/major 进入复审 Prompt，校验器要求 resolutions 精确覆盖这些 issue_id。Fixture 的 `review_round` 只是来源元数据，不参与模式判断。
+
+每条新记录保存稳定的 `run_id`、`review_round`、`completed_at` 和完整 `ReviewResult`。相同 run_id 内容一致时不重复追加，内容冲突时拒绝覆盖。历史损坏、document_id 不一致或 Schema 错误均立即失败，不隔离、不重建，以免错误执行初审。
 
 模型原始输出必须匹配 `ModelReviewPayload` 的严格 JSON Schema。模型不负责生成通知和本地状态；最终结果必须依次经过 JSON Parser、类别/等级/计数归一化、覆盖和结论一致性校验，然后才能映射状态。
 
@@ -43,9 +51,9 @@ SQLite 查询在 SQL 层排除当前 document_id。正文摘要使用字符 2～
 
 ## 可恢复性与副作用
 
-每个运行目录持有独立 `checkpoint.sqlite` 和 thread ID。节点边界形成 checkpoint；恢复时定位失败节点之前的最近快照并以相同 thread ID 继续。模型调用、产物落盘和相似画像持久化分属不同节点，因此索引 UPSERT 中断时不会重新调用模型。
+每个运行目录持有独立 `checkpoint.sqlite` 和 thread ID，只负责同一次 run 的恢复，不承担跨轮历史。跨轮复审只使用独立的 document_id JSON 历史。模型调用、产物落盘、历史持久化和相似画像持久化分属不同节点，因此历史或索引写入中断时不会重新调用模型。
 
-所有正式 JSON 产物先写同目录临时文件、刷新并 `os.replace`。普通产物只允许首次写入或内容完全相同的幂等写入；持续更新的 trace 使用原子替换。历史文件保留 records 数组，损坏的历史会被隔离为带时间戳的 `.corrupt-*` 文件。
+所有正式 JSON 产物先写同目录临时文件、刷新并 `os.replace`。普通产物只允许首次写入或内容完全相同的幂等写入；持续更新的 trace 使用原子替换。历史文件保留 records 数组；损坏历史保持原样并产生明确错误，等待人工检查。
 
 ## 安全
 

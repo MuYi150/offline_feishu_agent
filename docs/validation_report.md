@@ -36,6 +36,17 @@ conda run --no-capture-output -n feishu-api python -m pytest -q
 - 第二篇结果：`pass`；召回 `test_doc_similarity_drone_source`；运行后记录数：2。
 - 分项分数：摘要 TF-IDF `0.383671`、标题 `0.444444`、关键词 `0.4`、技术实体 `0.769231`。
 - 最终分数：`0.413698`，超过默认阈值 `0.35`，且 `selected_for_prompt=true`。
+
+## 本地历史自动复审验收
+
+2026-08-12 使用独立的临时 state、output 和相似性索引目录，按顺序运行 `drone_hardware_rd_round1_need_revision` 与 `drone_hardware_rd_round2_pass`：
+
+- round1 无本地历史，自动进入第 1 轮初审，结果为 `need_revision`。
+- round2 的 Fixture 不包含 `previous_issues`，系统按相同 document_id 命中 round1 的本地历史并自动进入第 2 轮复审，结果为 `pass`。
+- round2 Prompt 加载了 round1 实际产生的 `drone-major-mcu-selection`、`drone-major-power-design`、`drone-major-verification-criteria`，并包含位置、问题、建议和证据 ID。
+- round2 的 resolutions 精确覆盖上述三个动态 issue_id；复审未重新召回相似候选。
+- 本地历史最终包含 `history-round1` 和 `history-round2` 两条记录，轮次依次为 1、2。
+- 完整测试结果为 `88 passed, 2 skipped`，最终复跑耗时 13.46 秒；两个 skipped 仍为未显式启用的真实 Kimi 测试。
 - 第二篇 Prompt 已实际包含第一篇 document_id、标题、`similarity_score` 和完整本地摘要。
 - 新增产物及 SQLite 扫描未发现 `;base64,`、Authorization、Bearer 或测试 Key。
 - `pip check`：`No broken requirements found.`；`git diff --check` 通过。

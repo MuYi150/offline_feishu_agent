@@ -112,8 +112,10 @@ class FixtureDocumentSource:
                         "issue_id": item.get("issue_id") or f"previous-{index}",
                         "level": item.get("level", "major"),
                         "category": item.get("category", "other"),
+                        "position": item.get("position", ""),
                         "problem": item.get("problem", ""),
                         "suggestion": item.get("suggestion", ""),
+                        "evidence_ids": item.get("evidence_ids", []),
                     }
                 )
             )

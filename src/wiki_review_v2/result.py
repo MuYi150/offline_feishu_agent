@@ -180,7 +180,12 @@ class ReviewResultNormalizer:
 
 
 class ReviewResultValidator:
-    def validate(self, result: ReviewResult) -> None:
+    def validate(
+        self,
+        result: ReviewResult,
+        *,
+        required_rereview_issue_ids: list[str] | None = None,
+    ) -> None:
         counts = {
             level: sum(1 for issue in result.issues if issue.level.value == level)
             for level in ("blocking", "major", "minor")
@@ -212,6 +217,12 @@ class ReviewResultValidator:
             raise ModelSchemaError("相似性状态与 decision 不一致")
         if result.similarity_check.decision != SimilarityDecision.KEEP_INDEPENDENT and not result.similarity_check.candidates_considered:
             raise ModelSchemaError("合并或不建议独立提交必须引用至少一个有效相似候选")
+        if required_rereview_issue_ids is not None:
+            actual = [item.issue_id for item in result.re_review_assessment.resolutions]
+            if len(actual) != len(set(actual)):
+                raise ModelSchemaError("复审 resolutions 不得包含重复 issue_id")
+            if set(actual) != set(required_rereview_issue_ids):
+                raise ModelSchemaError("复审 resolutions 必须完整且仅覆盖上一轮 blocking/major issue_id")
 
 
 class ReviewOutcomeMapper:

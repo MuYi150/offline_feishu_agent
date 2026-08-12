@@ -7,7 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from wiki_review_v2.errors import FixtureError, ModelAuthenticationError
+from wiki_review_v2.errors import FixtureError, ModelAuthenticationError, ReviewHistoryError
 from wiki_review_v2.fixtures import FixtureDocumentSource
 from wiki_review_v2.model import KimiMultimodalModel, ModelRequest
 from wiki_review_v2.runner import ReviewRunner
@@ -84,14 +84,31 @@ def test_empty_structured_text_without_visual_input_is_incomplete(settings, tmp_
     assert coverage["visual_pages_complete"] is False
 
 
-def test_corrupt_history_is_quarantined(tmp_path: Path) -> None:
+def test_corrupt_history_is_auditable_and_never_becomes_initial(settings) -> None:
+    history = settings.state_root / "review_history" / "test_doc_basic_pass.json"
+    history.parent.mkdir(parents=True)
+    history.write_text("not json", encoding="utf-8")
+    summary = ReviewRunner(settings).run_case("basic_pass", run_id="corrupt-history")
+    assert not summary.ok
+    assert summary.failure["code"] == "review_history_error"
+    lookup = json.loads(
+        (summary.output_dir / "review_history_lookup.json").read_text(encoding="utf-8")
+    )
+    assert lookup["lookup_status"] == "error"
+    assert lookup["error_code"] == "review_history_error"
+    assert history.read_text(encoding="utf-8") == "not json"
+    assert not (summary.output_dir / "prompt.txt").exists()
+
+
+def test_corrupt_history_store_raises_without_quarantine(tmp_path: Path) -> None:
     store = ReviewHistoryStore(tmp_path)
     history = tmp_path / "review_history" / "doc.json"
     history.parent.mkdir(parents=True)
     history.write_text("not json", encoding="utf-8")
-    store.append("doc", {"result": "pass"})
-    assert json.loads(history.read_text(encoding="utf-8"))["records"][0]["result"] == "pass"
-    assert list(history.parent.glob("doc.corrupt-*.json"))
+    with pytest.raises(ReviewHistoryError):
+        store.load_latest("doc")
+    assert history.read_text(encoding="utf-8") == "not json"
+    assert not list(history.parent.glob("doc.corrupt-*.json"))
 
 
 def test_kimi_retries_rate_limit_and_does_not_retry_authentication(settings) -> None:

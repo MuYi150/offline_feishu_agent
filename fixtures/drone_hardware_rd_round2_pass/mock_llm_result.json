@@ -3,7 +3,7 @@
   "response": {
     "result": "pass",
     "summary": "文档已根据上一轮意见完成修改：明确当前为工程样机详细设计阶段，将性能表述改为待验证设计目标，补充 MCU、供电与输入保护候选方案及选型依据，并给出可执行的量化验收方法。",
-    "pass_reason": "上一轮两项 major 问题均已解决。设计目标与实测结论已明确区分，核心器件候选、资源分配、电流预算、保护边界和测试通过条件完整；两张硬件图与正文一致，现有内容达到设计方案类研发文档的审稿要求。",
+    "pass_reason": "上一轮三项 major 问题均已解决。主控选型、电源设计与量化验证标准均已补齐；两张硬件图与正文一致，现有内容达到设计方案类研发文档的审稿要求。",
     "blocking_count": 0,
     "major_count": 0,
     "minor_count": 0,
@@ -31,8 +31,7 @@
           "page": 1,
           "observation": "页面明确当前设计阶段，列出 STM32F405VGT6 的主频、存储、封装、定型条件和接口资源分配。",
           "supports": [
-            "major-1-resolved",
-            "major-2-resolved"
+            "drone-major-mcu-selection-resolved"
           ]
         },
         {
@@ -40,7 +39,7 @@
           "page": 3,
           "observation": "页面补充 2S~4S 输入边界、保护器件要求、5V/3.3V 电流预算、候选稳压器件、纹波和温升目标，并保留 PCB 工程图。",
           "supports": [
-            "major-2-resolved",
+            "drone-major-power-design-resolved",
             "pcb_routing"
           ]
         },
@@ -49,7 +48,7 @@
           "page": 4,
           "observation": "第 6.1 节已改为待样机验证的设计目标，每项说明依据、当前状态和验证条件；第七节开始列出量化测试方法。",
           "supports": [
-            "major-1-resolved",
+            "drone-major-verification-criteria-resolved",
             "verification_plan"
           ]
         },
@@ -58,7 +57,7 @@
           "page": 5,
           "observation": "页面给出接口与试飞验收标准，文末 AI 辅助说明已清理竖线并规范表述。",
           "supports": [
-            "major-1-resolved",
+            "drone-major-verification-criteria-resolved",
             "minor-format-resolved"
           ]
         }
@@ -70,14 +69,19 @@
     "re_review_assessment": {
       "resolutions": [
         {
-          "issue_id": "major-1",
+          "issue_id": "drone-major-mcu-selection",
           "status": "resolved",
           "evidence": "第 1 页声明当前阶段和目标/实测边界；第 4 页将 6.1 改为“设计目标指标（待样机验证）”，逐项补充估算依据、实现状态与验证条件，第 4~5 页给出量化测试标准。"
         },
         {
-          "issue_id": "major-2",
+          "issue_id": "drone-major-power-design",
           "status": "resolved",
           "evidence": "第 1 页补充 STM32F405VGT6 的关键规格、候选依据、资源分配与定型条件；第 3 页补充输入保护候选链路、耐压约束、5V/3.3V 电流预算、稳压器件候选和纹波/温升目标。"
+        },
+        {
+          "issue_id": "drone-major-verification-criteria",
+          "status": "resolved",
+          "evidence": "第 4 至 5 页为电源、传感器、EMC、接口可靠性和试飞补充了测试条件、测量方法、量化阈值及通过标准。"
         }
       ]
     }

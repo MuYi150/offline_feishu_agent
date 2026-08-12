@@ -121,3 +121,41 @@ def test_outcome_mapping() -> None:
     assert mapper.map(ReviewOutcome.INCOMPLETE_REVIEW) == "待分配人工审稿"
     assert mapper.map(ReviewOutcome.REJECT) == "已拒稿"
 
+
+@pytest.mark.parametrize(
+    "resolution_ids",
+    [["a"], ["a", "a"], ["a", "b", "extra"]],
+)
+def test_rereview_resolutions_must_exactly_cover_previous_issues(resolution_ids) -> None:
+    raw = payload()
+    raw["similarity_check"]["status"] = "not_applicable"
+    raw["re_review_assessment"] = {
+        "resolutions": [
+            {"issue_id": issue_id, "status": "resolved", "evidence": "已补充"}
+            for issue_id in resolution_ids
+        ]
+    }
+    result = ReviewResultNormalizer().normalize(
+        ModelReviewPayload.model_validate(raw), coverage(), review_mode="rereview"
+    )
+    with pytest.raises(ModelSchemaError):
+        ReviewResultValidator().validate(
+            result, required_rereview_issue_ids=["a", "b"]
+        )
+
+
+def test_rereview_resolutions_accept_exact_issue_set() -> None:
+    raw = payload()
+    raw["similarity_check"]["status"] = "not_applicable"
+    raw["re_review_assessment"] = {
+        "resolutions": [
+            {"issue_id": issue_id, "status": "resolved", "evidence": "已补充"}
+            for issue_id in ["b", "a"]
+        ]
+    }
+    result = ReviewResultNormalizer().normalize(
+        ModelReviewPayload.model_validate(raw), coverage(), review_mode="rereview"
+    )
+    ReviewResultValidator().validate(
+        result, required_rereview_issue_ids=["a", "b"]
+    )
