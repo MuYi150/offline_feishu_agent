@@ -51,6 +51,12 @@
     "suggested_next_action": "admin_confirm",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文介绍无人机主控板的硬件研发方案，覆盖总体设计目标、核心器件与外设接口布局、PCB分层和布线、电源系统、EMC优化、性能目标、研发测试及迭代方向，并以主控板三维图和PCB工程图辅助说明板级设计。",
+      "topics": ["无人机硬件", "主控板设计", "PCB布线", "电源与测试"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

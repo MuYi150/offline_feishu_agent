@@ -41,6 +41,12 @@ def payload(*, result: str = "pass", issues: list[dict[str, object]] | None = No
         "revision_priority": [],
         "suggested_next_action": "admin_confirm",
         "re_review_assessment": {"resolutions": []},
+        "article_overview": {
+            "content": "本文记录当前文章的主题、方法和验证结果。",
+            "topics": ["技术记录"],
+            "technical_entities": [],
+            "key_parameters": [],
+        },
     }
 
 

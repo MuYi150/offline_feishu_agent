@@ -40,7 +40,8 @@ class Settings(BaseModel):
     max_structured_text_chars: int = Field(default=500_000, ge=1_000)
     similarity_threshold: float = Field(default=0.35, ge=0, le=1)
     similarity_top_k: int = Field(default=5, ge=1, le=50)
-    similarity_summary_max_chars: int = Field(default=1200, ge=200, le=5000)
+    similarity_overview_max_chars: int = Field(default=1200, ge=200, le=5000)
+    similarity_query_max_chars: int = Field(default=30_000, ge=1_000, le=500_000)
     similarity_index_path: Path = Path("local_state/similarity_index/articles.sqlite")
 
     @field_validator("kimi_reasoning_effort")
@@ -92,9 +93,13 @@ class Settings(BaseModel):
             similarity_top_k=int(
                 os.getenv("SIMILARITY_TOP_K", os.getenv("SIMILARITY_TOP_N", "5"))
             ),
-            similarity_summary_max_chars=int(
-                os.getenv("SIMILARITY_SUMMARY_MAX_CHARS", "1200")
+            similarity_overview_max_chars=int(
+                os.getenv(
+                    "SIMILARITY_OVERVIEW_MAX_CHARS",
+                    os.getenv("SIMILARITY_SUMMARY_MAX_CHARS", "1200"),
+                )
             ),
+            similarity_query_max_chars=int(os.getenv("SIMILARITY_QUERY_MAX_CHARS", "30000")),
             similarity_index_path=configured_index,
         )
 
@@ -107,6 +112,11 @@ class Settings(BaseModel):
     def similarity_top_n(self) -> int:
         """Compatibility alias for callers using the original setting name."""
         return self.similarity_top_k
+
+    @property
+    def similarity_summary_max_chars(self) -> int:
+        """Compatibility alias for the old deterministic summary limit."""
+        return self.similarity_overview_max_chars
 
     def safe_dict(self) -> dict[str, object]:
         data = self.model_dump(exclude={"kimi_api_key"}, mode="json")

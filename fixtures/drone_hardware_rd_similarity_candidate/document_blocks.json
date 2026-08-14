@@ -1,0 +1,64 @@
+{
+  "blocks": [
+    {
+      "heading1": {"elements": [{"text_run": {"content": "无人机飞控核心主板B版研发文档"}}]},
+      "block_type": "heading1"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "本文档详细阐述一款一体化无人机飞控核心主板B版的硬件研发设计方案。主板集成IMU惯性单元、GPS定位接口、四路无刷电机PWM驱动、433 MHz无线通信及多级电源管理电路，面向园区巡检和教学验证用四旋翼无人机。B版沿用既有平台的总体架构，但重新确定惯性传感器、测试时长和装机试飞判据。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "无人机硬件设计"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "主板采用STM32F405VGT6作为核心主控，Cortex-M4F内核主频168 MHz，配置1 MB Flash和192 KB SRAM。SPI1连接ICM-42688-P，UART1连接GPS，UART2连接433 MHz数传，I2C1预留气压计和磁力计，TIM1与TIM8提供四路PWM电机输出以及两路扩展测试点。固件目标为IMU以1 kHz采样、姿态控制环以500 Hz执行。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "飞控主板"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "关键技术实体清单：STM32F405VGT6；Cortex-M4F；TPS5430；TPS62162；SMBJ18A；SPI；I2C；UART；PWM；IMU；GPS；LDO；EMC；TVS。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "PCB 布局布线"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "硬件采用四层PCB结构，通过数字地与模拟地分区、完整地层铺铜以及中心MCU、板边GPS和射频接口的分区布局抑制电机电磁干扰。高速SPI、晶振和传感器信号保持短走线与连续参考地，大电流动力线路加宽铜箔，IMU区域增加接地过孔围栏。EMC验证采用四路电机0%到80%占空比阶跃，记录电源纹波、陀螺仪噪声和控制器复位情况。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "电源管理"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "电源系统支持2S～4S锂电池的6.0 V～16.8 V输入，入口配置3 A自恢复保险丝、反接保护MOSFET和SMBJ18A TVS。TPS5430输出5 V/3 A，TPS62162输出数字3.3 V/1 A，IMU另设低噪声3.3 V LDO。验收目标为5 V纹波不高于50 mVpp、数字3.3 V纹波不高于30 mVpp、IMU电源纹波不高于10 mVpp。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "电磁兼容优化"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "电机PWM输出端配置阻尼与RC滤波，外部连接器设置接地针脚，IMU区域使用接地过孔围栏。以电机阶跃负载下的传感器噪声和电源纹波作为PCB布局与电磁兼容设计的定型依据。"}}]},
+      "block_type": "text"
+    },
+    {
+      "heading2": {"elements": [{"text_run": {"content": "硬件测试验证"}}]},
+      "block_type": "heading2"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "样机验收覆盖限流上电、电源效率与温升、IMU六面标定、控制周期、EMC干扰、接口可靠性和整机装机试飞。UART以1 Mbps、SPI以8 MHz、I2C以400 kHz分别连续传输30 min；连接器完成100次插拔后应无断连和锁死，错误或丢包率不高于1×10^-5。满载运行时间由原方案的30 min延长至45 min，关键器件表面温度目标低于80 ℃。"}}]},
+      "block_type": "text"
+    },
+    {
+      "text": {"elements": [{"text_run": {"content": "装机试飞依次执行解锁、低油门、悬停、定点、返航和中速机动，完整保存电源、IMU、控制周期、GPS状态和故障日志。B版要求单架次悬停不少于12 min，GPS状态良好时定点水平误差目标不高于1.8 m。后续将根据纹波、温升和振动台结果评估CAN-FD接口、板载存储及三防工艺。"}}]},
+      "block_type": "text"
+    }
+  ]
+}

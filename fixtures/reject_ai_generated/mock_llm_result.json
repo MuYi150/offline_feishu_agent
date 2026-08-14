@@ -40,6 +40,12 @@
     "suggested_next_action": "reject",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文尝试整理通用编程概念，内容涉及变量、流程控制和函数等基础主题，但正文主要由泛化说明构成，缺少与具体实践过程、运行输出和个人分析相对应的材料。",
+      "topics": ["通用编程概念", "基础知识整理"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

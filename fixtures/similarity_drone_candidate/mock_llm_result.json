@@ -19,7 +19,7 @@
           "wiki_name": "离线测试知识库",
           "link": "https://example.invalid/wiki/test_doc_similarity_drone_source",
           "status": "AI通过待确认",
-          "score": 0.413698,
+          "score": 0.434914,
           "relationship": "same_area_different_direction",
           "evidence": "两文共享 STM32H743、ICM-42688-P、CAN-FD 和 6S 电源架构，但机型、部分器件、额定参数和验证时长不同。"
         }
@@ -34,6 +34,12 @@
     },
     "revision_priority": [],
     "suggested_next_action": "admin_confirm",
-    "re_review_assessment": {"resolutions": []}
+    "re_review_assessment": {"resolutions": []},
+    "article_overview": {
+      "content": "本文设计一套面向实验室六旋翼无人机的控制器硬件。核心采用 STM32H743，主 IMU 为 ICM-42688-P，高度通道使用 BMP390，并通过 SPI、CAN-FD 和双 UART 连接传感器、扩展设备及调试链路。系统由 6S 电池供电，满电电压 25.2 V，降压输出 5 V 6 A，独立 LDO 提供 3.3 V 1 A。样机验证包括短路和静态电流检查、IMU六面标定、CAN-FD环回、PWM通道、45 min温升和振动台测试，同时记录零偏、丢包率、示波器波形与改板原因。",
+      "topics": ["六旋翼无人机", "控制器硬件", "电源管理", "通信接口", "样机验证"],
+      "technical_entities": ["STM32H743", "ICM-42688-P", "BMP390", "SPI", "CAN-FD", "UART", "IMU", "LDO", "PWM"],
+      "key_parameters": ["800 Hz", "6S", "25.2 V", "5 V 6 A", "3.3 V 1 A", "45 min"]
+    }
   }
 }

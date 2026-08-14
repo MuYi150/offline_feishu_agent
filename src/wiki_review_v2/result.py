@@ -265,5 +265,6 @@ def incomplete_payload(reason: str) -> ModelReviewPayload:
             "revision_priority": [],
             "suggested_next_action": "human_recheck",
             "re_review_assessment": {"resolutions": []},
+            "article_overview": None,
         }
     )

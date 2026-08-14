@@ -17,7 +17,7 @@ REVIEW_PROCEDURE = """必须按以下顺序完成审稿：
 3. 交叉核对正文与截图、图纸、表格、命令、代码、日志、结果和结论，检查是否相互支持或存在矛盾。
 4. 按 blocking、major、minor 合并同类问题；每条问题必须有具体位置、实际证据和可执行建议。
 5. 根据覆盖范围、问题等级、相似性和复审状态选择结论，不得过度放松，也不得无限挑刺或滥用人工复审。
-6. 输出前复核问题计数、result、pass_reason、suggested_next_action、similarity_check、visual_evidence_assessment 和 re_review_assessment 是否一致，再严格按 OutputRequirements 输出 JSON。"""
+6. 输出前复核问题计数、result、pass_reason、suggested_next_action、similarity_check、visual_evidence_assessment、re_review_assessment 和 article_overview 是否一致，再严格按 OutputRequirements 输出 JSON。"""
 
 VISUAL_INPUT_GUIDE = """VisualManifest 字段含义：
 - source：视觉页面来源。pdf 表示页面来自 Fixture 提供的 PDF；fixture_pages 表示页面来自 Fixture 直接提供的 PNG/JPG 等页面图片；generated_pdf 表示页面由结构化 Markdown 自动生成；unavailable 表示没有可用视觉页面。
@@ -27,6 +27,14 @@ VISUAL_INPUT_GUIDE = """VisualManifest 字段含义：
 - limitations：视觉输入处理过程中必须在结论中承认的限制。
 当 source 为 pdf 或 fixture_pages、visual_pages_complete=true 且页面实际清晰可读时，应把页面中的图片、图纸、截图、标注、表格和排版信息作为已经审查的内容；不得沿用 v1“图片不可读”的假设，也不得仅因图片多或正文依赖图片而输出 recommend_human_review。
 特别注意：generated_pdf 页面由结构化正文生成，内容可能与 StructuredContent 重复，不能将其视为独立的原始视觉证据，也不能据此判断原始飞书排版。"""
+
+VISUAL_PUBLICATION_QUALITY_RULES = """必须检查原始页面是否具备可直接阅读和发布的视觉质量，而不只是判断页面是否成功传入：
+- 当 VisualManifest.source 为 pdf 或 fixture_pages 时，逐页检查表格、代码、命令、公式、图片标注和正文是否被裁切、遮挡、折叠、溢出、截断，是否因列宽、行高、字号、横向/纵向滚动区域而只显示一部分，或者清晰度低到无法阅读。滚动条本身不是问题；关键内容在当前知识库页面中无法完整阅读才是问题。
+- 如果“硬件清单、实验参数、测试结果、操作步骤”等关键表格只显示部分行或列，或必须滚动、下载、打开外部附件才能看到核心内容，必须生成 major 问题，category=visibility，result=need_revision；不得 pass，也不得降为 minor。position 要写明章节/表格和页码，evidence_ids 必须引用实际显示问题的页面。
+- StructuredContent 中存在完整表格文字，并不能抵消原始发布页面的裁切或不可读问题；审稿同时检查内容和读者实际看到的排版。AttachmentMetadata 中有表格附件但 attachments_opened=false 时，不得假设附件可以补足页面中不可见的内容。
+- 修改建议必须可执行，例如改为飞书原生表格、拆分过宽表格、调整列宽/行高/字号、把关键清单直接放入正文，并将 Excel 仅作为补充附件。不能只写“优化格式”。
+- 如果只是轻微对齐或美观问题，且全部关键内容完整清晰可读，才可以作为 minor；如果页面覆盖本身缺失、失败或不可用，导致无法判断表格是否完整，则按输入覆盖规则处理 incomplete_review，而不是假装已经发现或排除了排版问题。
+- generated_pdf 是工作流根据结构化正文生成的技术渲染，不能用于判定原始飞书页面存在或不存在上述排版问题。"""
 
 INPUT_COVERAGE_GUIDE = """InputCoverage 字段含义：
 - structured_text_available：是否取得可供审查的结构化 Markdown 正文。
@@ -47,11 +55,29 @@ INITIAL_REVIEW_SIMILARITY_GUIDE = """InitialReviewSimilarityContext 字段含义
 - threshold：本地候选进入本次模型比较的最低相似分数。
 - top_k：最多提交给模型的候选数量。
 - effective_candidates：从本地 SQLite 历史摘要索引计算、排除当前 document_id、经过阈值和 Top-K 筛选后的候选；Fixture 的 similarity_candidates.json 不参与召回。
-- similarity_score：本地确定性算法根据摘要字符 TF-IDF、标题、关键词和技术实体计算的 0～1 分数，不是模型生成的结论。
-- score_details：上述四项分数及 final_score，输出 candidates_considered 时应把 similarity_score 对应填写到 score 字段。
-- content：历史文章的可读文字摘要，不是完整正文，也不包含历史 PDF、PNG 或页面图片。
+- similarity_score：本地确定性算法根据当前正文与历史 AI 概述的字符 TF-IDF、标题、主题关键词、技术实体和参数计算的 0～1 分数，不是模型生成的结论。
+- score_details：上述五项分数及 final_score，输出 candidates_considered 时应把 similarity_score 对应填写到 score 字段。
+- content：历史文章审稿通过时生成的 AI 文章概述，或兼容迁移的 legacy 规则摘要；不是完整正文，也不包含历史 PDF、PNG 或页面图片。
+- summary_source、overview_model、overview_prompt_version：候选概述的来源和生成版本；deterministic_legacy 表示升级前的规则摘要。
 每个候选同时提供 document_id、标题、链接、状态、分数和摘要。算法分数只表示可能相似，不能仅凭分数认定抄袭、重复、必须合并或拒稿。必须结合当前文章正文和候选摘要，分别判断是否主题相似但内容独立、是否明显重复、是否需要作者修改，并写明判断依据。
 effective_candidates 为空表示本次没有达到阈值的本地候选，不允许凭空声称存在重复文章。"""
+
+SIMILARITY_MERGE_RULES = """相似候选的最终判断必须比较知识内容和可复用流程，不能只比较标题、机型名称或 similarity_score：
+- 对教程、SOP、搭建记录和调试文档，重点比较前置环境、软件/固件安装、工具链、地面站配置、连接适配、校准、参数设置、调试步骤、故障排查、命令、截图和操作顺序，而不是只看最终设备名称。
+- 例如“四旋翼无人机搭建教程”和“穿越机搭建教程”即使机型名称不同，只要环境搭建、QGC 地面站安装/适配/调试、飞控连接、校准和主要操作步骤大体相同，且独有内容主要只是机架、动力配置、硬件型号或少量参数差异，就属于应合并的实质性流程重合，不能以 same_area_different_direction 独立 pass。
+- 当共同步骤构成文章的核心或大部分可执行内容，并且能够抽成一套公共流程复用时，必须使用 similarity_check.status=merge_recommended、decision=merge_required；result=need_revision、pass_reason=""、suggested_next_action=merge_with_existing，并生成至少一条 level=major、category=similarity 的 issue，引用候选标题/链接并说明具体重合模块。
+- 合并建议应说明如何重构：把环境搭建、QGC 配置、通用校准和调试步骤合并为公共教程或公共章节；把四旋翼、穿越机等机型特有的装配、动力参数和差异步骤保留为分支章节，或在独立短文中引用公共教程，不重复复制通用流程。
+- 如果共同内容只是简短的通用前置知识，而当前文章在目标、核心步骤、技术方法、验证过程和结论上均有实质独立内容，才可使用 same_area_different_direction 或 related_but_keep。不得仅凭同领域判合并，也不得仅凭标题不同判独立。
+- 候选 content 只是历史 AI 概述，证据不足时不得编造逐段重复事实；但当当前正文和候选概述已经明确显示上述核心流程重合时，不得以“候选不是全文”为由回避合并判断。近乎完整复制、独立投稿不再增加知识价值时，才考虑 duplicate_reject_recommended；存在可保留的机型差异时优先 merge_recommended。"""
+
+ARTICLE_OVERVIEW_REQUIREMENTS = """article_overview 是当前投稿文章本身的检索概述，与审稿结论 summary 完全不同。
+- summary 只总结本轮审稿结论、问题和依据；article_overview 只概述当前文章讨论了什么。
+- article_overview 只能依据当前 StructuredContent 和本次实际提供的视觉页面，不得吸收、改写或复制 InitialReviewSimilarityContext 中候选文章的内容。
+- 不得出现“本轮审稿”“上一轮审稿”“审稿通过”“已解决上一轮”或“符合知识库公示标准”等审稿过程和状态话术。
+- content 必须是自然、连续、可独立理解的中文概述，目标长度 500～{max_chars} 字；短文章允许更短，不得重复凑字数或堆砌关键词。
+- content 应尽量保留当前文章的主题、目标、主要方法或系统结构、关键技术、器件/算法/协议、重要参数、验证方法和主要结论，但不得编造未提供的事实。
+- topics 是核心主题；technical_entities 只列当前文章实际出现的型号、芯片、协议、工具、算法或系统名；key_parameters 只列当前文章实际出现的数值、版本、性能指标、实验条件或配置参数。三个数组都要简洁、去重。
+- 即使最终 result 不是 pass，只要实际执行了 final_review，也必须为当前文章生成 article_overview；只有工作流明确未调用模型的技术性 incomplete_review 才使用 null。"""
 
 REREVIEW_GUIDE = """ReReviewHistoryContext 字段含义：
 - previous_review_round：上一轮审稿轮次。
@@ -93,13 +119,19 @@ OUTPUT_JSON_EXAMPLE: dict[str, Any] = {
     "revision_priority": [],
     "suggested_next_action": "admin_confirm",
     "re_review_assessment": {"resolutions": []},
+    "article_overview": {
+        "content": "结构示例：请替换为只描述当前文章主题、方法、关键技术、参数、验证和结论的连续概述。",
+        "topics": ["结构示例主题"],
+        "technical_entities": ["结构示例实体"],
+        "key_parameters": ["结构示例参数"],
+    },
 }
 
 OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供；下面给出与该 Schema 一致的完整合法 JSON 要求和结构示例。
 
 格式硬约束：
 1. 最终响应必须是单个、可被标准 JSON 解析器直接解析的对象；只能使用双引号，不得使用单引号、注释、尾随逗号、NaN 或 Infinity。
-2. 必须输出以下 13 个顶层字段，全部必填且一个不能遗漏：result、summary、pass_reason、blocking_count、major_count、minor_count、issues、similarity_check、learning_trace_assessment、visual_evidence_assessment、revision_priority、suggested_next_action、re_review_assessment。
+2. 必须输出以下 14 个顶层字段，全部必填且一个不能遗漏：result、summary、pass_reason、blocking_count、major_count、minor_count、issues、similarity_check、learning_trace_assessment、visual_evidence_assessment、revision_priority、suggested_next_action、re_review_assessment、article_overview。
 3. 禁止输出任何额外顶层字段，尤其不要输出 schema_version、local_status、input_coverage、reasoning、analysis 或 markdown。
 4. 字符串必须是 JSON string，数量和页码必须是 JSON integer，数组即使为空也必须写成 []，对象即使内容为空也必须保留其全部必填字段；不得用 null 代替字符串、数组或对象。
 5. 只输出 JSON 对象本身，不得在 JSON 外输出解释、Markdown 围栏、标题、前缀或后缀文字。
@@ -116,6 +148,7 @@ OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供；
 - revision_priority：按优先顺序列出作者应处理的关键修改；无须修改时为空数组。
 - suggested_next_action：与 result 和相似性结论一致的下一步动作。
 - re_review_assessment：复审时逐项记录上一轮 blocking/major 的解决状态；首审时保持空 resolutions。
+- article_overview：当前投稿文章本身的检索概述，不能写成审稿结论，也不能混入历史候选内容。正常 final_review 必须为对象；只有工作流未调用模型的技术性 incomplete_review 才可为 null。
 
 问题意见质量要求：列出全部关键 blocking；major 通常合并为 1–5 条；minor 通常 0–5 条。不得逐字逐句罗列重复问题，不得用“建议完善内容”“建议优化格式”等空泛表述。position、problem、suggestion 必须分别回答“具体在哪里”“实际有什么问题及证据”“作者应如何修改”。如果判断缺少研发/学习痕迹，必须列出已看到的证据和仍缺少的证据；如果使用视觉证据，必须说明对应页面实际显示了什么。
 
@@ -126,6 +159,7 @@ OUTPUT_REQUIREMENTS = """JSON Schema 由 API 的 response_format 单独提供；
 - visual_evidence_assessment 必须且只能包含：coverage(complete|partial|unavailable)、pages_reviewed(integer[])、evidence_used、limitations(string[])。
 - evidence_used 中每个元素必须且只能包含：evidence_id(string)、page(integer 且从 1 开始)、observation(string)、supports(string[])；evidence_id 只能引用实际提供的页面证据。
 - re_review_assessment 必须且只能包含 resolutions。resolutions 中每个元素必须且只能包含：issue_id(string)、status(resolved|partially_resolved|unresolved)、evidence(string)。
+- article_overview 为对象时必须且只能包含：content(string)、topics(string[])、technical_entities(string[])、key_parameters(string[])。
 
 相似性 status 与 decision 必须严格配对：
 - no_similar、same_area_different_direction、related_but_keep、not_applicable → keep_independent；
@@ -176,8 +210,9 @@ def _visual_manifest_payload(manifest: VisualManifest) -> dict[str, Any]:
 
 
 class ReviewPromptBuilder:
-    def __init__(self, review_standard: str) -> None:
+    def __init__(self, review_standard: str, overview_max_chars: int = 1200) -> None:
         self.review_standard = review_standard
+        self.overview_max_chars = overview_max_chars
 
     def build(
         self,
@@ -203,6 +238,7 @@ class ReviewPromptBuilder:
             ),
             ("StructuredContent", content),
             ("VisualInputGuide", VISUAL_INPUT_GUIDE),
+            ("VisualPublicationQualityRules", VISUAL_PUBLICATION_QUALITY_RULES),
             ("VisualManifest", json.dumps(_visual_manifest_payload(manifest), ensure_ascii=False, indent=2)),
         ]
         if visual_evidence:
@@ -219,6 +255,7 @@ class ReviewPromptBuilder:
             sections.extend(
                 [
                     ("InitialReviewSimilarityGuide", INITIAL_REVIEW_SIMILARITY_GUIDE),
+                    ("SimilarityMergeRules", SIMILARITY_MERGE_RULES),
                     (
                         "InitialReviewSimilarityContext",
                         json.dumps(similarity_context, ensure_ascii=False, indent=2),
@@ -235,6 +272,10 @@ class ReviewPromptBuilder:
         sections.extend(
             [
                 ("DecisionRules", DECISION_RULES),
+                (
+                    "ArticleOverviewRequirements",
+                    ARTICLE_OVERVIEW_REQUIREMENTS.format(max_chars=self.overview_max_chars),
+                ),
                 ("OutputRequirements", OUTPUT_REQUIREMENTS),
             ]
         )
@@ -244,7 +285,9 @@ class ReviewPromptBuilder:
         listing = [{"evidence_id": page["evidence_id"], "page": page["page"]} for page in pages]
         return (
             f"{SYSTEM_ROLE}\n\n"
-            "仅提取这些页面中与学习痕迹、正确性、可复现性、截图命令/配置/日志/结果有关的视觉证据。"
+            "仅提取这些页面中与学习痕迹、正确性、可复现性、截图命令/配置/日志/结果有关的视觉证据，"
+            "并检查关键表格、代码、命令、公式、图片标注或正文是否被裁切、遮挡、溢出、截断或无法清晰阅读。"
+            "发现表格只显示部分行列、依赖滚动或外部附件才能看到核心内容时，必须记录具体页面、可见缺陷和受影响内容。"
             "不得作最终审稿结论。每条证据引用 evidence_id 和 page。\n\n"
             + json.dumps(listing, ensure_ascii=False, indent=2)
         )

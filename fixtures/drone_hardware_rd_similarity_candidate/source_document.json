@@ -1,0 +1,15 @@
+{
+  "case_id": "drone_hardware_rd_similarity_candidate",
+  "document_id": "test_doc_drone_hardware_rd_similarity_candidate",
+  "node_token": "test_node_drone_hardware_rd_similarity_candidate",
+  "title": "无人机硬件研发文档_B版飞控核心板",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_drone_similarity_candidate",
+  "author": "测试用户_飞控方案乙",
+  "link": "https://example.invalid/wiki/test_doc_drone_hardware_rd_similarity_candidate",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/08/14 16:00:00",
+  "last_ai_review_at": ""
+}

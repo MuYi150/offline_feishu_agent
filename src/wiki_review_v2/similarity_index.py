@@ -11,9 +11,11 @@ from datetime import UTC, datetime
 from difflib import SequenceMatcher
 from pathlib import Path
 
+from .article_overview import OVERVIEW_PROMPT_VERSION
 from .config import Settings
 from .errors import SimilarityIndexError
 from .models import (
+    ArticleOverview,
     ReviewOutcome,
     SimilarityProfile,
     SimilarityPromptCandidate,
@@ -24,7 +26,7 @@ from .models import (
 )
 
 
-SCHEMA_VERSION = "1"
+SCHEMA_VERSION = "2"
 
 
 @dataclass(frozen=True)
@@ -35,13 +37,22 @@ class IndexedSimilarityArticle:
     node_token: str
     link: str
     content: str
-    keywords: list[str]
+    topics: list[str]
     technical_entities: list[str]
+    key_parameters: list[str]
+    summary_source: str
+    overview_model: str
+    overview_prompt_version: str
+    source_content_hash: str
     source: str
     review_result: str
     local_status: str
     source_updated_at: str
     indexed_at: str
+
+    @property
+    def keywords(self) -> list[str]:
+        return self.topics
 
 
 class SimilarityIndexStore:
@@ -74,37 +85,80 @@ class SimilarityIndexStore:
                 existing = connection.execute(
                     "SELECT value FROM similarity_index_metadata WHERE key='schema_version'"
                 ).fetchone()
-                if existing is not None and existing["value"] != SCHEMA_VERSION:
+                table_exists = connection.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name='similarity_articles'"
+                ).fetchone()
+                version = str(existing["value"]) if existing else None
+                if version not in {None, "1", SCHEMA_VERSION}:
                     raise SimilarityIndexError(
-                        f"相似性索引 Schema 版本不兼容：{existing['value']} != {SCHEMA_VERSION}"
+                        f"相似性索引 Schema 版本不兼容：{version}，当前支持 1→{SCHEMA_VERSION}"
                     )
+                if not table_exists:
+                    self._create_v2_table(connection)
+                else:
+                    self._migrate_to_v2(connection)
                 connection.execute(
-                    "INSERT OR IGNORE INTO similarity_index_metadata(key, value) VALUES('schema_version', ?)",
+                    "INSERT INTO similarity_index_metadata(key, value) VALUES('schema_version', ?) "
+                    "ON CONFLICT(key) DO UPDATE SET value=excluded.value",
                     (SCHEMA_VERSION,),
-                )
-                connection.execute(
-                    """
-                    CREATE TABLE IF NOT EXISTS similarity_articles (
-                        document_id TEXT PRIMARY KEY,
-                        title TEXT NOT NULL,
-                        wiki_name TEXT NOT NULL,
-                        node_token TEXT NOT NULL,
-                        link TEXT NOT NULL,
-                        content TEXT NOT NULL,
-                        keywords_json TEXT NOT NULL,
-                        technical_entities_json TEXT NOT NULL,
-                        source TEXT NOT NULL,
-                        review_result TEXT NOT NULL,
-                        local_status TEXT NOT NULL,
-                        source_updated_at TEXT NOT NULL,
-                        indexed_at TEXT NOT NULL
-                    )
-                    """
                 )
         except SimilarityIndexError:
             raise
         except (OSError, sqlite3.Error) as exc:
-            raise SimilarityIndexError("无法初始化本地相似性索引") from exc
+            raise SimilarityIndexError("无法初始化或迁移本地相似性索引") from exc
+
+    @staticmethod
+    def _create_v2_table(connection: sqlite3.Connection) -> None:
+        connection.execute(
+            """
+            CREATE TABLE similarity_articles (
+                document_id TEXT PRIMARY KEY,
+                title TEXT NOT NULL,
+                wiki_name TEXT NOT NULL,
+                node_token TEXT NOT NULL,
+                link TEXT NOT NULL,
+                content TEXT NOT NULL,
+                keywords_json TEXT NOT NULL,
+                technical_entities_json TEXT NOT NULL,
+                source TEXT NOT NULL,
+                review_result TEXT NOT NULL,
+                local_status TEXT NOT NULL,
+                source_updated_at TEXT NOT NULL,
+                indexed_at TEXT NOT NULL,
+                topics_json TEXT NOT NULL DEFAULT '[]',
+                key_parameters_json TEXT NOT NULL DEFAULT '[]',
+                summary_source TEXT NOT NULL DEFAULT 'deterministic_legacy',
+                overview_model TEXT NOT NULL DEFAULT '',
+                overview_prompt_version TEXT NOT NULL DEFAULT '',
+                source_content_hash TEXT NOT NULL DEFAULT ''
+            )
+            """
+        )
+
+    @staticmethod
+    def _migrate_to_v2(connection: sqlite3.Connection) -> None:
+        existing_columns = {
+            str(row["name"]) for row in connection.execute("PRAGMA table_info(similarity_articles)")
+        }
+        additions = {
+            "topics_json": "TEXT NOT NULL DEFAULT '[]'",
+            "key_parameters_json": "TEXT NOT NULL DEFAULT '[]'",
+            "summary_source": "TEXT NOT NULL DEFAULT 'deterministic_legacy'",
+            "overview_model": "TEXT NOT NULL DEFAULT ''",
+            "overview_prompt_version": "TEXT NOT NULL DEFAULT ''",
+            "source_content_hash": "TEXT NOT NULL DEFAULT ''",
+        }
+        for name, declaration in additions.items():
+            if name not in existing_columns:
+                connection.execute(f"ALTER TABLE similarity_articles ADD COLUMN {name} {declaration}")
+        connection.execute(
+            "UPDATE similarity_articles SET topics_json=keywords_json "
+            "WHERE topics_json='[]' OR topics_json=''"
+        )
+        connection.execute(
+            "UPDATE similarity_articles SET summary_source='deterministic_legacy' "
+            "WHERE summary_source=''"
+        )
 
     def info(self) -> dict[str, object]:
         self.initialize()
@@ -116,10 +170,18 @@ class SimilarityIndexStore:
                 count = connection.execute(
                     "SELECT COUNT(*) AS count FROM similarity_articles"
                 ).fetchone()["count"]
+                sources = {
+                    row["summary_source"]: row["count"]
+                    for row in connection.execute(
+                        "SELECT summary_source, COUNT(*) AS count FROM similarity_articles "
+                        "GROUP BY summary_source ORDER BY summary_source"
+                    )
+                }
             return {
                 "path": str(self.path.resolve()),
                 "schema_version": version,
                 "record_count": count,
+                "summary_sources": sources,
             }
         except (OSError, sqlite3.Error) as exc:
             raise SimilarityIndexError("无法读取本地相似性索引信息") from exc
@@ -129,14 +191,19 @@ class SimilarityIndexStore:
         *,
         source: SourceDocument,
         profile: SimilarityProfile,
+        article_overview: ArticleOverview,
+        overview_model: str,
+        source_content_hash: str,
         review_result: ReviewOutcome | str,
         local_status: str,
     ) -> None:
         result = review_result.value if isinstance(review_result, ReviewOutcome) else str(review_result)
         if result != ReviewOutcome.PASS.value:
             raise SimilarityIndexError("只有审稿通过的文章可以写入相似性索引")
-        if profile.source not in {"blocks", "pdf"} or not profile.content.strip():
-            raise SimilarityIndexError("只有包含可靠文字摘要的文章可以写入相似性索引")
+        if profile.source not in {"blocks", "pdf"} or not article_overview.content.strip():
+            raise SimilarityIndexError("只有包含可靠 AI 文章概述的文章可以写入相似性索引")
+        if source_content_hash != profile.source_content_hash or not source_content_hash:
+            raise SimilarityIndexError("文章概述与当前正文内容哈希不一致")
         self.initialize()
         try:
             with self._connection() as connection:
@@ -145,8 +212,10 @@ class SimilarityIndexStore:
                     INSERT INTO similarity_articles(
                         document_id, title, wiki_name, node_token, link, content,
                         keywords_json, technical_entities_json, source, review_result,
-                        local_status, source_updated_at, indexed_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        local_status, source_updated_at, indexed_at, topics_json,
+                        key_parameters_json, summary_source, overview_model,
+                        overview_prompt_version, source_content_hash
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT(document_id) DO UPDATE SET
                         title=excluded.title,
                         wiki_name=excluded.wiki_name,
@@ -159,7 +228,13 @@ class SimilarityIndexStore:
                         review_result=excluded.review_result,
                         local_status=excluded.local_status,
                         source_updated_at=excluded.source_updated_at,
-                        indexed_at=excluded.indexed_at
+                        indexed_at=excluded.indexed_at,
+                        topics_json=excluded.topics_json,
+                        key_parameters_json=excluded.key_parameters_json,
+                        summary_source=excluded.summary_source,
+                        overview_model=excluded.overview_model,
+                        overview_prompt_version=excluded.overview_prompt_version,
+                        source_content_hash=excluded.source_content_hash
                     """,
                     (
                         source.document_id,
@@ -167,14 +242,20 @@ class SimilarityIndexStore:
                         source.wiki_name,
                         source.node_token,
                         source.link,
-                        profile.content,
-                        json.dumps(profile.keywords, ensure_ascii=False),
-                        json.dumps(profile.technical_entities, ensure_ascii=False),
+                        article_overview.content,
+                        json.dumps(article_overview.topics, ensure_ascii=False),
+                        json.dumps(article_overview.technical_entities, ensure_ascii=False),
                         profile.source,
                         result,
                         local_status,
                         source.updated_at,
                         datetime.now(UTC).isoformat(),
+                        json.dumps(article_overview.topics, ensure_ascii=False),
+                        json.dumps(article_overview.key_parameters, ensure_ascii=False),
+                        "ai_article_overview",
+                        overview_model,
+                        OVERVIEW_PROMPT_VERSION,
+                        source_content_hash,
                     ),
                 )
         except (OSError, sqlite3.Error) as exc:
@@ -197,8 +278,13 @@ class SimilarityIndexStore:
                     node_token=row["node_token"],
                     link=row["link"],
                     content=row["content"],
-                    keywords=list(json.loads(row["keywords_json"])),
+                    topics=list(json.loads(row["topics_json"])),
                     technical_entities=list(json.loads(row["technical_entities_json"])),
+                    key_parameters=list(json.loads(row["key_parameters_json"])),
+                    summary_source=row["summary_source"],
+                    overview_model=row["overview_model"],
+                    overview_prompt_version=row["overview_prompt_version"],
+                    source_content_hash=row["source_content_hash"],
                     source=row["source"],
                     review_result=row["review_result"],
                     local_status=row["local_status"],
@@ -211,28 +297,35 @@ class SimilarityIndexStore:
             raise SimilarityIndexError("无法查询本地相似性索引") from exc
 
 
-class TextSimilarityScorer:                                         #相似度计算
+class TextSimilarityScorer:
     TEXT_WEIGHT = 0.70
-    TITLE_WEIGHT = 0.15
-    KEYWORD_WEIGHT = 0.10
+    TITLE_WEIGHT = 0.10
+    TOPIC_WEIGHT = 0.10
     ENTITY_WEIGHT = 0.05
+    PARAMETER_WEIGHT = 0.05
 
     def score_all(
         self, current: SimilarityProfile, candidates: list[IndexedSimilarityArticle]
     ) -> list[tuple[IndexedSimilarityArticle, SimilarityScoreDetails]]:
-        text_scores = self._tfidf_scores(current.content, [item.content for item in candidates])
+        text_scores = self._tfidf_scores(current.query_text, [item.content for item in candidates])
         scored: list[tuple[IndexedSimilarityArticle, SimilarityScoreDetails]] = []
         for candidate, text_score in zip(candidates, text_scores, strict=True):
             title_score = SequenceMatcher(
                 None, _normalize(current.title), _normalize(candidate.title)
             ).ratio()
-            keyword_score = _jaccard(current.keywords, candidate.keywords)
-            entity_score = _jaccard(current.technical_entities, candidate.technical_entities)
+            topic_score = _jaccard(current.local_keywords, candidate.topics)
+            entity_score = _jaccard(
+                current.local_technical_entities, candidate.technical_entities
+            )
+            parameter_score = _jaccard(
+                current.local_key_parameters, candidate.key_parameters
+            )
             final = (
                 self.TEXT_WEIGHT * text_score
                 + self.TITLE_WEIGHT * title_score
-                + self.KEYWORD_WEIGHT * keyword_score
+                + self.TOPIC_WEIGHT * topic_score
                 + self.ENTITY_WEIGHT * entity_score
+                + self.PARAMETER_WEIGHT * parameter_score
             )
             scored.append(
                 (
@@ -240,8 +333,9 @@ class TextSimilarityScorer:                                         #相似度�
                     SimilarityScoreDetails(
                         text_tfidf=_score(text_score),
                         title_similarity=_score(title_score),
-                        keyword_jaccard=_score(keyword_score),
+                        topic_keyword_jaccard=_score(topic_score),
                         entity_jaccard=_score(entity_score),
+                        parameter_jaccard=_score(parameter_score),
                         final_score=_score(final),
                     ),
                 )
@@ -280,11 +374,9 @@ class LocalSimilarityRetriever:
         self, *, current_document_id: str, current_profile: SimilarityProfile
     ) -> tuple[list[SimilarityPromptCandidate], SimilarityRetrievalAudit]:
         indexed = self.store.query(exclude_document_id=current_document_id)
-        scored = self.scorer.score_all(current_profile, indexed) if current_profile.content else []
+        scored = self.scorer.score_all(current_profile, indexed) if current_profile.query_text else []
         scored.sort(key=lambda item: (-item[1].final_score, item[0].document_id))
-        above = [
-            item for item in scored if item[1].final_score >= self.settings.similarity_threshold
-        ]
+        above = [item for item in scored if item[1].final_score >= self.settings.similarity_threshold]
         selected = above[: self.settings.similarity_top_k]
         selected_ids = {item[0].document_id for item in selected}
         prompt_candidates = [
@@ -297,6 +389,9 @@ class LocalSimilarityRetriever:
                 similarity_score=details.final_score,
                 score_details=details,
                 content=article.content,
+                summary_source=article.summary_source,
+                overview_model=article.overview_model,
+                overview_prompt_version=article.overview_prompt_version,
             )
             for article, details in selected
         ]
@@ -315,6 +410,11 @@ class LocalSimilarityRetriever:
                     score_details=details,
                     above_threshold=details.final_score >= self.settings.similarity_threshold,
                     selected_for_prompt=article.document_id in selected_ids,
+                    entered_prompt=article.document_id in selected_ids,
+                    content=article.content,
+                    summary_source=article.summary_source,
+                    overview_model=article.overview_model,
+                    overview_prompt_version=article.overview_prompt_version,
                 )
                 for article, details in scored
             ],

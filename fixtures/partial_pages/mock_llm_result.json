@@ -28,6 +28,12 @@
     "suggested_next_action": "admin_confirm",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文记录了一项包含多页视觉材料的技术工作，正文说明了主要目标、实施过程和已有结果，但部分页面当前不可用，因此只能依据已提供的文字与可见页面理解文章内容。",
+      "topics": ["技术记录", "视觉材料"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

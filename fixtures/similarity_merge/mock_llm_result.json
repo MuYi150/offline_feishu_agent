@@ -38,6 +38,12 @@
     "suggested_next_action": "merge_with_existing",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文描述了一组软件部署步骤，包含环境准备、配置修改、服务启动和结果检查，整体内容用于帮助读者按照固定顺序完成部署并定位常见执行问题。",
+      "topics": ["软件部署", "配置与验证"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

@@ -6,7 +6,9 @@ from pathlib import Path
 import pytest
 
 from wiki_review_v2.errors import OutputConflictError, SimilarityIndexError
+from wiki_review_v2.fixtures import FixtureDocumentSource
 from wiki_review_v2.graph import ReviewWorkflow
+from wiki_review_v2.model import ModelResponse
 from wiki_review_v2.runner import ReviewRunner
 from wiki_review_v2.similarity_index import SimilarityIndexStore
 from wiki_review_v2.storage import ReviewHistoryStore
@@ -25,6 +27,7 @@ from wiki_review_v2.storage import ReviewHistoryStore
         ("multimodal_pass", "pass"),
         ("drone_hardware_rd", "pass"),
         ("drone_hardware_rd_round2_pass", "pass"),
+        ("drone_hardware_rd_similarity_candidate", "pass"),
     ],
 )
 def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
@@ -41,6 +44,7 @@ def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
         "input_coverage.json",
         "similarity_profile.json",
         "similarity_retrieval.json",
+        "article_overview.json",
         "review_history_lookup.json",
         "prompt.txt",
         "model_request_summary.json",
@@ -62,6 +66,30 @@ def test_invalid_json_and_api_failure_have_no_success_artifacts(settings) -> Non
         assert not (summary.output_dir / "parsed_review_result.json").exists()
         assert not (summary.output_dir / "submitter_notification.txt").exists()
         assert (summary.output_dir / "failure.json").exists()
+
+
+def test_source_document_artifact_keeps_v1_field_order(settings) -> None:
+    summary = ReviewRunner(settings).run_case("basic_pass")
+    source = json.loads(
+        (summary.output_dir / "source_document.json").read_text(encoding="utf-8")
+    )
+    assert list(source) == [
+        "case_id",
+        "document_id",
+        "node_token",
+        "title",
+        "wiki_name",
+        "author_id",
+        "author",
+        "link",
+        "review_method",
+        "status",
+        "review_round",
+        "updated_at",
+        "last_ai_review_at",
+        "previous_issues",
+        "schema_version",
+    ]
 
 
 def test_long_pdf_uses_batches_and_key_pages(settings) -> None:
@@ -148,6 +176,14 @@ def test_drone_round2_uses_real_round1_major_issue_ids(settings) -> None:
         ("drone-round1", 1),
         ("drone-round2", 2),
     ]
+    overview_audit = json.loads(
+        (summary.output_dir / "article_overview.json").read_text(encoding="utf-8")
+    )
+    indexed = SimilarityIndexStore(settings.similarity_index_path).query(
+        exclude_document_id="another-document"
+    )
+    assert overview_audit["persisted_to_index"] is True
+    assert indexed[0].content == result["article_overview"]["content"]
 
 
 def test_outputs_do_not_contain_base64_or_authorization(settings) -> None:
@@ -205,10 +241,18 @@ def test_two_drone_fixtures_recall_from_local_index_only(settings) -> None:
     source_profile = json.loads(
         (source_run.output_dir / "similarity_profile.json").read_text(encoding="utf-8")
     )
+    source_result = json.loads(
+        (source_run.output_dir / "parsed_review_result.json").read_text(encoding="utf-8")
+    )
+    source_overview_audit = json.loads(
+        (source_run.output_dir / "article_overview.json").read_text(encoding="utf-8")
+    )
     source_audit = json.loads(
         (source_run.output_dir / "similarity_retrieval.json").read_text(encoding="utf-8")
     )
     assert source_profile["source"] == "blocks"
+    assert source_profile["query_text"] != source_result["article_overview"]["content"]
+    assert source_overview_audit["persisted_to_index"] is True
     assert source_audit["prompt_candidates"] == []
     assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 1
     source_requests = json.loads(
@@ -227,7 +271,10 @@ def test_two_drone_fixtures_recall_from_local_index_only(settings) -> None:
     recalled = audit["prompt_candidates"][0]
     assert recalled["document_id"] == "test_doc_similarity_drone_source"
     assert recalled["similarity_score"] >= settings.similarity_threshold
-    assert recalled["content"] == source_profile["content"]
+    assert recalled["content"] == source_result["article_overview"]["content"]
+    assert recalled["summary_source"] == "ai_article_overview"
+    assert recalled["overview_model"] == "fake-kimi"
+    assert recalled["overview_prompt_version"] == "article-overview-v1"
     assert recalled["score_details"]["final_score"] == recalled["similarity_score"]
     assert "test_doc_similarity_drone_source" in prompt
     assert "设计_四旋翼飞控硬件平台研发方案-v1.0" in prompt
@@ -235,7 +282,7 @@ def test_two_drone_fixtures_recall_from_local_index_only(settings) -> None:
         "\n\n## DecisionRules", 1
     )[0]
     context = json.loads(context_text)
-    assert context["effective_candidates"][0]["content"] == source_profile["content"]
+    assert context["effective_candidates"][0]["content"] == source_result["article_overview"]["content"]
     assert f'"similarity_score": {recalled["similarity_score"]}' in prompt
     assert "source.pdf" not in prompt and "page-0001.png" not in prompt
     assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 2
@@ -248,6 +295,64 @@ def test_non_pass_and_model_failure_do_not_enter_index(settings) -> None:
     assert revision.ok and revision.result == "need_revision"
     assert not failure.ok
     assert SimilarityIndexStore(settings.similarity_index_path).info()["record_count"] == 0
+
+
+def test_null_article_overview_uses_existing_schema_repair(settings) -> None:
+    valid = FixtureDocumentSource().load(
+        settings.fixtures_root / "basic_pass"
+    ).fake_model_response["review"]
+    invalid = json.loads(json.dumps(valid, ensure_ascii=False))
+    invalid["article_overview"] = None
+
+    class SequenceModel:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def invoke(self, request):
+            self.calls += 1
+            payload = invalid if self.calls == 1 else valid
+            return ModelResponse(content=json.dumps(payload, ensure_ascii=False))
+
+    model = SequenceModel()
+    summary = ReviewRunner(settings).run_case(
+        "basic_pass", run_id="overview-repair", model_override=model
+    )
+    assert summary.ok and model.calls == 2
+    requests = json.loads(
+        (summary.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert [item["phase"] for item in requests["requests"]] == [
+        "final_review",
+        "schema_repair",
+    ]
+
+
+def test_pass_with_ungrounded_but_present_article_overview_is_indexed(settings) -> None:
+    payload = FixtureDocumentSource().load(
+        settings.fixtures_root / "basic_pass"
+    ).fake_model_response["review"]
+    payload = json.loads(json.dumps(payload, ensure_ascii=False))
+    payload["article_overview"]["technical_entities"] = ["UNSUPPORTED-CHIP-999"]
+
+    class StaticModel:
+        def invoke(self, request):
+            return ModelResponse(content=json.dumps(payload, ensure_ascii=False))
+
+    summary = ReviewRunner(settings).run_case(
+        "basic_pass", run_id="overview-invalid", model_override=StaticModel()
+    )
+    assert summary.ok and summary.result == "pass"
+    audit = json.loads(
+        (summary.output_dir / "article_overview.json").read_text(encoding="utf-8")
+    )
+    assert audit["validation_status"] == "invalid"
+    assert audit["persisted_to_index"] is True
+    indexed = SimilarityIndexStore(settings.similarity_index_path).query(
+        exclude_document_id="another-document"
+    )
+    assert len(indexed) == 1
+    assert indexed[0].content == payload["article_overview"]["content"]
+    assert indexed[0].technical_entities == ["UNSUPPORTED-CHIP-999"]
 
 
 def test_checkpoint_resume_retries_only_similarity_upsert(settings, monkeypatch) -> None:

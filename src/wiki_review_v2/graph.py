@@ -8,12 +8,14 @@ from typing import Any, Callable
 from langgraph.graph import END, START, StateGraph
 from pydantic import ValidationError
 
+from .article_overview import ArticleOverviewValidator
 from .config import Settings
 from .errors import ModelJsonError, ModelSchemaError, ReviewError, ReviewHistoryError, classify_exception
 from .fixtures import DocumentExtractor, FixtureDocumentSource
 from .model import ModelRequest, ReviewModel, request_summary
 from .models import (
     InputCoverage,
+    ArticleOverviewAudit,
     FixtureOptions,
     ModelReviewPayload,
     PreviousReview,
@@ -41,6 +43,7 @@ from .result import (
     incomplete_payload,
 )
 from .storage import (
+    SCHEMA_VERSION,
     AuditStore,
     ReviewHistoryStore,
     atomic_replace_json,
@@ -77,10 +80,13 @@ class ReviewWorkflow:
         self.similarity_profiles = SimilarityProfileBuilder(settings)
         self.similarity_index = SimilarityIndexStore(settings.similarity_index_path)
         self.similarity = LocalSimilarityRetriever(settings, self.similarity_index)
+        self.article_overviews = ArticleOverviewValidator(settings)
         self.history_policy = ReviewHistoryPolicy()
         standard_path = settings.project_root / "review_standard.md"
         standard = standard_path.read_text(encoding="utf-8") if standard_path.exists() else "按科研知识库最低质量标准审稿。"
-        self.prompt_builder = ReviewPromptBuilder(standard)
+        self.prompt_builder = ReviewPromptBuilder(
+            standard, overview_max_chars=settings.similarity_overview_max_chars
+        )
         self.parser = ReviewResultParser()
         self.normalizer = ReviewResultNormalizer()
         self.validator = ReviewResultValidator()
@@ -113,6 +119,9 @@ class ReviewWorkflow:
             "parse_result": self._guard("parse_result", self.parse_result),
             "normalize_result": self._guard("normalize_result", self.normalize_result),
             "validate_result": self._guard("validate_result", self.validate_result),
+            "validate_article_overview": self._guard(
+                "validate_article_overview", self.validate_article_overview
+            ),
             "project_status": self._guard("project_status", self.project_status),
             "render_notifications": self._guard("render_notifications", self.render_notifications),
             "save_artifacts": self._guard("save_artifacts", self.save_artifacts),
@@ -161,7 +170,8 @@ class ReviewWorkflow:
             ("invoke_kimi", "parse_result"),
             ("parse_result", "normalize_result"),
             ("normalize_result", "validate_result"),
-            ("validate_result", "project_status"),
+            ("validate_result", "validate_article_overview"),
+            ("validate_article_overview", "project_status"),
             ("project_status", "render_notifications"),
             ("render_notifications", "save_artifacts"),
         ]
@@ -471,6 +481,11 @@ class ReviewWorkflow:
                 if retry == 0 and state.raw_model_output.get("finish_reason") == "length":
                     raise ModelJsonError("模型输出因长度限制被截断")
                 parsed = self.parser.parse(raw)
+                if (
+                    state.raw_model_output.get("source") != "deterministic_input_guard"
+                    and parsed.article_overview is None
+                ):
+                    raise ModelSchemaError("正常模型审稿必须返回非空 article_overview")
                 return {
                     "parsed_review_result": parsed.model_dump(mode="json"),
                     "model_calls": calls,
@@ -518,6 +533,32 @@ class ReviewWorkflow:
         self.validator.validate(result, required_rereview_issue_ids=required_issue_ids)
         return {}
 
+    def validate_article_overview(self, state: ReviewGraphState) -> dict[str, Any]:
+        result = ReviewResult.model_validate(state.parsed_review_result)
+        source = SourceDocument.model_validate(state.source_document)
+        profile = SimilarityProfile.model_validate(state.similarity_profile)
+        model_name = next(
+            (
+                str(call.get("model", ""))
+                for call in reversed(state.model_calls)
+                if call.get("phase") in {"final_review", "schema_repair"}
+            ),
+            "fake-kimi" if state.model_mode == "fake" else self.settings.kimi_model,
+        )
+        normalized, audit = self.article_overviews.normalize_and_validate(
+            document_id=source.document_id,
+            overview=result.article_overview,
+            review_summary=result.summary,
+            profile=profile,
+            candidates=list(state.similarity_context.get("effective_candidates", [])),
+            overview_model=model_name,
+        )
+        result.article_overview = normalized
+        return {
+            "parsed_review_result": result.model_dump(mode="json"),
+            "article_overview_audit": audit.model_dump(mode="json"),
+        }
+
     def project_status(self, state: ReviewGraphState) -> dict[str, Any]:#审稿结论映射为业务状态
         result = ReviewResult.model_validate(state.parsed_review_result)
         status = self.mapper.map(result.result)
@@ -541,14 +582,20 @@ class ReviewWorkflow:
         result = ReviewResult.model_validate(state.parsed_review_result)
         source = SourceDocument.model_validate(state.source_document)
         interim_trace = _trace(state)
+        source_document = source.model_dump(mode="json")
+        # Keep the v1/Fixture field order for migration-friendly inspection.
+        # Compatibility-only fields follow the original fields, and the artifact
+        # schema version remains last instead of triggering global key sorting.
+        source_document["schema_version"] = SCHEMA_VERSION
         documents: dict[str, Any] = {
-            "source_document.json": state.source_document,
+            "source_document.json": source_document,
             "extracted_content.json": state.extracted_content,
             "visual_manifest.json": state.visual_manifest,
             "visual_evidence.json": state.visual_evidence,
             "input_coverage.json": state.input_coverage,
             "similarity_profile.json": state.similarity_profile,
             "similarity_retrieval.json": state.similarity_retrieval,
+            "article_overview.json": state.article_overview_audit,
             "review_history_lookup.json": state.review_history_lookup,
             "model_request_summary.json": {
                 "model": self.settings.kimi_model if state.model_mode == "real" else "fake-kimi",
@@ -569,7 +616,12 @@ class ReviewWorkflow:
             },
         }
         for name, payload in documents.items():
-            atomic_write_json(output / name, payload, allow_identical=True)
+            atomic_write_json(
+                output / name,
+                payload,
+                allow_identical=True,
+                sort_keys=name != "source_document.json",
+            )
         atomic_write_text(output / "prompt.txt", state.prompt, allow_identical=True)
         atomic_write_text(output / "submitter_notification.txt", state.submitter_notification, allow_identical=True)
         atomic_write_text(output / "admin_notification.txt", state.admin_notification, allow_identical=True)
@@ -591,29 +643,35 @@ class ReviewWorkflow:
         output = Path(state.output_dir)
         source = SourceDocument.model_validate(state.source_document)
         result = ReviewResult.model_validate(state.parsed_review_result)
-        coverage = InputCoverage.model_validate(state.input_coverage)
         profile = SimilarityProfile.model_validate(state.similarity_profile)
+        overview_audit = ArticleOverviewAudit.model_validate(state.article_overview_audit)
         eligible = (
             result.result.value == "pass"
-            and profile.source in {"blocks", "pdf"}
-            and bool(profile.content.strip())
-            and not coverage.input_truncated
-            and not coverage.missing_sources
+            and result.article_overview is not None
+            and bool(result.article_overview.content.strip())
         )
         if eligible:
             self.similarity_index.upsert(
                 source=source,
                 profile=profile,
+                article_overview=result.article_overview,
+                overview_model=overview_audit.overview_model,
+                source_content_hash=overview_audit.source_content_hash,
                 review_result=result.result,
                 local_status=result.local_status,
             )
+        updated_audit = overview_audit.model_copy(update={"persisted_to_index": eligible})
+        atomic_replace_json(output / "article_overview.json", updated_audit.model_dump(mode="json"))
         final_trace = _trace(state) + [
             _event("persist_similarity_profile", "completed", persisted=eligible)
         ]
         atomic_replace_json(
             output / "run_trace.json", {"events": final_trace, "result": result.result.value}
         )
-        return {"similarity_profile_persisted": eligible}
+        return {
+            "similarity_profile_persisted": eligible,
+            "article_overview_audit": updated_audit.model_dump(mode="json"),
+        }
 
     def record_safe_failure(self, state: ReviewGraphState) -> dict[str, Any]:
         failure = state.failure or {

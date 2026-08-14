@@ -24,6 +24,12 @@
     },
     "revision_priority": [],
     "suggested_next_action": "admin_confirm",
-    "re_review_assessment": {"resolutions": []}
+    "re_review_assessment": {"resolutions": []},
+    "article_overview": {
+      "content": "本文设计一套科研无人机飞控硬件平台，核心计算单元采用 STM32H743，整体设计包含惯性测量、稳压电源、机载通信和电机控制输出，并针对多旋翼振动与台架运行优化布局。主 IMU 选用 ICM-42688-P，经 SPI 接口读取，外部导航连接 GNSS，扩展设备通过 CAN-FD 接入，UART 用于遥测和调试。系统使用 6S 锂电池输入，降压模块提供 5 V，传感器侧由独立 LDO 输出 3.3 V；四层 PCB 对数字区与模拟传感器区进行分区，CAN-FD 接口配置终端匹配和浪涌保护。样机上电后测量电源轨并完成 IMU 六面标定，随后执行 CAN-FD 环回、PWM 通道、温升与振动台测试，持续记录零偏、通信丢包率、示波器波形和改板原因。",
+      "topics": ["控制器", "硬件", "无人机", "惯性测量", "电源", "通信", "接口", "传感器", "配置", "测试", "标定"],
+      "technical_entities": ["STM32H743", "ICM-42688-P", "SPI", "GNSS", "CAN-FD", "UART", "LDO", "PCB", "IMU", "PWM"],
+      "key_parameters": ["6S", "5 V", "3.3 V"]
+    }
   }
 }

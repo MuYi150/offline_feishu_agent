@@ -1,0 +1,45 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "pass",
+    "summary": "文章完整描述了巡检无人机飞控核心板B版的主控资源、PCB抗干扰、电源树和可执行验收流程；与历史无人机主板方案技术领域接近，但文档有独立的器件组合、参数和验证安排。",
+    "pass_reason": "正文提供了明确的设计边界、关键参数、测试步骤与量化判据，相似部分属于同类飞控硬件的技术共性，可以作为独立研发记录保留。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "same_area_different_direction",
+      "decision": "keep_independent",
+      "summary": "两篇文章均涉及一体化无人机飞控主板，但B版增加了ICM-42688-P、不同温升时长和试飞判据，属于同主题下的独立设计记录。",
+      "candidate_count": 1,
+      "candidates_considered": [
+        {
+          "title": "无人机硬件研发文档",
+          "wiki_name": "离线测试知识库",
+          "link": "https://example.invalid/wiki/test_doc_drone_hardware_rd",
+          "status": "AI通过待确认",
+          "score": 0.5,
+          "relationship": "same_area_different_direction",
+          "evidence": "主控平台、四层PCB、电源分级、SPI/I2C/UART接口及EMC测试框架相近，但当前文章的IMU型号、测试时长与定点误差目标不同。"
+        }
+      ]
+    },
+    "learning_trace_assessment": "文章按设计约束、器件配置、板级测试和装机试飞顺序记录，测试输入、时长与通过条件能够复现。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [1, 2],
+      "evidence_used": [],
+      "limitations": ["视觉页面由结构化正文生成，只用于核对当前文档渲染结果。"]
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {"resolutions": []},
+    "article_overview": {
+      "content": "本文设计面向园区巡检和教学验证的四旋翼无人机飞控核心板B版。系统采用STM32F405VGT6，连接ICM-42688-P、GPS、433 MHz数传以及SPI、UART、I2C和PWM接口。四层PCB通过完整参考地、传感器分区、接地过孔和连续回流路径降低电机干扰。电源支持2S～4S锂电池，使用TPS5430、TPS62162和独立LDO生成5 V与3.3 V电源。验证流程覆盖限流上电、纹波与温升、IMU标定、连续通信、电机阶跃干扰、连接器插拔和装机试飞，并保存测量波形、状态数据与故障日志。",
+      "topics": ["无人机飞控主板", "PCB抗干扰", "电源管理", "通信接口", "样机验证"],
+      "technical_entities": ["STM32F405VGT6", "ICM-42688-P", "GPS", "SPI", "UART", "I2C", "PWM", "TPS5430", "TPS62162", "LDO"],
+      "key_parameters": ["168 MHz", "1 MB Flash", "192 KB SRAM", "6.0 V～16.8 V", "5 V/3 A", "3.3 V/1 A", "1 kHz", "500 Hz", "45 min"]
+    }
+  }
+}

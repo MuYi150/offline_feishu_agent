@@ -88,6 +88,12 @@
     "suggested_next_action": "author_revise",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文记录无人机主控板工程样机的硬件设计，涉及主控与接口布局、PCB分层布线、电源保护与降压、EMC优化、目标性能和研发测试计划。现有版本已经形成总体架构和工程图，但部分器件定型参数、电源预算及量化测试条件仍待补充。",
+      "topics": ["无人机硬件", "主控板设计", "电源设计", "研发测试"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

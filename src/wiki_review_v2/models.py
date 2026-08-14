@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import StrEnum
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class StrictModel(BaseModel):
@@ -142,25 +142,64 @@ class InputCoverage(StrictModel):
 
 
 class SimilarityProfile(StrictModel):
-    schema_version: str = "1.0"
+    schema_version: str = "2.0"
     document_id: str
     title: str
     source: Literal["blocks", "pdf", "unavailable"]
-    content: str = ""
+    query_text: str = ""
     headings: list[str] = Field(default_factory=list)
-    keywords: list[str] = Field(default_factory=list)
-    technical_entities: list[str] = Field(default_factory=list)
-    parameters: list[str] = Field(default_factory=list)
+    local_keywords: list[str] = Field(default_factory=list)
+    local_technical_entities: list[str] = Field(default_factory=list)
+    local_key_parameters: list[str] = Field(default_factory=list)
     source_character_count: int = Field(default=0, ge=0)
-    summary_character_count: int = Field(default=0, ge=0)
+    query_character_count: int = Field(default=0, ge=0)
+    query_truncated: bool = False
+    source_content_hash: str = ""
     limitations: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_v1_profile(cls, value: Any) -> Any:
+        """Accept checkpoint/test profiles written before query-profile v2."""
+        if not isinstance(value, dict):
+            return value
+        data = dict(value)
+        if "query_text" not in data and "content" in data:
+            data["query_text"] = data.pop("content")
+        if "local_keywords" not in data and "keywords" in data:
+            data["local_keywords"] = data.pop("keywords")
+        if "local_technical_entities" not in data and "technical_entities" in data:
+            data["local_technical_entities"] = data.pop("technical_entities")
+        if "local_key_parameters" not in data and "parameters" in data:
+            data["local_key_parameters"] = data.pop("parameters")
+        if "query_character_count" not in data and "summary_character_count" in data:
+            data["query_character_count"] = data.pop("summary_character_count")
+        data["schema_version"] = "2.0"
+        return data
+
+    @property
+    def content(self) -> str:
+        return self.query_text
+
+    @property
+    def keywords(self) -> list[str]:
+        return self.local_keywords
+
+    @property
+    def technical_entities(self) -> list[str]:
+        return self.local_technical_entities
+
+    @property
+    def parameters(self) -> list[str]:
+        return self.local_key_parameters
 
 
 class SimilarityScoreDetails(StrictModel):
     text_tfidf: float = Field(ge=0, le=1)
     title_similarity: float = Field(ge=0, le=1)
-    keyword_jaccard: float = Field(ge=0, le=1)
+    topic_keyword_jaccard: float = Field(ge=0, le=1)
     entity_jaccard: float = Field(ge=0, le=1)
+    parameter_jaccard: float = Field(ge=0, le=1)
     final_score: float = Field(ge=0, le=1)
 
 
@@ -173,6 +212,11 @@ class SimilarityScoredCandidate(StrictModel):
     score_details: SimilarityScoreDetails
     above_threshold: bool
     selected_for_prompt: bool
+    entered_prompt: bool
+    content: str
+    summary_source: str
+    overview_model: str = ""
+    overview_prompt_version: str = ""
 
 
 class SimilarityPromptCandidate(StrictModel):
@@ -184,10 +228,13 @@ class SimilarityPromptCandidate(StrictModel):
     similarity_score: float = Field(ge=0, le=1)
     score_details: SimilarityScoreDetails
     content: str
+    summary_source: str
+    overview_model: str = ""
+    overview_prompt_version: str = ""
 
 
 class SimilarityRetrievalAudit(StrictModel):
-    schema_version: str = "1.0"
+    schema_version: str = "2.0"
     query_document_id: str
     index_candidate_count: int = Field(default=0, ge=0)
     threshold: float = Field(ge=0, le=1)
@@ -258,6 +305,26 @@ class ReReviewAssessment(StrictModel):
     resolutions: list[ReReviewResolution] = Field(default_factory=list)
 
 
+class ArticleOverview(StrictModel):
+    content: str
+    topics: list[str]
+    technical_entities: list[str]
+    key_parameters: list[str]
+
+
+class ArticleOverviewAudit(StrictModel):
+    schema_version: str = "1.0"
+    document_id: str
+    article_overview: ArticleOverview | None = None
+    summary_source: str = "ai_article_overview"
+    overview_model: str = ""
+    overview_prompt_version: str = "article-overview-v1"
+    source_content_hash: str = ""
+    validation_status: Literal["valid", "warning", "invalid", "unavailable"] = "unavailable"
+    validation_warnings: list[str] = Field(default_factory=list)
+    persisted_to_index: bool = False
+
+
 class ModelReviewPayload(StrictModel):
     result: ReviewOutcome
     summary: str
@@ -272,12 +339,15 @@ class ModelReviewPayload(StrictModel):
     revision_priority: list[str]
     suggested_next_action: SuggestedNextAction
     re_review_assessment: ReReviewAssessment
+    article_overview: ArticleOverview | None
 
 
 class ReviewResult(ModelReviewPayload):
     schema_version: str = "2.0"
     local_status: str = ""
     input_coverage: InputCoverage
+    # Old local review_history records predate article_overview.
+    article_overview: ArticleOverview | None = None
 
 
 class ReviewHistoryRecord(StrictModel):
@@ -347,6 +417,7 @@ class ReviewGraphState(StrictModel):
     similarity_profile: dict[str, Any] = Field(default_factory=dict)
     similarity_retrieval: dict[str, Any] = Field(default_factory=dict)
     similarity_profile_persisted: bool = False
+    article_overview_audit: dict[str, Any] = Field(default_factory=dict)
     review_mode: Literal["initial", "rereview"] = "initial"
     similarity_context: dict[str, Any] = Field(default_factory=dict)
     rereview_context: dict[str, Any] = Field(default_factory=dict)

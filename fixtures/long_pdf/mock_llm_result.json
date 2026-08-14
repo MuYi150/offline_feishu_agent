@@ -43,6 +43,12 @@
     "suggested_next_action": "admin_confirm",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文是一份长篇实验记录，按照章节说明实验目标、环境配置、执行步骤、分批观察结果和最终结论，并利用多页材料保存关键过程证据，方便后续复查与复现。",
+      "topics": ["长篇实验记录", "过程证据", "实验复现"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   },
   "visual_batches": [

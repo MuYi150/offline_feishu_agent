@@ -54,3 +54,14 @@ conda run --no-capture-output -n feishu-api python -m pytest -q
 ## 真实 Kimi
 
 当前 `KIMI_API_KEY` 和 `MOONSHOT_API_KEY` 均未设置。两个 `real_kimi` 案例因缺少 Key 被显式跳过，未使用 Fake 冒充真实结果。这是唯一外部验证阻塞项。
+
+## 2026-08-14 AI 文章概述索引升级
+
+- 全量测试：`98 passed, 2 skipped`，耗时 15.34 秒；两个 skipped 仍为未显式授权的真实 Kimi 冒烟测试。
+- 独立临时 SQLite 从 0 条开始连续运行 `similarity_drone_source` 和 `similarity_drone_candidate`，两篇均为 `pass`，最终 v2 索引为 2 条 `ai_article_overview`。
+- source 查询正文 828 字符，模型概述 325 字符；数据库 `content` 与模型 `article_overview.content` 逐字一致，且与本地 `query_text` 不同。
+- candidate 召回 source，最终分数 `0.434914`：TF-IDF `0.416504`、标题 `0.444444`、主题关键词 `0.384615`、实体 `0.909091`、参数 `0.3`，超过默认阈值 `0.35`。
+- candidate Prompt 包含 source 的 document_id、标题、分数和完整 AI 概述，不包含历史 PDF、PNG、页面路径或 Base64。
+- 同一临时环境运行无人机 round1/round2：round1=`need_revision` 后索引仍为 2 条，round2=`pass` 后新增/更新为 3 条，证明只有复审通过后才写入概述。
+- 将开发环境现有 SQLite v1 复制到临时目录后原位迁移：记录数保持 1，Schema 升至 v2，旧记录标记为 `deterministic_legacy`；原始数据库 SHA-256 未变化。
+- 新增产物和 Prompt 安全扫描未发现 `Authorization`、`Bearer`、`;base64,` 或测试 Key。

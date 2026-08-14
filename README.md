@@ -77,7 +77,7 @@ $stamp = Get-Date -Format "yyyyMMddTHHmmss"
 
 ## 本地文字相似性索引
 
-初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层，再生成可读摘要并与本地 SQLite 历史摘要比较。图片、PNG、渲染页面和 OCR 完全不参与相似性计算；历史文章只把摘要和分数放入 Prompt，不发送历史 PDF、图片或完整正文。
+初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层，将清洗后的当前正文与本地 SQLite 中历史文章的 AI `article_overview` 比较。图片、PNG、渲染页面和 OCR 完全不参与相似性计算；历史文章只把 AI 概述和分数放入 Prompt，不发送历史 PDF、图片或完整正文。最终审稿调用同时生成当前文章概述，不增加独立摘要模型调用；最终结果为 `pass` 且 `article_overview.content` 非空时写入索引。
 
 默认配置如下，程序仍沿用现有环境变量读取方式，不会自动加载 `.env`：
 
@@ -85,10 +85,11 @@ $stamp = Get-Date -Format "yyyyMMddTHHmmss"
 $env:SIMILARITY_INDEX_PATH = Join-Path $PWD "local_state\similarity_index\articles.sqlite"
 $env:SIMILARITY_THRESHOLD = "0.35"
 $env:SIMILARITY_TOP_K = "5"
-$env:SIMILARITY_SUMMARY_MAX_CHARS = "1200"
+$env:SIMILARITY_OVERVIEW_MAX_CHARS = "1200"
+$env:SIMILARITY_QUERY_MAX_CHARS = "30000"
 ```
 
-摘要字符 2～4 gram TF-IDF、标题、关键词和技术实体的固定权重分别为 `0.70/0.15/0.10/0.05`。只有经过完整结果校验、最终为 `pass`、摘要来源是 Blocks/PDF、正文未截断且没有缺失来源的文章才会 UPSERT；相同 `document_id` 更新原记录。
+当前正文与历史 AI 概述的字符 2～4 gram TF-IDF、标题、主题关键词、技术实体和参数权重分别为 `0.70/0.10/0.10/0.05/0.05`。最终为 `pass` 且 `article_overview.content` 非空的文章会 UPSERT；概述校验结果仍写入 `article_overview.json` 供审计，但 `invalid` 不再阻止入库。相同 `document_id` 更新原记录。SQLite v1 会原位迁移到 v2，旧规则摘要保留并标记为 `deterministic_legacy`。
 
 初始化和查看索引：
 
@@ -128,6 +129,16 @@ Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
 
 不超过 12 页的文档一次提交全部页面。长 PDF 以默认 8 页一批提取 `VisualEvidenceBatch`，随后把结构化正文、批次证据和最多 8 个关键页交给最终审稿调用。任何超限、损坏或缺页都会显式进入 `input_coverage`；系统不会静默截断，也不会在覆盖不足时强行 pass/reject。
 
+审稿正文：
+只来自 document_blocks.json
+
+审稿视觉：
+PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
+
+相似性文字：
+有效 Blocks 优先，否则读取原始 PDF 文字层；
+永远不读取 pages，不做 OCR
+
 ## 输出文件
 
 每次新运行创建 `outputs/<case_id>/<run_id>/`，已存在目录不会覆盖：
@@ -138,8 +149,9 @@ Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
 - `visual_manifest.json`：页面、evidence ID、尺寸、哈希和失败页。
 - `visual_evidence.json`：长 PDF 分批视觉证据。
 - `input_coverage.json`：本次实际可见范围及限制。
-- `similarity_profile.json`：当前文章的文字来源、可读摘要、关键词、技术实体和字符数。
-- `similarity_retrieval.json`：本地索引候选数、四项分数、阈值判断和最终 Prompt 候选。
+- `similarity_profile.json`：当前文章的文字来源、清洗查询正文、本地关键词/实体/参数、字符数、截断状态和内容哈希。
+- `similarity_retrieval.json`：本地索引候选数、五项分数、概述来源/版本、阈值判断和最终 Prompt 候选。
+- `article_overview.json`：模型生成的当前文章概述、模型与 Prompt 版本、落地校验警告和是否写入索引。
 - `prompt.txt`：纯文字 Prompt，不含图片 Base64。
 - `model_request_summary.json`：模型、阶段、耗时、token 和图片摘要，不含认证信息。
 - `raw_model_output.json`：仅保存最终 message content 和安全响应元数据，不保存推理内容或完整 SDK 响应。

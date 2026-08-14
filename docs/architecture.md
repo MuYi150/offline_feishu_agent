@@ -13,7 +13,7 @@ flowchart TD
     P --> R["PdfPageRenderer"]
     R --> C["InputCoverage"]
     C --> M{"首轮或复审"}
-    M -->|首轮| S["SQLite 历史摘要 + 本地 TF-IDF 召回"]
+    M -->|首轮| S["当前正文 → SQLite 历史 AI 概述召回"]
     M -->|复审| H["上一轮 blocking/major"]
     S --> B["Prompt + MultimodalInput"]
     H --> B
@@ -21,11 +21,11 @@ flowchart TD
     L -->|是| V["分批 VisualEvidence"]
     L -->|否| K["最终审稿"]
     V --> K
-    K --> J["Parser → Normalizer → Validator"]
+    K --> J["Parser → Normalizer → Review/Overview Validator"]
     J --> O["OutcomeMapper + Notifications"]
     O --> A["Atomic Artifacts"]
     A --> H2["幂等追加 Review History"]
-    H2 --> U["合格 pass 画像 UPSERT"]
+    H2 --> U["合格 pass AI 概述 UPSERT"]
     C -->|关键输入不可用| I["确定性 incomplete_review"]
     I --> J
     K -->|API/JSON 失败| X["Safe failure trace，无状态/通知"]
@@ -33,7 +33,7 @@ flowchart TD
 
 ## 数据契约
 
-`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。历史查询增加严格的 `ReviewHistoryRecord` 与 `ReviewHistoryLookupAudit`；文字召回使用 `SimilarityProfile`、`SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `previous_issues` 和 `similarity_candidates.json`，但 Graph 不使用这些 Fixture 数据决定复审或候选，正式历史与候选都来自本地状态。
+`ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。历史查询使用严格的 `ReviewHistoryRecord` 与 `ReviewHistoryLookupAudit`；文字召回使用查询画像 `SimilarityProfile`、模型输出 `ArticleOverview`、五项 `SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `previous_issues` 和 `similarity_candidates.json`，但 Graph 不使用这些 Fixture 数据决定复审或候选，正式历史与候选都来自本地状态。
 
 ## 审稿历史数据流
 
@@ -45,9 +45,11 @@ Graph 在正文提取后读取 `local_state/review_history/<safe_document_id>.js
 
 ## 文字相似性数据流
 
-画像构建位于正文提取之后。有效 Blocks 优先；否则只读取 Fixture 原始 PDF 文字层，不读取生成 PDF、PNG、渲染页面或内嵌图片，也不执行 OCR。摘要以标题、章节、可读关键词、技术实体、参数和原文代表句组成，最大长度由配置控制。
+查询画像构建位于正文提取之后。有效 Blocks 优先；否则只读取 Fixture 原始 PDF 文字层，不读取生成 PDF、PNG、渲染页面或内嵌图片，也不执行 OCR。画像保存标题、章节、清洗正文、本地关键词、实体和参数；超长正文按全文均匀取样并显式记录截断，不再生成用于入库的规则摘要。
 
-SQLite 查询在 SQL 层排除当前 document_id。正文摘要使用字符 2～4 gram TF-IDF 余弦，标题使用规范化字符相似度，关键词和技术实体使用 Jaccard；固定权重为 `0.70/0.15/0.10/0.05`。超过阈值的 Top-K 摘要进入 Prompt，模型仍负责判断主题独立、重复关系和修改必要性。
+SQLite 查询在 SQL 层排除当前 document_id。当前查询正文与历史 `article_overview.content` 使用字符 2～4 gram TF-IDF 余弦，标题、主题关键词、技术实体和参数使用可解释分数；固定权重为 `0.70/0.10/0.10/0.05/0.05`。超过阈值的 Top-K 概述进入 Prompt，模型仍负责判断主题独立、重复关系和修改必要性。最终审稿调用同时生成当前文章概述；最终结果为 `pass` 且概述正文非空时写入索引。概述落地校验继续提供审计警告，但不再作为索引写入门槛。
+
+索引 Schema v2 在原表上事务化增加概述来源、模型、Prompt 版本、参数和正文哈希列。v1 行不删除，迁移后标记为 `deterministic_legacy` 并继续参与召回；同一 document_id 后续 pass 会 UPSERT 为 `ai_article_overview`。
 
 ## 可恢复性与副作用
 

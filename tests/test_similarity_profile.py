@@ -77,8 +77,8 @@ def test_png_and_image_placeholders_are_never_used(settings, tmp_path: Path) -> 
     assert "STM32H743" not in profile.technical_entities
 
 
-def test_summary_is_readable_deduplicated_and_respects_limit(settings, tmp_path: Path) -> None:
-    limited = settings.model_copy(update={"similarity_summary_max_chars": 300})
+def test_query_is_readable_deduplicated_and_respects_distributed_limit(settings, tmp_path: Path) -> None:
+    limited = settings.model_copy(update={"similarity_query_max_chars": 1000})
     repeated = "执行电源测试并记录结果。"
     markdown = (
         "# 电源验证\n"
@@ -92,10 +92,29 @@ def test_summary_is_readable_deduplicated_and_respects_limit(settings, tmp_path:
         case_path=tmp_path,
         options=FixtureOptions(),
     )
-    assert len(profile.content) <= 300
-    assert profile.summary_character_count == len(profile.content)
+    assert len(profile.query_text) <= 1000
+    assert profile.query_character_count == len(profile.query_text)
     assert profile.content.count(repeated) == 1
-    assert "标题：" in profile.content and "代表内容：" in profile.content
+    assert "标题：" in profile.content and "正文" in profile.content
     assert "STM32H743" in profile.technical_entities
     assert any("24 V" in item for item in profile.parameters)
     assert all(len(item) >= 2 for item in profile.keywords)
+    assert len(profile.source_content_hash) == 64
+
+
+def test_long_query_samples_across_the_document(settings, tmp_path: Path) -> None:
+    limited = settings.model_copy(update={"similarity_query_max_chars": 1000})
+    markdown = "# 全文取样\n" + "\n".join(
+        f"第{index}段记录飞控硬件测试、参数和结果，标记 SEGMENT_{index:03d}。"
+        for index in range(100)
+    )
+    profile = SimilarityProfileBuilder(limited).build(
+        source=_source(),
+        extracted_content={"content_markdown": markdown},
+        case_path=tmp_path,
+        options=FixtureOptions(),
+    )
+    assert profile.query_truncated
+    assert "SEGMENT_000" in profile.query_text
+    assert any(f"SEGMENT_{index:03d}" in profile.query_text for index in range(80, 100))
+    assert "similarity_query_truncated" in profile.limitations

@@ -65,14 +65,17 @@ def test_prompt_sections_follow_semantics_before_data_order() -> None:
         "DocumentMetadata",
         "StructuredContent",
         "VisualInputGuide",
+        "VisualPublicationQualityRules",
         "VisualManifest",
         "AttachmentGuide",
         "AttachmentMetadata",
         "InputCoverageGuide",
         "InputCoverage",
         "InitialReviewSimilarityGuide",
+        "SimilarityMergeRules",
         "InitialReviewSimilarityContext",
         "DecisionRules",
+        "ArticleOverviewRequirements",
         "OutputRequirements",
     ]
     positions = [prompt.index(f"## {heading}") for heading in headings]
@@ -127,6 +130,45 @@ def test_visual_manifest_includes_summary_fields_and_generated_pdf_warning() -> 
     assert "不能据此判断原始飞书排版" in prompt
 
 
+def test_visual_publication_rules_reject_clipped_key_tables() -> None:
+    prompt = _build(
+        manifest=VisualManifest(
+            source="fixture_pages",
+            total_pages=1,
+            rendered_pages=[_page(1)],
+        ),
+        coverage=InputCoverage(
+            structured_text_available=True,
+            visual_pages_complete=True,
+            attachments_opened=False,
+        ),
+        attachments=[{"name": "硬件清单.xlsx", "size": 4096}],
+    )
+    assert "## VisualPublicationQualityRules" in prompt
+    assert "被裁切、遮挡、折叠、溢出、截断" in prompt
+    assert "横向/纵向滚动区域而只显示一部分" in prompt
+    assert "关键表格只显示部分行或列" in prompt
+    assert "major 问题，category=visibility，result=need_revision" in prompt
+    assert "不得 pass，也不得降为 minor" in prompt
+    assert "evidence_ids 必须引用实际显示问题的页面" in prompt
+    assert "StructuredContent 中存在完整表格文字，并不能抵消" in prompt
+    assert "不得假设附件可以补足页面中不可见的内容" in prompt
+    assert "改为飞书原生表格" in prompt
+    assert "Excel 仅作为补充附件" in prompt
+    assert "按输入覆盖规则处理 incomplete_review" in prompt
+    assert "generated_pdf" in prompt and "不能用于判定原始飞书页面" in prompt
+
+
+def test_visual_batch_prompt_extracts_clipped_table_evidence() -> None:
+    prompt = ReviewPromptBuilder("审稿标准").build_visual_batch(
+        [{"evidence_id": "page-1", "page": 1}]
+    )
+    assert "关键表格、代码、命令、公式" in prompt
+    assert "裁切、遮挡、溢出、截断" in prompt
+    assert "表格只显示部分行列" in prompt
+    assert "记录具体页面、可见缺陷和受影响内容" in prompt
+
+
 def test_attachment_guide_distinguishes_empty_and_unopened_metadata() -> None:
     empty_prompt = _build(attachments=[])
     assert "本次 AttachmentMetadata 为空：没有附件需要打开" in empty_prompt
@@ -153,7 +195,8 @@ def test_initial_similarity_guide_explains_upstream_score_and_empty_candidates()
         assert f"- {field}：" in prompt
     assert "本地确定性算法" in prompt
     assert "similarity_candidates.json 不参与召回" in prompt
-    assert "可读文字摘要，不是完整正文" in prompt
+    assert "AI 文章概述" in prompt
+    assert "不是完整正文" in prompt
     assert "不能仅凭分数认定抄袭" in prompt
     assert "effective_candidates 为空" in prompt
     assert "## ReReviewGuide" not in prompt
@@ -175,11 +218,15 @@ def test_initial_similarity_context_contains_local_score_and_summary() -> None:
                     "score_details": {
                         "text_tfidf": 0.75,
                         "title_similarity": 0.5,
-                        "keyword_jaccard": 0.8,
+                        "topic_keyword_jaccard": 0.8,
                         "entity_jaccard": 1.0,
+                        "parameter_jaccard": 0.5,
                         "final_score": 0.72,
                     },
                     "content": "标题：无人机硬件方案\n代表内容：使用 STM32H743 完成 CAN-FD 测试。",
+                    "summary_source": "ai_article_overview",
+                    "overview_model": "fake-kimi",
+                    "overview_prompt_version": "article-overview-v1",
                 }
             ],
         }
@@ -188,6 +235,38 @@ def test_initial_similarity_context_contains_local_score_and_summary() -> None:
     assert '"similarity_score": 0.72' in prompt
     assert "使用 STM32H743 完成 CAN-FD 测试" in prompt
     assert "不能仅凭分数认定抄袭" in prompt
+
+
+def test_similarity_merge_rules_merge_repeated_drone_tutorial_workflows() -> None:
+    prompt = _build(
+        similarity_context={
+            "threshold": 0.35,
+            "top_k": 5,
+            "effective_candidates": [
+                {
+                    "document_id": "fpv-tutorial",
+                    "title": "穿越机组装搭建教程",
+                    "similarity_score": 0.68,
+                    "content": "包含环境搭建、QGC地面站适配、飞控连接、校准和调试流程。",
+                }
+            ],
+        }
+    )
+    assert "## SimilarityMergeRules" in prompt
+    assert "四旋翼无人机搭建教程" in prompt
+    assert "穿越机搭建教程" in prompt
+    assert "QGC 地面站安装/适配/调试" in prompt
+    assert "不能以 same_area_different_direction 独立 pass" in prompt
+    assert "status=merge_recommended、decision=merge_required" in prompt
+    assert "result=need_revision" in prompt
+    assert 'pass_reason=""' in prompt
+    assert "suggested_next_action=merge_with_existing" in prompt
+    assert "level=major、category=similarity" in prompt
+    assert "公共教程或公共章节" in prompt
+    assert "机型特有的装配、动力参数和差异步骤" in prompt
+    assert "共同内容只是简短的通用前置知识" in prompt
+    assert "不得仅凭同领域判合并，也不得仅凭标题不同判独立" in prompt
+    assert "优先 merge_recommended" in prompt
 
 
 def test_rereview_guide_requires_each_blocking_major_resolution() -> None:
@@ -205,6 +284,7 @@ def test_rereview_guide_requires_each_blocking_major_resolution() -> None:
     assert "复审不重新召回相似候选" in prompt
     assert "不得为了延长流程而随意增加无关 minor" in prompt
     assert "## InitialReviewSimilarityContext" not in prompt
+    assert "## SimilarityMergeRules" not in prompt
 
 
 def test_rereview_document_metadata_does_not_repeat_unfiltered_previous_issues() -> None:
@@ -249,6 +329,7 @@ def test_decision_and_output_requirements_explain_business_fields_safely() -> No
         "revision_priority",
         "suggested_next_action",
         "re_review_assessment",
+        "article_overview",
     ):
         assert f"- {field}：" in prompt
     assert "evidence_ids 只能引用本 Prompt 实际提供的 evidence_id" in prompt
@@ -300,6 +381,7 @@ def test_output_requirements_include_a_complete_schema_valid_json_example() -> N
         "revision_priority",
         "suggested_next_action",
         "re_review_assessment",
+        "article_overview",
     }
 
     prompt = _build()
@@ -313,7 +395,7 @@ def test_output_requirements_include_a_complete_schema_valid_json_example() -> N
 
 def test_output_requirements_define_types_enums_and_nested_shapes() -> None:
     prompt = _build()
-    assert "13 个顶层字段" in prompt
+    assert "14 个顶层字段" in prompt
     assert "全部必填且一个不能遗漏" in prompt
     assert "禁止输出任何额外顶层字段" in prompt
     assert "不得用 null" in prompt
@@ -321,6 +403,7 @@ def test_output_requirements_define_types_enums_and_nested_shapes() -> None:
     assert "score(number, 0 到 1)" in prompt
     assert "coverage(complete|partial|unavailable)" in prompt
     assert "status(resolved|partially_resolved|unresolved)" in prompt
+    assert "content(string)、topics(string[])、technical_entities(string[])、key_parameters(string[])" in prompt
     assert "merge_recommended → merge_required" in prompt
     assert "duplicate_reject_recommended → reject_independent_submission" in prompt
     assert "复审的 similarity_check 必须使用 status=not_applicable" in prompt
@@ -328,6 +411,17 @@ def test_output_requirements_define_types_enums_and_nested_shapes() -> None:
     assert "不得因为示例是 pass 而默认 pass" in prompt
     assert '"properties"' not in prompt
     assert '"$defs"' not in prompt
+
+
+def test_article_overview_is_separate_from_review_summary_and_candidates() -> None:
+    prompt = _build()
+    assert "## ArticleOverviewRequirements" in prompt
+    assert "summary 只总结本轮审稿结论" in prompt
+    assert "article_overview 只概述当前文章" in prompt
+    assert "不得吸收、改写或复制 InitialReviewSimilarityContext" in prompt
+    assert "目标长度 500～1200 字" in prompt
+    for field in ("content", "topics", "technical_entities", "key_parameters"):
+        assert field in prompt
 
 
 def test_v1_review_strengths_are_adapted_to_v2_multimodal_standard(settings) -> None:

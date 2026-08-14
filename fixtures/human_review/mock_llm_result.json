@@ -28,6 +28,12 @@
     "suggested_next_action": "human_review",
     "re_review_assessment": {
       "resolutions": []
+    },
+    "article_overview": {
+      "content": "本文整理了一个需要领域专家进一步判断的专业问题，说明了现有背景、材料范围和待确认事项，并列出了当前能够观察到的依据以及必须由具备相应职责的人员完成的判断边界。",
+      "topics": ["专业判断", "风险边界"],
+      "technical_entities": [],
+      "key_parameters": []
     }
   }
 }

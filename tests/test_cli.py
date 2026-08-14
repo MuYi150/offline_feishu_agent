@@ -23,6 +23,6 @@ def test_similarity_index_cli_actions(tmp_path, monkeypatch, capsys) -> None:
     assert '"record_count": 0' in capsys.readouterr().out
     assert main(["--similarity-index-info"]) == 0
     output = capsys.readouterr().out
-    assert '"schema_version": "1"' in output
+    assert '"schema_version": "2"' in output
     assert Path(json.loads(output)["path"]) == index_path
 

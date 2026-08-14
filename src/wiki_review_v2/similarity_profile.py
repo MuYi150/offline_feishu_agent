@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import re
 from pathlib import Path
 
@@ -12,33 +13,9 @@ from .models import FixtureOptions, SimilarityProfile, SourceDocument
 _IMAGE_PLACEHOLDER = re.compile(r"\[图片说明：.*?\]|!\[[^\]]*\]\([^)]*\)")
 _MEANINGFUL = re.compile(r"[0-9A-Za-z\u4e00-\u9fff]")
 _KNOWN_TERMS = (
-    "无人机",
-    "飞控",
-    "硬件",
-    "控制器",
-    "传感器",
-    "惯性测量",
-    "通信",
-    "电源",
-    "电源树",
-    "原理图",
-    "电路板",
-    "接口",
-    "固件",
-    "标定",
-    "台架测试",
-    "环回测试",
-    "振动测试",
-    "温升测试",
-    "故障排查",
-    "实验记录",
-    "复现",
-    "验证",
-    "测试",
-    "日志",
-    "部署",
-    "配置",
-    "参数",
+    "无人机", "飞控", "硬件", "控制器", "传感器", "惯性测量", "通信", "电源", "电源树",
+    "原理图", "电路板", "接口", "固件", "标定", "台架测试", "环回测试", "振动测试",
+    "温升测试", "故障排查", "实验记录", "复现", "验证", "测试", "日志", "部署", "配置", "参数",
 )
 _TECH_PATTERN = re.compile(
     r"(?i:\b(?:STM32[A-Z0-9-]*|ICM[-A-Z0-9]*|BMP\d+|CAN(?:-FD)?|UART|SPI|I2C|"
@@ -50,11 +27,10 @@ _PARAMETER_PATTERN = re.compile(
     r"(?:V|mV|A|mA|W|kW|Hz|kHz|MHz|GHz|ms|s|min|mm|cm|m|km|g|kg|℃|°C|%|dB|rpm|Mbps|层|S)(?!\w)",
     re.I,
 )
-_ACTION_TERMS = ("设计", "选择", "配置", "测试", "验证", "标定", "测量", "记录", "分析", "结果", "结论", "故障", "修复")
 
 
 class SimilarityProfileBuilder:
-    """Builds a deterministic text-only profile. It never reads rendered pages or images."""
+    """Build the local query profile; rendered pages and images are never read."""
 
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
@@ -73,8 +49,8 @@ class SimilarityProfileBuilder:
             source_kind = "blocks"
             raw_text = markdown
         else:
-            raw_text, pdf_limit = self._extract_pdf_text(case_path, options)
-            limitations.extend(pdf_limit)
+            raw_text, pdf_limitations = self._extract_pdf_text(case_path, options)
+            limitations.extend(pdf_limitations)
             source_kind = "pdf" if self._is_valid_text(raw_text) else "unavailable"
 
         if source_kind == "unavailable":
@@ -92,27 +68,29 @@ class SimilarityProfileBuilder:
         entities = self._technical_entities(cleaned)
         parameters = self._parameters(cleaned)
         keywords = self._keywords(cleaned, headings, entities)
-        sentences = self._representative_sentences(cleaned, entities, parameters)
-        summary = self._compose_summary(
+        query_text, truncated = self._compose_query(
             title=source.title,
             headings=headings,
+            body=cleaned,
             keywords=keywords,
             entities=entities,
             parameters=parameters,
-            sentences=sentences,
-            cleaned_body=cleaned,
         )
+        if truncated:
+            limitations.append("similarity_query_truncated")
         return SimilarityProfile(
             document_id=source.document_id,
             title=source.title,
             source=source_kind,
-            content=summary,
+            query_text=query_text,
             headings=headings,
-            keywords=keywords,
-            technical_entities=entities,
-            parameters=parameters,
+            local_keywords=keywords,
+            local_technical_entities=entities,
+            local_key_parameters=parameters,
             source_character_count=len(cleaned),
-            summary_character_count=len(summary),
+            query_character_count=len(query_text),
+            query_truncated=truncated,
+            source_content_hash=self._content_hash(cleaned),
             limitations=limitations,
         )
 
@@ -127,8 +105,7 @@ class SimilarityProfileBuilder:
         return len(_MEANINGFUL.findall(text)) >= 20
 
     def _extract_pdf_text(self, case_path: Path, options: FixtureOptions) -> tuple[str, list[str]]:
-        pdf_name = options.source_pdf or "source.pdf"
-        pdf_path = case_path / pdf_name
+        pdf_path = case_path / (options.source_pdf or "source.pdf")
         if not pdf_path.exists():
             return "", ["native_pdf_text_unavailable"]
         if pdf_path.stat().st_size > self.settings.max_pdf_bytes:
@@ -140,7 +117,7 @@ class SimilarityProfileBuilder:
                 text = "\n".join(page.get_text("text") for page in document)
         except Exception:
             return "", ["native_pdf_text_extraction_failed"]
-        if not SimilarityProfileBuilder._is_valid_text(text):
+        if not self._is_valid_text(text):
             return "", ["native_pdf_has_no_reliable_text"]
         return text, []
 
@@ -167,6 +144,8 @@ class SimilarityProfileBuilder:
         cleaned_parts: list[str] = []
         seen: set[str] = set()
         for raw in re.split(r"\n\s*\n|\n", text):
+            if re.match(r"^\s*#{1,6}\s+", raw):
+                continue
             part = re.sub(r"^\s*(?:#{1,6}|[-+*>]|\d+[.)])\s*", "", raw)
             part = re.sub(r"\s+", " ", part).strip(" |\t")
             key = re.sub(r"\s+", "", part).lower()
@@ -186,82 +165,80 @@ class SimilarityProfileBuilder:
 
     @staticmethod
     def _keywords(text: str, headings: list[str], entities: list[str]) -> list[str]:
-        positioned: list[tuple[int, str]] = []
-        for term in _KNOWN_TERMS:
-            position = text.find(term)
-            if position >= 0:
-                positioned.append((position, term))
-        positioned.sort(key=lambda item: (item[0], item[1]))
+        positioned = sorted(
+            ((text.find(term), term) for term in _KNOWN_TERMS if term in text),
+            key=lambda item: (item[0], item[1]),
+        )
         heading_terms = [item for item in headings if 2 <= len(item) <= 20]
         return _unique([*heading_terms, *(item[1] for item in positioned), *entities], limit=30)
 
-    @staticmethod
-    def _representative_sentences(
-        text: str, entities: list[str], parameters: list[str]
-    ) -> list[str]:
-        candidates: list[tuple[int, int, str]] = []
-        seen: set[str] = set()
-        for order, raw in enumerate(re.split(r"(?<=[。！？!?；;])\s*|\n+", text)):
-            sentence = re.sub(r"\s+", " ", raw).strip()
-            key = re.sub(r"\s+", "", sentence).lower()
-            if len(key) < 10 or key in seen:
-                continue
-            seen.add(key)
-            entity_hits = sum(item.lower() in sentence.lower() for item in entities)
-            parameter_hits = sum(item.lower() in sentence.lower() for item in parameters)
-            action_hits = sum(item in sentence for item in _ACTION_TERMS)
-            score = entity_hits * 8 + parameter_hits * 8 + action_hits * 3
-            score += min(len(re.findall(r"\d", sentence)), 8) + min(len(sentence), 180) // 30
-            candidates.append((score, order, sentence))
-        selected = sorted(candidates, key=lambda item: (-item[0], item[1]))[:12]
-        return [item[2] for item in sorted(selected, key=lambda item: item[1])]
-
-    def _compose_summary(
+    def _compose_query(
         self,
         *,
         title: str,
         headings: list[str],
+        body: str,
         keywords: list[str],
         entities: list[str],
         parameters: list[str],
-        sentences: list[str],
-        cleaned_body: str,
-    ) -> str:
-        max_chars = self.settings.similarity_summary_max_chars
-        sections = [f"标题：{title}"]
-        for label, values in (
-            ("章节主题", headings),
-            ("关键词", keywords),
-            ("技术实体", entities),
-            ("关键参数", parameters),
-        ):
-            if values:
-                sections.append(f"{label}：{'、'.join(values)}")
+    ) -> tuple[str, bool]:
+        metadata = "\n".join(
+            item
+            for item in (
+                f"标题：{title}",
+                f"章节：{'、'.join(headings)}" if headings else "",
+                f"关键词：{'、'.join(keywords)}" if keywords else "",
+                f"技术实体：{'、'.join(entities)}" if entities else "",
+                f"关键参数：{'、'.join(parameters)}" if parameters else "",
+            )
+            if item
+        )
+        full = f"{metadata}\n正文：\n{body}".strip()
+        limit = self.settings.similarity_query_max_chars
+        if len(full) <= limit:
+            return full, False
+        prefix = f"{metadata}\n正文（已按全文均匀取样）：\n"
+        budget = max(1, limit - len(prefix))
+        segments = _body_segments(body)
+        if not segments:
+            return prefix[:limit], True
+        slot_count = min(len(segments), max(2, budget // 240))
+        if slot_count == 1:
+            indices = [0]
+        else:
+            indices = sorted({round(index * (len(segments) - 1) / (slot_count - 1)) for index in range(slot_count)})
+        per_slot = max(1, (budget - max(0, len(indices) - 1)) // len(indices))
+        sampled = "\n".join(segments[index][:per_slot] for index in indices)
+        return (prefix + sampled)[:limit], True
 
-        added_sentence = False
-        for sentence in sentences:
-            line = f"代表内容：{sentence}"
-            candidate = "\n".join([*sections, line])
-            if len(candidate) <= max_chars:
-                sections.append(line)
-                added_sentence = True
-        if not added_sentence and cleaned_body:
-            prefix = "正文摘要："
-            remaining = max_chars - len("\n".join(sections)) - len(prefix) - 1
-            if remaining > 0:
-                sections.append(prefix + cleaned_body[:remaining].rstrip())
-        return "\n".join(sections)[:max_chars].rstrip()
+    @staticmethod
+    def _content_hash(text: str) -> str:
+        normalized = re.sub(r"\s+", "", text).lower()
+        return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-def _unique(values: object, *, limit: int) -> list[str]:
-    output: list[str] = []
+def _body_segments(body: str) -> list[str]:
+    segments: list[str] = []
+    for line in body.splitlines():
+        pieces = re.split(r"(?<=[。！？!?；;])", line)
+        for piece in pieces:
+            piece = piece.strip()
+            if not piece:
+                continue
+            segments.extend(piece[index : index + 500] for index in range(0, len(piece), 500))
+    return segments
+
+
+def _unique(values, *, limit: int) -> list[str]:
+    result: list[str] = []
     seen: set[str] = set()
-    for raw in values:  # type: ignore[union-attr]
-        value = str(raw).strip()
-        key = value.lower()
-        if value and key not in seen:
-            seen.add(key)
-            output.append(value)
-        if len(output) >= limit:
+    for value in values:
+        item = re.sub(r"\s+", " ", str(value)).strip()
+        key = item.lower()
+        if not item or key in seen:
+            continue
+        seen.add(key)
+        result.append(item)
+        if len(result) >= limit:
             break
-    return output
+    return result
