@@ -1,0 +1,15 @@
+{
+  "case_id": "longlong_pdf_text",
+  "document_id": "longlong_pdf_text",
+  "node_token": "longlong_pdf_text",
+  "title": "基于集成学习的电信客户流失预测系统的研究与设计",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_001",
+  "author": "测试用户001",
+  "link": "https://example.invalid/wiki/longlong_pdf_text",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/08/16 16:00:00",
+  "last_ai_review_at": ""
+}
