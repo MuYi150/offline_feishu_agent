@@ -32,6 +32,12 @@ class Settings(BaseModel):
     pdf_render_dpi: int = Field(default=150, ge=72, le=300)
     max_image_long_edge: int = Field(default=2048, ge=512, le=4096)
     direct_page_limit: int = Field(default=12, ge=1)
+    direct_image_count_limit: int = Field(default=12, ge=1)
+    direct_image_bytes_limit: int = Field(default=15 * 1024 * 1024, ge=1024)
+    max_visual_regions: int = Field(default=60, ge=1)
+    max_visual_total_bytes: int = Field(default=15 * 1024 * 1024, ge=1024)
+    max_full_page_fallbacks: int = Field(default=4, ge=0)
+    long_pdf_legacy_batch_fallback: bool = False
     vision_batch_size: int = Field(default=8, ge=1)
     final_key_page_limit: int = Field(default=8, ge=1)
     max_pdf_pages: int = Field(default=100, ge=1)
@@ -81,6 +87,16 @@ class Settings(BaseModel):
             pdf_render_dpi=int(os.getenv("PDF_RENDER_DPI", "150")),
             max_image_long_edge=int(os.getenv("MAX_IMAGE_LONG_EDGE", "2048")),
             direct_page_limit=int(os.getenv("DIRECT_PAGE_LIMIT", "12")),
+            direct_image_count_limit=int(os.getenv("DIRECT_IMAGE_COUNT_LIMIT", "12")),
+            direct_image_bytes_limit=int(
+                os.getenv("DIRECT_IMAGE_BYTES_LIMIT", str(15 * 1024 * 1024))
+            ),
+            max_visual_regions=int(os.getenv("MAX_VISUAL_REGIONS", "60")),
+            max_visual_total_bytes=int(
+                os.getenv("MAX_VISUAL_TOTAL_BYTES", str(15 * 1024 * 1024))
+            ),
+            max_full_page_fallbacks=int(os.getenv("MAX_FULL_PAGE_FALLBACKS", "4")),
+            long_pdf_legacy_batch_fallback=_bool_env("LONG_PDF_LEGACY_BATCH_FALLBACK"),
             vision_batch_size=int(os.getenv("VISION_BATCH_SIZE", "8")),
             final_key_page_limit=int(os.getenv("FINAL_KEY_PAGE_LIMIT", "8")),
             max_pdf_pages=int(os.getenv("MAX_PDF_PAGES", "100")),

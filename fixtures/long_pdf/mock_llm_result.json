@@ -18,24 +18,7 @@
     "learning_trace_assessment": "包含明确的操作过程、观察和结论。",
     "visual_evidence_assessment": {
       "coverage": "complete",
-      "pages_reviewed": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
-      ],
+      "pages_reviewed": [],
       "evidence_used": [],
       "limitations": []
     },
@@ -50,55 +33,5 @@
       "technical_entities": [],
       "key_parameters": []
     }
-  },
-  "visual_batches": [
-    {
-      "batch_summary": "检查第 1-8 页。",
-      "pages_reviewed": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "evidence": [
-        {
-          "evidence_id": "page-1",
-          "page": 1,
-          "observation": "页面包含实际命令和验证结果。",
-          "supports": [
-            "reproducibility"
-          ]
-        }
-      ],
-      "limitations": []
-    },
-    {
-      "batch_summary": "检查第 9-16 页。",
-      "pages_reviewed": [
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
-      ],
-      "evidence": [
-        {
-          "evidence_id": "page-9",
-          "page": 9,
-          "observation": "页面包含实际命令和验证结果。",
-          "supports": [
-            "reproducibility"
-          ]
-        }
-      ],
-      "limitations": []
-    }
-  ]
+  }
 }

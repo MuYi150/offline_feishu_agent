@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "result": "pass",
+  "table_status": "AI通过待确认",
+  "review_mode": "initial_review",
+  "review_round": 1,
+  "notifications_generated": true
+}

@@ -65,3 +65,12 @@ conda run --no-capture-output -n feishu-api python -m pytest -q
 - 同一临时环境运行无人机 round1/round2：round1=`need_revision` 后索引仍为 2 条，round2=`pass` 后新增/更新为 3 条，证明只有复审通过后才写入概述。
 - 将开发环境现有 SQLite v1 复制到临时目录后原位迁移：记录数保持 1，Schema 升至 v2，旧记录标记为 `deterministic_legacy`；原始数据库 SHA-256 未变化。
 - 新增产物和 Prompt 安全扫描未发现 `Authorization`、`Bearer`、`;base64,` 或测试 Key。
+
+## 2026-08-17 PDF 文字优先与视觉区域选择
+
+- 全量 Fake/单元/集成测试：`111 passed, 2 skipped`，最终复跑耗时 17.71 秒；两个 skipped 为未显式启用的真实 Kimi 冒烟测试。
+- 16 页 `long_pdf` 改为 PDF-only 原生文字案例：`mode=selective_regions`，提取 16 页带页码正文，发送 0 张图片，仅调用 1 次 `final_review`；旧流程为 2 次 `visual_batch` 加 1 次最终审稿。
+- 14 页 `long_pdf_mixed` 发送 4 个局部/兜底视觉项：内嵌测试图、复杂表格、矢量架构图、扫描页整页兜底；重复图片按 SHA-256 去重，没有发送 14 张整页图，也没有 `visual_batch`。
+- 短篇 `multimodal_pass` 保持 `legacy_full_pages`、原 `page-N` evidence ID 和单次 `final_review`。
+- 将视觉区域预算压缩到 1 且禁止整页兜底后，审计记录必要内容未提交，`visual_pages_complete=false`，Fake 的 pass 自动归一为 `incomplete_review`。
+- 新增 `document_extraction.json` 和 `visual_selection.json`；请求摘要记录图片类型和 bbox。安全扫描未发现 Base64、Authorization、Bearer 或 API Key。

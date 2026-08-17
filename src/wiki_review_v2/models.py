@@ -62,6 +62,7 @@ class FixtureOptions(StrictModel):
     pdf_required: bool = False
     render_fail_pages: list[int] = Field(default_factory=list)
     attachment_content_required: bool = False
+    real_model_only: bool = False
 
 
 class DocumentBlock(StrictModel):
@@ -120,6 +121,85 @@ class VisualPage(StrictModel):
     height: int
     byte_size: int
     sha256: str
+    type: Literal[
+        "full_page",
+        "embedded_image",
+        "table_crop",
+        "diagram_crop",
+        "scanned_page_fallback",
+    ] = "full_page"
+    bbox: list[float] | None = None
+    selection_reason: str = ""
+
+    @model_validator(mode="after")
+    def validate_bbox(self) -> "VisualPage":
+        if self.bbox is not None and len(self.bbox) != 4:
+            raise ValueError("bbox 必须包含四个坐标")
+        return self
+
+
+class PageExtraction(StrictModel):
+    page: int = Field(ge=1)
+    text_source: Literal["native", "scanned_or_unavailable", "blank", "error"]
+    text: str = ""
+    character_count: int = Field(default=0, ge=0)
+    simple_tables: list[str] = Field(default_factory=list)
+    simple_table_count: int = Field(default=0, ge=0)
+    complex_table_count: int = Field(default=0, ge=0)
+    embedded_image_count: int = Field(default=0, ge=0)
+    diagram_count: int = Field(default=0, ge=0)
+    scanned: bool = False
+    extraction_failed: bool = False
+    limitations: list[str] = Field(default_factory=list)
+
+
+class DocumentExtractionAudit(StrictModel):
+    schema_version: str = "2.0"
+    total_pages: int = Field(default=0, ge=0)
+    structured_content_source: Literal["blocks", "pdf", "unavailable"] = "unavailable"
+    text_pages_covered: int = Field(default=0, ge=0)
+    pages: list[PageExtraction] = Field(default_factory=list)
+    scanned_pages: list[int] = Field(default_factory=list)
+    failed_pages: list[int] = Field(default_factory=list)
+    limitations: list[str] = Field(default_factory=list)
+
+
+class VisualSelectionDecision(StrictModel):
+    item: VisualPage
+    status: Literal["selected", "filtered", "deduplicated", "budget_omitted"]
+    reason: str
+    duplicate_of: str | None = None
+    priority: int = 0
+    required_for_review: bool = False
+
+
+class VisualSelectionAudit(StrictModel):
+    schema_version: str = "2.0"
+    mode: Literal["legacy_full_pages", "selective_regions", "legacy_batch_fallback"]
+    discovered: list[VisualPage] = Field(default_factory=list)
+    decisions: list[VisualSelectionDecision] = Field(default_factory=list)
+    selected: list[VisualPage] = Field(default_factory=list)
+    full_page_fallbacks: list[int] = Field(default_factory=list)
+    selected_count: int = Field(default=0, ge=0)
+    selected_bytes: int = Field(default=0, ge=0)
+    budget_exceeded: bool = False
+    required_visuals_omitted: bool = False
+    limitations: list[str] = Field(default_factory=list)
+
+
+class PreparedDocumentInput(StrictModel):
+    schema_version: str = "2.0"
+    mode: Literal["legacy_full_pages", "selective_regions", "legacy_batch_fallback"]
+    structured_content: str = ""
+    structured_content_source: Literal["blocks", "pdf", "unavailable"] = "unavailable"
+    visual_items: list[VisualPage] = Field(default_factory=list)
+    total_pages: int = Field(default=0, ge=0)
+    text_pages_covered: int = Field(default=0, ge=0)
+    visual_regions_found: int = Field(default=0, ge=0)
+    visual_regions_selected: int = Field(default=0, ge=0)
+    full_page_fallbacks: list[int] = Field(default_factory=list)
+    visual_coverage_complete: bool = False
+    limitations: list[str] = Field(default_factory=list)
 
 
 class VisualManifest(StrictModel):
@@ -412,6 +492,9 @@ class ReviewGraphState(StrictModel):
     fake_model_response: dict[str, Any] = Field(default_factory=dict)
     expected_result: dict[str, Any] = Field(default_factory=dict)
     extracted_content: dict[str, Any] = Field(default_factory=dict)
+    prepared_document_input: dict[str, Any] = Field(default_factory=dict)
+    document_extraction: dict[str, Any] = Field(default_factory=dict)
+    visual_selection: dict[str, Any] = Field(default_factory=dict)
     visual_manifest: dict[str, Any] = Field(default_factory=dict)
     input_coverage: dict[str, Any] = Field(default_factory=dict)
     similarity_profile: dict[str, Any] = Field(default_factory=dict)

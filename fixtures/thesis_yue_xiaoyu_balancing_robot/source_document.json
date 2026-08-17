@@ -1,0 +1,15 @@
+{
+  "case_id": "thesis_yue_xiaoyu_balancing_robot",
+  "document_id": "test_doc_thesis_yue_xiaoyu_balancing_robot",
+  "node_token": "test_node_thesis_yue_xiaoyu_balancing_robot",
+  "title": "智能双轮自平衡机器人的研究与设计",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_yue_xiaoyu",
+  "author": "岳孝昱",
+  "link": "https://example.invalid/wiki/test_doc_thesis_yue_xiaoyu_balancing_robot",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2024/07/15 22:45:37",
+  "last_ai_review_at": ""
+}

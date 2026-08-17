@@ -39,6 +39,8 @@ def test_fake_graph_outcomes(settings, case_id: str, expected: str) -> None:
     for name in (
         "source_document.json",
         "extracted_content.json",
+        "document_extraction.json",
+        "visual_selection.json",
         "visual_manifest.json",
         "visual_evidence.json",
         "input_coverage.json",
@@ -92,16 +94,51 @@ def test_source_document_artifact_keeps_v1_field_order(settings) -> None:
     ]
 
 
-def test_long_pdf_uses_batches_and_key_pages(settings) -> None:
+def test_long_pdf_uses_native_text_and_one_final_review(settings) -> None:
     summary = ReviewRunner(settings).run_case("long_pdf")
     assert summary.ok
     request = json.loads((summary.output_dir / "model_request_summary.json").read_text(encoding="utf-8"))
-    assert [call["phase"] for call in request["calls"]] == ["visual_batch", "visual_batch", "final_review"]
-    assert request["requests"][-1]["image_count"] <= settings.final_key_page_limit
+    assert [call["phase"] for call in request["calls"]] == ["final_review"]
+    assert request["requests"][-1]["image_count"] == 0
     assert json.loads((summary.output_dir / "visual_manifest.json").read_text(encoding="utf-8"))["total_pages"] == 16
+    selection = json.loads(
+        (summary.output_dir / "visual_selection.json").read_text(encoding="utf-8")
+    )
+    extraction = json.loads(
+        (summary.output_dir / "document_extraction.json").read_text(encoding="utf-8")
+    )
+    assert selection["mode"] == "selective_regions"
+    assert extraction["text_pages_covered"] == 16
+    assert extraction["structured_content_source"] == "pdf"
     prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
-    assert "## BatchedVisualEvidence" in prompt
+    assert "[PDF第1页]" in prompt and "[PDF第16页]" in prompt
+    assert "## BatchedVisualEvidence" not in prompt
     assert "## OutputRequirements" in prompt
+
+
+def test_long_mixed_pdf_selects_regions_without_visual_batch(settings) -> None:
+    summary = ReviewRunner(settings).run_case("long_pdf_mixed")
+    assert summary.ok and summary.result == "pass"
+    request = json.loads(
+        (summary.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    selection = json.loads(
+        (summary.output_dir / "visual_selection.json").read_text(encoding="utf-8")
+    )
+    extraction = json.loads(
+        (summary.output_dir / "document_extraction.json").read_text(encoding="utf-8")
+    )
+    assert [call["phase"] for call in request["calls"]] == ["final_review"]
+    assert 0 < request["requests"][0]["image_count"] < 14
+    assert all(image["type"] for image in request["requests"][0]["images"])
+    assert {item["type"] for item in selection["selected"]} >= {
+        "embedded_image",
+        "table_crop",
+        "diagram_crop",
+        "scanned_page_fallback",
+    }
+    assert any(page["simple_table_count"] for page in extraction["pages"])
+    assert any(item["reason"] == "duplicate_sha256" for item in selection["decisions"])
 
 
 def test_fixture_review_round_without_local_history_remains_initial(settings) -> None:

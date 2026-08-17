@@ -180,7 +180,10 @@ class KimiMultimodalModel:                        #真实模型，调用Kimi API
             parts.append(
                 {
                     "type": "text",
-                    "text": f"视觉证据 {page['evidence_id']}，页码 {page['page']}。下一项是对应页面图片。",
+                    "text": (
+                        f"视觉证据 {page['evidence_id']}，页码 {page['page']}，"
+                        f"类型 {page.get('type', 'full_page')}。下一项是对应图片。"
+                    ),
                 }
             )
             parts.append({"type": "image_url", "image_url": {"url": f"data:{mime};base64,{encoded}"}})
@@ -215,6 +218,8 @@ def request_summary(request: ModelRequest) -> dict[str, Any]:
                 "height": page["height"],
                 "byte_size": page["byte_size"],
                 "sha256": page["sha256"],
+                "type": page.get("type", "full_page"),
+                "bbox": page.get("bbox"),
             }
             for page in request.pages
         ],

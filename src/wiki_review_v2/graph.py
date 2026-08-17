@@ -19,6 +19,7 @@ from .models import (
     FixtureOptions,
     ModelReviewPayload,
     PreviousReview,
+    PreparedDocumentInput,
     ReviewGraphState,
     ReviewHistoryLookupAudit,
     ReviewHistoryRecord,
@@ -31,6 +32,7 @@ from .models import (
 )
 from .notifications import NotificationRenderer
 from .pdf import PdfPageRenderer, calculate_input_coverage
+from .pdf_content import PdfDocumentInputPreparer
 from .policies import ReviewHistoryPolicy, ReviewModePolicy
 from .prompts import ReviewPromptBuilder
 from .similarity_index import LocalSimilarityRetriever, SimilarityIndexStore
@@ -76,6 +78,7 @@ class ReviewWorkflow:
         self.fixture_source = FixtureDocumentSource()
         self.extractor = DocumentExtractor()
         self.pdf = PdfPageRenderer(settings)
+        self.document_inputs = PdfDocumentInputPreparer(settings, self.pdf)
         self.mode_policy = ReviewModePolicy()
         self.similarity_profiles = SimilarityProfileBuilder(settings)
         self.similarity_index = SimilarityIndexStore(settings.similarity_index_path)
@@ -305,25 +308,42 @@ class ReviewWorkflow:
     def prepare_pdf_pages(self, state: ReviewGraphState) -> dict[str, Any]:                     #第三个
         source = SourceDocument.model_validate(state.source_document)  #PDF渲染需要的源文档信息
         options = FixtureOptions.model_validate(state.fixture_options)
-        manifest, reason = self.pdf.prepare(              #pdf渲染
-            Path(state.case_path),
-            Path(state.output_dir),
-            source,
-            options,
-            str(state.extracted_content.get("content_markdown", "")),
+        prepared, extraction, selection, manifest, reason = self.document_inputs.prepare(
+            case_path=Path(state.case_path),
+            output_dir=Path(state.output_dir),
+            source=source,
+            options=options,
+            blocks_content=str(state.extracted_content.get("content_markdown", "")),
+            block_image_count=int(state.extracted_content.get("image_count", 0)),
         )
-        return {"visual_manifest": manifest.model_dump(mode="json"), "technical_incomplete_reason": reason}
+        extracted = dict(state.extracted_content)
+        extracted.update(
+            content_markdown=prepared.structured_content,
+            character_count=len(prepared.structured_content),
+            content_source=prepared.structured_content_source,
+            pdf_text_page_count=prepared.text_pages_covered,
+        )
+        return {
+            "extracted_content": extracted,
+            "prepared_document_input": prepared.model_dump(mode="json"),
+            "document_extraction": extraction.model_dump(mode="json"),
+            "visual_selection": selection.model_dump(mode="json"),
+            "visual_manifest": manifest.model_dump(mode="json"),
+            "technical_incomplete_reason": reason,
+        }
 
     def build_input_coverage(self, state: ReviewGraphState) -> dict[str, Any]: #交给模型的材料是否完善
         source = SourceDocument.model_validate(state.source_document)
         options = FixtureOptions.model_validate(state.fixture_options)
         manifest = VisualManifest.model_validate(state.visual_manifest)
+        prepared = PreparedDocumentInput.model_validate(state.prepared_document_input)
         coverage, reason = calculate_input_coverage(
             str(state.extracted_content.get("content_markdown", "")),
             manifest,
             attachments=state.attachments,
             attachment_content_required=options.attachment_content_required,
             max_text_chars=self.settings.max_structured_text_chars,
+            prepared=prepared,
         )
         return {
             "input_coverage": coverage,
@@ -370,7 +390,8 @@ class ReviewWorkflow:
         )
         manifest = VisualManifest.model_validate(state.visual_manifest)
         coverage = InputCoverage.model_validate(state.input_coverage)
-        pages = [item.model_dump(mode="json") for item in manifest.rendered_pages]#页面png
+        prepared = PreparedDocumentInput.model_validate(state.prepared_document_input)
+        pages = [item.model_dump(mode="json") for item in prepared.visual_items]
         prompt = self.prompt_builder.build(                 #prompt组合
             source=source,
             content=str(state.extracted_content.get("content_markdown", "")),
@@ -380,6 +401,7 @@ class ReviewWorkflow:
             similarity_context=state.similarity_context,
             rereview_context=state.rereview_context,
             attachments=state.attachments,
+            input_mode=prepared.mode,
         )
         return {"prompt": prompt, "selected_pages": pages}
 
@@ -401,7 +423,8 @@ class ReviewWorkflow:
         summaries = list(state.request_summaries)
         evidence_batches: list[dict[str, Any]] = []
 
-        if len(pages) > self.settings.direct_page_limit:                #长pdf判断
+        prepared = PreparedDocumentInput.model_validate(state.prepared_document_input)
+        if prepared.mode == "legacy_batch_fallback":
             for offset in range(0, len(pages), self.settings.vision_batch_size):
                 batch = pages[offset : offset + self.settings.vision_batch_size]
                 request = ModelRequest(
@@ -444,6 +467,7 @@ class ReviewWorkflow:
                 rereview_context=state.rereview_context,
                 attachments=state.attachments,
                 visual_evidence={"batches": evidence_batches},
+                input_mode=prepared.mode,
             )
 
         request = ModelRequest(            #请求
@@ -590,6 +614,8 @@ class ReviewWorkflow:
         documents: dict[str, Any] = {
             "source_document.json": source_document,
             "extracted_content.json": state.extracted_content,
+            "document_extraction.json": state.document_extraction,
+            "visual_selection.json": state.visual_selection,
             "visual_manifest.json": state.visual_manifest,
             "visual_evidence.json": state.visual_evidence,
             "input_coverage.json": state.input_coverage,

@@ -1,0 +1,35 @@
+{
+  "behavior": "return",
+  "response": {
+    "result": "pass",
+    "summary": "长篇图文材料的正文、表格和关键视觉证据可支持审查。",
+    "pass_reason": "原生文字完整，关键图表和扫描页均提供了可引用证据。",
+    "blocking_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "issues": [],
+    "similarity_check": {
+      "status": "no_similar",
+      "decision": "keep_independent",
+      "summary": "未发现有效相似候选。",
+      "candidate_count": 0,
+      "candidates_considered": []
+    },
+    "learning_trace_assessment": "材料包含配置、验证和结果证据。",
+    "visual_evidence_assessment": {
+      "coverage": "complete",
+      "pages_reviewed": [3, 5, 6, 7],
+      "evidence_used": [],
+      "limitations": []
+    },
+    "revision_priority": [],
+    "suggested_next_action": "admin_confirm",
+    "re_review_assessment": {"resolutions": []},
+    "article_overview": {
+      "content": "本文记录一套长篇混合实验材料，包含环境配置、器件参数、简单与复杂表格、测试结果图片、系统架构图和扫描记录，并按页保存验证过程与阶段结论。",
+      "topics": ["长篇实验", "视觉证据", "系统架构"],
+      "technical_entities": ["STM32H743", "ICM-42688-P", "CAN-FD"],
+      "key_parameters": ["3.3V", "5V"]
+    }
+  }
+}

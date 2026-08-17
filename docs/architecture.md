@@ -10,17 +10,17 @@ flowchart TD
     E --> D["ReviewHistoryStore：按 document_id 查询"]
     D --> T["SimilarityProfile：Blocks → 原生 PDF 文字"]
     T --> P["PDF 生成或读取"]
-    P --> R["PdfPageRenderer"]
-    R --> C["InputCoverage"]
+    P --> R{"短篇且整页预算内"}
+    R -->|是| F1["全部整页 PNG"]
+    R -->|否| F2["原生文字 + 本地视觉区域选择"]
+    F1 --> C["统一 PreparedDocumentInput + InputCoverage"]
+    F2 --> C
     C --> M{"首轮或复审"}
     M -->|首轮| S["当前正文 → SQLite 历史 AI 概述召回"]
     M -->|复审| H["上一轮 blocking/major"]
-    S --> B["Prompt + MultimodalInput"]
+    S --> B["Prompt + 统一视觉项"]
     H --> B
-    B --> L{"长 PDF"}
-    L -->|是| V["分批 VisualEvidence"]
-    L -->|否| K["最终审稿"]
-    V --> K
+    B --> K["一次 final_review"]
     K --> J["Parser → Normalizer → Review/Overview Validator"]
     J --> O["OutcomeMapper + Notifications"]
     O --> A["Atomic Artifacts"]
@@ -34,6 +34,12 @@ flowchart TD
 ## 数据契约
 
 `ReviewGraphState` 是 Pydantic 状态模型，checkpoint 内仅保存 JSON 可序列化值。历史查询使用严格的 `ReviewHistoryRecord` 与 `ReviewHistoryLookupAudit`；文字召回使用查询画像 `SimilarityProfile`、模型输出 `ArticleOverview`、五项 `SimilarityScoreDetails` 和 `SimilarityRetrievalAudit`。Fixture Loader 继续兼容 `previous_issues` 和 `similarity_candidates.json`，但 Graph 不使用这些 Fixture 数据决定复审或候选，正式历史与候选都来自本地状态。
+
+## PDF 审稿输入
+
+`PdfDocumentInputPreparer` 统一生成 `PreparedDocumentInput`。短篇在页数、整页图片数和总字节均未超限时保留全部 `full_page`；长篇直接扫描 PDF 对象，不先渲染所有整页。可靠 Blocks 保持为正文；无可靠 Blocks 时按页提取原生文字并保留 `[PDF第N页]` 边界。
+
+长篇局部视觉通过 image block bbox、`find_tables()` 和 `get_drawings()` 提取。简单表格转 Markdown，复杂表格、图片、矢量图和扫描页生成带类型与 bbox 的视觉项。候选按重要性稳定排序，先做 SHA-256、再做 dHash 去重，最后同时应用数量、总字节和整页兜底预算。必要视觉内容未选中时覆盖降为 partial，结果不能被归一为 pass/reject。默认只有一次 `final_review`；旧 `VisualEvidenceBatch` 仅由显式兼容开关启用。
 
 ## 审稿历史数据流
 

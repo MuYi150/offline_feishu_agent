@@ -10,10 +10,10 @@
 conda run --no-capture-output -n feishu-api python -m pip install -e ".[dev]"
 ```
 
-文字相似性画像从原生 PDF 提取文字时使用 PyMuPDF；如需单独安装：
+PDF 原生文字、表格和视觉区域提取使用 PyMuPDF，轻量感知去重使用 Pillow；如需单独安装：
 
 ```powershell
-conda run --no-capture-output -n feishu-api python -m pip install "PyMuPDF>=1.24,<2"
+conda run --no-capture-output -n feishu-api python -m pip install "PyMuPDF>=1.24,<2" "Pillow>=10,<13"
 ```
 
 ## 配置 Kimi
@@ -26,7 +26,7 @@ $env:KIMI_BASE_URL = "https://api.moonshot.cn/v1"
 $env:KIMI_MODEL = "kimi-k3"
 ```
 
-默认 `ALLOW_REAL_MODEL_CALL=0`。CLI 的 `--real-model` 本身是一次显式授权；程序仍会在没有 Key 时安全失败。模型、超时、重试、PDF DPI、图片尺寸、批次页数、最大页数和输入上限均可通过 `.env.example` 中的变量覆盖。
+默认 `ALLOW_REAL_MODEL_CALL=0`。CLI 的 `--real-model` 本身是一次显式授权；程序仍会在没有 Key 时安全失败。模型、超时、重试、PDF DPI、图片尺寸、长短文分流、视觉预算、最大页数和输入上限均可通过 `.env.example` 中的变量覆盖。
 
 ## 运行
 
@@ -125,12 +125,26 @@ Remove-Item -LiteralPath $env:SIMILARITY_INDEX_PATH -Force
 
 ## 多模态页面如何进入模型
 
-正文 Block 首先被转换为 Markdown。PDF 由 PyMuPDF 逐页渲染，每页获得稳定的 `page-N` evidence ID、一基页码、尺寸、字节数和 SHA-256。Prompt Builder 只生成文字和视觉清单；Kimi 适配器在内存中把页面标签以及对应的 `image_url` 数据项加入 `message.content` 数组，Base64 不会拼进 Prompt 或写入产物。
+正文 Block 首先被转换为 Markdown。短篇 PDF 保持逐页渲染，每页使用稳定的 `page-N` evidence ID。长篇 PDF 则先提取带 `[PDF第N页]` 标记的原生文字，并用本地规则提取内嵌图片、复杂表格、矢量图和扫描页兜底。Prompt Builder 只生成文字和视觉清单；Kimi 适配器在内存中把视觉标签以及对应的 `image_url` 加入 `message.content`，Base64 不会拼进 Prompt 或写入产物。
 
-不超过 12 页的文档一次提交全部页面。长 PDF 以默认 8 页一批提取 `VisualEvidenceBatch`，随后把结构化正文、批次证据和最多 8 个关键页交给最终审稿调用。任何超限、损坏或缺页都会显式进入 `input_coverage`；系统不会静默截断，也不会在覆盖不足时强行 pass/reject。
+短篇只有在页数不超过 12、整页图片不超过 12 张且总字节不超过 15 MiB 时，才一次提交全部页面。否则进入 `selective_regions`：普通文字页不发送截图，简单表格转 Markdown，真正需要视觉理解的区域按优先级、SHA-256 和 dHash 去重后提交。默认长短流程都只调用一次 `final_review`，不再运行 `visual_batch`；只有显式设置 `LONG_PDF_LEGACY_BATCH_FALLBACK=true` 才恢复旧长文批次方案。
+
+默认视觉配置：
+
+```powershell
+$env:DIRECT_PAGE_LIMIT = "12"
+$env:DIRECT_IMAGE_COUNT_LIMIT = "12"
+$env:DIRECT_IMAGE_BYTES_LIMIT = "15728640"
+$env:MAX_VISUAL_REGIONS = "60"
+$env:MAX_VISUAL_TOTAL_BYTES = "15728640"
+$env:MAX_FULL_PAGE_FALLBACKS = "4"
+$env:LONG_PDF_LEGACY_BATCH_FALLBACK = "false"
+```
+
+任何正文截断、PDF 损坏、提取失败或必要视觉区域因预算未提交，都会写入 `input_coverage`；覆盖不足时不能 pass/reject。
 
 审稿正文：
-只来自 document_blocks.json
+可靠 Blocks 优先；没有可靠 Blocks 时使用带页码的 PDF 原生文字
 
 审稿视觉：
 PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
@@ -145,9 +159,11 @@ PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
 
 - `source_document.json`：输入元数据快照。
 - `extracted_content.json`：结构化 Markdown 及统计。
-- `pages/`：实际提交视觉流程的页面图。
-- `visual_manifest.json`：页面、evidence ID、尺寸、哈希和失败页。
-- `visual_evidence.json`：长 PDF 分批视觉证据。
+- `pages/`：短篇旧流程的整页图；长篇局部图片位于 `visual_regions/`。
+- `document_extraction.json`：逐页文字来源、字符数、表格/图片/图表、扫描页和失败页。
+- `visual_selection.json`：视觉候选、过滤/去重、优先级、预算、选中项和必要遗漏。
+- `visual_manifest.json`：实际提交的整页或局部视觉项、类型、evidence ID、bbox、尺寸和哈希。
+- `visual_evidence.json`：兼容旧批次流程的证据；默认长篇新流程不产生批次内容。
 - `input_coverage.json`：本次实际可见范围及限制。
 - `similarity_profile.json`：当前文章的文字来源、清洗查询正文、本地关键词/实体/参数、字符数、截断状态和内容哈希。
 - `similarity_retrieval.json`：本地索引候选数、五项分数、概述来源/版本、阈值判断和最终 Prompt 候选。
@@ -174,6 +190,7 @@ PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
 - `mock_llm_result.json` 保持 v1 的 `behavior=return/raw/raise` 包装；Fake 响应与 `expected_result.json` 始终分离，避免测试自证。
 - `expected_result.json` 保持 v1 的预期摘要字段。相似候选是 v2 扩展，采用 `similarity_candidates.json` 的 `similar_documents` 包装。
 - 页面素材继续使用约定文件 `source.pdf` 或 `pages/`。仅 v2 才需要的“固定 PDF、模拟缺页”等测试控制放入可选 `fixture_options.json`，不污染 v1 的 source 格式。
+- `fixture_options.real_model_only=true` 表示案例只用于真实模型手动运行；Fake CLI 会明确拒绝，而不会伪造模型结果。
 
 Loader 也兼容早期 v2 的简化 Blocks、列表式附件/相似候选、`fake_model_response.json` 和独立 `previous_review.json`，但新建 Fixture 应优先使用上面的 v1 格式。
 
@@ -181,6 +198,23 @@ Loader 也兼容早期 v2 的简化 Blocks、列表式附件/相似候选、`fak
 
 ```powershell
 conda run --no-capture-output -n feishu-api python scripts\generate_fixtures.py
+conda run --no-capture-output -n feishu-api python fixtures\generate_pdf_fixtures.py
+```
+
+短篇、长篇纯文字和长篇图文的 Fake 验收：
+
+```powershell
+& "E:\tools\conda\envs\feishu-api\python.exe" -m wiki_review_v2.cli --case multimodal_pass
+& "E:\tools\conda\envs\feishu-api\python.exe" -m wiki_review_v2.cli --case long_pdf
+& "E:\tools\conda\envs\feishu-api\python.exe" -m wiki_review_v2.cli --case long_pdf_mixed
+```
+
+从命令返回的 `output_dir` 查看新审计和实际请求：
+
+```powershell
+Get-Content -Raw -Encoding UTF8 "<output_dir>\document_extraction.json"
+Get-Content -Raw -Encoding UTF8 "<output_dir>\visual_selection.json"
+Get-Content -Raw -Encoding UTF8 "<output_dir>\model_request_summary.json"
 ```
 
 ## 测试
@@ -201,7 +235,7 @@ conda run --no-capture-output -n feishu-api python -m pytest -q -m real_kimi
 
 ## 可以优化的地方
 
-1.前主要依赖视觉审稿，将文档blocks和文档照片一起传入kimi大模型，消耗量较大，可以尝试的地方，更改Prompt组合方式，利用deepseek审稿，将视觉图片传入Kimi返回图片信息，多模型协同。
+1. 长篇 PDF 已使用本地文字优先和视觉区域筛选；后续可用真实语料继续校准表格、矢量图和视觉优先级规则。
 
 2.摘要归为本地索引的时间需要改为已公式后，目前为了测试方便改为ai通过后。
 

@@ -7,7 +7,7 @@ import fitz
 
 from .config import Settings
 from .errors import PdfError
-from .models import FixtureOptions, SourceDocument, VisualManifest, VisualPage
+from .models import FixtureOptions, PreparedDocumentInput, SourceDocument, VisualManifest, VisualPage
 from .storage import sha256_file
 
 
@@ -175,14 +175,22 @@ def calculate_input_coverage(
     attachments: list[dict[str, object]],
     attachment_content_required: bool,
     max_text_chars: int,
+    prepared: PreparedDocumentInput | None = None,
 ) -> tuple[dict[str, object], str]:
-    limitations = list(manifest.limitations)
+    limitations = list(dict.fromkeys([*manifest.limitations, *(prepared.limitations if prepared else [])]))
     missing: list[str] = []
     truncated = len(content) > max_text_chars
     if truncated:
         limitations.append(f"结构化正文 {len(content)} 字符，超过上限 {max_text_chars}，未提交模型。")
         missing.append("structured_text_over_limit")
-    if not manifest.rendered_pages:
+    visual_complete = (
+        prepared.visual_coverage_complete
+        if prepared is not None
+        else bool(manifest.total_pages)
+        and not manifest.failed_pages
+        and len(manifest.rendered_pages) == manifest.total_pages
+    )
+    if not visual_complete:
         missing.append("visual_pages")
     if attachment_content_required and attachments:
         missing.append("attachment_content")
@@ -190,7 +198,7 @@ def calculate_input_coverage(
     coverage = {
         "schema_version": "2.0",
         "structured_text_available": bool(content.strip()),
-        "visual_pages_complete": bool(manifest.total_pages) and not manifest.failed_pages and len(manifest.rendered_pages) == manifest.total_pages,
+        "visual_pages_complete": visual_complete,
         "attachments_opened": False,
         "input_truncated": truncated,
         "missing_sources": missing,
@@ -201,6 +209,6 @@ def calculate_input_coverage(
         incomplete = "结构化正文超过安全上限"
     elif not content.strip() and not manifest.rendered_pages:
         incomplete = "结构化正文和视觉页面均不可用"
-    elif manifest.total_pages > 0 and not manifest.rendered_pages:
+    elif manifest.total_pages > 0 and not manifest.rendered_pages and not visual_complete:
         incomplete = "视觉页面不可用"
     return coverage, incomplete

@@ -21,12 +21,20 @@ REVIEW_PROCEDURE = """必须按以下顺序完成审稿：
 
 VISUAL_INPUT_GUIDE = """VisualManifest 字段含义：
 - source：视觉页面来源。pdf 表示页面来自 Fixture 提供的 PDF；fixture_pages 表示页面来自 Fixture 直接提供的 PNG/JPG 等页面图片；generated_pdf 表示页面由结构化 Markdown 自动生成；unavailable 表示没有可用视觉页面。
+- mode：legacy_full_pages 表示短篇全部整页截图；selective_regions 表示长篇已由本地确定性规则扫描全部 PDF，只提交需要视觉理解的局部区域和必要整页兜底；legacy_batch_fallback 表示显式开启的旧长文批次兼容模式。
 - total_pages：当前视觉来源声明的总页数。
-- rendered_pages：成功处理且可通过 evidence_id 引用的页面；其中 page 是一基页码，width/height 是渲染图像尺寸。
+- rendered_pages：成功处理且实际提交模型、可通过 evidence_id 引用的视觉项；它不一定是整页。type 可为 full_page、embedded_image、table_crop、diagram_crop 或 scanned_page_fallback；page 是一基页码，bbox 是原 PDF 坐标范围，width/height 是图像尺寸。
 - failed_pages：未成功处理的页码；非空时不得声称完成全部视觉审查。
 - limitations：视觉输入处理过程中必须在结论中承认的限制。
 当 source 为 pdf 或 fixture_pages、visual_pages_complete=true 且页面实际清晰可读时，应把页面中的图片、图纸、截图、标注、表格和排版信息作为已经审查的内容；不得沿用 v1“图片不可读”的假设，也不得仅因图片多或正文依赖图片而输出 recommend_human_review。
 特别注意：generated_pdf 页面由结构化正文生成，内容可能与 StructuredContent 重复，不能将其视为独立的原始视觉证据，也不能据此判断原始飞书排版。"""
+
+SELECTIVE_VISUAL_GUIDE = """长篇 selective_regions 输入规则：
+- StructuredContent 来自可靠 Blocks，或来自 PDF 原生文字；PDF 原生文字以 [PDF第N页] 标出原始页码。
+- VisualManifest 只列实际发送的整页或局部视觉项，evidence_id 可能是 page-12-image-1、page-18-table-1、page-20-diagram-1 或 page-7-full。
+- selective_regions 表示本地程序检查并筛选了 PDF 内容，不表示模型看过每一页的完整截图或全部排版细节。只能声称审查了 StructuredContent 和实际提供的 evidence_id。
+- 引用视觉证据必须使用实际提供的 evidence_id；不得声称看过未提供的页面区域。若结论依赖未提交的视觉内容，必须在 visual_evidence_assessment.limitations 和最终说明中声明。
+- 简单表格可能已转换为 StructuredContent 中的 Markdown，因此不一定另有表格截图；复杂表格、图表和扫描页才会优先作为图片提交。"""
 
 VISUAL_PUBLICATION_QUALITY_RULES = """必须检查原始页面是否具备可直接阅读和发布的视觉质量，而不只是判断页面是否成功传入：
 - 当 VisualManifest.source 为 pdf 或 fixture_pages 时，逐页检查表格、代码、命令、公式、图片标注和正文是否被裁切、遮挡、折叠、溢出、截断，是否因列宽、行高、字号、横向/纵向滚动区域而只显示一部分，或者清晰度低到无法阅读。滚动条本身不是问题；关键内容在当前知识库页面中无法完整阅读才是问题。
@@ -191,8 +199,9 @@ def _attachment_guide(attachments: list[dict[str, Any]], coverage: InputCoverage
     return f"{base}\n{current}"
 
 
-def _visual_manifest_payload(manifest: VisualManifest) -> dict[str, Any]:
+def _visual_manifest_payload(manifest: VisualManifest, input_mode: str) -> dict[str, Any]:
     return {
+        "mode": input_mode,
         "source": manifest.source,
         "total_pages": manifest.total_pages,
         "rendered_pages": [
@@ -201,6 +210,9 @@ def _visual_manifest_payload(manifest: VisualManifest) -> dict[str, Any]:
                 "page": page.page,
                 "width": page.width,
                 "height": page.height,
+                "type": page.type,
+                "bbox": page.bbox,
+                "selection_reason": page.selection_reason,
             }
             for page in manifest.rendered_pages
         ],
@@ -226,6 +238,7 @@ class ReviewPromptBuilder:
         rereview_context: dict[str, Any],
         attachments: list[dict[str, Any]],
         visual_evidence: dict[str, Any] | None = None,
+        input_mode: str = "legacy_full_pages",
     ) -> str:
         sections: list[tuple[str, str]] = [
             ("SystemRole", SYSTEM_ROLE),
@@ -238,8 +251,14 @@ class ReviewPromptBuilder:
             ),
             ("StructuredContent", content),
             ("VisualInputGuide", VISUAL_INPUT_GUIDE),
+            ("SelectiveVisualGuide", SELECTIVE_VISUAL_GUIDE),
             ("VisualPublicationQualityRules", VISUAL_PUBLICATION_QUALITY_RULES),
-            ("VisualManifest", json.dumps(_visual_manifest_payload(manifest), ensure_ascii=False, indent=2)),
+            (
+                "VisualManifest",
+                json.dumps(
+                    _visual_manifest_payload(manifest, input_mode), ensure_ascii=False, indent=2
+                ),
+            ),
         ]
         if visual_evidence:
             sections.append(("BatchedVisualEvidence", json.dumps(visual_evidence, ensure_ascii=False, indent=2)))

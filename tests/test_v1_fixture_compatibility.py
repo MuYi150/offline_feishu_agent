@@ -41,7 +41,10 @@ def test_all_generated_sources_keep_v1_base_shape(settings) -> None:
         raw = json.loads((case / "source_document.json").read_text(encoding="utf-8"))
         assert V1_SOURCE_KEYS <= set(raw), case.name
         assert set(raw) - V1_SOURCE_KEYS <= {"previous_issues"}, case.name
-        assert (case / "mock_llm_result.json").is_file(), case.name
+        options_path = case / "fixture_options.json"
+        options = json.loads(options_path.read_text(encoding="utf-8")) if options_path.exists() else {}
+        if not options.get("real_model_only"):
+            assert (case / "mock_llm_result.json").is_file(), case.name
         assert not (case / "fake_model_response.json").exists(), case.name
 
 

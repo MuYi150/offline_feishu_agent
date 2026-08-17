@@ -10,7 +10,7 @@ from typing import Any
 from langgraph.checkpoint.sqlite import SqliteSaver
 
 from .config import Settings
-from .errors import ModelAuthenticationError, OutputConflictError, ReviewError, classify_exception
+from .errors import FixtureError, ModelAuthenticationError, OutputConflictError, ReviewError, classify_exception
 from .fixtures import FixtureDocumentSource
 from .graph import ReviewWorkflow
 from .model import FakeReviewModel, KimiMultimodalModel, ReviewModel
@@ -60,6 +60,8 @@ class ReviewRunner:
         
         case_path = self.settings.fixtures_root / case_id
         bundle = self.source.load(case_path)                         #读取fixture包 
+        if bundle.fixture_options.real_model_only and not real_model and model_override is None:
+            raise FixtureError(f"Fixture {case_id} 标记为 real_model_only，请使用 --real-model")
         run_id = run_id or utc_run_id()
         root = (output_root or self.settings.output_root).resolve()
         output_dir = root / case_id / run_id                         #输出目录

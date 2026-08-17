@@ -1,0 +1,15 @@
+{
+  "case_id": "long_pdf_mixed",
+  "document_id": "test_doc_long_pdf_mixed",
+  "node_token": "test_node_long_pdf_mixed",
+  "title": "长篇图文混合实验记录",
+  "wiki_name": "离线测试知识库",
+  "author_id": "test_user_long_pdf_mixed",
+  "author": "测试用户_long_pdf_mixed",
+  "link": "https://example.invalid/wiki/test_doc_long_pdf_mixed",
+  "review_method": "AI",
+  "status": "AI审稿中",
+  "review_round": 0,
+  "updated_at": "2026/08/17 09:00:00",
+  "last_ai_review_at": ""
+}

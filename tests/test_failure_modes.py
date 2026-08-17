@@ -173,3 +173,8 @@ def test_real_model_preflight_without_key_writes_safe_failure(settings) -> None:
     assert summary.failure["code"] == "model_authentication_error"
     assert (summary.output_dir / "failure.json").exists()
     assert not (summary.output_dir / "submitter_notification.txt").exists()
+
+
+def test_real_only_fixture_rejects_fake_execution(settings) -> None:
+    with pytest.raises(FixtureError, match="real_model_only"):
+        ReviewRunner(settings).run_case("longlong_pdf_text")
