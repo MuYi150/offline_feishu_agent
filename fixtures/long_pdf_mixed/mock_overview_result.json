@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文记录一套长篇混合实验材料，包含环境配置、器件参数、简单与复杂表格、测试结果图片、系统架构图和扫描记录，并按页保存验证过程与阶段结论。",
+    "topics": ["长篇实验", "视觉证据", "系统架构"],
+    "technical_entities": ["STM32H743", "ICM-42688-P", "CAN-FD"],
+    "key_parameters": ["3.3V", "5V"],
+    "methods": ["系统架构设计", "混合材料记录"],
+    "application_scenarios": ["硬件系统实验"],
+    "validation_methods": ["测试结果核对", "扫描记录"]
+  }
+}

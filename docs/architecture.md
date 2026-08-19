@@ -15,12 +15,13 @@ flowchart TD
     R -->|否| F2["原生文字 + 本地视觉区域选择"]
     F1 --> C["统一 PreparedDocumentInput + InputCoverage"]
     F2 --> C
-    C --> M{"首轮或复审"}
-    M -->|首轮| S["当前正文 → SQLite 历史 AI 概述召回"]
+    C --> V["纯文字 retrieval_overview"]
+    V --> M{"首轮或复审"}
+    M -->|首轮| S["当前 AI 概述 → SQLite 历史概述召回"]
     M -->|复审| H["上一轮 blocking/major"]
     S --> B["Prompt + 统一视觉项"]
     H --> B
-    B --> K["一次 final_review"]
+    B --> K["第二次 final_review"]
     K --> J["Parser → Normalizer → Review/Overview Validator"]
     J --> O["OutcomeMapper + Notifications"]
     O --> A["Atomic Artifacts"]
@@ -51,11 +52,11 @@ Graph 在正文提取后读取 `local_state/review_history/<safe_document_id>.js
 
 ## 文字相似性数据流
 
-查询画像构建位于正文提取之后。有效 Blocks 优先；否则只读取 Fixture 原始 PDF 文字层，不读取生成 PDF、PNG、渲染页面或内嵌图片，也不执行 OCR。画像保存标题、章节、清洗正文、本地关键词、实体和参数；超长正文按全文均匀取样并显式记录截断，不再生成用于入库的规则摘要。
+查询画像构建位于正文提取之后。有效 Blocks 优先；否则只读取 Fixture 原始 PDF 文字层，不读取生成 PDF、PNG、渲染页面或内嵌图片，也不执行 OCR。第一次 `retrieval_overview` 只接收画像中的清洗正文，生成主题、实体、参数、方法、场景和验证方式齐全的检索概述；它不接收历史候选，也不执行审稿。
 
-SQLite 查询在 SQL 层排除当前 document_id。当前查询正文与历史 `article_overview.content` 使用字符 2～4 gram TF-IDF 余弦，标题、主题关键词、技术实体和参数使用可解释分数；固定权重为 `0.70/0.10/0.10/0.05/0.05`。超过阈值的 Top-K 概述进入 Prompt，模型仍负责判断主题独立、重复关系和修改必要性。最终审稿调用同时生成当前文章概述；最终结果为 `pass` 且概述正文非空时写入索引。概述落地校验继续提供审计警告，但不再作为索引写入门槛。
+SQLite 查询在 SQL 层排除当前 document_id。当前检索概述与历史概述在统一字符 2～4 gram TF-IDF 空间比较，并结合标题、主题、技术实体、参数、方法、场景和验证方式；固定权重为 `0.60/0.10/0.10/0.05/0.05/0.05/0.05`。超过阈值的 Top-K 概述进入第二次正式审稿，模型仍负责判断主题独立、流程重合、合并关系和修改必要性。只有正式结果 pass、检索概述有效且正文哈希一致时才写入索引。
 
-索引 Schema v2 在原表上事务化增加概述来源、模型、Prompt 版本、参数和正文哈希列。v1 行不删除，迁移后标记为 `deterministic_legacy` 并继续参与召回；同一 document_id 后续 pass 会 UPSERT 为 `ai_article_overview`。
+索引 Schema v3 在 v2 表上事务化增加方法、应用场景和验证方式列。v1/v2 行不删除并继续参与召回；同一 document_id 后续 pass 会 UPSERT 为 `ai_retrieval_overview`。
 
 ## 可恢复性与副作用
 

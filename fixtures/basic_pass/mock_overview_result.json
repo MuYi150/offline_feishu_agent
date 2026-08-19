@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文记录 Python 基础实践过程，包括环境准备、依赖安装、命令执行、结果观察和故障排查，并通过 pytest 输出验证调整输入校验后的修复结果。",
+    "topics": ["Python基础", "实验记录", "故障排查"],
+    "technical_entities": ["Python", "pytest"],
+    "key_parameters": ["12 passed"],
+    "methods": ["命令执行", "结果核对", "故障复现"],
+    "application_scenarios": ["Python基础实践"],
+    "validation_methods": ["pytest测试"]
+  }
+}

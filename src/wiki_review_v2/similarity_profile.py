@@ -98,11 +98,11 @@ class SimilarityProfileBuilder:
     def _is_valid_blocks(markdown: str) -> bool:
         without_images = _IMAGE_PLACEHOLDER.sub("", markdown)
         without_markup = re.sub(r"[`#>*_|~\-]", "", without_images)
-        return len(_MEANINGFUL.findall(without_markup)) >= 20
+        return len(_MEANINGFUL.findall(without_markup)) >= 1
 
     @staticmethod
     def _is_valid_text(text: str) -> bool:
-        return len(_MEANINGFUL.findall(text)) >= 20
+        return len(_MEANINGFUL.findall(text)) >= 1
 
     def _extract_pdf_text(self, case_path: Path, options: FixtureOptions) -> tuple[str, list[str]]:
         pdf_path = case_path / (options.source_pdf or "source.pdf")

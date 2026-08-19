@@ -63,12 +63,17 @@ INITIAL_REVIEW_SIMILARITY_GUIDE = """InitialReviewSimilarityContext 字段含义
 - threshold：本地候选进入本次模型比较的最低相似分数。
 - top_k：最多提交给模型的候选数量。
 - effective_candidates：从本地 SQLite 历史摘要索引计算、排除当前 document_id、经过阈值和 Top-K 筛选后的候选；Fixture 的 similarity_candidates.json 不参与召回。
-- similarity_score：本地确定性算法根据当前正文与历史 AI 概述的字符 TF-IDF、标题、主题关键词、技术实体和参数计算的 0～1 分数，不是模型生成的结论。
-- score_details：上述五项分数及 final_score，输出 candidates_considered 时应把 similarity_score 对应填写到 score 字段。
-- content：历史文章审稿通过时生成的 AI 文章概述，或兼容迁移的 legacy 规则摘要；不是完整正文，也不包含历史 PDF、PNG 或页面图片。
+- similarity_score：本地确定性算法根据当前 RetrievalArticleOverview 与历史概述的字符 TF-IDF、标题、主题、技术实体、参数、方法、应用场景和验证方式计算的 0～1 分数，不是模型生成的结论。
+- score_details：概述正文、标题和六类结构化特征分数及 final_score；text_tfidf 是 overview_content_tfidf 的兼容别名。输出 candidates_considered 时应把 similarity_score 对应填写到 score 字段。
+- content：历史文章审稿通过前独立生成的 AI 检索概述，或兼容迁移的旧概述；不是完整正文，也不包含历史 PDF、PNG 或页面图片。
 - summary_source、overview_model、overview_prompt_version：候选概述的来源和生成版本；deterministic_legacy 表示升级前的规则摘要。
 每个候选同时提供 document_id、标题、链接、状态、分数和摘要。算法分数只表示可能相似，不能仅凭分数认定抄袭、重复、必须合并或拒稿。必须结合当前文章正文和候选摘要，分别判断是否主题相似但内容独立、是否明显重复、是否需要作者修改，并写明判断依据。
 effective_candidates 为空表示本次没有达到阈值的本地候选，不允许凭空声称存在重复文章。"""
+
+CURRENT_RETRIEVAL_OVERVIEW_GUIDE = """CurrentRetrievalArticleOverview 是正式审稿前由独立文本模型阶段仅根据当前文章正文生成的检索概述。
+- 它只用于稳定表示当前文章并与历史概述进行召回，不是审稿结论，也不是历史候选内容。
+- 正式审稿仍必须以 StructuredContent、实际视觉证据和输入覆盖为准，不能用该概述代替完整审查。
+- 最终输出中的 article_overview 可按正式审稿实际看到的正文和视觉证据生成，不要求与本节逐字一致。"""
 
 SIMILARITY_MERGE_RULES = """相似候选的最终判断必须比较知识内容和可复用流程，不能只比较标题、机型名称或 similarity_score：
 - 对教程、SOP、搭建记录和调试文档，重点比较前置环境、软件/固件安装、工具链、地面站配置、连接适配、校准、参数设置、调试步骤、故障排查、命令、截图和操作顺序，而不是只看最终设备名称。
@@ -78,8 +83,8 @@ SIMILARITY_MERGE_RULES = """相似候选的最终判断必须比较知识内容�
 - 如果共同内容只是简短的通用前置知识，而当前文章在目标、核心步骤、技术方法、验证过程和结论上均有实质独立内容，才可使用 same_area_different_direction 或 related_but_keep。不得仅凭同领域判合并，也不得仅凭标题不同判独立。
 - 候选 content 只是历史 AI 概述，证据不足时不得编造逐段重复事实；但当当前正文和候选概述已经明确显示上述核心流程重合时，不得以“候选不是全文”为由回避合并判断。近乎完整复制、独立投稿不再增加知识价值时，才考虑 duplicate_reject_recommended；存在可保留的机型差异时优先 merge_recommended。"""
 
-ARTICLE_OVERVIEW_REQUIREMENTS = """article_overview 是当前投稿文章本身的检索概述，与审稿结论 summary 完全不同。
-- summary 只总结本轮审稿结论、问题和依据；article_overview 只概述当前文章讨论了什么。
+ARTICLE_OVERVIEW_REQUIREMENTS = """article_overview 是正式审稿结果中保留的当前文章兼容概述，与审稿结论 summary 完全不同；本次相似召回和后续索引使用的是前面的 CurrentRetrievalArticleOverview。
+- summary 只总结本轮审稿结论、问题和依据；article_overview 只概述当前文章讨论了什么，不要求与 CurrentRetrievalArticleOverview 逐字一致。
 - article_overview 只能依据当前 StructuredContent 和本次实际提供的视觉页面，不得吸收、改写或复制 InitialReviewSimilarityContext 中候选文章的内容。
 - 不得出现“本轮审稿”“上一轮审稿”“审稿通过”“已解决上一轮”或“符合知识库公示标准”等审稿过程和状态话术。
 - content 必须是自然、连续、可独立理解的中文概述，目标长度 500～{max_chars} 字；短文章允许更短，不得重复凑字数或堆砌关键词。
@@ -239,6 +244,7 @@ class ReviewPromptBuilder:
         attachments: list[dict[str, Any]],
         visual_evidence: dict[str, Any] | None = None,
         input_mode: str = "legacy_full_pages",
+        retrieval_article_overview: dict[str, Any] | None = None,
     ) -> str:
         sections: list[tuple[str, str]] = [
             ("SystemRole", SYSTEM_ROLE),
@@ -268,6 +274,11 @@ class ReviewPromptBuilder:
                 ("AttachmentMetadata", json.dumps(attachments, ensure_ascii=False, indent=2)),
                 ("InputCoverageGuide", INPUT_COVERAGE_GUIDE),
                 ("InputCoverage", json.dumps(coverage.model_dump(mode="json"), ensure_ascii=False, indent=2)),
+                ("CurrentRetrievalArticleOverviewGuide", CURRENT_RETRIEVAL_OVERVIEW_GUIDE),
+                (
+                    "CurrentRetrievalArticleOverview",
+                    json.dumps(retrieval_article_overview or {}, ensure_ascii=False, indent=2),
+                ),
             ]
         )
         if review_mode == "initial":

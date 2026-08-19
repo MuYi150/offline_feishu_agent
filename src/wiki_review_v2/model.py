@@ -26,6 +26,8 @@ class ModelRequest:
     pages: list[dict[str, Any]]
     schema_name: str
     json_schema: dict[str, Any]
+    system_prompt: str = "你是严格输出结构化 JSON 的科研知识库审稿助手。"
+    model: str | None = None
 
 
 @dataclass(frozen=True)
@@ -48,7 +50,12 @@ class FakeReviewModel:                      #fake模型，直接返回fixture中
 
     def invoke(self, request: ModelRequest) -> ModelResponse:
         self.call_count += 1
-        error = self.fixture_response.get("raise")
+        overview_phase = request.phase.startswith("retrieval_overview")
+        error = (
+            self.fixture_response.get("overview_raise")
+            if overview_phase
+            else self.fixture_response.get("raise")
+        )
         if error:
             mapping = {
                 "authentication": ModelAuthenticationError,
@@ -58,7 +65,13 @@ class FakeReviewModel:                      #fake模型，直接返回fixture中
                 "api": ModelCallError,
             }
             raise mapping.get(str(error), ModelCallError)(f"Fake 模型错误：{error}")
-        if request.phase == "visual_batch":
+        if overview_phase:
+            if "overview_raw" in self.fixture_response:
+                return self._response(str(self.fixture_response["overview_raw"]), request)
+            payload = self.fixture_response.get("overview")
+            if payload is None:
+                raise ModelCallError("Fake Fixture 缺少 retrieval_overview 响应")
+        elif request.phase == "visual_batch":
             responses = self.fixture_response.get("visual_batches") or []
             if self.batch_index < len(responses):
                 payload = responses[self.batch_index]
@@ -120,11 +133,11 @@ class KimiMultimodalModel:                        #真实模型，调用Kimi API
         for attempt in range(1, self.settings.kimi_max_attempts + 1):
             try:
                 completion = self.client.chat.completions.create(
-                    model=self.settings.kimi_model,
+                    model=request.model or self.settings.kimi_model,
                     reasoning_effort=self.settings.kimi_reasoning_effort,
                     max_completion_tokens=self.settings.kimi_max_completion_tokens,
                     messages=[
-                        {"role": "system", "content": "你是严格输出结构化 JSON 的科研知识库审稿助手。"},
+                        {"role": "system", "content": request.system_prompt},
                         {"role": "user", "content": content},
                     ],
                     response_format={                #规定模型输出格式
@@ -147,7 +160,7 @@ class KimiMultimodalModel:                        #真实模型，调用Kimi API
                 elapsed = int((time.perf_counter() - started) * 1000)
                 record = ModelCallRecord(#创建调用记录
                     phase=request.phase,
-                    model=self.settings.kimi_model,
+                    model=request.model or self.settings.kimi_model,
                     attempt_count=attempt,
                     elapsed_ms=elapsed,
                     prompt_chars=len(request.prompt),
@@ -207,6 +220,7 @@ class KimiMultimodalModel:                        #真实模型，调用Kimi API
 def request_summary(request: ModelRequest) -> dict[str, Any]:
     return {
         "phase": request.phase,
+        "model": request.model or "default",
         "prompt_chars": len(request.prompt),
         "image_count": len(request.pages),
         "image_bytes": sum(int(page.get("byte_size", 0)) for page in request.pages),

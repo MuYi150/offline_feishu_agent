@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文记录依赖安装、实际命令、观察结果和故障排查过程，并通过 pytest 输出说明输入校验调整后的异常复现与修复结论。",
+    "topics": ["实验记录", "故障排查"],
+    "technical_entities": ["Python", "pytest"],
+    "key_parameters": ["12 passed"],
+    "methods": ["命令执行", "异常复现"],
+    "application_scenarios": ["软件测试"],
+    "validation_methods": ["pytest测试"]
+  }
+}

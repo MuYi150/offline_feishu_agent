@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
 
 
 def _bool_env(name: str, default: bool = False) -> bool:
@@ -47,6 +47,10 @@ class Settings(BaseModel):
     similarity_threshold: float = Field(default=0.35, ge=0, le=1)
     similarity_top_k: int = Field(default=5, ge=1, le=50)
     similarity_overview_max_chars: int = Field(default=1200, ge=200, le=5000)
+    retrieval_overview_min_chars: int = Field(default=100, ge=1, le=5000)
+    retrieval_overview_max_chars: int = Field(default=1200, ge=100, le=5000)
+    retrieval_overview_prompt_version: str = "retrieval_overview_v1"
+    retrieval_overview_model: str = ""
     similarity_query_max_chars: int = Field(default=30_000, ge=1_000, le=500_000)
     similarity_index_path: Path = Path("local_state/similarity_index/articles.sqlite")
 
@@ -57,6 +61,14 @@ class Settings(BaseModel):
         if value not in {"low", "high", "max"}:
             raise ValueError("KIMI_REASONING_EFFORT must be low, high, or max")
         return value
+
+    @model_validator(mode="after")
+    def validate_retrieval_overview_limits(self) -> "Settings":
+        if self.retrieval_overview_min_chars > self.retrieval_overview_max_chars:
+            raise ValueError(
+                "RETRIEVAL_OVERVIEW_MIN_CHARS must not exceed RETRIEVAL_OVERVIEW_MAX_CHARS"
+            )
+        return self
 
     @classmethod
     def from_env(cls, project_root: Path | None = None) -> "Settings":
@@ -115,6 +127,16 @@ class Settings(BaseModel):
                     os.getenv("SIMILARITY_SUMMARY_MAX_CHARS", "1200"),
                 )
             ),
+            retrieval_overview_min_chars=int(
+                os.getenv("RETRIEVAL_OVERVIEW_MIN_CHARS", "100")
+            ),
+            retrieval_overview_max_chars=int(
+                os.getenv("RETRIEVAL_OVERVIEW_MAX_CHARS", "1200")
+            ),
+            retrieval_overview_prompt_version=os.getenv(
+                "RETRIEVAL_OVERVIEW_PROMPT_VERSION", "retrieval_overview_v1"
+            ),
+            retrieval_overview_model=os.getenv("RETRIEVAL_OVERVIEW_MODEL", "").strip(),
             similarity_query_max_chars=int(os.getenv("SIMILARITY_QUERY_MAX_CHARS", "30000")),
             similarity_index_path=configured_index,
         )

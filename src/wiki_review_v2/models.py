@@ -276,11 +276,24 @@ class SimilarityProfile(StrictModel):
 
 class SimilarityScoreDetails(StrictModel):
     text_tfidf: float = Field(ge=0, le=1)
+    overview_content_tfidf: float = Field(default=0, ge=0, le=1)
     title_similarity: float = Field(ge=0, le=1)
     topic_keyword_jaccard: float = Field(ge=0, le=1)
     entity_jaccard: float = Field(ge=0, le=1)
     parameter_jaccard: float = Field(ge=0, le=1)
+    methods_jaccard: float = Field(default=0, ge=0, le=1)
+    scenarios_validation_jaccard: float = Field(default=0, ge=0, le=1)
     final_score: float = Field(ge=0, le=1)
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_v2_details(cls, value: Any) -> Any:
+        if not isinstance(value, dict):
+            return value
+        data = dict(value)
+        if "overview_content_tfidf" not in data:
+            data["overview_content_tfidf"] = data.get("text_tfidf", 0)
+        return data
 
 
 class SimilarityScoredCandidate(StrictModel):
@@ -392,6 +405,37 @@ class ArticleOverview(StrictModel):
     key_parameters: list[str]
 
 
+class RetrievalArticleOverview(StrictModel):
+    content: str
+    topics: list[str]
+    technical_entities: list[str]
+    key_parameters: list[str]
+    methods: list[str]
+    application_scenarios: list[str]
+    validation_methods: list[str]
+
+
+class RetrievalOverviewValidation(StrictModel):
+    valid: bool = False
+    warnings: list[str] = Field(default_factory=list)
+    errors: list[str] = Field(default_factory=list)
+
+
+class RetrievalArticleOverviewAudit(StrictModel):
+    schema_version: str = "1.0"
+    document_id: str
+    phase: str = "retrieval_overview"
+    content_source: Literal["blocks", "pdf", "unavailable"] = "unavailable"
+    source_content_hash: str = ""
+    model: str = ""
+    prompt_version: str = "retrieval_overview_v1"
+    overview: RetrievalArticleOverview | None = None
+    validation: RetrievalOverviewValidation = Field(
+        default_factory=RetrievalOverviewValidation
+    )
+    persisted_to_index: bool = False
+
+
 class ArticleOverviewAudit(StrictModel):
     schema_version: str = "1.0"
     document_id: str
@@ -501,6 +545,10 @@ class ReviewGraphState(StrictModel):
     similarity_retrieval: dict[str, Any] = Field(default_factory=dict)
     similarity_profile_persisted: bool = False
     article_overview_audit: dict[str, Any] = Field(default_factory=dict)
+    retrieval_overview_prompt: str = ""
+    raw_retrieval_overview_output: dict[str, Any] = Field(default_factory=dict)
+    retrieval_article_overview: dict[str, Any] = Field(default_factory=dict)
+    retrieval_article_overview_audit: dict[str, Any] = Field(default_factory=dict)
     review_mode: Literal["initial", "rereview"] = "initial"
     similarity_context: dict[str, Any] = Field(default_factory=dict)
     rereview_context: dict[str, Any] = Field(default_factory=dict)

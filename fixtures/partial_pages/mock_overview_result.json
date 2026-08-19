@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文记录一项包含多页视觉材料的技术工作，正文说明主要目标、实施过程和已有结果，并使用页面材料保存操作和验证证据。",
+    "topics": ["技术记录", "视觉材料"],
+    "technical_entities": [],
+    "key_parameters": [],
+    "methods": ["过程记录"],
+    "application_scenarios": ["技术实践"],
+    "validation_methods": ["页面证据核对"]
+  }
+}

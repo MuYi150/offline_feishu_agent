@@ -24,6 +24,8 @@ from .models import (
     ReviewHistoryLookupAudit,
     ReviewHistoryRecord,
     ReviewResult,
+    RetrievalArticleOverview,
+    RetrievalArticleOverviewAudit,
     SimilarityProfile,
     SimilarityRetrievalAudit,
     SourceDocument,
@@ -35,6 +37,11 @@ from .pdf import PdfPageRenderer, calculate_input_coverage
 from .pdf_content import PdfDocumentInputPreparer
 from .policies import ReviewHistoryPolicy, ReviewModePolicy
 from .prompts import ReviewPromptBuilder
+from .retrieval_overview import (
+    RETRIEVAL_OVERVIEW_SYSTEM_PROMPT,
+    RetrievalOverviewPromptBuilder,
+    RetrievalOverviewValidator,
+)
 from .similarity_index import LocalSimilarityRetriever, SimilarityIndexStore
 from .similarity_profile import SimilarityProfileBuilder
 from .result import (
@@ -84,6 +91,8 @@ class ReviewWorkflow:
         self.similarity_index = SimilarityIndexStore(settings.similarity_index_path)
         self.similarity = LocalSimilarityRetriever(settings, self.similarity_index)
         self.article_overviews = ArticleOverviewValidator(settings)
+        self.retrieval_overview_prompts = RetrievalOverviewPromptBuilder(settings)
+        self.retrieval_overviews = RetrievalOverviewValidator(settings)
         self.history_policy = ReviewHistoryPolicy()
         standard_path = settings.project_root / "review_standard.md"
         standard = standard_path.read_text(encoding="utf-8") if standard_path.exists() else "按科研知识库最低质量标准审稿。"
@@ -110,6 +119,15 @@ class ReviewWorkflow:
             ),
             "prepare_pdf_pages": self._guard("prepare_pdf_pages", self.prepare_pdf_pages),
             "build_input_coverage": self._guard("build_input_coverage", self.build_input_coverage),
+            "build_retrieval_overview_request": self._guard(
+                "build_retrieval_overview_request", self.build_retrieval_overview_request
+            ),
+            "invoke_retrieval_overview": self._guard(
+                "invoke_retrieval_overview", self.invoke_retrieval_overview
+            ),
+            "parse_retrieval_overview": self._guard(
+                "parse_retrieval_overview", self.parse_retrieval_overview
+            ),
             "route_review_mode": self._guard("route_review_mode", self.route_review_mode),
             "retrieve_similar_documents": self._guard(
                 "retrieve_similar_documents", self.retrieve_similar_documents
@@ -145,7 +163,10 @@ class ReviewWorkflow:
             ("load_review_history", "build_similarity_profile"),
             ("build_similarity_profile", "prepare_pdf_pages"),
             ("prepare_pdf_pages", "build_input_coverage"),
-            ("build_input_coverage", "route_review_mode"),
+            ("build_input_coverage", "build_retrieval_overview_request"),
+            ("build_retrieval_overview_request", "invoke_retrieval_overview"),
+            ("invoke_retrieval_overview", "parse_retrieval_overview"),
+            ("parse_retrieval_overview", "route_review_mode"),
         ]
         for current, nxt in ordinary: #首审复审条件边
             builder.add_conditional_edges(current, self._failure_route, {"ok": nxt, "failure": "record_safe_failure"})
@@ -354,11 +375,157 @@ class ReviewWorkflow:
         previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
         return {"review_mode": self.mode_policy.decide(previous)}
 
+    def build_retrieval_overview_request(
+        self, state: ReviewGraphState
+    ) -> dict[str, Any]:
+        if state.technical_incomplete_reason:
+            return {"retrieval_overview_prompt": ""}
+        source = SourceDocument.model_validate(state.source_document)
+        profile = SimilarityProfile.model_validate(state.similarity_profile)
+        if not profile.query_text.strip() or profile.source == "unavailable":
+            raise ModelSchemaError("当前文章没有可用于生成检索概述的可靠文字")
+        return {
+            "retrieval_overview_prompt": self.retrieval_overview_prompts.build(
+                source=source, profile=profile
+            )
+        }
+
+    def invoke_retrieval_overview(self, state: ReviewGraphState) -> dict[str, Any]:
+        if state.technical_incomplete_reason:
+            return {
+                "raw_retrieval_overview_output": {
+                    "content": "",
+                    "source": "deterministic_input_guard",
+                    "finish_reason": "not_called",
+                }
+            }
+        request = ModelRequest(
+            phase="retrieval_overview",
+            prompt=state.retrieval_overview_prompt,
+            pages=[],
+            schema_name="retrieval_article_overview",
+            json_schema=RetrievalArticleOverview.model_json_schema(),
+            system_prompt=RETRIEVAL_OVERVIEW_SYSTEM_PROMPT,
+            model=self.settings.retrieval_overview_model or None,
+        )
+        summaries = [*state.request_summaries, request_summary(request)]
+        response = self.model.invoke(request)
+        calls = list(state.model_calls)
+        if response.record:
+            calls.append(response.record.model_dump(mode="json"))
+        return {
+            "raw_retrieval_overview_output": {
+                "content": response.content,
+                "source": state.model_mode,
+                "finish_reason": response.finish_reason,
+                "token_usage": response.token_usage,
+            },
+            "model_calls": calls,
+            "request_summaries": summaries,
+        }
+
+    def parse_retrieval_overview(self, state: ReviewGraphState) -> dict[str, Any]:
+        source = SourceDocument.model_validate(state.source_document)
+        profile = SimilarityProfile.model_validate(state.similarity_profile)
+        if state.technical_incomplete_reason:
+            audit = self.retrieval_overviews.unavailable_audit(
+                document_id=source.document_id,
+                profile=profile,
+                reason="technical_input_incomplete",
+            )
+            return {
+                "retrieval_article_overview": {},
+                "retrieval_article_overview_audit": audit.model_dump(mode="json"),
+            }
+
+        raw = str(state.raw_retrieval_overview_output.get("content", ""))
+        calls = list(state.model_calls)
+        summaries = list(state.request_summaries)
+        last_error: ReviewError | None = None
+        for retry in range(self.settings.kimi_schema_retry_attempts + 1):
+            try:
+                if retry == 0 and state.raw_retrieval_overview_output.get("finish_reason") == "length":
+                    raise ModelJsonError("检索概述输出因长度限制被截断")
+                try:
+                    decoded = json.loads(raw)
+                except json.JSONDecodeError as exc:
+                    raise ModelJsonError("检索概述不是合法 JSON") from exc
+                try:
+                    parsed = RetrievalArticleOverview.model_validate(decoded)
+                except ValidationError as exc:
+                    raise ModelSchemaError("检索概述不符合 Schema") from exc
+                model_name = next(
+                    (
+                        str(call.get("model", ""))
+                        for call in reversed(calls)
+                        if str(call.get("phase", "")).startswith("retrieval_overview")
+                    ),
+                    self.settings.retrieval_overview_model
+                    or ("fake-kimi" if state.model_mode == "fake" else self.settings.kimi_model),
+                )
+                normalized, audit = self.retrieval_overviews.normalize_and_validate(
+                    document_id=source.document_id,
+                    overview=parsed,
+                    profile=profile,
+                    model=model_name,
+                )
+                if not audit.validation.valid:
+                    raise ModelSchemaError(
+                        "检索概述质量校验失败：" + ", ".join(audit.validation.errors)
+                    )
+                return {
+                    "retrieval_article_overview": normalized.model_dump(mode="json"),
+                    "retrieval_article_overview_audit": audit.model_dump(mode="json"),
+                    "model_calls": calls,
+                    "request_summaries": summaries,
+                }
+            except (ModelJsonError, ModelSchemaError) as exc:
+                last_error = exc
+                if retry >= self.settings.kimi_schema_retry_attempts:
+                    raise
+                repair = ModelRequest(
+                    phase="retrieval_overview_schema_repair",
+                    prompt=(
+                        state.retrieval_overview_prompt
+                        + "\n\n上一次响应不符合检索概述 JSON Schema。请重新输出完整 JSON，"
+                        "不要添加 Markdown 围栏或审稿意见。"
+                    ),
+                    pages=[],
+                    schema_name="retrieval_article_overview",
+                    json_schema=RetrievalArticleOverview.model_json_schema(),
+                    system_prompt=RETRIEVAL_OVERVIEW_SYSTEM_PROMPT,
+                    model=self.settings.retrieval_overview_model or None,
+                )
+                summaries.append(request_summary(repair))
+                response = self.model.invoke(repair)
+                if response.record:
+                    calls.append(response.record.model_dump(mode="json"))
+                raw = response.content
+        raise last_error or ModelSchemaError("检索概述解析失败")
+
     def retrieve_similar_documents(self, state: ReviewGraphState) -> dict[str, Any]:#筛选相似文章
         source = SourceDocument.model_validate(state.source_document)
+        if state.technical_incomplete_reason or not state.retrieval_article_overview:
+            audit = SimilarityRetrievalAudit(
+                query_document_id=source.document_id,
+                threshold=self.settings.similarity_threshold,
+                top_k=self.settings.similarity_top_k,
+                skipped_reason="technical_input_incomplete",
+            )
+            return {
+                "similarity_retrieval": audit.model_dump(mode="json"),
+                "similarity_context": {
+                    "threshold": self.settings.similarity_threshold,
+                    "top_k": self.settings.similarity_top_k,
+                    "effective_candidates": [],
+                },
+            }
         selected, audit = self.similarity.retrieve(
             current_document_id=source.document_id,
             current_profile=SimilarityProfile.model_validate(state.similarity_profile),
+            current_overview=RetrievalArticleOverview.model_validate(
+                state.retrieval_article_overview
+            ),
         )
         return {
             "similarity_retrieval": audit.model_dump(mode="json"),
@@ -402,6 +569,7 @@ class ReviewWorkflow:
             rereview_context=state.rereview_context,
             attachments=state.attachments,
             input_mode=prepared.mode,
+            retrieval_article_overview=state.retrieval_article_overview,
         )
         return {"prompt": prompt, "selected_pages": pages}
 
@@ -468,6 +636,7 @@ class ReviewWorkflow:
                 attachments=state.attachments,
                 visual_evidence={"batches": evidence_batches},
                 input_mode=prepared.mode,
+                retrieval_article_overview=state.retrieval_article_overview,
             )
 
         request = ModelRequest(            #请求
@@ -622,6 +791,7 @@ class ReviewWorkflow:
             "similarity_profile.json": state.similarity_profile,
             "similarity_retrieval.json": state.similarity_retrieval,
             "article_overview.json": state.article_overview_audit,
+            "retrieval_article_overview.json": state.retrieval_article_overview_audit,
             "review_history_lookup.json": state.review_history_lookup,
             "model_request_summary.json": {
                 "model": self.settings.kimi_model if state.model_mode == "real" else "fake-kimi",
@@ -670,24 +840,37 @@ class ReviewWorkflow:
         source = SourceDocument.model_validate(state.source_document)
         result = ReviewResult.model_validate(state.parsed_review_result)
         profile = SimilarityProfile.model_validate(state.similarity_profile)
-        overview_audit = ArticleOverviewAudit.model_validate(state.article_overview_audit)
+        overview_audit = RetrievalArticleOverviewAudit.model_validate(
+            state.retrieval_article_overview_audit
+        )
+        retrieval_overview = (
+            RetrievalArticleOverview.model_validate(state.retrieval_article_overview)
+            if state.retrieval_article_overview
+            else None
+        )
         eligible = (
             result.result.value == "pass"
-            and result.article_overview is not None
-            and bool(result.article_overview.content.strip())
+            and retrieval_overview is not None
+            and bool(retrieval_overview.content.strip())
+            and overview_audit.validation.valid
+            and overview_audit.source_content_hash == profile.source_content_hash
         )
         if eligible:
             self.similarity_index.upsert(
                 source=source,
                 profile=profile,
-                article_overview=result.article_overview,
-                overview_model=overview_audit.overview_model,
+                article_overview=retrieval_overview,
+                overview_model=overview_audit.model,
+                overview_prompt_version=overview_audit.prompt_version,
                 source_content_hash=overview_audit.source_content_hash,
                 review_result=result.result,
                 local_status=result.local_status,
             )
         updated_audit = overview_audit.model_copy(update={"persisted_to_index": eligible})
-        atomic_replace_json(output / "article_overview.json", updated_audit.model_dump(mode="json"))
+        atomic_replace_json(
+            output / "retrieval_article_overview.json",
+            updated_audit.model_dump(mode="json"),
+        )
         final_trace = _trace(state) + [
             _event("persist_similarity_profile", "completed", persisted=eligible)
         ]
@@ -696,7 +879,7 @@ class ReviewWorkflow:
         )
         return {
             "similarity_profile_persisted": eligible,
-            "article_overview_audit": updated_audit.model_dump(mode="json"),
+            "retrieval_article_overview_audit": updated_audit.model_dump(mode="json"),
         }
 
     def record_safe_failure(self, state: ReviewGraphState) -> dict[str, Any]:

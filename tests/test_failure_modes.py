@@ -29,11 +29,19 @@ def test_missing_and_corrupt_pdf_become_deterministic_incomplete(settings, tmp_p
     first = ReviewRunner(missing_settings).run_case("multimodal_pass")
     assert first.result == "incomplete_review"
     assert json.loads((first.output_dir / "raw_model_output.json").read_text(encoding="utf-8"))["source"] == "deterministic_input_guard"
+    first_requests = json.loads(
+        (first.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert first_requests["calls"] == []
 
     corrupt_settings, corrupt = clone_case(settings, tmp_path / "corrupt")
     (corrupt / "source.pdf").write_bytes(b"not-a-pdf")
     second = ReviewRunner(corrupt_settings).run_case("multimodal_pass")
     assert second.result == "incomplete_review"
+    second_requests = json.loads(
+        (second.output_dir / "model_request_summary.json").read_text(encoding="utf-8")
+    )
+    assert second_requests["calls"] == []
 
 
 def test_page_count_pdf_size_and_text_limits_are_explicit(settings, tmp_path: Path) -> None:

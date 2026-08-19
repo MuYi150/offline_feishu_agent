@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文给出无人机主控板工程样机的完整硬件方案，明确主控芯片、接口资源、PCB分层、器件分区、关键走线、输入保护、多级降压、负载预算、纹波和温升目标，并规定传感器标定、EMC、接口可靠性和整机试飞的测试条件与量化阈值。",
+    "topics": ["无人机硬件", "主控板设计", "PCB布线", "电源预算", "样机验证"],
+    "technical_entities": ["PCB", "EMC"],
+    "key_parameters": [],
+    "methods": ["接口资源设计", "PCB分区布线", "负载预算"],
+    "application_scenarios": ["无人机主控板样机"],
+    "validation_methods": ["传感器标定", "接口可靠性测试", "整机试飞"]
+  }
+}

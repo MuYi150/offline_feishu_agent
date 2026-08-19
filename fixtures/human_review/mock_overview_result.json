@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文整理一个需要专业职责人员判断的问题，说明背景、现有材料、可观察依据、待确认事项以及专业判断的适用边界。",
+    "topics": ["专业判断", "风险边界"],
+    "technical_entities": [],
+    "key_parameters": [],
+    "methods": ["材料梳理", "边界分析"],
+    "application_scenarios": ["专业风险判断"],
+    "validation_methods": ["专家确认"]
+  }
+}

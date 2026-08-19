@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文通过结构化正文、命令截图和表格记录一次技术实践，说明执行步骤、配置内容、关键输出和结果核对方式。",
+    "topics": ["多模态实验记录", "命令与表格", "结果验证"],
+    "technical_entities": [],
+    "key_parameters": [],
+    "methods": ["命令执行", "表格记录"],
+    "application_scenarios": ["技术实验"],
+    "validation_methods": ["截图与输出核对"]
+  }
+}

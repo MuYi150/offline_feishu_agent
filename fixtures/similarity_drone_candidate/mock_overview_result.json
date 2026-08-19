@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文设计实验室六旋翼无人机控制器硬件，核心采用 STM32H743，使用 ICM-42688-P 作为主 IMU、BMP390 作为高度传感器，并通过 SPI、CAN-FD、双 UART 和 PWM 连接传感器、扩展设备、调试链路及电机通道。系统由 6S 电池供电，满电电压 25.2 V，降压输出 5 V 6 A，独立 LDO 输出 3.3 V 1 A。样机验证包含短路与静态电流检查、IMU 六面标定、CAN-FD 环回、PWM 通道、45 min 温升和振动台测试，并记录零偏、丢包率、示波器波形与改板原因。",
+    "topics": ["六旋翼无人机", "无人机控制器", "飞控硬件", "惯性测量", "电源管理", "通信接口", "样机验证"],
+    "technical_entities": ["STM32H743", "ICM-42688-P", "BMP390", "SPI", "CAN-FD", "UART", "IMU", "LDO", "PWM"],
+    "key_parameters": ["800 Hz", "6S", "25.2 V", "5 V 6 A", "3.3 V 1 A", "45 min"],
+    "methods": ["IMU六面标定", "CAN-FD环回测试", "PWM通道测试", "振动台测试"],
+    "application_scenarios": ["实验室六旋翼无人机控制器"],
+    "validation_methods": ["静态电流检查", "温升测试", "振动测试", "通信丢包率记录"]
+  }
+}

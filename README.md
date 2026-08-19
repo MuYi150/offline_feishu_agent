@@ -77,7 +77,9 @@ $stamp = Get-Date -Format "yyyyMMddTHHmmss"
 
 ## 本地文字相似性索引
 
-初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层，将清洗后的当前正文与本地 SQLite 中历史文章的 AI `article_overview` 比较。图片、PNG、渲染页面和 OCR 完全不参与相似性计算；历史文章只把 AI 概述和分数放入 Prompt，不发送历史 PDF、图片或完整正文。最终审稿调用同时生成当前文章概述，不增加独立摘要模型调用；最终结果为 `pass` 且 `article_overview.content` 非空时写入索引。
+初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层；第一次纯文字模型调用把当前正文转换为 `retrieval_article_overview`，再与 SQLite 中历史检索概述对称比较。达到阈值的历史概述进入第二次正式多模态审稿。第一次调用不发送图片、附件或候选，第二次调用才发送当前正文、选定视觉证据和候选概述；历史 PDF、图片和完整正文永不进入 Prompt。
+
+正常初审因此有两次模型调用：`retrieval_overview` 和 `final_review`。复审仍跳过相似候选召回，但会生成修改后概述，复审 pass 后 UPSERT 同一 document_id。第一次概述是检索和索引的权威内容；正式审稿 JSON 中原有 `article_overview` 继续保留用于结果兼容，两者无需逐字相同。
 
 默认配置如下，程序仍沿用现有环境变量读取方式，不会自动加载 `.env`：
 
@@ -87,9 +89,13 @@ $env:SIMILARITY_THRESHOLD = "0.35"
 $env:SIMILARITY_TOP_K = "5"
 $env:SIMILARITY_OVERVIEW_MAX_CHARS = "1200"
 $env:SIMILARITY_QUERY_MAX_CHARS = "30000"
+$env:RETRIEVAL_OVERVIEW_MIN_CHARS = "100"
+$env:RETRIEVAL_OVERVIEW_MAX_CHARS = "1200"
+$env:RETRIEVAL_OVERVIEW_PROMPT_VERSION = "retrieval_overview_v1"
+$env:RETRIEVAL_OVERVIEW_MODEL = ""
 ```
 
-当前正文与历史 AI 概述的字符 2～4 gram TF-IDF、标题、主题关键词、技术实体和参数权重分别为 `0.70/0.10/0.10/0.05/0.05`。最终为 `pass` 且 `article_overview.content` 非空的文章会 UPSERT；概述校验结果仍写入 `article_overview.json` 供审计，但 `invalid` 不再阻止入库。相同 `document_id` 更新原记录。SQLite v1 会原位迁移到 v2，旧规则摘要保留并标记为 `deterministic_legacy`。
+当前检索概述与历史概述使用统一字符 2～4 gram TF-IDF 空间。概述正文、标题、主题、技术实体、参数、方法、应用场景与验证方式的权重分别为 `0.60/0.10/0.10/0.05/0.05/0.05/0.05`。正式结果为 `pass`、检索概述合法且正文哈希一致时 UPSERT；相同 `document_id` 更新原记录。SQLite v1/v2 会原位迁移到 v3，旧规则摘要和旧正式审稿概述保留并继续召回，新记录标记为 `ai_retrieval_overview`。
 
 初始化和查看索引：
 
@@ -166,8 +172,9 @@ PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
 - `visual_evidence.json`：兼容旧批次流程的证据；默认长篇新流程不产生批次内容。
 - `input_coverage.json`：本次实际可见范围及限制。
 - `similarity_profile.json`：当前文章的文字来源、清洗查询正文、本地关键词/实体/参数、字符数、截断状态和内容哈希。
-- `similarity_retrieval.json`：本地索引候选数、五项分数、概述来源/版本、阈值判断和最终 Prompt 候选。
-- `article_overview.json`：模型生成的当前文章概述、模型与 Prompt 版本、落地校验警告和是否写入索引。
+- `similarity_retrieval.json`：本地索引候选数、七项分数、概述来源/版本、阈值判断和最终 Prompt 候选。
+- `retrieval_article_overview.json`：第一次纯文字调用生成的权威检索概述、正文哈希、质量校验和是否写入索引。
+- `article_overview.json`：第二次正式审稿返回的兼容文章概述及质量审计，不作为新索引记录的权威内容。
 - `prompt.txt`：纯文字 Prompt，不含图片 Base64。
 - `model_request_summary.json`：模型、阶段、耗时、token 和图片摘要，不含认证信息。
 - `raw_model_output.json`：仅保存最终 message content 和安全响应元数据，不保存推理内容或完整 SDK 响应。
@@ -187,7 +194,7 @@ PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
 - `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`。旧 Fixture 可继续携带 `previous_issues` 供 Loader 兼容解析，但 Graph 不使用它；实际模式和轮次只由本地历史确定。
 - `document_blocks.json` 保持 `{"blocks": [...]}` 包装，内部使用飞书风格的 `block_type`、`text.elements[].text_run.content`、表格子块等原始结构。
 - `attachment_metadata.json` 保持 `{"document_id": "...", "attachments": [...]}`。
-- `mock_llm_result.json` 保持 v1 的 `behavior=return/raw/raise` 包装；Fake 响应与 `expected_result.json` 始终分离，避免测试自证。
+- `mock_overview_result.json` 提供第一次检索概述 Fake 响应，`mock_llm_result.json` 继续提供正式审稿响应；两者都与 `expected_result.json` 分离，避免测试自证。
 - `expected_result.json` 保持 v1 的预期摘要字段。相似候选是 v2 扩展，采用 `similarity_candidates.json` 的 `similar_documents` 包装。
 - 页面素材继续使用约定文件 `source.pdf` 或 `pages/`。仅 v2 才需要的“固定 PDF、模拟缺页”等测试控制放入可选 `fixture_options.json`，不污染 v1 的 source 格式。
 - `fixture_options.real_model_only=true` 表示案例只用于真实模型手动运行；Fake CLI 会明确拒绝，而不会伪造模型结果。

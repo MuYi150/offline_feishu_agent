@@ -195,7 +195,7 @@ def test_initial_similarity_guide_explains_upstream_score_and_empty_candidates()
         assert f"- {field}：" in prompt
     assert "本地确定性算法" in prompt
     assert "similarity_candidates.json 不参与召回" in prompt
-    assert "AI 文章概述" in prompt
+    assert "AI 检索概述" in prompt
     assert "不是完整正文" in prompt
     assert "不能仅凭分数认定抄袭" in prompt
     assert "effective_candidates 为空" in prompt
@@ -418,6 +418,16 @@ def test_article_overview_is_separate_from_review_summary_and_candidates() -> No
     assert "## ArticleOverviewRequirements" in prompt
     assert "summary 只总结本轮审稿结论" in prompt
     assert "article_overview 只概述当前文章" in prompt
+
+
+def test_final_prompt_explains_current_retrieval_overview_and_symmetric_scores() -> None:
+    prompt = _build(
+        similarity_context={"threshold": 0.35, "top_k": 5, "effective_candidates": []}
+    )
+    assert "## CurrentRetrievalArticleOverviewGuide" in prompt
+    assert "正式审稿前由独立文本模型阶段" in prompt
+    assert "overview_content_tfidf" in prompt
+    assert "方法、应用场景和验证方式" in prompt
     assert "不得吸收、改写或复制 InitialReviewSimilarityContext" in prompt
     assert "目标长度 500～1200 字" in prompt
     for field in ("content", "topics", "technical_entities", "key_parameters"):

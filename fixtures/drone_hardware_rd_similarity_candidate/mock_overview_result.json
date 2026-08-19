@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文设计园区巡检和教学验证用四旋翼无人机飞控核心板B版，采用 STM32F405VGT6、ICM-42688-P、GPS、433 MHz 数传及 SPI、UART、I2C、PWM 接口，使用四层 PCB、连续回流和多级电源设计，并进行限流上电、纹波温升、IMU标定、通信、电机干扰、插拔和试飞验证。",
+    "topics": ["无人机飞控主板", "PCB抗干扰", "电源管理", "通信接口", "样机验证"],
+    "technical_entities": ["STM32F405VGT6", "ICM-42688-P", "GPS", "SPI", "UART", "I2C", "PWM", "TPS5430", "TPS62162", "LDO"],
+    "key_parameters": ["168 MHz", "1 MB Flash", "192 KB SRAM", "6.0 V～16.8 V", "5 V/3 A", "3.3 V/1 A", "1 kHz", "500 Hz", "45 min"],
+    "methods": ["四层PCB设计", "连续回流设计", "IMU标定"],
+    "application_scenarios": ["园区巡检", "教学验证"],
+    "validation_methods": ["限流上电", "纹波温升测试", "通信测试", "装机试飞"]
+  }
+}

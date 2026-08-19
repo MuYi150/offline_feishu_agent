@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文描述软件部署流程，包含环境准备、配置修改、服务启动、结果检查和常见执行问题定位，供读者按固定顺序完成部署。",
+    "topics": ["软件部署", "配置验证"],
+    "technical_entities": [],
+    "key_parameters": [],
+    "methods": ["环境准备", "配置修改", "服务启动"],
+    "application_scenarios": ["软件部署"],
+    "validation_methods": ["结果检查"]
+  }
+}

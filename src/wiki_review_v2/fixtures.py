@@ -64,6 +64,29 @@ class FixtureDocumentSource:
             if not mock_path.exists():
                 mock_path = case_path / "fake_model_response.json"
             fake = self._adapt_mock(_read_json(mock_path, required=False, default={}))
+            overview_path = case_path / "mock_overview_result.json"
+            if overview_path.exists():
+                overview = self._adapt_mock(
+                    _read_json(overview_path, required=True, default={})
+                )
+                if "review" in overview:
+                    fake["overview"] = overview["review"]
+                if "raw" in overview:
+                    fake["overview_raw"] = overview["raw"]
+                if "raise" in overview:
+                    fake["overview_raise"] = overview["raise"]
+            elif isinstance(fake.get("review"), dict) and isinstance(
+                fake["review"].get("article_overview"), dict
+            ):
+                # Legacy Fixture compatibility. New/updated fixtures should provide
+                # mock_overview_result.json so the two model phases stay independent.
+                legacy = dict(fake["review"]["article_overview"])
+                fake["overview"] = {
+                    **legacy,
+                    "methods": [],
+                    "application_scenarios": [],
+                    "validation_methods": [],
+                }
             expected = _read_json(case_path / "expected_result.json", required=False, default={})
             return FixtureBundle(
                 source_document=source,

@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文是一份长篇实验记录，按页和章节说明实验目标、环境配置、执行步骤、阶段观察结果与最终结论，并保存过程证据用于复查和复现。",
+    "topics": ["长篇实验记录", "过程证据", "实验复现"],
+    "technical_entities": [],
+    "key_parameters": [],
+    "methods": ["分阶段实验", "过程记录"],
+    "application_scenarios": ["长篇实验复现"],
+    "validation_methods": ["阶段结果核对"]
+  }
+}

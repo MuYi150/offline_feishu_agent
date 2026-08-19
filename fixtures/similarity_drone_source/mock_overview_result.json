@@ -1,0 +1,12 @@
+{
+  "behavior": "return",
+  "response": {
+    "content": "本文设计科研四旋翼无人机飞控硬件平台，核心采用 STM32H743 和 ICM-42688-P，通过 SPI 采集惯性数据，以 GNSS、CAN-FD、UART 和 PWM 完成导航、扩展通信、遥测调试及电机控制。系统使用 6S 锂电池，经降压模块生成 5 V，并由独立 LDO 提供 3.3 V；四层 PCB 对数字区和模拟传感器区分区布局，并配置终端匹配、浪涌保护和连续参考地。样机依次执行电源轨测量、IMU 六面标定、CAN-FD 环回、PWM 通道、温升和振动台测试，记录零偏、通信丢包率、示波器波形及改板原因。",
+    "topics": ["四旋翼无人机", "无人机控制器", "飞控硬件", "惯性测量", "电源管理", "通信接口", "样机验证"],
+    "technical_entities": ["STM32H743", "ICM-42688-P", "SPI", "GNSS", "CAN-FD", "UART", "LDO", "PCB", "IMU", "PWM"],
+    "key_parameters": ["6S", "5 V", "3.3 V"],
+    "methods": ["四层PCB分区设计", "IMU六面标定", "CAN-FD环回测试", "振动台测试"],
+    "application_scenarios": ["科研四旋翼无人机飞控"],
+    "validation_methods": ["电源轨测量", "温升测试", "振动测试", "通信丢包率记录"]
+  }
+}

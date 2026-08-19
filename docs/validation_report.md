@@ -74,3 +74,11 @@ conda run --no-capture-output -n feishu-api python -m pytest -q
 - 短篇 `multimodal_pass` 保持 `legacy_full_pages`、原 `page-N` evidence ID 和单次 `final_review`。
 - 将视觉区域预算压缩到 1 且禁止整页兜底后，审计记录必要内容未提交，`visual_pages_complete=false`，Fake 的 pass 自动归一为 `incomplete_review`。
 - 新增 `document_extraction.json` 和 `visual_selection.json`；请求摘要记录图片类型和 bbox。安全扫描未发现 Base64、Authorization、Bearer 或 API Key。
+
+## 2026-08-19 两阶段 AI 检索概述
+
+- 全量 Fake/单元/集成测试：`122 passed, 2 skipped`；两个 skipped 为未显式启用的真实 Kimi 测试。
+- 使用独立临时 output、state 和 SQLite 连续运行 `similarity_drone_source`、`similarity_drone_candidate`，两篇均为 `pass`，调用顺序均为 `retrieval_overview → final_review`，概述阶段图片数为 0。
+- source 的检索概述成功写入；candidate 从 1 条历史记录中召回 source，最终分数 `0.371560`，超过默认阈值 `0.35`。分项为：概述 TF-IDF `0.263456`、标题 `0.444444`、主题 `0.75`、实体 `0.727273`、参数 `0.125`、方法 `0.6`、场景与验证 `0.428571`。
+- candidate Prompt 包含 source 的 document_id 和完整检索概述，不包含历史 `source.pdf`、页面图片路径或 Base64。临时 SQLite Schema 为 v3，最终两条记录均标记为 `ai_retrieval_overview`。
+- 新增 Prompt、JSON、trace 和临时 SQLite 文本安全扫描未发现 Authorization、Bearer、Base64 或测试 Key。
