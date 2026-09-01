@@ -6,10 +6,9 @@ from wiki_review_v2.policies import ReviewHistoryPolicy, ReviewModePolicy
 
 def test_review_mode_initial_and_rereview() -> None:
     policy = ReviewModePolicy()
-    assert policy.decide(None) == "initial"
-    assert policy.decide(
-        PreviousReview(document_id="d", review_round=1, result="pass")
-    ) == "rereview"
+    assert policy.decide(0) == "initial"
+    assert policy.decide(1) == "rereview"
+    assert policy.decide(3) == "rereview"
 
 
 def test_rereview_context_only_keeps_blocking_and_major() -> None:

@@ -23,10 +23,8 @@ from wiki_review_v2.storage import ReviewHistoryStore
         ("human_review", "recommend_human_review"),
         ("partial_pages", "incomplete_review"),
         ("similarity_merge", "pass"),
-        ("rereview_resolved", "pass"),
         ("multimodal_pass", "pass"),
         ("drone_hardware_rd", "pass"),
-        ("drone_hardware_rd_round2_pass", "pass"),
         ("drone_hardware_rd_similarity_candidate", "pass"),
     ],
 )
@@ -150,16 +148,46 @@ def test_long_mixed_pdf_selects_regions_without_visual_batch(settings) -> None:
     assert any(item["reason"] == "duplicate_sha256" for item in selection["decisions"])
 
 
-def test_fixture_review_round_without_local_history_remains_initial(settings) -> None:
+def test_fixture_rereview_round_without_matching_history_fails_safely(settings) -> None:
     summary = ReviewRunner(settings).run_case("rereview_resolved")
-    prompt = (summary.output_dir / "prompt.txt").read_text(encoding="utf-8")
     lookup = json.loads(
         (summary.output_dir / "review_history_lookup.json").read_text(encoding="utf-8")
     )
+
+    assert not summary.ok
+    assert summary.failure["code"] == "review_history_error"
+    assert "test_doc_rereview_resolved" in summary.failure["message"]
+    assert "第 1 轮" in summary.failure["message"]
+    assert lookup["lookup_status"] == "error"
     assert lookup["history_found"] is False
-    assert "previous-1" not in prompt
+    assert not (summary.output_dir / "prompt.txt").exists()
+    assert not (summary.output_dir / "model_request_summary.json").exists()
+
+
+def test_fixture_initial_round_ignores_existing_local_history(settings) -> None:
+    runner = ReviewRunner(settings)
+    first = runner.run_case("basic_pass", run_id="basic-first")
+    second = runner.run_case("basic_pass", run_id="basic-repeat")
+
+    assert first.ok and second.ok
+    prompt = (second.output_dir / "prompt.txt").read_text(encoding="utf-8")
+    lookup = json.loads(
+        (second.output_dir / "review_history_lookup.json").read_text(encoding="utf-8")
+    )
+    history = json.loads(
+        (settings.state_root / "review_history" / "test_doc_basic_pass.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert lookup["history_found"] is False
+    assert lookup["selected_review_round"] is None
+    assert lookup["total_history_records"] == 1
     assert "## InitialReviewSimilarityGuide" in prompt
     assert "## ReReviewGuide" not in prompt
+    assert [(item["run_id"], item["review_round"]) for item in history["records"]] == [
+        ("basic-first", 1),
+        ("basic-repeat", 1),
+    ]
 
 
 def test_drone_round2_uses_real_round1_major_issue_ids(settings) -> None:

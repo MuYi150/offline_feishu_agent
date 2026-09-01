@@ -252,8 +252,8 @@ class ReviewWorkflow:
             "blocks": bundle.blocks,
             "attachments": bundle.attachments,
             "similarity_candidates": [item.model_dump(mode="json") for item in bundle.similarity_candidates],
-            # Fixture history remains parseable for v1 compatibility, but production routing
-            # is exclusively driven by ReviewHistoryStore in load_review_history.
+            # Fixture history remains parseable for v1 compatibility. Routing is driven by
+            # source_document.review_round; local history only supplies rereview context.
             "previous_review": None,
             "fixture_options": bundle.fixture_options.model_dump(mode="json"),
             "fake_model_response": bundle.fake_model_response,
@@ -266,9 +266,25 @@ class ReviewWorkflow:
 
     def load_review_history(self, state: ReviewGraphState) -> dict[str, Any]:
         source = SourceDocument.model_validate(state.source_document)
+        requested_previous_round = source.review_round
         try:
-            latest = self.history.load_latest(source.document_id)
-            total = self.history.record_count(source.document_id)
+            if requested_previous_round == 0:
+                # Validate any existing history for audit safety, but never let it
+                # change fixture-driven initial-review routing or supply context.
+                self.history.load_latest(source.document_id)
+                selected = None
+                total = self.history.record_count(source.document_id)
+            else:
+                selected = self.history.load_latest_for_round(
+                    source.document_id, requested_previous_round
+                )
+                total = self.history.record_count(source.document_id)
+                if selected is None:
+                    raise ReviewHistoryError(
+                        "未找到 document_id="
+                        f"{source.document_id} 的第 {requested_previous_round} 轮审稿历史，"
+                        "无法安全执行复审。"
+                    )
         except ReviewHistoryError:
             audit = ReviewHistoryLookupAudit(
                 document_id=source.document_id,
@@ -283,14 +299,14 @@ class ReviewWorkflow:
 
         previous = None
         blocking_major_count = 0
-        if latest is not None:
+        if selected is not None:
             previous = PreviousReview(
                 document_id=source.document_id,
-                review_round=latest.review_round,
-                result=latest.result.result,
+                review_round=selected.review_round,
+                result=selected.result.result,
                 issues=[
                     issue.model_dump(mode="json")
-                    for issue in latest.result.issues
+                    for issue in selected.result.issues
                 ],
             )
             blocking_major_count = sum(
@@ -298,11 +314,11 @@ class ReviewWorkflow:
             )
         audit = ReviewHistoryLookupAudit(
             document_id=source.document_id,
-            history_found=latest is not None,
-            source="local_history" if latest is not None else "none",
-            selected_run_id=latest.run_id if latest else None,
-            selected_review_round=latest.review_round if latest else None,
-            selected_result=latest.result.result if latest else None,
+            history_found=selected is not None,
+            source="local_history" if selected is not None else "none",
+            selected_run_id=selected.run_id if selected else None,
+            selected_review_round=selected.review_round if selected else None,
+            selected_result=selected.result.result if selected else None,
             total_history_records=total,
             blocking_major_issue_count=blocking_major_count,
         )
@@ -312,9 +328,9 @@ class ReviewWorkflow:
         )
         return {
             "previous_review": previous.model_dump(mode="json") if previous else None,
-            "previous_history_record": latest.model_dump(mode="json") if latest else None,
+            "previous_history_record": selected.model_dump(mode="json") if selected else None,
             "review_history_lookup": audit.model_dump(mode="json"),
-            "current_review_round": (latest.review_round + 1) if latest else 1,
+            "current_review_round": requested_previous_round + 1,
         }
 
     def build_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
@@ -372,8 +388,8 @@ class ReviewWorkflow:
         }
 
     def route_review_mode(self, state: ReviewGraphState) -> dict[str, Any]: #a分支：判断是初审还是复审
-        previous = PreviousReview.model_validate(state.previous_review) if state.previous_review else None
-        return {"review_mode": self.mode_policy.decide(previous)}
+        source = SourceDocument.model_validate(state.source_document)
+        return {"review_mode": self.mode_policy.decide(source.review_round)}
 
     def build_retrieval_overview_request(
         self, state: ReviewGraphState

@@ -103,6 +103,21 @@ class ReviewHistoryStore:
         except ValidationError as exc:
             raise ReviewHistoryError("最新审稿历史记录不符合 Schema，无法安全判断审稿轮次。") from exc
 
+    def load_latest_for_round(
+        self, document_id: str, review_round: int
+    ) -> ReviewHistoryRecord | None:
+        if review_round < 1:
+            raise ReviewHistoryError("按轮次读取审稿历史时，review_round 必须大于等于 1。")
+        records = self._load_records(document_id)
+        for raw in reversed(records):
+            try:
+                record = ReviewHistoryRecord.model_validate(raw)
+            except ValidationError as exc:
+                raise ReviewHistoryError("本地审稿历史记录不符合 Schema，无法安全匹配指定轮次。") from exc
+            if record.review_round == review_round:
+                return record
+        return None
+
     def record_count(self, document_id: str) -> int:
         return len(self._load_records(document_id))
 

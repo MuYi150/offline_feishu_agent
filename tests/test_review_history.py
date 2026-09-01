@@ -51,6 +51,25 @@ def test_legacy_history_without_completed_at_uses_last_array_record(settings, tm
     assert latest.completed_at == ""
 
 
+def test_load_latest_for_round_uses_last_matching_record(settings, tmp_path) -> None:
+    result = _result_from_run(settings)
+    store = ReviewHistoryStore(tmp_path / "state-by-round")
+    store.append("doc", _completed_record(run_id="round-1-old", review_round=1, result=result))
+    store.append("doc", _completed_record(run_id="round-1-new", review_round=1, result=result))
+    store.append("doc", _completed_record(run_id="round-2", review_round=2, result=result))
+
+    selected = store.load_latest_for_round("doc", 1)
+
+    assert selected is not None
+    assert selected.run_id == "round-1-new"
+    assert store.load_latest_for_round("doc", 3) is None
+
+
+def test_load_latest_for_round_rejects_zero(tmp_path) -> None:
+    with pytest.raises(ReviewHistoryError):
+        ReviewHistoryStore(tmp_path).load_latest_for_round("doc", 0)
+
+
 def test_append_is_idempotent_by_run_id_and_rejects_conflict(settings, tmp_path) -> None:
     result = _result_from_run(settings)
     store = ReviewHistoryStore(tmp_path / "state")
