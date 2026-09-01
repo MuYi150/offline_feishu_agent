@@ -26,7 +26,7 @@ class Settings(BaseModel):
     allow_real_model_call: bool = False
     kimi_reasoning_effort: str = "low"
     kimi_max_completion_tokens: int = Field(default=8192, ge=256)
-    kimi_timeout_seconds: float = Field(default=180.0, gt=0)
+    kimi_timeout_seconds: float = Field(default=600.0, gt=0)
     kimi_max_attempts: int = Field(default=3, ge=1, le=10)
     kimi_schema_retry_attempts: int = Field(default=1, ge=0, le=3)
     pdf_render_dpi: int = Field(default=150, ge=72, le=300)
@@ -48,7 +48,7 @@ class Settings(BaseModel):
     similarity_top_k: int = Field(default=5, ge=1, le=50)
     similarity_overview_max_chars: int = Field(default=1200, ge=200, le=5000)
     retrieval_overview_min_chars: int = Field(default=100, ge=1, le=5000)
-    retrieval_overview_max_chars: int = Field(default=1200, ge=100, le=5000)
+    retrieval_overview_max_chars: int = Field(default=1500, ge=100, le=5000)
     retrieval_overview_prompt_version: str = "retrieval_overview_v1"
     retrieval_overview_model: str = ""
     similarity_query_max_chars: int = Field(default=30_000, ge=1_000, le=500_000)
@@ -93,7 +93,7 @@ class Settings(BaseModel):
             allow_real_model_call=_bool_env("ALLOW_REAL_MODEL_CALL"),
             kimi_reasoning_effort=os.getenv("KIMI_REASONING_EFFORT", "low"),
             kimi_max_completion_tokens=int(os.getenv("KIMI_MAX_COMPLETION_TOKENS", "8192")),
-            kimi_timeout_seconds=float(os.getenv("KIMI_TIMEOUT_SECONDS", "180")),
+            kimi_timeout_seconds=float(os.getenv("KIMI_TIMEOUT_SECONDS", "600.0")),
             kimi_max_attempts=int(os.getenv("KIMI_MAX_ATTEMPTS", "3")),
             kimi_schema_retry_attempts=int(os.getenv("KIMI_SCHEMA_RETRY_ATTEMPTS", "1")),
             pdf_render_dpi=int(os.getenv("PDF_RENDER_DPI", "150")),
