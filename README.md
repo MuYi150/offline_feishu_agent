@@ -1,6 +1,6 @@
 # 科研团队飞书知识库审稿 Agent v2
 
-这是一个完全本地的多模态审稿系统。第一阶段只读取仓库内的 Fixture，使用 LangGraph 编排流程，并可选择离线 Fake 模型或显式调用真实 Kimi；它不会认证飞书、读取线上 Wiki/Sheet/Docx、写表、发消息、移动或修改文档。
+这是一个使用 LangGraph 编排的多模态审稿系统。本地 CLI 保留 Fixture、离线 Fake 和真实 Kimi 模式；新增独立线上入口 `python -m wiki_review_v2.online`，支持飞书普通同步、自动 Fixture、审稿回写、通知重试和公示索引。线上配置、运行命令和切换步骤见 [ONLINE.md](ONLINE.md)，默认只读，线上修改必须显式 `--write`，模型另需 `--real-model`。
 
 ## 安装
 
@@ -58,7 +58,7 @@ conda run --no-capture-output -n feishu-api python -m wiki_review_v2.cli --resum
 
 ## 本地审稿历史与自动复审
 
-跨运行复审由 `local_state/review_history/<document_id>.json` 驱动，不使用每次输出目录中的 `checkpoint.sqlite`。新稿进入 Graph 后会先按 `document_id` 查询本地历史：没有历史自动进入初审；有历史自动加载最后一条有效完成记录并进入复审，只把其中的 blocking/major 问题交给模型。Fixture 的 `review_round` 和旧 `previous_issues` 仍可被 Loader 解析，但不会决定生产工作流的初审/复审模式。
+本地跨运行历史存储于 `local_state/review_history/<document_id>.json`。Fixture 的 `review_round=0` 明确进入初审；大于零时必须加载对应轮次的真实历史，只把 blocking/major 问题交给模型，跳过相似召回。旧 `previous_issues` 只供兼容解析，不替代历史。线上使用独立 SQLite 历史，并在表格写入确认后提交有效记录；每次运行目录内的 checkpoint 用于恢复该次运行。
 
 新历史记录包含 `run_id`、系统推导的 `review_round`、`completed_at` 和完整审稿结果。相同 `run_id` 重试采用幂等写入；旧记录没有时间字段时按 records 数组顺序，以最后一条为最新。历史文件损坏或 Schema 不合法会产生 `review_history_error` 并停止，不会静默降级为初审，也不会移动或覆盖原历史文件。
 
@@ -75,7 +75,7 @@ $stamp = Get-Date -Format "yyyyMMddTHHmmss"
 
 每次运行的 `review_history_lookup.json` 记录是否命中历史及选中轮次；`review_history.json` 区分本次运行前加载的 `previous_review` 和本次产生的 `current_review`。
 
-## 本地文字相似性索引
+## 本地文字相似性索引（线上公示索引见 ONLINE.md）
 
 初审不再使用 Fixture 中预设的 `similarity_candidates.json` 分数。系统优先用有效 Blocks，Blocks 不可用时读取 Fixture 原始 `source.pdf` 文字层；第一次纯文字模型调用把当前正文转换为 `retrieval_article_overview`，再与 SQLite 中历史检索概述对称比较。达到阈值的历史概述进入第二次正式多模态审稿。第一次调用不发送图片、附件或候选，第二次调用才发送当前正文、选定视觉证据和候选概述；历史 PDF、图片和完整正文永不进入 Prompt。
 
@@ -191,7 +191,7 @@ PDF 优先，其次 pages，最后由 Blocks 自动生成 PDF
 
 每个案例放在 `fixtures/<case_id>/`。为方便后续从 v1 平移，v2 沿用 v1 的 Fixture 外部契约，不把简化 DTO 写进测试数据：
 
-- `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`。旧 Fixture 可继续携带 `previous_issues` 供 Loader 兼容解析，但 Graph 不使用它；实际模式和轮次只由本地历史确定。
+- `source_document.json` 保留 v1 字段：`case_id`、`document_id`、`node_token`、`title`、`wiki_name`、`author_id`、`author`、`link`、`review_method`、`status`、`review_round`、`updated_at`、`last_ai_review_at`。旧 Fixture 可继续携带 `previous_issues` 供 Loader 兼容解析，但 Graph 不使用它；模式由 review_round 决定，复审需匹配已提交历史。
 - `document_blocks.json` 保持 `{"blocks": [...]}` 包装，内部使用飞书风格的 `block_type`、`text.elements[].text_run.content`、表格子块等原始结构。
 - `attachment_metadata.json` 保持 `{"document_id": "...", "attachments": [...]}`。
 - `mock_overview_result.json` 提供第一次检索概述 Fake 响应，`mock_llm_result.json` 继续提供正式审稿响应；两者都与 `expected_result.json` 分离，避免测试自证。
@@ -244,6 +244,6 @@ conda run --no-capture-output -n feishu-api python -m pytest -q -m real_kimi
 
 1. 长篇 PDF 已使用本地文字优先和视觉区域筛选；后续可用真实语料继续校准表格、矢量图和视觉优先级规则。
 
-2.摘要归为本地索引的时间需要改为已公式后，目前为了测试方便改为ai通过后。
+2. 本地 Fake 测试继续在 AI 通过后写入测试索引；线上生产索引仅在公示资格和版本确认后写入，二者隔离。
 
-3. 当前本地历史采用按 document_id 分文件的 JSON records 数组，适合单机顺序运行；多进程并发写同一文档仍需后续升级为带事务锁的数据库存储。
+3. 本地案例历史仍采用按 document_id 分文件的 JSON records 数组；线上历史与交付使用 SQLite 事务和操作系统运行锁，防止定时作业重叠。

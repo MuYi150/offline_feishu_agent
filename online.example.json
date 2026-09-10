@@ -1,0 +1,22 @@
+{
+  "online_root": "online_state",
+  "feishu": {
+    "app_id": "YOUR_FEISHU_APP_ID",
+    "app_secret": "YOUR_FEISHU_APP_SECRET",
+    "domain": "YOUR_TENANT.feishu.cn",
+    "review_wiki_node_token": "YOUR_REVIEW_SHEET_WIKI_NODE_TOKEN",
+    "config_wiki_node_token": "YOUR_CONFIG_SHEET_WIKI_NODE_TOKEN",
+    "review_sheet_name": "文档上传情况",
+    "config_sheet_name": "知识库配置表",
+    "admin_open_id": "ou_YOUR_ADMIN_OPEN_ID",
+    "enable_admin_notify": true,
+    "http_timeout": 30,
+    "http_max_retries": 3,
+    "export_timeout": 120,
+    "max_review_rounds": 3
+  },
+  "model": {
+    "kimi_model": "kimi-k2.6",
+    "kimi_base_url": "https://api.moonshot.cn/v1"
+  }
+}

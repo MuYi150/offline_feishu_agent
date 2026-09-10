@@ -1,0 +1,6725 @@
+{
+  "blocks": [
+    {
+      "block_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "block_type": 1,
+      "children": [
+        "doxcnEddu1f32pjcFXMTDR5KUJe",
+        "doxcn6rohTlifYOV9U3wtCCyXYd",
+        "Xcmtd40E1osbuAxKLOIcs1olnBb",
+        "doxcnde5tDifSVEcJNyWHIm6ueu",
+        "doxcnoiPFguMLr8gZcyF7d9p2Ah",
+        "doxcnqoZNCCI9XtIRyWBvOC7EMD",
+        "doxcnV76emgnvBK3Ib0l6fpvdvf",
+        "doxcneeIS4Sh7Nec4jyUd7zPR2Z",
+        "doxcnjBuXkKF39AOJOxC3jiw8Df",
+        "doxcnB2L08PLXabzW3Ei4g8kPOg",
+        "doxcn7HCuaoGeAyvkxRZJv6Q3dc",
+        "doxcnljN3XO7nhLKadSb7rgxQLb",
+        "doxcnSbzaqQLvLBNBjPzeY8Q8hc",
+        "doxcn2nTbsmnllfuXvEvkh4i96e",
+        "doxcnHu9s8lehNRdUMoKDKj6iIg",
+        "doxcn1ZmOOGVXGPTafE0vbpUHiz",
+        "doxcnsklZa0l2roJPZHCJs3BKJe",
+        "doxcnwOkzoUFV7qqRsGWejgxtke",
+        "doxcnCLmIf8nibnntfBgTo4R3QL",
+        "doxcngmzIBOiVChUXoLXyHc8Cth",
+        "doxcnVXFuTUumvMbkR3KsZyrHuc",
+        "doxcnToK507EcwzkbtRj4PRT53g",
+        "doxcnh9UNvXHaXkRYmpYae5DCze",
+        "doxcnIPFOjbKdIlquhrwfXJmBbH",
+        "doxcnQADIPOtzSWdCxXHohoqiLc",
+        "doxcnwoFNSLWTezNGz4Xdn7Z06e",
+        "doxcnxjyQZPBn9qandQNIoHeuzi",
+        "doxcnXkjujtdBddgzIxv1SfsaXd",
+        "doxcn8GxachzyUDZHGuiVxGh0He",
+        "doxcntw6C21O5GHo4JFRazwGBUf",
+        "doxcnR9Tv4hiY1NW26dk8XqvEeb",
+        "doxcnY5hA08A2U5wxROTLwne7Pb",
+        "doxcn4VTEXGhd2qubJs1TLBa1md",
+        "doxcn0iqnRbM9hjbrqG6Gx0ODYf",
+        "doxcny8qdQwoNRvFuGUTAA2PJbe",
+        "doxcnJTqXNVUApHYQWiEN1yc5ne",
+        "doxcn6rzLQCkeODp6jndGazT1cd",
+        "doxcnHwka6Tk62YgYuqvgmrdeOg",
+        "doxcnFkTNlBl3SUQO771gmEGMLg",
+        "doxcnR2hGJEa4BwM05w8iRWiqGe",
+        "doxcnp17e8JqQ9wU6meED8wlvzd",
+        "doxcnnsKITr5xZ5KJTHduxUxztd",
+        "doxcnBpFyAoSW0FiOFRPNJJkWpg",
+        "doxcnsRp4TjxnFvPjVqEtdKmCmf",
+        "doxcn967NzQV8lcbYIahrgnMc0c",
+        "doxcnxBT0P6IWnWNy6UwrPnIihe",
+        "doxcn8Y8FFaJAhV8NaEfH0AXa3L",
+        "doxcncN9D9LJXQXBME5lRYwRFPb",
+        "doxcnPadCp2abHdz5endFxvXpih",
+        "doxcntaqQGVqLvzwlHYZe4W7VN7",
+        "doxcnrn5WcDE8gtjL0yhKBhTZEg",
+        "doxcni8RqUHHMmlKLmJCcsIpoue",
+        "doxcnOZrkCqjRREO42O7mVBdwZd",
+        "doxcnuCPu6Xj344X5VEGmRC8lie",
+        "doxcnF7Pw7Z1kIdmuqKwKd6yyeN",
+        "doxcnwPXbPsaJpBJmXZRL5dcwAc",
+        "doxcnYb7CvKZW2LtcHQfGz3tVFf",
+        "doxcnmBXeD9HSt9tP3WU6LnD1be",
+        "doxcnMRPYwziOZOFVIrM40ZMLbh",
+        "doxcnVmNyn68V0nzejeGz95spDb",
+        "doxcn8Lfte62yjRuqeRxJkHI6vg",
+        "doxcn5ziYaypzEucZBTLQ2DeDCb",
+        "doxcniQblyzD2Q3I24EyxtpiROb",
+        "doxcniVctXqSnGuhgxsBlcN5oLb",
+        "doxcnwtAm97xtPHdgGidl1wGAVd",
+        "doxcnNx3eBcStK6Ie87LN0ChMyg",
+        "doxcnXhQAgfsuU3w1jGHiU0kUse",
+        "doxcnU8QZR3I9sqK42Iyqzx38Nd",
+        "doxcnrAZTO3pSSqhJE0MpvXozyc",
+        "doxcnOU1ARENR6uNEfn6YdsU3Fc",
+        "doxcnxKG7z4AHwJCOSMYxsftiMe",
+        "doxcnb9M2iolTWnLrce2VryuHLc",
+        "doxcn4TVgvk2nAxIk6lQjlzI4Qe",
+        "doxcnHPHItg44t2UNorwwJXzEDc",
+        "doxcnJ5O1QDN6dljaF65BaVcP0V",
+        "doxcnTvUSfRw5CK8TwcIEEnAkTh",
+        "doxcn1NNyuVDd8u1zHYtPRYrLUf",
+        "doxcny344EQAz73f3GzPPdaoPPg",
+        "doxcnc5dVnGNOvuyrG5lJspXnoe",
+        "doxcnkOZwNNnUtZ0QcNsxRA6KKg",
+        "doxcnKcASunUsLspaUJiTcmYtje"
+      ],
+      "page": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1
+        }
+      },
+      "parent_id": ""
+    },
+    {
+      "block_id": "doxcnEddu1f32pjcFXMTDR5KUJe",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn6rohTlifYOV9U3wtCCyXYd",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "1.背景与目标",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "Xcmtd40E1osbuAxKLOIcs1olnBb",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "部分修改测试。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnde5tDifSVEcJNyWHIm6ueu",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本项目面向战中推演展示场景，将物理仿真引擎、Tacview 可视化和因果杀伤链展示界面串联起来，形成“物理事件驱动、因果链路同步展示”的双引擎演示系统。\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "演示视频：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnoiPFguMLr8gZcyF7d9p2Ah",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "[新版-物理因果双引擎可视化界面修改版.mp4]",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqoZNCCI9XtIRyWBvOC7EMD",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎负责读取 1.json、2.json 并执行装备动作事件；因果引擎界面通过本地服务轮询物理引擎的实时接口，将 TT、FM、WAIT 等事件映射到 F2T2EA 杀伤链环节，用于展示每个目标的发现、定位、跟踪、目标指示、打击和评估进度。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnV76emgnvBK3Ib0l6fpvdvf",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本文档重点解决工程复现问题：说明工程包内容、运行环境、启动顺序、接口关系、结果核对方式和常见排错方法。附件中的工程目录和演示视频由投稿人手动插入。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcneeIS4Sh7Nec4jyUd7zPR2Z",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "2.关键词",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnjBuXkKF39AOJOxC3jiw8Df",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理因果双引擎",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnB2L08PLXabzW3Ei4g8kPOg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "战中仿真",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcn7HCuaoGeAyvkxRZJv6Q3dc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "F2T2EA 杀伤链",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnljN3XO7nhLKadSb7rgxQLb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Tacview",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnSbzaqQLvLBNBjPzeY8Q8hc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "JSON 事件队列",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcn2nTbsmnllfuXvEvkh4i96e",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "实时接口",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnHu9s8lehNRdUMoKDKj6iIg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果诊断",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcn1ZmOOGVXGPTafE0vbpUHiz",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Fast Combat Simulation",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnsklZa0l2roJPZHCJs3BKJe",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3.工程内容概览",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnwOkzoUFV7qqRsGWejgxtke",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "当前工程若移动到其他目录，应保持目录内部相对结构不变，并优先使用最外层启动脚本。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnCLmIf8nibnntfBgTo4R3QL",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "[物理-因果双引擎工程文件.zip]",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "block_type": 31,
+      "children": [
+        "doxcnUAMjLSKydkhWYuXTtDXZgb",
+        "doxcnqDgkRwCihWuVxD0AP65Vxb",
+        "doxcnF9y6GL2pMqWDwJc4aRiYvh",
+        "doxcnZLlNLJpu6UUTueZEnjxctb",
+        "doxcniXA1ybruTQEThr6WtL9mDe",
+        "doxcnQK6ml140XijHJPf1T56vSf",
+        "doxcnbdRH3CXsSrdnSwJ5fc8Cwd",
+        "doxcnQOnGKbDUztpiwL3dkSRar6",
+        "doxcnOZdwSv1fiSyod41qLBDUKd",
+        "doxcnuxchzxstqAbLDyv1Xehzve",
+        "doxcnwFR3CjcMgE2joHy76wWT5e",
+        "doxcnHb7rVDjrSRszSBmcrjC9vc",
+        "doxcnCw4NQR7cJg7jq8NAvovPHh",
+        "doxcn4p6jm3Sakh44TXn25Ikpfd",
+        "doxcn1fvtVoLf0gJ1lRnUsVZ5Jb",
+        "doxcnxFHkD0dnTCNf4HfjFagnod",
+        "doxcnJfKgFlwUpeoSF49Qu8pGye",
+        "doxcngu7vUBq326f19Hsp6yucFd",
+        "doxcnAuJPffGM8mvAsF4xjJknFg",
+        "doxcnhU17kVrhD6OgDqqH5QAsec",
+        "doxcn16DOhpLB5xsyHVHY3NWXYg",
+        "doxcnWHonMu4IEIaK138ZvzVbtf",
+        "doxcnRISlhFOtox4ohn34pkDjzb",
+        "doxcn97SD4qB76Nzk5BvaZxuNOg"
+      ],
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "table": {
+        "cells": [
+          "doxcnUAMjLSKydkhWYuXTtDXZgb",
+          "doxcnqDgkRwCihWuVxD0AP65Vxb",
+          "doxcnF9y6GL2pMqWDwJc4aRiYvh",
+          "doxcnZLlNLJpu6UUTueZEnjxctb",
+          "doxcniXA1ybruTQEThr6WtL9mDe",
+          "doxcnQK6ml140XijHJPf1T56vSf",
+          "doxcnbdRH3CXsSrdnSwJ5fc8Cwd",
+          "doxcnQOnGKbDUztpiwL3dkSRar6",
+          "doxcnOZdwSv1fiSyod41qLBDUKd",
+          "doxcnuxchzxstqAbLDyv1Xehzve",
+          "doxcnwFR3CjcMgE2joHy76wWT5e",
+          "doxcnHb7rVDjrSRszSBmcrjC9vc",
+          "doxcnCw4NQR7cJg7jq8NAvovPHh",
+          "doxcn4p6jm3Sakh44TXn25Ikpfd",
+          "doxcn1fvtVoLf0gJ1lRnUsVZ5Jb",
+          "doxcnxFHkD0dnTCNf4HfjFagnod",
+          "doxcnJfKgFlwUpeoSF49Qu8pGye",
+          "doxcngu7vUBq326f19Hsp6yucFd",
+          "doxcnAuJPffGM8mvAsF4xjJknFg",
+          "doxcnhU17kVrhD6OgDqqH5QAsec",
+          "doxcn16DOhpLB5xsyHVHY3NWXYg",
+          "doxcnWHonMu4IEIaK138ZvzVbtf",
+          "doxcnRISlhFOtox4ohn34pkDjzb",
+          "doxcn97SD4qB76Nzk5BvaZxuNOg"
+        ],
+        "property": {
+          "column_size": 3,
+          "column_width": [
+            183,
+            368,
+            137
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 8
+        }
+      }
+    },
+    {
+      "block_id": "doxcnUAMjLSKydkhWYuXTtDXZgb",
+      "block_type": 32,
+      "children": [
+        "doxcnSaARbGfsScZXnnhyt3owug"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnSaARbGfsScZXnnhyt3owug",
+      "block_type": 2,
+      "parent_id": "doxcnUAMjLSKydkhWYuXTtDXZgb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "文件或目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqDgkRwCihWuVxD0AP65Vxb",
+      "block_type": 32,
+      "children": [
+        "doxcnudaihVHkaZC8Y9H1EtscMg"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnudaihVHkaZC8Y9H1EtscMg",
+      "block_type": 2,
+      "parent_id": "doxcnqDgkRwCihWuVxD0AP65Vxb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "作用",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnF9y6GL2pMqWDwJc4aRiYvh",
+      "block_type": 32,
+      "children": [
+        "doxcn5HCxptSCt2kGtuoN2QyL6b"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn5HCxptSCt2kGtuoN2QyL6b",
+      "block_type": 2,
+      "parent_id": "doxcnF9y6GL2pMqWDwJc4aRiYvh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "复现时是否必需",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnZLlNLJpu6UUTueZEnjxctb",
+      "block_type": 32,
+      "children": [
+        "doxcnz8jcPuIdU2Fgw0GcTNxIZb"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnz8jcPuIdU2Fgw0GcTNxIZb",
+      "block_type": 2,
+      "parent_id": "doxcnZLlNLJpu6UUTueZEnjxctb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "README-运行说明.md",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcniXA1ybruTQEThr6WtL9mDe",
+      "block_type": 32,
+      "children": [
+        "doxcnrg1Z0rbGO9Df74X1pjO2cb"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnrg1Z0rbGO9Df74X1pjO2cb",
+      "block_type": 2,
+      "parent_id": "doxcniXA1ybruTQEThr6WtL9mDe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "工程包顶层运行说明，记录推荐启动顺序和关键接口",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQK6ml140XijHJPf1T56vSf",
+      "block_type": 32,
+      "children": [
+        "doxcnjta72cKiJJQIkdKEW8pyoe"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnjta72cKiJJQIkdKEW8pyoe",
+      "block_type": 2,
+      "parent_id": "doxcnQK6ml140XijHJPf1T56vSf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "建议保留",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnbdRH3CXsSrdnSwJ5fc8Cwd",
+      "block_type": 32,
+      "children": [
+        "doxcnWLljzRWz0LvcbPPs3CnqWf"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnWLljzRWz0LvcbPPs3CnqWf",
+      "block_type": 2,
+      "parent_id": "doxcnbdRH3CXsSrdnSwJ5fc8Cwd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "启动因果引擎界面.bat",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQOnGKbDUztpiwL3dkSRar6",
+      "block_type": 32,
+      "children": [
+        "doxcnMVIsaTl9BxhmHX0D6kFaug"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnMVIsaTl9BxhmHX0D6kFaug",
+      "block_type": 2,
+      "parent_id": "doxcnQOnGKbDUztpiwL3dkSRar6",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "启动本地因果引擎同步服务，并打开 http://127.0.0.1:5174/",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOZdwSv1fiSyod41qLBDUKd",
+      "block_type": 32,
+      "children": [
+        "doxcnztm93t2aLUhi59DOiyPGow"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnztm93t2aLUhi59DOiyPGow",
+      "block_type": 2,
+      "parent_id": "doxcnOZdwSv1fiSyod41qLBDUKd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "必需",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnuxchzxstqAbLDyv1Xehzve",
+      "block_type": 32,
+      "children": [
+        "doxcn96GPt8TFEDdfavtIqRo3kg"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn96GPt8TFEDdfavtIqRo3kg",
+      "block_type": 2,
+      "parent_id": "doxcnuxchzxstqAbLDyv1Xehzve",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "启动物理引擎和Tacview.bat",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnwFR3CjcMgE2joHy76wWT5e",
+      "block_type": 32,
+      "children": [
+        "doxcnp19TPrjbZTqoSkdSrq7PNq"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnp19TPrjbZTqoSkdSrq7PNq",
+      "block_type": 2,
+      "parent_id": "doxcnwFR3CjcMgE2joHy76wWT5e",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "查找 AirCombat_demo.exe，启动物理仿真并尝试打开 Tacview",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHb7rVDjrSRszSBmcrjC9vc",
+      "block_type": 32,
+      "children": [
+        "doxcnWrZKZy69uT4HfuvKb3zg9g"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnWrZKZy69uT4HfuvKb3zg9g",
+      "block_type": 2,
+      "parent_id": "doxcnHb7rVDjrSRszSBmcrjC9vc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "必需",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnCw4NQR7cJg7jq8NAvovPHh",
+      "block_type": 32,
+      "children": [
+        "doxcnfY3yuXgnq3Wr5swxqovFyR"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnfY3yuXgnq3Wr5swxqovFyR",
+      "block_type": 2,
+      "parent_id": "doxcnCw4NQR7cJg7jq8NAvovPHh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果引擎杀伤链同步界面/",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn4p6jm3Sakh44TXn25Ikpfd",
+      "block_type": 32,
+      "children": [
+        "doxcnjIgN6DP5E8Pdar1M9xkKgg"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnjIgN6DP5E8Pdar1M9xkKgg",
+      "block_type": 2,
+      "parent_id": "doxcn4p6jm3Sakh44TXn25Ikpfd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "HTML/CSS/JS 前端和 causal_sync_server.py 本地服务",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn1fvtVoLf0gJ1lRnUsVZ5Jb",
+      "block_type": 32,
+      "children": [
+        "doxcngyy76sXQJvl6jJ45kdeMhg"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcngyy76sXQJvl6jJ45kdeMhg",
+      "block_type": 2,
+      "parent_id": "doxcn1fvtVoLf0gJ1lRnUsVZ5Jb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "必需",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnxFHkD0dnTCNf4HfjFagnod",
+      "block_type": 32,
+      "children": [
+        "doxcnZkHjOXWPGlDlElYoVGeQRg"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnZkHjOXWPGlDlElYoVGeQRg",
+      "block_type": 2,
+      "parent_id": "doxcnxFHkD0dnTCNf4HfjFagnod",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎-fz/",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnJfKgFlwUpeoSF49Qu8pGye",
+      "block_type": 32,
+      "children": [
+        "doxcnS9XxvWTxxyeHYAlp79F7Le"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnS9XxvWTxxyeHYAlp79F7Le",
+      "block_type": 2,
+      "parent_id": "doxcnJfKgFlwUpeoSF49Qu8pGye",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "FastCombatSimulation 物理仿真工程、Debug 程序、DLL、样例 JSON 和日志",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcngu7vUBq326f19Hsp6yucFd",
+      "block_type": 32,
+      "children": [
+        "doxcnRZxls1p4on7pdGzGYnIlIf"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnRZxls1p4on7pdGzGYnIlIf",
+      "block_type": 2,
+      "parent_id": "doxcngu7vUBq326f19Hsp6yucFd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "必需",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnAuJPffGM8mvAsF4xjJknFg",
+      "block_type": 32,
+      "children": [
+        "doxcnnKIIpBc6di4WZxliPxVpNh"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnnKIIpBc6di4WZxliPxVpNh",
+      "block_type": 2,
+      "parent_id": "doxcnAuJPffGM8mvAsF4xjJknFg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "战中因果方案工程工具包/",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnhU17kVrhD6OgDqqH5QAsec",
+      "block_type": 32,
+      "children": [
+        "doxcn6DA0tvN7MV7KrQhp5OffBc"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn6DA0tvN7MV7KrQhp5OffBc",
+      "block_type": 2,
+      "parent_id": "doxcnhU17kVrhD6OgDqqH5QAsec",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果诊断脚本、F2T2EA 转换脚本、配置规则、样例和输出",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn16DOhpLB5xsyHVHY3NWXYg",
+      "block_type": 32,
+      "children": [
+        "doxcnt1rzyYy6AukZA2HTne8bvd"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnt1rzyYy6AukZA2HTne8bvd",
+      "block_type": 2,
+      "parent_id": "doxcn16DOhpLB5xsyHVHY3NWXYg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "建议保留",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnWHonMu4IEIaK138ZvzVbtf",
+      "block_type": 32,
+      "children": [
+        "doxcnnVfJrjaCfypRVFUnRnXIJb"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnnVfJrjaCfypRVFUnRnXIJb",
+      "block_type": 2,
+      "parent_id": "doxcnWHonMu4IEIaK138ZvzVbtf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "新版-物理因果双引擎可视化界面修改版.mp4",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnRISlhFOtox4ohn34pkDjzb",
+      "block_type": 32,
+      "children": [
+        "doxcn3mJISaOh3CGDT1LuVbhYfb"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn3mJISaOh3CGDT1LuVbhYfb",
+      "block_type": 2,
+      "parent_id": "doxcnRISlhFOtox4ohn34pkDjzb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "演示视频，展示双引擎界面和可视化效果",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn97SD4qB76Nzk5BvaZxuNOg",
+      "block_type": 32,
+      "children": [
+        "doxcnBOQbLZUSYhIPPIkXSsv8bc"
+      ],
+      "parent_id": "doxcngmzIBOiVChUXoLXyHc8Cth",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnBOQbLZUSYhIPPIkXSsv8bc",
+      "block_type": 2,
+      "parent_id": "doxcn97SD4qB76Nzk5BvaZxuNOg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "作为附件手动插入",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnVXFuTUumvMbkR3KsZyrHuc",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3.1 有效源码与历史文件说明",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnToK507EcwzkbtRj4PRT53g",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎有效工程入口为 物理引擎-fz\\FastCombatSimulation.sln，主工程为 物理引擎-fz\\AirCombat_demo\\AirCombat_demo.vcxproj，主程序入口为 物理引擎-fz\\Source\\Source\\demo\\AirCombat_demo.cpp。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnh9UNvXHaXkRYmpYae5DCze",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "目录中存在 Source.zip、Source(2).zip、AirCombat_demo.cpp~、AirCombat_demo.cpp~~、AirCombat_demo.cpp(50)、interface.cpp.bak_event_stream、interface.cpp.bak_causal_sync、",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "pycache",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "、历史日志等开发过程文件。正式复现时以本文列出的当前工程文件和顶层启动脚本为准，历史备份文件不参与编译和运行。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnIPFOjbKdIlquhrwfXJmBbH",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "4.前置准备",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "block_type": 31,
+      "children": [
+        "doxcnB8Fy86UzSaKIW9014a3VWd",
+        "doxcne9DTpIMj32wS4or6gmTWBd",
+        "doxcnSx1Sl6qasKhZndMJpiL0Zp",
+        "doxcnVJVDiW2TzZ8tAnsYnuLNQc",
+        "doxcnsmWvJSPtI4FrowiVtaJkDf",
+        "doxcnqlXNVIyf2okRD5SE38kRHf",
+        "doxcnuBePVVjMBGK0y9ckRbCBze",
+        "doxcnQStflRVZ4QfoyFTUA8bvnb",
+        "doxcnBJx8ZPwiBbR4czRzuZDEUf",
+        "doxcnzblcbtTQDYBHGc4TgFTACg",
+        "doxcnHKAyl6bIU5zcIs4brHeI3y",
+        "doxcnUbMzNChliTDJ5rEkY1vn9c",
+        "doxcnGTOH0hyjFdxUZuJ1ur9mhf",
+        "doxcnX09bzSs8KivwKVb1qRjQ2b",
+        "doxcnIAYvDSR67ePza3HYHwDuCe",
+        "doxcn2meuehjP1RX4dspR0LCgQc",
+        "doxcnxxNCOt1d7tQrYHfC179TsH",
+        "doxcnrrYS4P1J3FJI53e0YXPwgf",
+        "doxcnZNaPqLeDh1bIxGLI1PRurf",
+        "doxcnUwGaugA41hKfHmcoS41xif"
+      ],
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "table": {
+        "cells": [
+          "doxcnB8Fy86UzSaKIW9014a3VWd",
+          "doxcne9DTpIMj32wS4or6gmTWBd",
+          "doxcnSx1Sl6qasKhZndMJpiL0Zp",
+          "doxcnVJVDiW2TzZ8tAnsYnuLNQc",
+          "doxcnsmWvJSPtI4FrowiVtaJkDf",
+          "doxcnqlXNVIyf2okRD5SE38kRHf",
+          "doxcnuBePVVjMBGK0y9ckRbCBze",
+          "doxcnQStflRVZ4QfoyFTUA8bvnb",
+          "doxcnBJx8ZPwiBbR4czRzuZDEUf",
+          "doxcnzblcbtTQDYBHGc4TgFTACg",
+          "doxcnHKAyl6bIU5zcIs4brHeI3y",
+          "doxcnUbMzNChliTDJ5rEkY1vn9c",
+          "doxcnGTOH0hyjFdxUZuJ1ur9mhf",
+          "doxcnX09bzSs8KivwKVb1qRjQ2b",
+          "doxcnIAYvDSR67ePza3HYHwDuCe",
+          "doxcn2meuehjP1RX4dspR0LCgQc",
+          "doxcnxxNCOt1d7tQrYHfC179TsH",
+          "doxcnrrYS4P1J3FJI53e0YXPwgf",
+          "doxcnZNaPqLeDh1bIxGLI1PRurf",
+          "doxcnUwGaugA41hKfHmcoS41xif"
+        ],
+        "property": {
+          "column_size": 2,
+          "column_width": [
+            183,
+            506
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 10
+        }
+      }
+    },
+    {
+      "block_id": "doxcnB8Fy86UzSaKIW9014a3VWd",
+      "block_type": 32,
+      "children": [
+        "doxcn4dbsanQeL7eJiMwVlmotvg"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn4dbsanQeL7eJiMwVlmotvg",
+      "block_type": 2,
+      "parent_id": "doxcnB8Fy86UzSaKIW9014a3VWd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "项目",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcne9DTpIMj32wS4or6gmTWBd",
+      "block_type": 32,
+      "children": [
+        "doxcn0khByUcNV4Yr1nm3S7Xeeb"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn0khByUcNV4Yr1nm3S7Xeeb",
+      "block_type": 2,
+      "parent_id": "doxcne9DTpIMj32wS4or6gmTWBd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "要求或说明",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnSx1Sl6qasKhZndMJpiL0Zp",
+      "block_type": 32,
+      "children": [
+        "doxcnMjHL6Hm4WSZ2vskb2mRYQb"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnMjHL6Hm4WSZ2vskb2mRYQb",
+      "block_type": 2,
+      "parent_id": "doxcnSx1Sl6qasKhZndMJpiL0Zp",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "操作系统",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnVJVDiW2TzZ8tAnsYnuLNQc",
+      "block_type": 32,
+      "children": [
+        "doxcn5CkbwDngwDgoV6Ka9yGnfd"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn5CkbwDngwDgoV6Ka9yGnfd",
+      "block_type": 2,
+      "parent_id": "doxcnVJVDiW2TzZ8tAnsYnuLNQc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Windows 10 / Windows 11",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnsmWvJSPtI4FrowiVtaJkDf",
+      "block_type": 32,
+      "children": [
+        "doxcn3qhB50Ba6KUlICnzDgPncd"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn3qhB50Ba6KUlICnzDgPncd",
+      "block_type": 2,
+      "parent_id": "doxcnsmWvJSPtI4FrowiVtaJkDf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎编译环境",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqlXNVIyf2okRD5SE38kRHf",
+      "block_type": 32,
+      "children": [
+        "doxcnGvgw8OxjrxFWYeMLYhxTWe"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnGvgw8OxjrxFWYeMLYhxTWe",
+      "block_type": 2,
+      "parent_id": "doxcnqlXNVIyf2okRD5SE38kRHf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Visual Studio 2022，MSVC v143，Debug | x64",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnuBePVVjMBGK0y9ckRbCBze",
+      "block_type": 32,
+      "children": [
+        "doxcnPFQAGbyuoNXkMP5LFa1uKe"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnPFQAGbyuoNXkMP5LFa1uKe",
+      "block_type": 2,
+      "parent_id": "doxcnuBePVVjMBGK0y9ckRbCBze",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Windows SDK",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQStflRVZ4QfoyFTUA8bvnb",
+      "block_type": 32,
+      "children": [
+        "doxcnaAas37IyfXGVrtLL68bmld"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnaAas37IyfXGVrtLL68bmld",
+      "block_type": 2,
+      "parent_id": "doxcnQStflRVZ4QfoyFTUA8bvnb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "使用 Visual Studio 2022 默认安装的 Windows 10/11 SDK 即可",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnBJx8ZPwiBbR4czRzuZDEUf",
+      "block_type": 32,
+      "children": [
+        "doxcnmnL7guWOr4llrRYOSn0gQh"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnmnL7guWOr4llrRYOSn0gQh",
+      "block_type": 2,
+      "parent_id": "doxcnBJx8ZPwiBbR4czRzuZDEUf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Python",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnzblcbtTQDYBHGc4TgFTACg",
+      "block_type": 32,
+      "children": [
+        "doxcnJ0gi4ml4lZlnaUMufAFkke"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnJ0gi4ml4lZlnaUMufAFkke",
+      "block_type": 2,
+      "parent_id": "doxcnzblcbtTQDYBHGc4TgFTACg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "建议 Python 3.10 及以上；当前启动脚本优先使用 PATH 中的 python",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHKAyl6bIU5zcIs4brHeI3y",
+      "block_type": 32,
+      "children": [
+        "doxcn2sG8u2XZRtLrDlaIP4QGLb"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn2sG8u2XZRtLrDlaIP4QGLb",
+      "block_type": 2,
+      "parent_id": "doxcnHKAyl6bIU5zcIs4brHeI3y",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "浏览器",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnUbMzNChliTDJ5rEkY1vn9c",
+      "block_type": 32,
+      "children": [
+        "doxcnuDVCi02hFtcfpmYcNjWzjf"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnuDVCi02hFtcfpmYcNjWzjf",
+      "block_type": 2,
+      "parent_id": "doxcnUbMzNChliTDJ5rEkY1vn9c",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Edge 或 Chrome；普通模式由脚本打开 http://127.0.0.1:5174/",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnGTOH0hyjFdxUZuJ1ur9mhf",
+      "block_type": 32,
+      "children": [
+        "doxcnYWjgZIeDwLnWv3kt0ijib4"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnYWjgZIeDwLnWv3kt0ijib4",
+      "block_type": 2,
+      "parent_id": "doxcnGTOH0hyjFdxUZuJ1ur9mhf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Tacview",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnX09bzSs8KivwKVb1qRjQ2b",
+      "block_type": 32,
+      "children": [
+        "doxcnZ7i9DWpmUkNt9cvqWnFjfe"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnZ7i9DWpmUkNt9cvqWnFjfe",
+      "block_type": 2,
+      "parent_id": "doxcnX09bzSs8KivwKVb1qRjQ2b",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "如需物理可视化，需安装 Tacview；脚本默认路径为 本地路径\\steam\\steamapps\\common\\Tacview\\tacview64.exe，不一致时需手动修改或手动打开 Tacview",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnIAYvDSR67ePza3HYHwDuCe",
+      "block_type": 32,
+      "children": [
+        "doxcn2edqRTgfZri3bcJyNKkGfg"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn2edqRTgfZri3bcJyNKkGfg",
+      "block_type": 2,
+      "parent_id": "doxcnIAYvDSR67ePza3HYHwDuCe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "依赖 DLL",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn2meuehjP1RX4dspR0LCgQc",
+      "block_type": 32,
+      "children": [
+        "doxcn4jVhJlgFdGeNZd0nQjUZ4b"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn4jVhJlgFdGeNZd0nQjUZ4b",
+      "block_type": 2,
+      "parent_id": "doxcn2meuehjP1RX4dspR0LCgQc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "AirCombat_demo.exe 同目录需包含 datalink.dll、wguazj.dll、msvcp140d.dll、vcruntime140d.dll、ucrtbased.dll 等运行依赖",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnxxNCOt1d7tQrYHfC179TsH",
+      "block_type": 32,
+      "children": [
+        "doxcnFVvGH5f1cOGqJzwGYbsLWd"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnFVvGH5f1cOGqJzwGYbsLWd",
+      "block_type": 2,
+      "parent_id": "doxcnxxNCOt1d7tQrYHfC179TsH",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "端口",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrrYS4P1J3FJI53e0YXPwgf",
+      "block_type": 32,
+      "children": [
+        "doxcnS139PipHIpbm0aLApAuOYd"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnS139PipHIpbm0aLApAuOYd",
+      "block_type": 2,
+      "parent_id": "doxcnrrYS4P1J3FJI53e0YXPwgf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果引擎界面使用 5174，物理引擎实时接口使用 8090",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnZNaPqLeDh1bIxGLI1PRurf",
+      "block_type": 32,
+      "children": [
+        "doxcnkCI5beAFjlTfgkbZJ2Rnje"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnkCI5beAFjlTfgkbZJ2Rnje",
+      "block_type": 2,
+      "parent_id": "doxcnZNaPqLeDh1bIxGLI1PRurf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "日志编码",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnUwGaugA41hKfHmcoS41xif",
+      "block_type": 32,
+      "children": [
+        "doxcnu7hZjgqpPsK3j2lvOpq28f"
+      ],
+      "parent_id": "doxcnQADIPOtzSWdCxXHohoqiLc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnu7hZjgqpPsK3j2lvOpq28f",
+      "block_type": 2,
+      "parent_id": "doxcnUwGaugA41hKfHmcoS41xif",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "CSV 字段名可能受本机编码影响出现乱码，建议使用 VS Code / Notepad++ 切换 UTF-8、UTF-8 with BOM 或 ANSI 查看",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnwoFNSLWTezNGz4Xdn7Z06e",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "5.核心数据流",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnxjyQZPBn9qandQNIoHeuzi",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "系统运行时的数据流如下：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnXkjujtdBddgzIxv1SfsaXd",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "1.json / 2.json -> 物理引擎 AirCombat_demo.exe -> 8090/deduction_realTime -> 因果同步服务 causal_sync_server.py -> 5174 Web 界面 -> F2T2EA 杀伤链展示",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn8GxachzyUDZHGuiVxGh0He",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理端在 AirCombat_demo.cpp 中启动 8090 HTTP 服务，并在事件执行时更新杀伤链状态。因果端 causal_sync_server.py 监听 5174 端口，对前端提供 /api/state、/api/health、/api/rules 等接口，并主动读取物理端 http://127.0.0.1:8090/deduction_realTime。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcntw6C21O5GHo4JFRazwGBUf",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "5.1 两个引擎通信原理",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnR9Tv4hiY1NW26dk8XqvEeb",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "双引擎之间采用本机 HTTP 接口通信，不直接共享内存，也不由因果界面反向控制仿真主循环。物理引擎是运行时事实来源，因果引擎负责读取、转换和展示。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "block_type": 31,
+      "children": [
+        "doxcn2mWX0HqnGLmGFyTRY3KdWg",
+        "doxcn0YoCZeAoXpTnnnY4nAWDyc",
+        "doxcn2kFWkrdEUpZ0L1XeXXvb2e",
+        "doxcnMUqXRlLP8AliwLHv4JxxQg",
+        "doxcn0iCrUdkfcOwcfloiFfLSCe",
+        "doxcnHYqPRKyHDi2Nkd07Irhwub",
+        "doxcnOYIZfRoyhCD7d2ptEUr1rh",
+        "doxcnQD6sQrC9FVZbUAV6eYOHIV",
+        "doxcnUhg6bOQnvYYxnaDix52Jyh",
+        "doxcn3rErzhGHi8EJe5DhGQnsFe",
+        "doxcnIMP8jmo9KnOYqJJZvM1mUc",
+        "doxcnYPfZQinqndccfcYXYEyNOh",
+        "doxcn6ApGzVx5z8AuBuNBnBy2cd",
+        "doxcnSHCk1imAt3fBjQ3LZPSaZb",
+        "doxcn4kh7skMM9Y2CVNX1Z29Pkg",
+        "doxcnw1zKVZfdqVna2XInaamygc",
+        "doxcnIkfthJRoJybwdYUUvGZ90c",
+        "doxcnPUYZMBsx3av2aRAQ2vvxDf"
+      ],
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "table": {
+        "cells": [
+          "doxcn2mWX0HqnGLmGFyTRY3KdWg",
+          "doxcn0YoCZeAoXpTnnnY4nAWDyc",
+          "doxcn2kFWkrdEUpZ0L1XeXXvb2e",
+          "doxcnMUqXRlLP8AliwLHv4JxxQg",
+          "doxcn0iCrUdkfcOwcfloiFfLSCe",
+          "doxcnHYqPRKyHDi2Nkd07Irhwub",
+          "doxcnOYIZfRoyhCD7d2ptEUr1rh",
+          "doxcnQD6sQrC9FVZbUAV6eYOHIV",
+          "doxcnUhg6bOQnvYYxnaDix52Jyh",
+          "doxcn3rErzhGHi8EJe5DhGQnsFe",
+          "doxcnIMP8jmo9KnOYqJJZvM1mUc",
+          "doxcnYPfZQinqndccfcYXYEyNOh",
+          "doxcn6ApGzVx5z8AuBuNBnBy2cd",
+          "doxcnSHCk1imAt3fBjQ3LZPSaZb",
+          "doxcn4kh7skMM9Y2CVNX1Z29Pkg",
+          "doxcnw1zKVZfdqVna2XInaamygc",
+          "doxcnIkfthJRoJybwdYUUvGZ90c",
+          "doxcnPUYZMBsx3av2aRAQ2vvxDf"
+        ],
+        "property": {
+          "column_size": 3,
+          "column_width": [
+            147,
+            252,
+            290
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 6
+        }
+      }
+    },
+    {
+      "block_id": "doxcn2mWX0HqnGLmGFyTRY3KdWg",
+      "block_type": 32,
+      "children": [
+        "doxcnruVMZIk8dDVzgXxV6nsTde"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnruVMZIk8dDVzgXxV6nsTde",
+      "block_type": 2,
+      "parent_id": "doxcn2mWX0HqnGLmGFyTRY3KdWg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "通信环节",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0YoCZeAoXpTnnnY4nAWDyc",
+      "block_type": 32,
+      "children": [
+        "doxcnqpuKjitV8strQqaVuhFLrh"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnqpuKjitV8strQqaVuhFLrh",
+      "block_type": 2,
+      "parent_id": "doxcn0YoCZeAoXpTnnnY4nAWDyc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "实现方式",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn2kFWkrdEUpZ0L1XeXXvb2e",
+      "block_type": 32,
+      "children": [
+        "doxcnic0zKKCCrsvfC8bcpGbDUg"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnic0zKKCCrsvfC8bcpGbDUg",
+      "block_type": 2,
+      "parent_id": "doxcn2kFWkrdEUpZ0L1XeXXvb2e",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "说明",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnMUqXRlLP8AliwLHv4JxxQg",
+      "block_type": 32,
+      "children": [
+        "doxcnpy3SRUyxo6alFIc5Dlxt8c"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnpy3SRUyxo6alFIc5Dlxt8c",
+      "block_type": 2,
+      "parent_id": "doxcnMUqXRlLP8AliwLHv4JxxQg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎发布状态",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0iCrUdkfcOwcfloiFfLSCe",
+      "block_type": 32,
+      "children": [
+        "doxcnFu8daIjL7bkTWnDzXBMcIb"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnFu8daIjL7bkTWnDzXBMcIb",
+      "block_type": 2,
+      "parent_id": "doxcn0iCrUdkfcOwcfloiFfLSCe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "AirCombat_demo.exe 启动 8090 端口 HTTP 服务",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHYqPRKyHDi2Nkd07Irhwub",
+      "block_type": 32,
+      "children": [
+        "doxcnH58bt0lz0JYDPFLZtHRt24"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnH58bt0lz0JYDPFLZtHRt24",
+      "block_type": 2,
+      "parent_id": "doxcnHYqPRKyHDi2Nkd07Irhwub",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "仿真主循环执行 EnvStep，并在事件执行过程中维护杀伤链运行状态",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOYIZfRoyhCD7d2ptEUr1rh",
+      "block_type": 32,
+      "children": [
+        "doxcnqKxXZYTu7216uSmJnvew9g"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnqKxXZYTu7216uSmJnvew9g",
+      "block_type": 2,
+      "parent_id": "doxcnOYIZfRoyhCD7d2ptEUr1rh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "实时状态接口",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQD6sQrC9FVZbUAV6eYOHIV",
+      "block_type": 32,
+      "children": [
+        "doxcnyGPeUarM212ZTrQi3jlluc"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnyGPeUarM212ZTrQi3jlluc",
+      "block_type": 2,
+      "parent_id": "doxcnQD6sQrC9FVZbUAV6eYOHIV",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "POST http://127.0.0.1:8090/deduction_realTime",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnUhg6bOQnvYYxnaDix52Jyh",
+      "block_type": 32,
+      "children": [
+        "doxcnEuRn3ICX7mZKABtIH847hP"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnEuRn3ICX7mZKABtIH847hP",
+      "block_type": 2,
+      "parent_id": "doxcnUhg6bOQnvYYxnaDix52Jyh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果同步服务通过该接口读取物理引擎当前事件流或杀伤链状态",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn3rErzhGHi8EJe5DhGQnsFe",
+      "block_type": 32,
+      "children": [
+        "doxcnUzAr6hZh5aManJUl5oUMBd"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnUzAr6hZh5aManJUl5oUMBd",
+      "block_type": 2,
+      "parent_id": "doxcn3rErzhGHi8EJe5DhGQnsFe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果同步服务",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnIMP8jmo9KnOYqJJZvM1mUc",
+      "block_type": 32,
+      "children": [
+        "doxcnogDw8OZHm1qY1kKuP08B0b"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnogDw8OZHm1qY1kKuP08B0b",
+      "block_type": 2,
+      "parent_id": "doxcnIMP8jmo9KnOYqJJZvM1mUc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "causal_sync_server.py 监听 127.0.0.1:5174",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnYPfZQinqndccfcYXYEyNOh",
+      "block_type": 32,
+      "children": [
+        "doxcnPy2RQZkltLeWTlQPWWaKDe"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnPy2RQZkltLeWTlQPWWaKDe",
+      "block_type": 2,
+      "parent_id": "doxcnYPfZQinqndccfcYXYEyNOh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "服务端定时访问 8090 接口，将物理事件转换为前端可显示的因果链状态",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn6ApGzVx5z8AuBuNBnBy2cd",
+      "block_type": 32,
+      "children": [
+        "doxcntdtNKQgcfrlROy17nAM2Fg"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcntdtNKQgcfrlROy17nAM2Fg",
+      "block_type": 2,
+      "parent_id": "doxcn6ApGzVx5z8AuBuNBnBy2cd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "前端页面取数",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnSHCk1imAt3fBjQ3LZPSaZb",
+      "block_type": 32,
+      "children": [
+        "doxcnxpGpW3ShYz9khrWyKB3T9c"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnxpGpW3ShYz9khrWyKB3T9c",
+      "block_type": 2,
+      "parent_id": "doxcnSHCk1imAt3fBjQ3LZPSaZb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "浏览器访问 /api/state、/api/health、/api/rules",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn4kh7skMM9Y2CVNX1Z29Pkg",
+      "block_type": 32,
+      "children": [
+        "doxcnLyyPmhiOkTbWnmpSpYGdmh"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnLyyPmhiOkTbWnmpSpYGdmh",
+      "block_type": 2,
+      "parent_id": "doxcn4kh7skMM9Y2CVNX1Z29Pkg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "app.js 每约 700 ms 轮询 /api/state，刷新连接状态、链路数量和各阶段进度",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnw1zKVZfdqVna2XInaamygc",
+      "block_type": 32,
+      "children": [
+        "doxcnjWBH0gRpuv7mhqernMOiFg"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnjWBH0gRpuv7mhqernMOiFg",
+      "block_type": 2,
+      "parent_id": "doxcnw1zKVZfdqVna2XInaamygc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "映射规则",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnIkfthJRoJybwdYUUvGZ90c",
+      "block_type": 32,
+      "children": [
+        "doxcnG9rUbFHndGgOJR7gssN9Yd"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnG9rUbFHndGgOJR7gssN9Yd",
+      "block_type": 2,
+      "parent_id": "doxcnIkfthJRoJybwdYUUvGZ90c",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "config/kill_chain_event_stage_mapping.json",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnPUYZMBsx3av2aRAQ2vvxDf",
+      "block_type": 32,
+      "children": [
+        "doxcnspM4vv6ywFHuGNJuTIqQWf"
+      ],
+      "parent_id": "doxcnY5hA08A2U5wxROTLwne7Pb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnspM4vv6ywFHuGNJuTIqQWf",
+      "block_type": 2,
+      "parent_id": "doxcnPUYZMBsx3av2aRAQ2vvxDf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "定义 RD/WP/FC/XT/TT/FM/WAIT 到 Find/Fix/Track/Target/Engage/Assess 的映射关系",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn4VTEXGhd2qubJs1TLBa1md",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "通信过程可以理解为四步：第一，物理引擎读取 1.json 和 2.json 后进入仿真循环；第二，每当装备事件被执行，物理端根据 commandType、eventId、equipmentId、targetId、waitId、params 等信息更新运行时状态；第三，因果同步服务轮询 8090 实时接口，按映射规则把物理事件归入目标杀伤链；第四，浏览器前端轮询 5174 服务端接口，把每条 KC_TARGET_{targetId} 杀伤链的当前环节和完成状态显示出来。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0iqnRbM9hjbrqG6Gx0ODYf",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "链路编号以攻击目标为核心，而不是以发射方装备或事件序号为核心。也就是说，同一个 targetId 被多个装备发现、跟踪、指示、打击或等待评估时，都会归入同一条 KC_TARGET_{targetId} 杀伤链。这样做可以让界面聚焦“某个目标的杀伤链走到哪一步”，而不是只展示离散事件列表。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcny8qdQwoNRvFuGUTAA2PJbe",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "当前通信是近实时轮询机制，不是 WebSocket 推送。轮询的优点是实现简单、便于本地演示和排错；限制是界面刷新存在一个轮询周期级别的延迟，并且 8090 端口必须由当前物理引擎进程占用。causal_sync_server.py 中包含端口归属检查逻辑，如果 8090 被其他进程占用，页面会提示等待物理引擎或连接异常。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnJTqXNVUApHYQWiEN1yc5ne",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "需要注意的是，因果引擎界面不负责启动、暂停或改变物理仿真，也不会修改 1.json、2.json。它只是把物理引擎已经执行到的事件状态转换成 F2T2EA 视角的链路展示。因此排查联动问题时，应先确认物理引擎是否在 8090 正常提供实时状态，再检查 5174 因果同步服务和前端页面。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "block_type": 31,
+      "children": [
+        "doxcnKp8KzJQoZj5g6yE9tWBEkd",
+        "doxcnc7jE6T6aE4pmEWe9NxB4Sg",
+        "doxcn9nkn3jGCQbfLqwJCoQApfe",
+        "doxcnZkMKgcaesqqLRGbNX8teFb",
+        "doxcnmg2DoXTZf4Mo1Cl7fmB97d",
+        "doxcnMiWkHCdNXg8hEFCBHUsRce",
+        "doxcnbFJqnZlEhOsLtE92U5Y2mh",
+        "doxcnYhi4D7qJazL3RpRmUiwjqf",
+        "doxcnwI5OSloCYnwg3vewEjsFtc",
+        "doxcnjG8rRBHKX1wjSqsxWfs5yb",
+        "doxcnI6w3XSOxm1Rxs9HbMbVXod",
+        "doxcnkRdsu2ExJTehS2RaArxa8e",
+        "doxcntX5bGdDWsFQQKShdQnjnOc",
+        "doxcnsiTgCVcQ1Q51mAp2VaPDWc",
+        "doxcny0nIry57B8VbJmzLPmtrYd",
+        "doxcnBtzDE8ljOfvmijLPFB6Qbe",
+        "doxcnb8lImnS2hXZJWsuKGUYFeb",
+        "doxcnLA2Mel5s2GaqdoBibunHfe",
+        "doxcnPqftRdre7DCVRio1E7P2Rf",
+        "doxcnL0OXOTKFjtuUTDNLFOnAUe",
+        "doxcnFGVn2cmxyhL6KDAKutE1Pg",
+        "doxcn371RYio0V2vvTV8l0b3Iyh",
+        "doxcnvSVwF964N9hcQabRLYMBYf",
+        "doxcnic7c59kgGRgV5sQKc9dmph"
+      ],
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "table": {
+        "cells": [
+          "doxcnKp8KzJQoZj5g6yE9tWBEkd",
+          "doxcnc7jE6T6aE4pmEWe9NxB4Sg",
+          "doxcn9nkn3jGCQbfLqwJCoQApfe",
+          "doxcnZkMKgcaesqqLRGbNX8teFb",
+          "doxcnmg2DoXTZf4Mo1Cl7fmB97d",
+          "doxcnMiWkHCdNXg8hEFCBHUsRce",
+          "doxcnbFJqnZlEhOsLtE92U5Y2mh",
+          "doxcnYhi4D7qJazL3RpRmUiwjqf",
+          "doxcnwI5OSloCYnwg3vewEjsFtc",
+          "doxcnjG8rRBHKX1wjSqsxWfs5yb",
+          "doxcnI6w3XSOxm1Rxs9HbMbVXod",
+          "doxcnkRdsu2ExJTehS2RaArxa8e",
+          "doxcntX5bGdDWsFQQKShdQnjnOc",
+          "doxcnsiTgCVcQ1Q51mAp2VaPDWc",
+          "doxcny0nIry57B8VbJmzLPmtrYd",
+          "doxcnBtzDE8ljOfvmijLPFB6Qbe",
+          "doxcnb8lImnS2hXZJWsuKGUYFeb",
+          "doxcnLA2Mel5s2GaqdoBibunHfe",
+          "doxcnPqftRdre7DCVRio1E7P2Rf",
+          "doxcnL0OXOTKFjtuUTDNLFOnAUe",
+          "doxcnFGVn2cmxyhL6KDAKutE1Pg",
+          "doxcn371RYio0V2vvTV8l0b3Iyh",
+          "doxcnvSVwF964N9hcQabRLYMBYf",
+          "doxcnic7c59kgGRgV5sQKc9dmph"
+        ],
+        "property": {
+          "column_size": 3,
+          "column_width": [
+            147,
+            296,
+            246
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 8
+        }
+      }
+    },
+    {
+      "block_id": "doxcnKp8KzJQoZj5g6yE9tWBEkd",
+      "block_type": 32,
+      "children": [
+        "doxcnbqxY2veAU0GJUdLoWoxV3f"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnbqxY2veAU0GJUdLoWoxV3f",
+      "block_type": 2,
+      "parent_id": "doxcnKp8KzJQoZj5g6yE9tWBEkd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "commandType",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnc7jE6T6aE4pmEWe9NxB4Sg",
+      "block_type": 32,
+      "children": [
+        "doxcna59VAR7nIfqk0s4ru663od"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcna59VAR7nIfqk0s4ru663od",
+      "block_type": 2,
+      "parent_id": "doxcnc7jE6T6aE4pmEWe9NxB4Sg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理事件含义",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn9nkn3jGCQbfLqwJCoQApfe",
+      "block_type": 32,
+      "children": [
+        "doxcnA9nhnYq4pZQtPmOtNCLSQe"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnA9nhnYq4pZQtPmOtNCLSQe",
+      "block_type": 2,
+      "parent_id": "doxcn9nkn3jGCQbfLqwJCoQApfe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果链路映射",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnZkMKgcaesqqLRGbNX8teFb",
+      "block_type": 32,
+      "children": [
+        "doxcnd1MqQtW8UAgjDhrjuVsUEh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnd1MqQtW8UAgjDhrjuVsUEh",
+      "block_type": 2,
+      "parent_id": "doxcnZkMKgcaesqqLRGbNX8teFb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "RD",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnmg2DoXTZf4Mo1Cl7fmB97d",
+      "block_type": 32,
+      "children": [
+        "doxcn8GG4V5kzl6ZauPK8iDvXqh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn8GG4V5kzl6ZauPK8iDvXqh",
+      "block_type": 2,
+      "parent_id": "doxcnmg2DoXTZf4Mo1Cl7fmB97d",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "雷达状态指令",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnMiWkHCdNXg8hEFCBHUsRce",
+      "block_type": 32,
+      "children": [
+        "doxcnT66Pex3UXyg41RE06iW5Uh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnT66Pex3UXyg41RE06iW5Uh",
+      "block_type": 2,
+      "parent_id": "doxcnMiWkHCdNXg8hEFCBHUsRce",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Find",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnbFJqnZlEhOsLtE92U5Y2mh",
+      "block_type": 32,
+      "children": [
+        "doxcnz1yogxABbhgtbjNEocae0g"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnz1yogxABbhgtbjNEocae0g",
+      "block_type": 2,
+      "parent_id": "doxcnbFJqnZlEhOsLtE92U5Y2mh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "WP",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnYhi4D7qJazL3RpRmUiwjqf",
+      "block_type": 32,
+      "children": [
+        "doxcnhxIK1QPp2AUwRpeOr3dXab"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnhxIK1QPp2AUwRpeOr3dXab",
+      "block_type": 2,
+      "parent_id": "doxcnYhi4D7qJazL3RpRmUiwjqf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "航路点指令",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnwI5OSloCYnwg3vewEjsFtc",
+      "block_type": 32,
+      "children": [
+        "doxcnods93L1xGjWEmuISNOAt6b"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnods93L1xGjWEmuISNOAt6b",
+      "block_type": 2,
+      "parent_id": "doxcnwI5OSloCYnwg3vewEjsFtc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Fix",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnjG8rRBHKX1wjSqsxWfs5yb",
+      "block_type": 32,
+      "children": [
+        "doxcnD6dwLX3BlWxaz25fmOBmCb"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnD6dwLX3BlWxaz25fmOBmCb",
+      "block_type": 2,
+      "parent_id": "doxcnjG8rRBHKX1wjSqsxWfs5yb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "FC",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnI6w3XSOxm1Rxs9HbMbVXod",
+      "block_type": 32,
+      "children": [
+        "doxcnJg8THN6ShrzcI9UbL2mrAc"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnJg8THN6ShrzcI9UbL2mrAc",
+      "block_type": 2,
+      "parent_id": "doxcnI6w3XSOxm1Rxs9HbMbVXod",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "飞控姿态/油门指令",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnkRdsu2ExJTehS2RaArxa8e",
+      "block_type": 32,
+      "children": [
+        "doxcn4Dc22IDuNYI7bWI5zAwV4b"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn4Dc22IDuNYI7bWI5zAwV4b",
+      "block_type": 2,
+      "parent_id": "doxcnkRdsu2ExJTehS2RaArxa8e",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Fix",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcntX5bGdDWsFQQKShdQnjnOc",
+      "block_type": 32,
+      "children": [
+        "doxcnFbkwmN9o8NmpdFYo5fUfVd"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnFbkwmN9o8NmpdFYo5fUfVd",
+      "block_type": 2,
+      "parent_id": "doxcntX5bGdDWsFQQKShdQnjnOc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "XT",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnsiTgCVcQ1Q51mAp2VaPDWc",
+      "block_type": 32,
+      "children": [
+        "doxcnhRSBKPPDtDuNNYXewlQ3Lh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnhRSBKPPDtDuNNYXewlQ3Lh",
+      "block_type": 2,
+      "parent_id": "doxcnsiTgCVcQ1Q51mAp2VaPDWc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "悬停或等待",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcny0nIry57B8VbJmzLPmtrYd",
+      "block_type": 32,
+      "children": [
+        "doxcnGyxoKnuH5wL7VkeurE0zVh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnGyxoKnuH5wL7VkeurE0zVh",
+      "block_type": 2,
+      "parent_id": "doxcny0nIry57B8VbJmzLPmtrYd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Fix",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnBtzDE8ljOfvmijLPFB6Qbe",
+      "block_type": 32,
+      "children": [
+        "doxcnNnrkz0sTSJkE4X2YgB9CcA"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnNnrkz0sTSJkE4X2YgB9CcA",
+      "block_type": 2,
+      "parent_id": "doxcnBtzDE8ljOfvmijLPFB6Qbe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "TT",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnb8lImnS2hXZJWsuKGUYFeb",
+      "block_type": 32,
+      "children": [
+        "doxcnYWs2uZk0ls1A9t5B6LKeEh"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnYWs2uZk0ls1A9t5B6LKeEh",
+      "block_type": 2,
+      "parent_id": "doxcnb8lImnS2hXZJWsuKGUYFeb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "协同定位/追踪目标",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnLA2Mel5s2GaqdoBibunHfe",
+      "block_type": 32,
+      "children": [
+        "doxcnbWngEv026KB8tOXFoT0sub"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnbWngEv026KB8tOXFoT0sub",
+      "block_type": 2,
+      "parent_id": "doxcnLA2Mel5s2GaqdoBibunHfe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Track、Target",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnPqftRdre7DCVRio1E7P2Rf",
+      "block_type": 32,
+      "children": [
+        "doxcnNayRDbKXSU6B0e3O5LabNf"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnNayRDbKXSU6B0e3O5LabNf",
+      "block_type": 2,
+      "parent_id": "doxcnPqftRdre7DCVRio1E7P2Rf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "FM",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnL0OXOTKFjtuUTDNLFOnAUe",
+      "block_type": 32,
+      "children": [
+        "doxcnQzbz8XqPzbfyZ2QK3cqbNf"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnQzbz8XqPzbfyZ2QK3cqbNf",
+      "block_type": 2,
+      "parent_id": "doxcnL0OXOTKFjtuUTDNLFOnAUe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "发射导弹或毁伤目标",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnFGVn2cmxyhL6KDAKutE1Pg",
+      "block_type": 32,
+      "children": [
+        "doxcntFa1g9Zzkmwcz18HPCeUWg"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcntFa1g9Zzkmwcz18HPCeUWg",
+      "block_type": 2,
+      "parent_id": "doxcnFGVn2cmxyhL6KDAKutE1Pg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Engage",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn371RYio0V2vvTV8l0b3Iyh",
+      "block_type": 32,
+      "children": [
+        "doxcn2x9lOs2bYz9UZXkL5NF25f"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn2x9lOs2bYz9UZXkL5NF25f",
+      "block_type": 2,
+      "parent_id": "doxcn371RYio0V2vvTV8l0b3Iyh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "WAIT",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnvSVwF964N9hcQabRLYMBYf",
+      "block_type": 32,
+      "children": [
+        "doxcn7CxNh3cw7AbzM5zBClRHUe"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn7CxNh3cw7AbzM5zBClRHUe",
+      "block_type": 2,
+      "parent_id": "doxcnvSVwF964N9hcQabRLYMBYf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "等待毁伤结果或超时",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnic7c59kgGRgV5sQKc9dmph",
+      "block_type": 32,
+      "children": [
+        "doxcnrndf67OD0L1vS76Y4upfzf"
+      ],
+      "parent_id": "doxcn6rzLQCkeODp6jndGazT1cd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnrndf67OD0L1vS76Y4upfzf",
+      "block_type": 2,
+      "parent_id": "doxcnic7c59kgGRgV5sQKc9dmph",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Assess",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHwka6Tk62YgYuqvgmrdeOg",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.运行步骤",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnFkTNlBl3SUQO771gmEGMLg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.1 解压与目录确认",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnR2hGJEa4BwM05w8iRWiqGe",
+      "block_type": 13,
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "将附件工程解压到本地目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "sequence": "1"
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnp17e8JqQ9wU6meED8wlvzd",
+      "block_type": 13,
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "确认根目录下存在 README-运行说明.md、启动因果引擎界面.bat、启动物理引擎和Tacview.bat 三个顶层文件。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "sequence": "2"
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnnsKITr5xZ5KJTHduxUxztd",
+      "block_type": 13,
+      "ordered": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "确认 物理引擎-fz\\x64\\Debug 下存在 AirCombat_demo.exe、datalink.dll、wguazj.dll 和 zq\\1.json、zq\\2.json。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "sequence": "3"
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnBpFyAoSW0FiOFRPNJJkWpg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.2 启动因果引擎界面",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnsRp4TjxnFvPjVqEtdKmCmf",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "双击根目录下的 启动因果引擎界面.bat。脚本会定位 causal_sync_server.py，进入因果界面目录，打开浏览器并启动本地服务。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn967NzQV8lcbYIahrgnMc0c",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "cd /d 本地路径\\双引擎",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnxBT0P6IWnWNy6UwrPnIihe",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "启动因果引擎界面.bat",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn8Y8FFaJAhV8NaEfH0AXa3L",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "正常情况下浏览器会打开 http://127.0.0.1:5174/。如果物理引擎尚未启动，页面会显示等待连接，这是正常状态。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcncN9D9LJXQXBME5lRYwRFPb",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.3 启动物理引擎与 Tacview",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnPadCp2abHdz5endFxvXpih",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "双击根目录下的 启动物理引擎和Tacview.bat。脚本会递归查找 AirCombat_demo.exe，默认使用 exe 同目录下的 zq 作为配置目录，使用 log 作为日志目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcntaqQGVqLvzwlHYZe4W7VN7",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "cd /d 本地路径\\双引擎",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrn5WcDE8gtjL0yhKBhTZEg",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "启动物理引擎和Tacview.bat",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcni8RqUHHMmlKLmJCcsIpoue",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "脚本实际启动参数等价于：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOZrkCqjRREO42O7mVBdwZd",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "\"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\AirCombat_demo.exe\" \"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\zq\" \"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\log\"",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnuCPu6Xj344X5VEGmRC8lie",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "其中第一个参数是配置目录，必须包含 1.json 和 2.json；第二个参数是日志目录，程序会在其中创建按时间戳命名的子目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnF7Pw7Z1kIdmuqKwKd6yyeN",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.4 推荐启动顺序",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnwPXbPsaJpBJmXZRL5dcwAc",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "先启动因果引擎界面，确认浏览器打开 5174 页面。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnYb7CvKZW2LtcHQfGz3tVFf",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "再启动物理引擎和 Tacview，等待 8090 实时接口启动。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnmBXeD9HSt9tP3WU6LnD1be",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "观察因果界面顶部状态是否从“等待物理引擎”变为“物理引擎已连接”。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnMRPYwziOZOFVIrM40ZMLbh",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "在 Tacview 中按原仿真流程查看物理态势和航迹。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnVmNyn68V0nzejeGz95spDb",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6.5 路径优先级说明",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcn8Lfte62yjRuqeRxJkHI6vg",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本文以 本地路径\\双引擎 根目录下两个顶层 bat 脚本和本文命令为准。子目录 README、examples\\运行命令.txt 或历史脚本中若仍出现 D:\\Desktop\\fz、D:\\Desktop\\方案一工程工具包 等旧路径，仅作为开发历史记录，不作为当前复现依据。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn5ziYaypzEucZBTLQ2DeDCb",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "7.样例与工程验证信息",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcniQblyzD2Q3I24EyxtpiROb",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "根据当前工程文件检查，完整样例位于 物理引擎-fz\\x64\\Debug\\zq，其中 1.json 配置 18 个装备，红方 11 个、蓝方 7 个；2.json 包含 10 个装备动作队列、110 个事件，指令类型包括 WP、RD、TT、FM、WAIT、XT。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcniVctXqSnGuhgxsBlcN5oLb",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "简化样例位于 物理引擎-fz\\x64\\Debug\\zq\\简化，其中 1.json 配置 2 个装备，2.json 包含 1 个动作队列、3 个事件，可用于最小化联调。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnwtAm97xtPHdgGidl1wGAVd",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "当前工程保留了多轮运行日志，例如 物理引擎-fz\\x64\\Debug\\log\\20260904122231 下有 18 个装备 CSV 文件，与完整样例装备数量一致。战中因果方案工程工具包\\outputs\\causal_logs.md 中记录了输入事件数 110、诊断日志数 64，可作为因果诊断输出示例。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnNx3eBcStK6Ie87LN0ChMyg",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "8.结果核对方法",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnXhQAgfsuU3w1jGHiU0kUse",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "8.1 因果界面核对",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnU8QZR3I9sqK42Iyqzx38Nd",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "打开 http://127.0.0.1:5174/，确认页面能显示杀伤链数量、当前同步时间和物理引擎连接状态。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrAZTO3pSSqhJE0MpvXozyc",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "运行物理引擎后，查看目标杀伤链是否按 KC_TARGET_{targetId} 命名。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOU1ARENR6uNEfn6YdsU3Fc",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "确认 TT、FM、WAIT 等目标相关事件能推动 Track、Target、Engage、Assess 环节变化。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnxKG7z4AHwJCOSMYxsftiMe",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "8.2 CSV 日志核对",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnb9M2iolTWnLrce2VryuHLc",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "打开 物理引擎-fz\\x64\\Debug\\log 下最新时间戳目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn4TVgvk2nAxIk6lQjlzI4Qe",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "检查是否生成与装备数量对应的 CSV 文件，例如 10010.csv、10011.csv、20010.csv。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHPHItg44t2UNorwwJXzEDc",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "检查时间字段是否持续增长，经度、纬度、高度、姿态角、雷达捕获数量、是否发射、目标 ID、导弹剩余数量、是否存活等字段是否随仿真推进变化。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnJ5O1QDN6dljaF65BaVcP0V",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "8.3 Tacview 与视频核对",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnTvUSfRw5CK8TwcIEEnAkTh",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "如果本机 Tacview 路径正确，启动物理引擎脚本会尝试打开 Tacview。若脚本未能自动打开，可手动打开 Tacview 后按原仿真流程连接。演示视频 新版-物理因果双引擎可视化界面修改版.mp4 可作为界面效果参考，附件由投稿人手动插入。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcn1NNyuVDd8u1zHYtPRYrLUf",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "9.常见问题",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "block_type": 31,
+      "children": [
+        "doxcnVMva7v80FyYDGLZM591Fee",
+        "doxcn3CNNPA8cdlNUlrt2PWG0rf",
+        "doxcnQYV7MMb8TzEjj8U5lTNZqd",
+        "doxcnSkAXNh4csVmLOBxMJYNr5b",
+        "doxcnPTQ8nNHcNIT0YFJjLp8kWe",
+        "doxcnqqXQvKXxyJ5BIIv7xueDsh",
+        "doxcnakLSS4otgEhKfaEOrv62Cf",
+        "doxcnRA8W41IoN9vaWT08eppotf",
+        "doxcnNskR87Tz6vCzqPdwgLPvLz",
+        "doxcnQ59Rlkw0Va2G2f3IUQzxPc",
+        "doxcnfllspKO0QPeZw8Hfpj9Rkh",
+        "doxcniezKtc5f8xr5FxaBGEJMBg",
+        "doxcnaD0OtRCpsIX42NkzFtDTJd",
+        "doxcn0QLaGhMa7Fr4Ni8pCgTqch",
+        "doxcnwCi1SOsDkr5sy5fjyzk4qh",
+        "doxcne1yqW0upwollHzOXFF7krh",
+        "doxcnGNRyiZga0guoQaxLc6awrc",
+        "doxcnqNMF2aTfecttn7gJz148Bh",
+        "doxcnqpFZv0s30zjeT2wXtAm1Ze",
+        "doxcnDgiQCXxkZAhf41lKgnpoDe",
+        "doxcnm3skUCjAA3SdNiXYe2YtCc",
+        "doxcn0Hx9U4ZtqmUZ096jWO76ld",
+        "doxcnRDyP7loyd02wMgxszS0rCj",
+        "doxcnRLU892VQKEGT8GpSmCpEBd",
+        "doxcnPdhZ4HeLJWzb8sMVHrKoHb",
+        "doxcngSURF7b1H9Rn7JJT3qGbxb",
+        "doxcnrmJ5KD2MCalp5TpbaoTlzd"
+      ],
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "table": {
+        "cells": [
+          "doxcnVMva7v80FyYDGLZM591Fee",
+          "doxcn3CNNPA8cdlNUlrt2PWG0rf",
+          "doxcnQYV7MMb8TzEjj8U5lTNZqd",
+          "doxcnSkAXNh4csVmLOBxMJYNr5b",
+          "doxcnPTQ8nNHcNIT0YFJjLp8kWe",
+          "doxcnqqXQvKXxyJ5BIIv7xueDsh",
+          "doxcnakLSS4otgEhKfaEOrv62Cf",
+          "doxcnRA8W41IoN9vaWT08eppotf",
+          "doxcnNskR87Tz6vCzqPdwgLPvLz",
+          "doxcnQ59Rlkw0Va2G2f3IUQzxPc",
+          "doxcnfllspKO0QPeZw8Hfpj9Rkh",
+          "doxcniezKtc5f8xr5FxaBGEJMBg",
+          "doxcnaD0OtRCpsIX42NkzFtDTJd",
+          "doxcn0QLaGhMa7Fr4Ni8pCgTqch",
+          "doxcnwCi1SOsDkr5sy5fjyzk4qh",
+          "doxcne1yqW0upwollHzOXFF7krh",
+          "doxcnGNRyiZga0guoQaxLc6awrc",
+          "doxcnqNMF2aTfecttn7gJz148Bh",
+          "doxcnqpFZv0s30zjeT2wXtAm1Ze",
+          "doxcnDgiQCXxkZAhf41lKgnpoDe",
+          "doxcnm3skUCjAA3SdNiXYe2YtCc",
+          "doxcn0Hx9U4ZtqmUZ096jWO76ld",
+          "doxcnRDyP7loyd02wMgxszS0rCj",
+          "doxcnRLU892VQKEGT8GpSmCpEBd",
+          "doxcnPdhZ4HeLJWzb8sMVHrKoHb",
+          "doxcngSURF7b1H9Rn7JJT3qGbxb",
+          "doxcnrmJ5KD2MCalp5TpbaoTlzd"
+        ],
+        "property": {
+          "column_size": 3,
+          "column_width": [
+            161,
+            230,
+            298
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            },
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 9
+        }
+      }
+    },
+    {
+      "block_id": "doxcnVMva7v80FyYDGLZM591Fee",
+      "block_type": 32,
+      "children": [
+        "doxcngLk67PG7ARa7f73pyeTkmb"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcngLk67PG7ARa7f73pyeTkmb",
+      "block_type": 2,
+      "parent_id": "doxcnVMva7v80FyYDGLZM591Fee",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "问题",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn3CNNPA8cdlNUlrt2PWG0rf",
+      "block_type": 32,
+      "children": [
+        "doxcnLTf5r205hb18tOK8r4EhQf"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnLTf5r205hb18tOK8r4EhQf",
+      "block_type": 2,
+      "parent_id": "doxcn3CNNPA8cdlNUlrt2PWG0rf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "可能原因",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQYV7MMb8TzEjj8U5lTNZqd",
+      "block_type": 32,
+      "children": [
+        "doxcnuFaFWh5tv0tup3eFthsMCf"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnuFaFWh5tv0tup3eFthsMCf",
+      "block_type": 2,
+      "parent_id": "doxcnQYV7MMb8TzEjj8U5lTNZqd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "处理方法",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnSkAXNh4csVmLOBxMJYNr5b",
+      "block_type": 32,
+      "children": [
+        "doxcnNYV7OZRFD0xw14VeU2GOZ3"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnNYV7OZRFD0xw14VeU2GOZ3",
+      "block_type": 2,
+      "parent_id": "doxcnSkAXNh4csVmLOBxMJYNr5b",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "5174 页面打不开",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnPTQ8nNHcNIT0YFJjLp8kWe",
+      "block_type": 32,
+      "children": [
+        "doxcneX3fO3nTgINAC0GEBErcQc"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcneX3fO3nTgINAC0GEBErcQc",
+      "block_type": 2,
+      "parent_id": "doxcnPTQ8nNHcNIT0YFJjLp8kWe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果服务未启动或 Python 不可用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqqXQvKXxyJ5BIIv7xueDsh",
+      "block_type": 32,
+      "children": [
+        "doxcnl5W29OUrlFvMCT4aSOfOOF"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnl5W29OUrlFvMCT4aSOfOOF",
+      "block_type": 2,
+      "parent_id": "doxcnqqXQvKXxyJ5BIIv7xueDsh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "保持 启动因果引擎界面.bat 窗口打开，确认 PATH 中有 python，或按脚本提示安装/配置 Python",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnakLSS4otgEhKfaEOrv62Cf",
+      "block_type": 32,
+      "children": [
+        "doxcnTHJCdrasHmLP3nRKEz5ctb"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnTHJCdrasHmLP3nRKEz5ctb",
+      "block_type": 2,
+      "parent_id": "doxcnakLSS4otgEhKfaEOrv62Cf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "页面一直等待物理引擎",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnRA8W41IoN9vaWT08eppotf",
+      "block_type": 32,
+      "children": [
+        "doxcnsRZPtvKwGSmryItkAoHIpe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnsRZPtvKwGSmryItkAoHIpe",
+      "block_type": 2,
+      "parent_id": "doxcnRA8W41IoN9vaWT08eppotf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "AirCombat_demo.exe 未运行，或 8090 端口不是当前工程占用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnNskR87Tz6vCzqPdwgLPvLz",
+      "block_type": 32,
+      "children": [
+        "doxcnsyXoiG2TDRVnEMqi8rXIae"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnsyXoiG2TDRVnEMqi8rXIae",
+      "block_type": 2,
+      "parent_id": "doxcnNskR87Tz6vCzqPdwgLPvLz",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "先运行 启动物理引擎和Tacview.bat；如仍失败，检查 8090 端口占用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnQ59Rlkw0Va2G2f3IUQzxPc",
+      "block_type": 32,
+      "children": [
+        "doxcnOAEzij0B4ySDto1FNcCQys"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnOAEzij0B4ySDto1FNcCQys",
+      "block_type": 2,
+      "parent_id": "doxcnQ59Rlkw0Va2G2f3IUQzxPc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "8090 端口占用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnfllspKO0QPeZw8Hfpj9Rkh",
+      "block_type": 32,
+      "children": [
+        "doxcnDJa476h6s4AVVkbOg49jdf"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnDJa476h6s4AVVkbOg49jdf",
+      "block_type": 2,
+      "parent_id": "doxcnfllspKO0QPeZw8Hfpj9Rkh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "旧仿真进程或其他程序占用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcniezKtc5f8xr5FxaBGEJMBg",
+      "block_type": 32,
+      "children": [
+        "doxcnAh3LBxvEYLMPBaqb9myE4d"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnAh3LBxvEYLMPBaqb9myE4d",
+      "block_type": 2,
+      "parent_id": "doxcniezKtc5f8xr5FxaBGEJMBg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "执行 netstat -ano | findstr 8090 查看 PID，关闭占用进程后重试",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnaD0OtRCpsIX42NkzFtDTJd",
+      "block_type": 32,
+      "children": [
+        "doxcn9vvmV2NxVJG7H9z0FJTlPt"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn9vvmV2NxVJG7H9z0FJTlPt",
+      "block_type": 2,
+      "parent_id": "doxcnaD0OtRCpsIX42NkzFtDTJd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理引擎启动后直接退出",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0QLaGhMa7Fr4Ni8pCgTqch",
+      "block_type": 32,
+      "children": [
+        "doxcnRnEejeC3y7UZNXvDqk3fkf"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnRnEejeC3y7UZNXvDqk3fkf",
+      "block_type": 2,
+      "parent_id": "doxcn0QLaGhMa7Fr4Ni8pCgTqch",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "参数目录错误、1.json/2.json 缺失或 DLL 缺失",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnwCi1SOsDkr5sy5fjyzk4qh",
+      "block_type": 32,
+      "children": [
+        "doxcn1twMkpvJNiruBKCHnXhved"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn1twMkpvJNiruBKCHnXhved",
+      "block_type": 2,
+      "parent_id": "doxcnwCi1SOsDkr5sy5fjyzk4qh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "确认 zq 目录下有 1.json/2.json，Debug 目录下有依赖 DLL",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcne1yqW0upwollHzOXFF7krh",
+      "block_type": 32,
+      "children": [
+        "doxcnOBTcxO3JiKg4HfVM56D7uf"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnOBTcxO3JiKg4HfVM56D7uf",
+      "block_type": 2,
+      "parent_id": "doxcne1yqW0upwollHzOXFF7krh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Tacview 没有自动打开",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnGNRyiZga0guoQaxLc6awrc",
+      "block_type": 32,
+      "children": [
+        "doxcngPHhE6YBqGSb4xAnv0zQLe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcngPHhE6YBqGSb4xAnv0zQLe",
+      "block_type": 2,
+      "parent_id": "doxcnGNRyiZga0guoQaxLc6awrc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Tacview 安装路径与脚本默认路径不一致",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqNMF2aTfecttn7gJz148Bh",
+      "block_type": 32,
+      "children": [
+        "doxcnFHPwZFOqUn1ZptqvJwMwUe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnFHPwZFOqUn1ZptqvJwMwUe",
+      "block_type": 2,
+      "parent_id": "doxcnqNMF2aTfecttn7gJz148Bh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "修改脚本中的 TACVIEW_EXE，或手动打开 Tacview",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnqpFZv0s30zjeT2wXtAm1Ze",
+      "block_type": 32,
+      "children": [
+        "doxcnBGyvy2Ogoy8jGsrI8eoXzb"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnBGyvy2Ogoy8jGsrI8eoXzb",
+      "block_type": 2,
+      "parent_id": "doxcnqpFZv0s30zjeT2wXtAm1Ze",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "CSV 表头乱码",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnDgiQCXxkZAhf41lKgnpoDe",
+      "block_type": 32,
+      "children": [
+        "doxcnkRXFdmDX8O5mduFUT3ppBJ"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnkRXFdmDX8O5mduFUT3ppBJ",
+      "block_type": 2,
+      "parent_id": "doxcnDgiQCXxkZAhf41lKgnpoDe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "日志编码与查看软件默认编码不一致",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnm3skUCjAA3SdNiXYe2YtCc",
+      "block_type": 32,
+      "children": [
+        "doxcn3rW3D8tbX0GNXLyH9ObXLe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn3rW3D8tbX0GNXLyH9ObXLe",
+      "block_type": 2,
+      "parent_id": "doxcnm3skUCjAA3SdNiXYe2YtCc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "用 VS Code 或 Notepad++ 切换 UTF-8、UTF-8 with BOM 或 ANSI 查看",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0Hx9U4ZtqmUZ096jWO76ld",
+      "block_type": 32,
+      "children": [
+        "doxcnUS41OEMsK0WlSpauq9UVsc"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnUS41OEMsK0WlSpauq9UVsc",
+      "block_type": 2,
+      "parent_id": "doxcn0Hx9U4ZtqmUZ096jWO76ld",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因果链路不更新",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnRDyP7loyd02wMgxszS0rCj",
+      "block_type": 32,
+      "children": [
+        "doxcnIlv0B7WOP6ow9CepEOBUze"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnIlv0B7WOP6ow9CepEOBUze",
+      "block_type": 2,
+      "parent_id": "doxcnRDyP7loyd02wMgxszS0rCj",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "物理端实时接口未返回新事件，或目标事件没有 targetId",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnRLU892VQKEGT8GpSmCpEBd",
+      "block_type": 32,
+      "children": [
+        "doxcnWwvpPtUJfEuv8cxlwvolCe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnWwvpPtUJfEuv8cxlwvolCe",
+      "block_type": 2,
+      "parent_id": "doxcnRLU892VQKEGT8GpSmCpEBd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "检查 2.json 中 TT/FM/WAIT 的 params，确认目标 ID 可被映射规则解析",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnPdhZ4HeLJWzb8sMVHrKoHb",
+      "block_type": 32,
+      "children": [
+        "doxcnQUqAOUxX8Ll6GoqIUjlFAc"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnQUqAOUxX8Ll6GoqIUjlFAc",
+      "block_type": 2,
+      "parent_id": "doxcnPdhZ4HeLJWzb8sMVHrKoHb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "旧路径导致运行失败",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcngSURF7b1H9Rn7JJT3qGbxb",
+      "block_type": 32,
+      "children": [
+        "doxcnu9dabRw8xtbtS4tYRSfFkz"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnu9dabRw8xtbtS4tYRSfFkz",
+      "block_type": 2,
+      "parent_id": "doxcngSURF7b1H9Rn7JJT3qGbxb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "子目录文档或历史命令仍保留 D:\\Desktop\\fz 等路径",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrmJ5KD2MCalp5TpbaoTlzd",
+      "block_type": 32,
+      "children": [
+        "doxcnJPgFlWBpTH5RaGkfpOvlRe"
+      ],
+      "parent_id": "doxcny344EQAz73f3GzPPdaoPPg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnJPgFlWBpTH5RaGkfpOvlRe",
+      "block_type": 2,
+      "parent_id": "doxcnrmJ5KD2MCalp5TpbaoTlzd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "复现时以本文和顶层两个 bat 脚本为准",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnc5dVnGNOvuyrG5lJspXnoe",
+      "block_type": 3,
+      "heading1": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "10. 总结",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd"
+    },
+    {
+      "block_id": "doxcnkOZwNNnUtZ0QcNsxRA6KKg",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "本项目把物理仿真事件和因果杀伤链展示连接起来，使战中推演不仅能在 Tacview 中观察装备运动，也能在因果界面中同步查看每个目标的 F2T2EA 链路推进状态。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnKcASunUsLspaUJiTcmYtje",
+      "block_type": 2,
+      "parent_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "复现时最重要的是保持工程相对目录结构不变，先启动 5174 因果界面，再启动 8090 物理引擎接口，并以顶层启动脚本和本文命令为准。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    }
+  ]
+}

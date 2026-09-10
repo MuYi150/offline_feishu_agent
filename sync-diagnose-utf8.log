@@ -1,0 +1,29 @@
+{
+  "write": false,
+  "events": [
+    {
+      "action": "diagnosis",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "row": 2,
+      "status": "已投稿",
+      "expected": "已投稿",
+      "eligible": false,
+      "control": {
+        "cycle": 0,
+        "handoff": false
+      },
+      "round": 0
+    }
+  ]
+}
+{
+  "write": false,
+  "events": [
+    {
+      "action": "job",
+      "id": "RZaedsHteoLTXcxXThAcLM1enxd-d8f5e066cc8be53f6da6",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "status": "queued"
+    }
+  ]
+}

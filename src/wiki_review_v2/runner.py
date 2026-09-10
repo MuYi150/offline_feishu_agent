@@ -32,9 +32,19 @@ class RunSummary:
 
 
 class ReviewRunner:
-    def __init__(self, settings: Settings) -> None:
+    def __init__(self, settings: Settings, *, history_store=None, similarity_store=None,
+                 defer_commit: bool = False) -> None:
         self.settings = settings
+        self.workflow_options = dict(history_store=history_store, similarity_store=similarity_store,
+                                     defer_commit=defer_commit)
         self.source = FixtureDocumentSource()
+
+    def run_snapshot(self, case_path: Path, **kwargs) -> RunSummary:
+        """Run an immutable external fixture without changing the local fixture root."""
+        path = case_path.resolve()
+        runner = ReviewRunner(self.settings.model_copy(update={"fixtures_root": path.parent}),
+                              **self.workflow_options)
+        return runner.run_case(path.name, **kwargs)
 
     def initialize_similarity_index(self) -> dict[str, object]:
         store = SimilarityIndexStore(self.settings.similarity_index_path)
@@ -106,7 +116,8 @@ class ReviewRunner:
         )
         return self._invoke(output_dir, initial.model_dump(mode="json"), model, resume=False)             #调用 LangGraph,返回运行结果
 
-    def resume(self, run_dir: Path, *, explicit_real_authorization: bool = False) -> RunSummary:
+    def resume(self, run_dir: Path, *, explicit_real_authorization: bool = False,
+               model_override: ReviewModel | None = None) -> RunSummary:
         output_dir = run_dir.resolve()
         metadata_path = output_dir / "run_metadata.json"
         if not metadata_path.exists():
@@ -116,7 +127,7 @@ class ReviewRunner:
         bundle = self.source.load(case_path)
         real = metadata["model_mode"] == "real"
         try:
-            model = self._make_model(real, bundle.fake_model_response, explicit_real_authorization)
+            model = model_override or self._make_model(real, bundle.fake_model_response, explicit_real_authorization)
         except ReviewError as exc:
             failure = classify_exception(exc)
             AuditStore().save_failure(
@@ -141,10 +152,17 @@ class ReviewRunner:
         connection = sqlite3.connect(output_dir / "checkpoint.sqlite", check_same_thread=False)
         try:
             checkpointer = SqliteSaver(connection)
-            graph = ReviewWorkflow(self.settings, model).compile(checkpointer)
+            graph = ReviewWorkflow(self.settings, model, **self.workflow_options).compile(checkpointer)
             config: dict[str, Any] = {"configurable": {"thread_id": metadata["thread_id"]}}
             if resume:
                 latest = graph.get_state(config)
+                if not latest.values:
+                    initial = ReviewGraphState(**{k: metadata[k] for k in (
+                        "case_id", "case_path", "output_dir", "run_id", "thread_id", "model_mode")})
+                    final = graph.invoke(initial.model_dump(mode="json"), config=config)
+                    data = final.model_dump(mode="json") if hasattr(final, "model_dump") else dict(final or {})
+                    return RunSummary(output_dir, metadata["run_id"],
+                                      (data.get("parsed_review_result") or {}).get("result"), data.get("failure"))
                 failed_node = self._failed_node(latest.values)
                 if failed_node:
                     for snapshot in graph.get_state_history(config):

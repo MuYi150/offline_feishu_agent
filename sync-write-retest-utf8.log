@@ -1,0 +1,22 @@
+{
+  "write": true,
+  "events": [
+    {
+      "action": "update",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "row": 2,
+      "columns": [
+        "N",
+        "M",
+        "C"
+      ]
+    },
+    {
+      "action": "sort_preview",
+      "needed": false,
+      "node_order": [
+        "W6UwwAyM1iSsy9kwdc3cHarZnXb"
+      ]
+    }
+  ]
+}

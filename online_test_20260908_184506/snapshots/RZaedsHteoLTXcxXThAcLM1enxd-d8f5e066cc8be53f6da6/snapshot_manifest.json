@@ -1,0 +1,65 @@
+{
+  "job_id": "RZaedsHteoLTXcxXThAcLM1enxd-d8f5e066cc8be53f6da6",
+  "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+  "obj": "RZaedsHteoLTXcxXThAcLM1enxd",
+  "version": "2026/09/06 15:39:51",
+  "cycle": 0,
+  "record": {
+    "row": [
+      1,
+      "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+      {
+        "text": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+        "link": "https://test-dl7w781n82l3.feishu.cn/wiki/W6UwwAyM1iSsy9kwdc3cHarZnXb",
+        "type": "url"
+      },
+      "协同博弈",
+      {
+        "category": "at-user-block",
+        "en_name": "杨挺",
+        "link": "https://s3-imfile.feishucdn.com/static-resource/v1/v3_00159_2f24dcfc-9e65-4eb3-9ec6-f123d2c0eb4g~?image_size=72x72&cut_type=default-face&quality=&format=jpeg&sticker_format=.webp",
+        "mentionNotify": false,
+        "mentionType": 0,
+        "name": "杨挺",
+        "not_notify": false,
+        "text": "@杨挺",
+        "token": "7682250113158269916",
+        "type": "mention"
+      },
+      "AI",
+      null,
+      "AI审稿中",
+      0,
+      "2026/09/06 15:39:51",
+      null,
+      "",
+      "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "RZaedsHteoLTXcxXThAcLM1enxd"
+    ],
+    "row_index": 2,
+    "title": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+    "link": "https://test-dl7w781n82l3.feishu.cn/wiki/W6UwwAyM1iSsy9kwdc3cHarZnXb",
+    "wiki_name": "协同博弈",
+    "author": "@杨挺",
+    "method": "AI",
+    "reviewer": "",
+    "status": "AI审稿中",
+    "round": 0,
+    "updated": "2026/09/06 15:39:51",
+    "reviewed": "",
+    "published": "",
+    "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+    "obj": "RZaedsHteoLTXcxXThAcLM1enxd"
+  },
+  "source_hash": "c34a52f220c90e54e68573d0a078a866cb62b21aa029d6ec66ce5d602cbf609c",
+  "errors": [],
+  "embedded": [],
+  "files": {
+    "attachment_metadata.json": "b5eee3bc9b395fdbf16c5a45dcc2ea86e81c3126b19bc488f571a2b34f70dbd8",
+    "document_blocks.json": "b37b1a9489e01973ebbab8b16dc9373a7b9e9d271dccf4cf8f4e0db51d481507",
+    "fixture_options.json": "ec95df7b1257b7ebdebb62e934cfd89255271412168992eb4f2a3f1836c221cf",
+    "raw_blocks.json": "67f5395f3e17f6f15dd0bbc61f36ec21f0b08294b54d849d50f6200e9aa0aa22",
+    "source.pdf": "f9ff85694d5353afc75f383470e887e15f9945e0e00c8b531fe791798d636a93",
+    "source_document.json": "f7100497f764d0a145512711ab5b876afdd04c1e8d94b614634b6afefd9bc7dd"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "job_id": "AmTUd2jCToDkXfxkgm5cjDlZngg-bd51f5422c7d410aa709",
+  "node": "EF9BwYh0diY44EkkijycpVLsnTd",
+  "obj": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+  "version": "2026/09/10 16:28:45",
+  "cycle": 0,
+  "record": {
+    "row": [
+      3,
+      "[必备知识学习]Linux入门知识和快捷指令-v1.0",
+      {
+        "text": "[必备知识学习]Linux入门知识和快捷指令-v1.0",
+        "link": "https://test-dl7w781n82l3.feishu.cn/wiki/EF9BwYh0diY44EkkijycpVLsnTd",
+        "type": "url"
+      },
+      "通用知识",
+      "@杨挺",
+      "AI",
+      null,
+      "AI审稿中",
+      null,
+      "2026/09/10 16:28:45",
+      null,
+      null,
+      "EF9BwYh0diY44EkkijycpVLsnTd",
+      "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    ],
+    "row_index": 4,
+    "title": "[必备知识学习]Linux入门知识和快捷指令-v1.0",
+    "link": "https://test-dl7w781n82l3.feishu.cn/wiki/EF9BwYh0diY44EkkijycpVLsnTd",
+    "wiki_name": "通用知识",
+    "author": "@杨挺",
+    "method": "AI",
+    "reviewer": "",
+    "status": "AI审稿中",
+    "round": 0,
+    "updated": "2026/09/10 16:28:45",
+    "reviewed": "",
+    "published": "",
+    "node": "EF9BwYh0diY44EkkijycpVLsnTd",
+    "obj": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+  },
+  "source_hash": "f7db53a77c8d383e5cdb9655769eebd4e2cc0fec8bf044dbd75dc1e4e2a4d0a3",
+  "errors": [],
+  "embedded": [],
+  "files": {
+    "attachment_metadata.json": "096fd8a7cecaa6bc31041c43d3db977b071690c58d3f3c9c46df15193e086386",
+    "document_blocks.json": "bd64c7f1de28877e7dcd7db49990ef54442cc681dd79bc8d378cecb9ec014afe",
+    "fixture_options.json": "ec95df7b1257b7ebdebb62e934cfd89255271412168992eb4f2a3f1836c221cf",
+    "raw_blocks.json": "9a64afc0fda0950525961df123be7785eadbc504d4fc809d4b79eeae832eab7a",
+    "source.pdf": "a98d08cefee6c194de1bdb37d93ae5b8533bee0fd567d2824eb5e5490687d49d",
+    "source_document.json": "daf7dbd24a7ae9bb88803015012dbc2e88cc9921363c0194ded675c242837b4b"
+  }
+}

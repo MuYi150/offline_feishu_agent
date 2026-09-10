@@ -1,0 +1,40 @@
+{
+  "write": true,
+  "events": [
+    {
+      "action": "update",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "row": 2,
+      "columns": [
+        "N",
+        "M",
+        "C"
+      ]
+    },
+    {
+      "action": "update",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "row": 2,
+      "columns": [
+        "H"
+      ]
+    },
+    {
+      "action": "fixture_candidate",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "round": 0
+    },
+    {
+      "action": "fixture_ready",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "path": "D:\\NEU\\feishu\\WIKI_V2\\online_test_20260908_184506\\snapshots\\RZaedsHteoLTXcxXThAcLM1enxd-d8f5e066cc8be53f6da6"
+    },
+    {
+      "action": "sort_preview",
+      "needed": false,
+      "node_order": [
+        "W6UwwAyM1iSsy9kwdc3cHarZnXb"
+      ]
+    }
+  ]
+}

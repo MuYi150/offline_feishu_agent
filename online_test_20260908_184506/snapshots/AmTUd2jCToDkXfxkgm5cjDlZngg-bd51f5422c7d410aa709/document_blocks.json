@@ -1,0 +1,559 @@
+{
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "[必备知识学习]Linux入门知识和快捷指令-v1.0"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "前言："
+    },
+    {
+      "type": "paragraph",
+      "text": "“在Linux世界里面，一切皆是文件”在Linux的世界里，“一切皆是文件”不仅是一句口号，更是其设计的核心哲学。从普通文档、硬件设备到系统进程，万事万物都被抽象为可以通过“打开、读取、写入、关闭”统一操作的文件对象。这种极致的一致性，赋予了系统无与伦比的透明度与灵活性——复杂的系统交互被简化为清晰的文件操作，独立的命令行工具能像乐高积木般自由组合，创造出强大的解决方案。理解这一理念，就掌握了通往Linux自由与高效世界的第一把钥匙。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第一章：Linux目录结构"
+    },
+    {
+      "type": "paragraph",
+      "text": "Linux的文件系统以根目录（/）为起点，采用单一的树状层次结构组织所有文件和目录。这种结构与Windows等操作系统常见的多个并列盘符（如C:、D:）有根本区别。在Linux中，一切皆从根目录开始，所有其他目录、文件、设备乃至网络存储，最终都被逻辑地“挂载”到树状结构的某个路径下，形成一个统一的命名空间。"
+    },
+    {
+      "type": "list",
+      "text": "/bin是Binary的缩写，存放着常用的命令。"
+    },
+    {
+      "type": "list",
+      "text": "/sbin是Super User的意思，存放着系统管理员使用的系统管理程序"
+    },
+    {
+      "type": "list",
+      "text": "/root 程序管理员的用户主目录"
+    },
+    {
+      "type": "list",
+      "text": "/lib 系统开机所需要的最基本的动态连接库，其作用类似于Windows里的DLL文件。"
+    },
+    {
+      "type": "list",
+      "text": "/etc 所有的系统管理所需要的配置文件和子目录my.conf"
+    },
+    {
+      "type": "list",
+      "text": "/usr 用户的很多应用程序和文件都放在这个目录下面"
+    },
+    {
+      "type": "list",
+      "text": "/boot 存放的是启动Linux时使用的一些核心文件"
+    },
+    {
+      "type": "list",
+      "text": "/proc[不能动]，虚拟目录，映射系统内存与进程信息，可用于查看系统实时状态。"
+    },
+    {
+      "type": "list",
+      "text": "/srv[不能动]，service缩写，用来存放一些服务启动之后需要提取的数据"
+    },
+    {
+      "type": "list",
+      "text": "/sys[不能动] 该目录安装了2.6内核中新出现的一个文件系统sysfs"
+    },
+    {
+      "type": "list",
+      "text": "/tmp，存放临时文件"
+    },
+    {
+      "type": "list",
+      "text": "/dev，类似于windows的设备管理器，把所有的硬件用文件的形式存储"
+    },
+    {
+      "type": "list",
+      "text": "/media linux系统会自动识别一些设备，当识别后，linux会把识别的设备挂载在这个目录下"
+    },
+    {
+      "type": "list",
+      "text": "/mnt  系统提供该目录是为了让用户挂载别的文件系统的，可以将外部的存储挂载在/mnt上，然后就可以进入该目录查看里面的内容"
+    },
+    {
+      "type": "list",
+      "text": "/opt 给主机额外安装软件所存放的目录，默认为空"
+    },
+    {
+      "type": "list",
+      "text": "/user/local 用户自行编译安装的软件通常放置于此，与系统自带的程序分离。"
+    },
+    {
+      "type": "list",
+      "text": "/var 存放经常变化的文件，如系统日志、缓存数据、邮件队列等。"
+    },
+    {
+      "type": "list",
+      "text": "/selinux Security-Enhanced Linux的安全子系统目录，用于存储策略与配置文件，可对程序访问权限进行强制控制。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第二章：Linux远程登陆"
+    },
+    {
+      "type": "paragraph",
+      "text": "在软件开发的团队协作场景中，一个集中的Linux服务器通常作为共享的开发、测试或构建环境。开发小组成员在此服务器上进行代码协同、项目构建、版本控制、内部测试等工作。然而，这个内部环境与面向公众的正式生产环境（即公网上线的服务器）是物理隔离的，这是为了确保开发活动不会影响线上服务的稳定与安全。"
+    },
+    {
+      "type": "paragraph",
+      "text": "因此，程序员需要远程安全地访问这台位于内网或数据中心的Linux服务器。这个过程主要涉及两种核心操作，并对应着两类经典工具："
+    },
+    {
+      "type": "list",
+      "text": "命令行操作：这是进行服务器管理、项目部署、服务调试、日志查看等所有核心运维和开发活动的主要方式。Xshell 6。它是一款功能强大的SSH客户端软件，允许用户通过网络建立一个加密的、安全的命令行会话连接到远程Linux服务器，就如同直接坐在服务器的物理终端前一样，可以执行任何授权范围内的命令。"
+    },
+    {
+      "type": "list",
+      "text": "文件传输：在开发和部署过程中，经常需要上传下载文件、修改配置文件、管理项目目录结构等。虽然命令行工具（如scp,rsync）可以完成，但图形化界面更为直观便捷。Xftp 6。它是一款基于SSH协议的SFTP（SSH File Transfer Protocol）客户端，提供了类似Windows资源管理器的双窗口界面，可以安全地在本地计算机和远程Linux服务器之间拖拽传输文件。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第三章：Vim工具的使用"
+    },
+    {
+      "type": "paragraph",
+      "text": "Linux系统会内置vi文本编辑器，Vim具有程序编辑的能力，可以看作是Vi的增强版本。"
+    },
+    {
+      "type": "list",
+      "text": "正常模式："
+    },
+    {
+      "type": "list",
+      "text": "进入方式：启动Vim的默认模式，或从其他模式Esc返回。"
+    },
+    {
+      "type": "list",
+      "text": "主要功能：浏览文档，执行编辑命令，"
+    },
+    {
+      "type": "list",
+      "text": "常用快捷键：yy(拷贝当前行)；5yy(拷贝当前及下五行)；p(粘贴)；dd(删除)；5dd(删除当前及下五行)；"
+    },
+    {
+      "type": "list",
+      "text": "插入模式："
+    },
+    {
+      "type": "list",
+      "text": "进入方式：在正常模式下按以下任一字母键"
+    },
+    {
+      "type": "list",
+      "text": "主要功能：实际编辑文本内容"
+    },
+    {
+      "type": "list",
+      "text": "常用快捷键：i(在当前光标前插入);I(在行首插入);a(在当前光标后插入);A(在行尾插入);o(在当前行下方新建一行并插入);O(在当前行上方新建一行并插入)"
+    },
+    {
+      "type": "list",
+      "text": "命令行模式："
+    },
+    {
+      "type": "list",
+      "text": "进入方式：在正常模式下输入英文冒号:"
+    },
+    {
+      "type": "list",
+      "text": "主要功能：退出vim或者其他辅助功能"
+    },
+    {
+      "type": "list",
+      "text": "常用快捷键：：w(保存文件)；：q(退出编辑器);：wq(保存并退出)；：q!(强制退出不一定保存)；：set nu(设置行号）；set nonu(隐藏行号）"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第四章：关机重启"
+    },
+    {
+      "type": "list",
+      "text": "shutdown -h now （立即关机）"
+    },
+    {
+      "type": "list",
+      "text": "shutdown -h 1 （一分钟后进行关机）"
+    },
+    {
+      "type": "list",
+      "text": "shutdown -r now (立即重新启动 = reboot)"
+    },
+    {
+      "type": "list",
+      "text": "sync (把内存的数据同步到磁盘 在关机或者重启之前执行这个)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第五章：用户管理"
+    },
+    {
+      "type": "paragraph",
+      "text": "Linux系统是一个真正的多任务、多用户操作系统。这意味着它可以同时运行多个程序（任务），并且允许多个用户同时登录和使用系统，彼此之间的操作环境与资源（在权限控制下）相互隔离，互不影响。 在这样的系统设计中，用户账户是系统进行身份识别、权限控制和资源管理的基础单元。每个用户拥有一个唯一的用户名（User ID, UID）和对应的主目录（Home Directory，通常为 /home/用户名）。"
+    },
+    {
+      "type": "list",
+      "text": "useradd 用户名（添加用户） 。同时会自动创建和用户名同名的家目录。useradd 用户名 -d 指定目录"
+    },
+    {
+      "type": "list",
+      "text": "passwd 用户名（指定密码）"
+    },
+    {
+      "type": "list",
+      "text": "userdel 用户名（删除用户保留家目录）  userdel -r 用户名（删除用户和家目录）"
+    },
+    {
+      "type": "list",
+      "text": "id 用户名（查询用户信息指令，包括uid、gid、组等）"
+    },
+    {
+      "type": "list",
+      "text": "su -切换用户名(切换用户,低权限到高权限需要密码，反之不用)"
+    },
+    {
+      "type": "list",
+      "text": "whoami(查看当前用户)"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第六章：用户组"
+    },
+    {
+      "type": "paragraph",
+      "text": "在Linux系统中，用户组是组织和管理具有相同属性或权限需求的多个用户的关键机制。它是一种逻辑上的集合，旨在简化权限分配和系统管理。当管理员创建新用户账户时，如果未明确指定其所属的主用户组，系统会自动执行一个标准化操作：创建一个与用户名同名的新组，并将该用户设为这个新组的唯一初始成员。这个自动生成的组通常被称为用户的“私有组”或“初始组。"
+    },
+    {
+      "type": "list",
+      "text": "groupadd 组名 （添加一个组）"
+    },
+    {
+      "type": "list",
+      "text": "groupdel 组名 （删除一个组）"
+    },
+    {
+      "type": "list",
+      "text": "useradd -g 用户组 用户名 （增加用户时直接加上组）"
+    },
+    {
+      "type": "list",
+      "text": "usermod -g 用户组 用户名 （修改用户的组）"
+    },
+    {
+      "type": "paragraph",
+      "text": "相关文件"
+    },
+    {
+      "type": "list",
+      "text": "/etc/passwd 用户的配置文件，记录用户的各种信息"
+    },
+    {
+      "type": "list",
+      "text": "/etc/shadow文件 口令的配置信息"
+    },
+    {
+      "type": "list",
+      "text": "/etc/group 组（group）的配置文件，记录Linux包含的组的信息"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第七章：组权限"
+    },
+    {
+      "type": "paragraph",
+      "text": "在Linux文件系统中，每个文件或目录都关联着一套精细的所有权与访问权限控制机制，这是系统安全与多用户协作的核心。这套机制由三个核心部分构成：所有者、所在组和其他用户，并为每个角色分别定义了可读、可写、可执行的权限。"
+    },
+    {
+      "type": "list",
+      "text": "所有者：一般为文件的创建者，谁创建了该文件，就自然的成为该文件的所有者。ls -ahl（查看文件的所有者） chown 用户名 文件名 （修改文件所有者）"
+    },
+    {
+      "type": "list",
+      "text": "所在组：ls -ahl（也可以查看文件所在组）。用chgrp 组名 文件名 （修改文件所在的组）"
+    },
+    {
+      "type": "list",
+      "text": "权限的基本介绍：一共10位，第0位确定文件类型（l是链接，d是目录，c是字符设备，b是块设备，-是一般文件）1-3位是所有者对该用户的权限，4-6位是所属组对该用户的权限，7-9位是确定其他用户对该文件的权限。"
+    },
+    {
+      "type": "paragraph",
+      "text": "r：可读。对文件表示可读取内容；对目录表示可列出目录内的文件列表。 w：可写。对文件表示可修改内容；对目录表示可在其中创建、删除、重命名文件或子目录。 x：可执行。对文件表示可作为程序或脚本运行；对目录表示可进入（切换至）该目录，是访问目录内任何文件的前提。 示例：(-rwxr-xr--)"
+    },
+    {
+      "type": "list",
+      "text": "权限修改：chmod命令用于更改文件或目录的权限，   其核心是通过操作符 +（增加权限）、-（移除权限）和 `=``（设置精确权限）来调整。 u：所有者 q:所在组 o:其他人o：所有人                           "
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>chmod [选项] 模式 文件/目录<br>chmod u = rwx  文件/目录名  //文件所有者拥有读(r)、写(w)、执行(x) 的全部权限<br>chmod g=rx 文件/目录名  //文件所属组成员拥有读(r) 和执行(x) 权限，但无写入(w) 权限<br>chmod a-x 文件/目录名  //从所有用户类别中移除执行(x) 权限。                                       |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "修改文件所有者：chown（change owner）命令用于更改文件或目录的所有者和所属用户组。它控制着谁\"拥有\"这个文件，以及文件属于哪个用户组。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>chown [选项] 新所有者[:新所属组] 文件/目录<br>chown newowner 文件/目录 //改变所有者<br>chown newowner:newgroup 文件/目录 //改变所有者和所在组 -R目录子文件递归生效 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "修改文件所在组：chgrp（change group）命令专门用于更改文件或目录的所属用户组。它是chown命令的简化版，专门处理组归属变更。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>chgrp newgroup 文件/目录 //改变所有组 |\n| --- |"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第八章：运行级别"
+    },
+    {
+      "type": "paragraph",
+      "text": "运行级别 是Linux系统（特别是使用System V init初始化系统的发行版）中一个重要的系统状态概念。它定义了系统启动后进入的特定操作模式，每种模式对应一组预设的服务和守护进程。简单来说，运行级别决定了系统启动时运行哪些服务、提供哪些功能，以及用户可以访问哪些界面和资源。"
+    },
+    {
+      "type": "list",
+      "text": "0：关机"
+    },
+    {
+      "type": "list",
+      "text": "1：单用户[找回丢失密码，无需密码即可获得root的shell]"
+    },
+    {
+      "type": "list",
+      "text": "2：多用户状态没有网络服务"
+    },
+    {
+      "type": "list",
+      "text": "3：多用户状态有网络服务"
+    },
+    {
+      "type": "list",
+      "text": "4：系统未使用保留给用户"
+    },
+    {
+      "type": "list",
+      "text": "5：图形界面"
+    },
+    {
+      "type": "list",
+      "text": "6：系统重启"
+    },
+    {
+      "type": "paragraph",
+      "text": "常用运行级别是3和5，也可以指定默认运行级别。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>init[0123456] //切换<br>systemctl get-default //打印当前的运行级别<br>systemctl set-default //改变默认的运行级别 |\n| --- |"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第九章：文件目录"
+    },
+    {
+      "type": "list",
+      "text": "pwd显示当前工作目录的绝对路径，明确告知您在文件系统中的确切位置。"
+    },
+    {
+      "type": "list",
+      "text": "ls（list directory contents）命令用于列出目录中的文件和子目录信息"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>ls [选项] [目录/文件...]<br><br>ls -a //显示指定目录下的所有文件和目录<br>ls -l //以详细列表格式展示<br>ls -h //以更便捷的形式展示大小<br><br>ls -la -al -lha //可以连着使用，不区分先后顺序 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "cd（change directory）命令用于在文件系统中切换当前工作目录"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>cd ~ //回到家目录<br>cd .. //回到上一级目录<br>cd [目录路径] // 打开指定目录 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "mkdir（make directory）命令用于在Linux系统中创建新的目录"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>mkdir [选项] 目录名...<br>mkdir 目录名  //创建目录<br>mkdir dir1 dir2 dir3  //一次创建多个同级目录<br>mkdir -p 父目录/子目录/孙目录... //递归创建多级目录<br> |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "rmdir（remove directory）命令专门用于安全删除空目录，无法删除包含文件或子目录的目录。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>rmdir [选项] 目录名...<br>rm -rf //删除该目录下所有的东西，并且没有提示<br>rmdir dir1 dir2 dir3  //一次删除多个空目录<br>rm -r 目录名 //递归删除，有提示 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "touch命令主要用于创建空文件或更新文件的时间戳"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>touch 文件名 //创建新文件<br>touch 已存在的文件名 //更新时间戳 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "cp（copy）命令用于在Linux系统中复制文件或目录 "
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>cp [选项] 源文件/目录 目标文件/目录<br>cp [选项] 源文件1 源文件2 ... 目标目录 //多个文件一起复制<br>cp -r 源目录 目标目录 //递归复制全部目录<br>cp -f 源文件 目标文件 //强制覆盖选项<br>cp -v 源文件 目标文件 //详细输出 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "mv（move）命令用于移动文件/目录或重命名文件/目录"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>mv 旧名称 新名称 //改名<br>mv 源文件/目录 目标路径/ //移动文件 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "cat（concatenate）命令主要用于查看文件内容、创建文件、合并文件和重定向输出"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>cat [选项] 文件名... <br>cat file.txt // 查看单个文件<br>cat file1.txt file2.txt file3.txt  //查看多个文件<br>cat -n file.txt //显示行号 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "more 命令是一个基本的分页查看器，用于一页一页地查看长文件内容。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>more [选项] 文件名<br>more longfile.txt //查看文件<br>more +10 file.txt //从第10行开始 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "less 是more的增强版，支持向前向后滚动、搜索、标记等功能，且退出时不清屏。"
+    },
+    {
+      "type": "list",
+      "text": "echo 命令用于将文本内容输出到标准输出（通常是终端屏幕），是Shell脚本和命令行中最常用的输出工具。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>echo [选项] [字符串/变量...]<br>echo \"Hello, World!\" //输出文本<br>echo $HOME //输出环境变量 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "head 命令用于显示文件的开头部分内容，默认显示前10行，常用于快速预览文件开头或查看日志文件的最新条目。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>head [选项] 文件名...<br>head file.txt //查看文件开头<br>head -5 file.txt  //显示前5行 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "tail 命令用于显示文件的末尾部分内容，默认显示最后10行，是监控日志文件、查看最新数据、实时跟踪文件变化的必备工具。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>tail [选项] 文件名...<br>tail file.log //查看文件末尾<br>tail -5 file.log    //显示倒数5行<br>tail -f /var/log/syslog //实时监控变化 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "输出重定向是将命令的标准输出（stdout）或标准错误（stderr）重定向到文件或其他位置，而不是显示在终端屏幕上。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>ls -l > filelist.txt <br>date > current_time.txt<br>echo \"Hello World\" > greeting.txt //覆盖写没有将创建新的文件<br><br><br><br>ls -la >> filelist.txt<br>date >> log.txt<br>echo \"New entry\" >> data.txt  //追加写到末尾 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "ln（link）命令用于创建文件链接，包括硬链接和软链接（符号链接），是Linux文件系统的重要特性，用于创建文件别名、节省存储空间、维护多版本文件等。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>ln -s [源文件/目录路径] [链接文件名] //创建文件软链接<br>ln -s /usr/local/app /opt/myapp //创建目录软链接 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "history查看历史指令"
+    },
+    {
+      "type": "list",
+      "text": "date 显示当前日期"
+    },
+    {
+      "type": "list",
+      "text": "find 命令是Linux中最强大的文件搜索工具，用于在指定目录树中递归搜索文件和目录，支持多种搜索条件和操作。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>find [搜索路径] [搜索条件] [操作]<br>find /home -name \"file.txt\" //按名称搜索<br>find /var/log -type f -name \"*.log\" #按类型搜索<br>find /home -user alice //按用户搜索<br>find /var -size 10M  //按大小搜索 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "locate 基于预建的数据库快速定位文件，速度极快。但数据库非实时更新，新建文件需运行 sudo updatedb 命令更新数据库后才能被找到。"
+    },
+    {
+      "type": "list",
+      "text": "which 查找某个系统命令（可执行文件）的实际存放路径。比如ls在哪个目录"
+    },
+    {
+      "type": "list",
+      "text": " grep（Global Regular Expression Print）用于在文件或输入流中查找包含指定模式的行，支持正则表达式，是文本处理的核心工具。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>grep [选项] \"搜索模式\" [文件名...]<br><br>grep \"error\" /var/log/syslog //在单个文件中搜索<br>cat file.txt \\| grep \"pattern\" //管道传递搜索<br>grep -i \"error\" log.txt //忽略大小写<br> |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "gzip 用于压缩文件 gunzip用于解压的  .gz格式"
+    },
+    {
+      "type": "list",
+      "text": "zip 和 unzip 命令用于处理 .zip 格式的压缩文件，是跨平台（Windows/Linux/macOS）兼容性最好的压缩格式。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>zip [选项] 压缩文件名.zip 文件/目录...<br><br>zip archive.zip file.txt //压缩单个文件<br>zip -r project.zip myproject/ //压缩目录<br><br>unzip [选项] 压缩文件名.zip<br>unzip archive.zip<br>unzip archive.zip -d /tmp/extracted/ //解压到指定目录 |\n| --- |"
+    },
+    {
+      "type": "list",
+      "text": "tar（tape archive）命令是Linux中最常用的归档工具，用于将多个文件/目录打包成一个文件，常与压缩工具（gzip、bzip2、xz）结合使用。"
+    },
+    {
+      "type": "table",
+      "markdown": "| Plain Text<br>tar [选项] 目标文件 源文件/目录...<br><br>tar -cf archive.tar file1.txt file2.txt dir1/ //基本打包<br><br>tar -xf archive.tar //解压文件<br><br>tar -tf archive.tar//列出归档内容<br><br>tar -rf archive.tar newfile.txt//向现有归档追加文件<br> |\n| --- |"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "第十章：帮助指令"
+    },
+    {
+      "type": "list",
+      "text": "man 命令或配置文件 man ls"
+    },
+    {
+      "type": "list",
+      "text": "help 命令 获得shell内置命令的帮助信息"
+    },
+    {
+      "type": "list",
+      "text": "百度"
+    }
+  ]
+}

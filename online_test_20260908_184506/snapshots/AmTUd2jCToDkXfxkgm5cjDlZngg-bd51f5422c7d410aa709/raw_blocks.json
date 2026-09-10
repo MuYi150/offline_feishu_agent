@@ -1,0 +1,6631 @@
+{
+  "blocks": [
+    {
+      "block_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "block_type": 1,
+      "children": [
+        "doxcnpipkWQwPs31qEwTH6zTkhc",
+        "doxcnGEwfKtnXSDdECmLzG4AzYd",
+        "doxcnXoQAv4wyRjHelDB8ZQtRTh",
+        "doxcnGY3JT7XLyHZOKP0eNLvpUg",
+        "doxcnuo7v52OrDxm6lEHexCiBmd",
+        "doxcnuxegiLNb7iOxk7kxMnNbag",
+        "doxcnWFSrLETnm6557aD5v0CrsV",
+        "doxcncAbw3H0aZYl6WW6EYfKI5f",
+        "doxcnVds30FrJdrxYLrEn8wzdJd",
+        "doxcn7wqA33b3O74QOsbZImryCd",
+        "doxcnghcD4km60VxL5Iyb3AaS8g",
+        "doxcn7Mzrgl29I9r24LbmqfP8Pg",
+        "doxcnEoocUkxigwGBLJ9c2xMLYO",
+        "doxcnsrWEtvCB0q2wcA9sFhgmBg",
+        "doxcn7yJmaucjKh3GP9HkNzjyLh",
+        "doxcnXBBep53N6jREdmyz4ruxKo",
+        "doxcnd6HbHdYYuI151jh4kppvAd",
+        "doxcn9BoCheBIVVSrY1fQq7rLhe",
+        "doxcnHMOZ4eGxvA7yg1C4Ydy2Vc",
+        "doxcnef8Mo3K47siGjXhSmo8RTU",
+        "doxcnjeD8Ejs5EG92vw2ZJzdyYf",
+        "doxcnCclvW62DSy1GEQdVkF7Vbf",
+        "doxcnCXycapH7EwJpiTC1hPfcEb",
+        "doxcnulbKWSllt9bvymfcWzSxGg",
+        "doxcn0ISmwzlcanOf6b5y3x55Cr",
+        "doxcnf49mPFsSYAtvDFt21N2Gvd",
+        "doxcngAmNgtQS7Rpn0bNhjvNZRc",
+        "doxcnyLrddcJLJYPZRqkhONbTkb",
+        "doxcnAoQ5lVKs3C0ugAf5O1nsve",
+        "doxcnkRzANVKhOVSX7JLXESwNae",
+        "doxcnUb8d23uJAYz1xQzCDVysPg",
+        "doxcnPK2UgLRSgiIhr0qeK6zUTc",
+        "doxcnSVi16lMLXlyA6GEiFwMCLb",
+        "doxcnAhWVP0plPVmnf1dm6O5d3j",
+        "doxcnMxJRfv7lm3FaWYt7DWXh9f",
+        "doxcnA0pfjE9vzRIv4DF5jg8Crb",
+        "doxcn6CigqvVUtnCQwciX6wMG8d",
+        "doxcnmFgyoijvFbZdazp1vp2Grg",
+        "doxcnS5QVyEZSRMw6LOtjhamIPc",
+        "doxcngRxpjk8yzc1Hsh9qk94e2c",
+        "doxcnAdmiP4CYbAIUxJhrEdfmkh",
+        "doxcn3Shy6BDsV6br4VsVvlhuDh",
+        "doxcn8M9CfEBxxKBjdp7S0wDuVT",
+        "doxcnAlMmCnUzikCJF0njpY4zib",
+        "doxcnHKAAfx6MNls9Onp7mC3j6b",
+        "doxcnKe985TyVkjyGqfalsEx4Ne",
+        "doxcnAsZY1loXI60Q2EYoIAcSFg",
+        "doxcn6C9HL8NiBz6MRUrJ1tvg9b",
+        "doxcnB2GUyTEJyGwhLqI0sAjTTg",
+        "doxcncPq40A9E3kJbU56gV1iQTf",
+        "doxcnrRxT3sTyRmNJDouohcxQAf",
+        "doxcnX23Gl5noGUC8Cqfw5MwUVe",
+        "doxcn6MgdUQWW17LzuGZbHwHFDf",
+        "doxcny0IftIC9pHFfLPV4JtgNhh",
+        "doxcn9318RhbkGdLz4BddWtMtad",
+        "doxcnmTjKAy2FsHyt8liFW7UjJc",
+        "doxcn5hHcriWAShZP3FOt5ScBod",
+        "doxcnB2FZhIHZACnmKSlAilcfbg",
+        "doxcnfZij2s1ZKqAIje47DrvhDb",
+        "doxcnP3hIr1Ywd1eInBPL62ZNOe",
+        "doxcnq8oTcMIPJcVfsiem3CIIor",
+        "doxcnlhWecZlAkQZunGOhFAYbHg",
+        "doxcnnrFU94nUhwPhVIsrbTRqfb",
+        "doxcnmQUzk6zBnt8aeXSJJQXyYf",
+        "doxcnrSQX9PR3J3JVtGezd0WZHg",
+        "doxcn4lpldI64WplzW1GnrmOxJe",
+        "doxcnCZ7BvAt2paoMIbYfAATJdh",
+        "doxcn0KBb2bQTxH5AxrU7cDrBTr",
+        "doxcnh3TbNxCW9eAEWheD9jzoZg",
+        "doxcnKeIBUfujC3eTYqbifzQa8d",
+        "doxcnXPPfuisdTgwpwO4CQEgIbh",
+        "doxcnUh22zgdV6NvfXHc7sN0Wob",
+        "doxcnSKledE5WK2OSAGkpwyO37f",
+        "doxcnFUVB1xR0vMThhpdJKnsMWg",
+        "doxcnJ9Ngo7kaoYFTUiCE6J0O4d",
+        "doxcnWX4Vt1ljkZEX5XRMwYTzmg",
+        "doxcnCYy12SqnrVoDxhgcESKzDc",
+        "doxcntqXekHywhtLPfOVJomMDjh",
+        "doxcng7cbbPMGW6jchQyVUrtx1e",
+        "doxcnihVNHrWA8D2PFK6j8ys4cd",
+        "doxcnE81rfno2E7JKB83z8e5r0g",
+        "doxcnJmmXyCMWaYnkuDckXD9mJV",
+        "doxcnsphgYralBvc4KgtJkz6hCe",
+        "doxcnJqzckouKu5QajCZ7NIRUCg",
+        "doxcnmYjgtGiPwxP5XCoWfU6Wxd",
+        "doxcnNGHGru1Qbb2AJ269wDPhDe",
+        "doxcnlmMNOVaWIfn6upEJvnZX0g",
+        "doxcnuVtapUT81D27luxKCucRVe",
+        "doxcn04tit8CGbqJHBOQWhhXEAf",
+        "doxcne9meaZDJ06SAprurlWLynd",
+        "doxcnqghsKG5lj7h3OB6QaEXIOc",
+        "doxcnevfuyfIKOpWXFGNnM9Fmog",
+        "doxcnNA86OtxfqAqCQWcp0OFf1a",
+        "doxcnNQuacMvmQqRjPDeg4dRd3e",
+        "doxcnK7QOmSrGJIWZyMsBeX07fc",
+        "doxcn9UdOhZLwf6vMjPt5hKzRSf",
+        "doxcn2uRUl5KTxcO5RP8bGNdbcb",
+        "doxcnO17FO6SSFk2piIUmfhlBxe",
+        "doxcnY1FguuSAiNcJ6VB4iZ4r6P",
+        "doxcngjkWxEhpQzkkzD40AVpHCb",
+        "doxcn6DfDwx9RFCu1GkTEsi4Czh",
+        "doxcneY9xG2heh0gKLWS8sxF8Jc",
+        "doxcnV9QnX20TGuHxFnaECdht3d",
+        "doxcnAMqz2HFhWZUqemHV0x5nCb",
+        "doxcn00hZ42cUhbE8TMu9FMxlPg",
+        "doxcnKUW98gaOoOsjNRKQh34xNg",
+        "doxcnMrdExV2v1uK0BDUAFEyDLg",
+        "doxcnayigpgobsxQbHssrfpxNgA",
+        "doxcn2S8B3nH7Hh9Lr9OKJzSwmh",
+        "doxcnWu5B9GFu5ymZiXq7wqSoqe",
+        "doxcnOL28faNi9jlcBV7S1Xco7f",
+        "doxcnqJtRb0qvFYyYPM0yRASpWb",
+        "doxcnwtwIyBCb1acvECcihHxT5c",
+        "doxcnUk7NcYVAwez8smCjKqahSf",
+        "doxcnzTf71vFEW3M4XQRU10ivGb",
+        "doxcnUgy8HxnLwl2vGK2NqBCNSt",
+        "doxcnsIZxwmZOKvVRxcfSPrr53e",
+        "doxcna2syT6FDFMIwsRSTVtFjSg",
+        "doxcnB7o4vG6SFob90Cojd8469g",
+        "doxcnxCqsUUMhrTgHJgNpOJ8DTh",
+        "doxcn0niAcSIezyTAj8x8fQtCWh",
+        "doxcnsDGd8AF3H4RdDTKScyKNOb",
+        "doxcnhOsnilBUfPNccWYZ6v6wcg",
+        "doxcnkO4zbrb0HOtmO6cLOxY44d",
+        "doxcn6rqMJ3v4TV807RHRSwH5Zd",
+        "doxcn6fQTrQfaA9vCcL3C0T9RRh",
+        "doxcnMXu4UloCFuvaSSPazar5Ab"
+      ],
+      "page": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "[必备知识学习]Linux入门知识和快捷指令-v1.0",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1
+        }
+      },
+      "parent_id": ""
+    },
+    {
+      "block_id": "doxcnpipkWQwPs31qEwTH6zTkhc",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "[必备知识学习]Linux入门知识和快捷指令-v1.0",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnGEwfKtnXSDdECmLzG4AzYd",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "前言：",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnXoQAv4wyRjHelDB8ZQtRTh",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "“在Linux世界里面，一切皆是文件”在Linux的世界里，“一切皆是文件”不仅是一句口号，更是其设计的核心哲学。从普通文档、硬件设备到系统进程，万事万物都被抽象为可以通过“打开、读取、写入、关闭”统一操作的文件对象。这种极致的一致性，赋予了系统无与伦比的透明度与灵活性——复杂的系统交互被简化为清晰的文件操作，独立的命令行工具能像乐高积木般自由组合，创造出强大的解决方案。理解这一理念，就掌握了通往Linux自由与高效世界的第一把钥匙。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnGY3JT7XLyHZOKP0eNLvpUg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第一章：Linux目录结构",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnuo7v52OrDxm6lEHexCiBmd",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Linux的文件系统以根目录（/）为起点，采用单一的树状层次结构组织所有文件和目录。这种结构与Windows等操作系统常见的多个并列盘符（如C:、D:）有根本区别。在Linux中，一切皆从根目录开始，所有其他目录、文件、设备乃至网络存储，最终都被逻辑地“挂载”到树状结构的某个路径下，形成一个统一的命名空间。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnuxegiLNb7iOxk7kxMnNbag",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/bin是Binary的缩写，存放着常用的命令。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnWFSrLETnm6557aD5v0CrsV",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/sbin是Super User的意思，存放着系统管理员使用的系统管理程序",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcncAbw3H0aZYl6WW6EYfKI5f",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/root 程序管理员的用户主目录",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnVds30FrJdrxYLrEn8wzdJd",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/lib 系统开机所需要的最基本的动态连接库，其作用类似于Windows里的DLL文件。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn7wqA33b3O74QOsbZImryCd",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/etc 所有的系统管理所需要的配置文件和子目录my.conf",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnghcD4km60VxL5Iyb3AaS8g",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/usr 用户的很多应用程序和文件都放在这个目录下面",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn7Mzrgl29I9r24LbmqfP8Pg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/boot 存放的是启动Linux时使用的一些核心文件",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnEoocUkxigwGBLJ9c2xMLYO",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/proc[不能动]，虚拟目录，映射系统内存与进程信息，可用于查看系统实时状态。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnsrWEtvCB0q2wcA9sFhgmBg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/srv[不能动]，service缩写，用来存放一些服务启动之后需要提取的数据",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn7yJmaucjKh3GP9HkNzjyLh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/sys[不能动] 该目录安装了2.6内核中新出现的一个文件系统sysfs",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnXBBep53N6jREdmyz4ruxKo",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/tmp，存放临时文件",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnd6HbHdYYuI151jh4kppvAd",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/dev，类似于windows的设备管理器，把所有的硬件用文件的形式存储",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn9BoCheBIVVSrY1fQq7rLhe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/media linux系统会自动识别一些设备，当识别后，linux会把识别的设备挂载在这个目录下",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnHMOZ4eGxvA7yg1C4Ydy2Vc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/mnt  系统提供该目录是为了让用户挂载别的文件系统的，可以将外部的存储挂载在/mnt上，然后就可以进入该目录查看里面的内容",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnef8Mo3K47siGjXhSmo8RTU",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/opt 给主机额外安装软件所存放的目录，默认为空",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnjeD8Ejs5EG92vw2ZJzdyYf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/user/local 用户自行编译安装的软件通常放置于此，与系统自带的程序分离。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnCclvW62DSy1GEQdVkF7Vbf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/var 存放经常变化的文件，如系统日志、缓存数据、邮件队列等。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnCXycapH7EwJpiTC1hPfcEb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/selinux Security-Enhanced Linux的安全子系统目录，用于存储策略与配置文件，可对程序访问权限进行强制控制。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnulbKWSllt9bvymfcWzSxGg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第二章：Linux远程登陆",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn0ISmwzlcanOf6b5y3x55Cr",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "在软件开发的团队协作场景中，一个集中的Linux服务器通常作为",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "共享的开发、测试或构建环境",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "。开发小组成员在此服务器上进行代码协同、项目构建、版本控制、内部测试等工作。然而，这个内部环境与面向公众的",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "正式生产环境",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（即公网上线的服务器）是物理隔离的，这是为了确保开发活动不会影响线上服务的稳定与安全。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnf49mPFsSYAtvDFt21N2Gvd",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "因此，程序员需要远程安全地访问这台位于内网或数据中心的Linux服务器。这个过程主要涉及两种核心操作，并对应着两类经典工具：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcngAmNgtQS7Rpn0bNhjvNZRc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "命令行操作：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "这是进行服务器管理、项目部署、服务调试、日志查看等所有核心运维和开发活动的主要方式。Xshell 6",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "。它是一款功能强大的SSH客户端软件，允许用户通过网络建立一个加密的、安全的命令行会话连接到远程Linux服务器，就如同直接坐在服务器的物理终端前一样，可以执行任何授权范围内的命令。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnyLrddcJLJYPZRqkhONbTkb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "文件传输：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "在开发和部署过程中，经常需要上传下载文件、修改配置文件、管理项目目录结构等。虽然命令行工具（如",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "scp",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": ",",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "rsync",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "）可以完成，但图形化界面更为直观便捷。Xftp 6。它是一款基于SSH协议的SFTP（SSH File Transfer Protocol）客户端，提供了类似Windows资源管理器的双窗口界面，可以安全地在本地计算机和远程Linux服务器之间拖拽传输文件。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnAoQ5lVKs3C0ugAf5O1nsve",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第三章：Vim工具的使用",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnkRzANVKhOVSX7JLXESwNae",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Linux系统会内置vi文本编辑器，Vim具有程序编辑的能力，可以看作是Vi的增强版本。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnUb8d23uJAYz1xQzCDVysPg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "正常模式：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "children": [
+        "doxcnsFnisHdjOBMn8hlFqwwGpf",
+        "doxcngCBRv187mEaq9GN3HCvQ0e",
+        "doxcn38HTHdlVRQJa03qz388NVg"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnsFnisHdjOBMn8hlFqwwGpf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "进入方式：启动Vim的默认模式，或从其他模式",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "Esc",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "返回。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnUb8d23uJAYz1xQzCDVysPg"
+    },
+    {
+      "block_id": "doxcngCBRv187mEaq9GN3HCvQ0e",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "主要功能：浏览文档，执行编辑命令，",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnUb8d23uJAYz1xQzCDVysPg"
+    },
+    {
+      "block_id": "doxcn38HTHdlVRQJa03qz388NVg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "常用快捷键：yy(拷贝当前行)；5yy(拷贝当前及下五行)；p(粘贴)；dd(删除)；5dd(删除当前及下五行)；",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnUb8d23uJAYz1xQzCDVysPg"
+    },
+    {
+      "block_id": "doxcnPK2UgLRSgiIhr0qeK6zUTc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "插入模式：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "children": [
+        "doxcnKrVmAfGXbOIHxBcuQYEKEb",
+        "doxcnOu2inCfvBk0gEBwtau7rrc",
+        "doxcnuoDYlbdFZyaWWdFALxR2Hh"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnKrVmAfGXbOIHxBcuQYEKEb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "进入方式：在正常模式下按以下任一字母键",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnPK2UgLRSgiIhr0qeK6zUTc"
+    },
+    {
+      "block_id": "doxcnOu2inCfvBk0gEBwtau7rrc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "主要功能：实际编辑文本内容",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnPK2UgLRSgiIhr0qeK6zUTc"
+    },
+    {
+      "block_id": "doxcnuoDYlbdFZyaWWdFALxR2Hh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "常用快捷键：i(在当前光标前插入);I(在行首插入);a(在当前光标后插入);A(在行尾插入);o(在当前行下方新建一行并插入);O(在当前行上方新建一行并插入)",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnPK2UgLRSgiIhr0qeK6zUTc"
+    },
+    {
+      "block_id": "doxcnSVi16lMLXlyA6GEiFwMCLb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "命令行模式：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "children": [
+        "doxcn68JcaBeq6McmsizkDKVUyg",
+        "doxcnc41e4p7RMS9zEtlaNpZrVf",
+        "doxcnmKD3Sor9qJNsRTbddg25Vb"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn68JcaBeq6McmsizkDKVUyg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "进入方式：在正常模式下输入英文冒号",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": ":",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnSVi16lMLXlyA6GEiFwMCLb"
+    },
+    {
+      "block_id": "doxcnc41e4p7RMS9zEtlaNpZrVf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "主要功能：退出vim或者其他辅助功能",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnSVi16lMLXlyA6GEiFwMCLb"
+    },
+    {
+      "block_id": "doxcnmKD3Sor9qJNsRTbddg25Vb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "常用快捷键：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "：w",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(保存文件)；",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "：q",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(退出编辑器);",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "：wq",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(保存并退出)；",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "：q!",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(强制退出不一定保存)；",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "：set nu",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(设置行号）；",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "set nonu",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(隐藏行号）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "doxcnSVi16lMLXlyA6GEiFwMCLb"
+    },
+    {
+      "block_id": "doxcnAhWVP0plPVmnf1dm6O5d3j",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第四章：关机重启",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnMxJRfv7lm3FaWYt7DWXh9f",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "shutdown -h now ",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（立即关机）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnA0pfjE9vzRIv4DF5jg8Crb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "shutdown -h 1 ",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（一分钟后进行关机）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6CigqvVUtnCQwciX6wMG8d",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "shutdown -r now ",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(立即重新启动 = reboot)",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnmFgyoijvFbZdazp1vp2Grg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "sync",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " (把内存的数据同步到磁盘 在关机或者重启之前执行这个)",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnS5QVyEZSRMw6LOtjhamIPc",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第五章：用户管理",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcngRxpjk8yzc1Hsh9qk94e2c",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Linux系统是一个真正的多任务、多用户操作系统。这意味着它可以同时运行多个程序（任务），并且允许多个用户同时登录和使用系统，彼此之间的操作环境与资源（在权限控制下）相互隔离，互不影响。 在这样的系统设计中，用户账户是系统进行身份识别、权限控制和资源管理的基础单元。每个用户拥有一个唯一的用户名（User ID, UID）和对应的主目录（Home Directory，通常为 /home/用户名）。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnAdmiP4CYbAIUxJhrEdfmkh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "useradd 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（添加用户） 。同时会自动创建和用户名同名的家目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "useradd 用户名 -d 指定目录",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn3Shy6BDsV6br4VsVvlhuDh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "passwd 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（指定密码）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn8M9CfEBxxKBjdp7S0wDuVT",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "userdel 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（删除用户保留家目录） ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " userdel -r 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（删除用户和家目录）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnAlMmCnUzikCJF0njpY4zib",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "id 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（查询用户信息指令，包括uid、gid、组等）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnHKAAfx6MNls9Onp7mC3j6b",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "su -切换用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(切换用户,低权限到高权限需要密码，反之不用)",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnKe985TyVkjyGqfalsEx4Ne",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "whoami",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(查看当前用户)",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnAsZY1loXI60Q2EYoIAcSFg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第六章：用户组",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6C9HL8NiBz6MRUrJ1tvg9b",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "在Linux系统中，用户组是组织和管理具有相同属性或权限需求的多个用户的关键机制。它是一种逻辑上的集合，旨在简化权限分配和系统管理。当管理员创建新用户账户时，如果未明确指定其所属的主用户组，系统会自动执行一个标准化操作：创建一个与用户名同名的新组，并将该用户设为这个新组的唯一初始成员。这个自动生成的组通常被称为用户的“私有组”或“初始组。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnB2GUyTEJyGwhLqI0sAjTTg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "groupadd 组名 ",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（添加一个组）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcncPq40A9E3kJbU56gV1iQTf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "groupdel 组名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " （删除一个组）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnrRxT3sTyRmNJDouohcxQAf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "useradd -g 用户组 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " （增加用户时直接加上组）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnX23Gl5noGUC8Cqfw5MwUVe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "usermod -g 用户组 用户名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " （修改用户的组）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6MgdUQWW17LzuGZbHwHFDf",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "相关文件",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcny0IftIC9pHFfLPV4JtgNhh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/etc/passwd 用户的配置文件，记录用户的各种信息",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn9318RhbkGdLz4BddWtMtad",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/etc/shadow文件 口令的配置信息",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnmTjKAy2FsHyt8liFW7UjJc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "/etc/group 组（group）的配置文件，记录Linux包含的组的信息",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn5hHcriWAShZP3FOt5ScBod",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第七章：组权限",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnB2FZhIHZACnmKSlAilcfbg",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "在Linux文件系统中，每个文件或目录都关联着一套精细的",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "所有权",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "与",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "访问权限",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "控制机制，这是系统安全与多用户协作的核心。这套机制由三个核心部分构成：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "所有者",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "、",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "所在组",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "和",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "其他用户",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，并为每个角色分别定义了可读、可写、可执行的权限。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnfZij2s1ZKqAIje47DrvhDb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "所有者：一般为文件的创建者，谁创建了该文件，就自然的成为该文件的所有者。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "ls -ahl",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（查看文件的所有者） ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chown 用户名 文件名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " （修改文件所有者）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnP3hIr1Ywd1eInBPL62ZNOe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "所在组：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "ls -ahl",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（也可以查看文件所在组）。用",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chgrp 组名 文件名",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " （修改文件所在的组）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnq8oTcMIPJcVfsiem3CIIor",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "权限的基本介绍：一共10位，第0位确定文件类型（l是链接，d是目录，c是字符设备，b是块设备，-是一般文件）1-3位是所有者对该用户的权限，4-6位是所属组对该用户的权限，7-9位是确定其他用户对该文件的权限。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnlhWecZlAkQZunGOhFAYbHg",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "r：可读。对文件表示可读取内容；对目录表示可列出目录内的文件列表。 w：可写。对文件表示可修改内容；对目录表示可在其中创建、删除、重命名文件或子目录。 x：可执行。对文件表示可作为程序或脚本运行；对目录表示可进入（切换至）该目录，是访问目录内任何文件的前提。 示例：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "(",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "-rwxr-xr--",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": ")",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnnrFU94nUhwPhVIsrbTRqfb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "权限修改：chmod命令用于更改文件或目录的权限，   其核心是通过操作符 +（增加权限）、-（移除权限）和 `=``（设置精确权限）来调整。 u：所有者 q:所在组 o:其他人o：所有人                           ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnmQUzk6zBnt8aeXSJJQXyYf",
+      "block_type": 31,
+      "children": [
+        "doxcnZPGJgkX62Mau0129aBlHqg"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnZPGJgkX62Mau0129aBlHqg"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            652
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnZPGJgkX62Mau0129aBlHqg",
+      "block_type": 32,
+      "children": [
+        "doxcnO20yocB85CeLDmcrju1kUc"
+      ],
+      "parent_id": "doxcnmQUzk6zBnt8aeXSJJQXyYf",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnO20yocB85CeLDmcrju1kUc",
+      "block_type": 2,
+      "parent_id": "doxcnZPGJgkX62Mau0129aBlHqg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nchmod [选项] 模式 文件/目录\nchmod u = rwx  文件/目录名  //文件所有者拥有读(r)、写(w)、执行(x) 的全部权限\nchmod g=rx 文件/目录名  //文件所属组成员拥有读(r) 和执行(x) 权限，但无写入(w) 权限\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chmod a-x 文件/目录名  //从所有用户类别中移除执行(x) 权限。                                      ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrSQX9PR3J3JVtGezd0WZHg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "修改文件所有者：chown（change owner）命令用于更改文件或目录的所有者和所属用户组。它控制着谁\"拥有\"这个文件，以及文件属于哪个用户组。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn4lpldI64WplzW1GnrmOxJe",
+      "block_type": 31,
+      "children": [
+        "doxcn4HfwvG26oajn8BZ2GGrGLG"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcn4HfwvG26oajn8BZ2GGrGLG"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            652
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcn4HfwvG26oajn8BZ2GGrGLG",
+      "block_type": 32,
+      "children": [
+        "doxcn1lGexdXjiuZRfjMAdKZqQe"
+      ],
+      "parent_id": "doxcn4lpldI64WplzW1GnrmOxJe",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn1lGexdXjiuZRfjMAdKZqQe",
+      "block_type": 2,
+      "parent_id": "doxcn4HfwvG26oajn8BZ2GGrGLG",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nchown [选项] 新所有者[:新所属组] 文件/目录\nchown newowner 文件/目录 //改变所有者\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chown newowner:newgroup 文件/目录 //改变所有者和所在组 -R目录子文件递归生效",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnCZ7BvAt2paoMIbYfAATJdh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "修改文件所在组：",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chgrp",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（change group）命令专门用于更改",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "文件或目录的所属用户组",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "。它是",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chown",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "命令的简化版，专门处理组归属变更。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn0KBb2bQTxH5AxrU7cDrBTr",
+      "block_type": 31,
+      "children": [
+        "doxcnHPI2P4IfXGICpI5aITbxoh"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnHPI2P4IfXGICpI5aITbxoh"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            652
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnHPI2P4IfXGICpI5aITbxoh",
+      "block_type": 32,
+      "children": [
+        "doxcnBQbAa7R3yPCLy5LapmDzkb"
+      ],
+      "parent_id": "doxcn0KBb2bQTxH5AxrU7cDrBTr",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnBQbAa7R3yPCLy5LapmDzkb",
+      "block_type": 2,
+      "parent_id": "doxcnHPI2P4IfXGICpI5aITbxoh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "chgrp newgroup 文件/目录 //改变所有组",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnh3TbNxCW9eAEWheD9jzoZg",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第八章：运行级别",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnKeIBUfujC3eTYqbifzQa8d",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "运行级别",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 是Linux系统（特别是使用System V init初始化系统的发行版）中一个重要的系统状态概念。它定义了系统启动后进入的特定操作模式，每种模式对应一组预设的服务和守护进程。简单来说，运行级别决定了系统启动时",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "运行哪些服务、提供哪些功能",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，以及",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "用户可以访问哪些界面和资源",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcnXPPfuisdTgwpwO4CQEgIbh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "0：关机",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnUh22zgdV6NvfXHc7sN0Wob",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "1：单用户[找回丢失密码，无需密码即可获得root的shell]",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnSKledE5WK2OSAGkpwyO37f",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "2：多用户状态没有网络服务",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnFUVB1xR0vMThhpdJKnsMWg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "3：多用户状态有网络服务",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnJ9Ngo7kaoYFTUiCE6J0O4d",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "4：系统未使用保留给用户",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnWX4Vt1ljkZEX5XRMwYTzmg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "5：图形界面",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnCYy12SqnrVoDxhgcESKzDc",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "6：系统重启",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcntqXekHywhtLPfOVJomMDjh",
+      "block_type": 2,
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "常用运行级别是3和5，也可以指定默认运行级别。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false,
+          "indentation_level": "NoIndent"
+        }
+      }
+    },
+    {
+      "block_id": "doxcng7cbbPMGW6jchQyVUrtx1e",
+      "block_type": 31,
+      "children": [
+        "doxcnZ7hq0hahIQ17BWxPfiGwOf"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnZ7hq0hahIQ17BWxPfiGwOf"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnZ7hq0hahIQ17BWxPfiGwOf",
+      "block_type": 32,
+      "children": [
+        "doxcnhCDNEq9foeTzBhgTEfdKmd"
+      ],
+      "parent_id": "doxcng7cbbPMGW6jchQyVUrtx1e",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnhCDNEq9foeTzBhgTEfdKmd",
+      "block_type": 2,
+      "parent_id": "doxcnZ7hq0hahIQ17BWxPfiGwOf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ninit[0123456] //切换\nsystemctl get-default //打印当前的运行级别\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "systemctl set-default //改变默认的运行级别",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnihVNHrWA8D2PFK6j8ys4cd",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第九章：文件目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnE81rfno2E7JKB83z8e5r0g",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "pwd显示当前工作目录的绝对路径，明确告知您在文件系统中的确切位置。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnJmmXyCMWaYnkuDckXD9mJV",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "ls",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（list directory contents）命令用于列出目录中的文件和子目录信息",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnsphgYralBvc4KgtJkz6hCe",
+      "block_type": 31,
+      "children": [
+        "doxcnbf4KwxA4IIyWCh3DnMdv4b"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnbf4KwxA4IIyWCh3DnMdv4b"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnbf4KwxA4IIyWCh3DnMdv4b",
+      "block_type": 32,
+      "children": [
+        "doxcnV5Jyp2InYMZkWzbkWeUwue"
+      ],
+      "parent_id": "doxcnsphgYralBvc4KgtJkz6hCe",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnV5Jyp2InYMZkWzbkWeUwue",
+      "block_type": 2,
+      "parent_id": "doxcnbf4KwxA4IIyWCh3DnMdv4b",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nls [选项] [目录/文件...]\n\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "ls -a //显示指定目录下的",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "所有",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "文件和目录\nls -l //以详细列表格式展示\nls -h //以更便捷的形式展示大小\n\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "ls -la -al -lha //可以连着使用，不区分先后顺序",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnJqzckouKu5QajCZ7NIRUCg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "cd",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（change directory）命令用于在文件系统中",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "切换当前工作目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnmYjgtGiPwxP5XCoWfU6Wxd",
+      "block_type": 31,
+      "children": [
+        "doxcnEvJcX8NVvaDQj73fmIoo7b"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnEvJcX8NVvaDQj73fmIoo7b"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnEvJcX8NVvaDQj73fmIoo7b",
+      "block_type": 32,
+      "children": [
+        "doxcnpsHsINOvChTqA96NIamKHc"
+      ],
+      "parent_id": "doxcnmYjgtGiPwxP5XCoWfU6Wxd",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnpsHsINOvChTqA96NIamKHc",
+      "block_type": 2,
+      "parent_id": "doxcnEvJcX8NVvaDQj73fmIoo7b",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ncd ~ //回到家目录\ncd .. //回到上一级目录\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "cd [目录路径] // 打开指定目录",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnNGHGru1Qbb2AJ269wDPhDe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "mkdir",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（make directory）命令用于在Linux系统中",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "创建新的目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnlmMNOVaWIfn6upEJvnZX0g",
+      "block_type": 31,
+      "children": [
+        "doxcnW8cqmW30AzjRGUDU2HZJsb"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnW8cqmW30AzjRGUDU2HZJsb"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnW8cqmW30AzjRGUDU2HZJsb",
+      "block_type": 32,
+      "children": [
+        "doxcnwoVPBsRZ3jwV868QJiPWdb"
+      ],
+      "parent_id": "doxcnlmMNOVaWIfn6upEJvnZX0g",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnwoVPBsRZ3jwV868QJiPWdb",
+      "block_type": 2,
+      "parent_id": "doxcnW8cqmW30AzjRGUDU2HZJsb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nmkdir [选项] 目录名...\nmkdir 目录名  //创建目录\nmkdir dir1 dir2 dir3  //一次创建多个同级目录\nmkdir -p 父目录/子目录/孙目录... //递归创建多级目录\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnuVtapUT81D27luxKCucRVe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "rmdir",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（remove directory）命令专门用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "安全删除空目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，无法删除包含文件或子目录的目录。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn04tit8CGbqJHBOQWhhXEAf",
+      "block_type": 31,
+      "children": [
+        "doxcnrR0leDZx0PI7QMVMyYNLTd"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnrR0leDZx0PI7QMVMyYNLTd"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnrR0leDZx0PI7QMVMyYNLTd",
+      "block_type": 32,
+      "children": [
+        "doxcn9zeuAOTlS7gghw08L4t4Ce"
+      ],
+      "parent_id": "doxcn04tit8CGbqJHBOQWhhXEAf",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn9zeuAOTlS7gghw08L4t4Ce",
+      "block_type": 2,
+      "parent_id": "doxcnrR0leDZx0PI7QMVMyYNLTd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nrmdir [选项] 目录名...\nrm -rf //删除该目录下所有的东西，并且没有提示\nrmdir dir1 dir2 dir3  //一次删除多个空目录\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "rm -r 目录名 //递归删除，有提示",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcne9meaZDJ06SAprurlWLynd",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "touch",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "命令主要用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "创建空文件",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "或",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "更新文件的时间戳",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnqghsKG5lj7h3OB6QaEXIOc",
+      "block_type": 31,
+      "children": [
+        "doxcnKhKZvuQQLbByEbZaR6TIWb"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnKhKZvuQQLbByEbZaR6TIWb"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnKhKZvuQQLbByEbZaR6TIWb",
+      "block_type": 32,
+      "children": [
+        "doxcnK1Gh0HLPxXRJM1i0Naq6Ed"
+      ],
+      "parent_id": "doxcnqghsKG5lj7h3OB6QaEXIOc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnK1Gh0HLPxXRJM1i0Naq6Ed",
+      "block_type": 2,
+      "parent_id": "doxcnKhKZvuQQLbByEbZaR6TIWb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ntouch 文件名 //创建新文件\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "touch 已存在的文件名 //更新时间戳",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnevfuyfIKOpWXFGNnM9Fmog",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "cp",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（copy）命令用于在Linux系统中",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "复制文件或目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnNA86OtxfqAqCQWcp0OFf1a",
+      "block_type": 31,
+      "children": [
+        "doxcnX21B4SjN9w55AafXKfp67g"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnX21B4SjN9w55AafXKfp67g"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnX21B4SjN9w55AafXKfp67g",
+      "block_type": 32,
+      "children": [
+        "doxcnRWGw2psakn1S6duawNJQ9g"
+      ],
+      "parent_id": "doxcnNA86OtxfqAqCQWcp0OFf1a",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnRWGw2psakn1S6duawNJQ9g",
+      "block_type": 2,
+      "parent_id": "doxcnX21B4SjN9w55AafXKfp67g",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ncp [选项] 源文件/目录 目标文件/目录\ncp [选项] 源文件1 源文件2 ... 目标目录 //多个文件一起复制\ncp -r 源目录 目标目录 //递归复制全部目录\ncp -f 源文件 目标文件 //强制覆盖选项\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "cp -v 源文件 目标文件 //详细输出",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnNQuacMvmQqRjPDeg4dRd3e",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "mv",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（move）命令用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "移动文件/目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "或",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "重命名文件/目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnK7QOmSrGJIWZyMsBeX07fc",
+      "block_type": 31,
+      "children": [
+        "doxcn7QdQwWMzuCoHG69xmAWDvf"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcn7QdQwWMzuCoHG69xmAWDvf"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcn7QdQwWMzuCoHG69xmAWDvf",
+      "block_type": 32,
+      "children": [
+        "doxcnBOYlW2PP1qLYYLRv74Sywb"
+      ],
+      "parent_id": "doxcnK7QOmSrGJIWZyMsBeX07fc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnBOYlW2PP1qLYYLRv74Sywb",
+      "block_type": 2,
+      "parent_id": "doxcn7QdQwWMzuCoHG69xmAWDvf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nmv 旧名称 新名称 //改名\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "mv 源文件/目录 目标路径/ //移动文件",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn9UdOhZLwf6vMjPt5hKzRSf",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "cat",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（concatenate）命令主要用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "查看文件内容",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "、",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "创建文件",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "、",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "合并文件",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "和",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "重定向输出",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn2uRUl5KTxcO5RP8bGNdbcb",
+      "block_type": 31,
+      "children": [
+        "doxcnKjlidzOwaYJmNIgT1iXSlY"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnKjlidzOwaYJmNIgT1iXSlY"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnKjlidzOwaYJmNIgT1iXSlY",
+      "block_type": 32,
+      "children": [
+        "doxcneSjHDYWODelsekrF5JX0Cg"
+      ],
+      "parent_id": "doxcn2uRUl5KTxcO5RP8bGNdbcb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcneSjHDYWODelsekrF5JX0Cg",
+      "block_type": 2,
+      "parent_id": "doxcnKjlidzOwaYJmNIgT1iXSlY",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ncat [选项] 文件名... \ncat file.txt // 查看单个文件\ncat file1.txt file2.txt file3.txt  //查看多个文件\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "cat -n file.txt //显示行号",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnO17FO6SSFk2piIUmfhlBxe",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "more",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令是一个",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "基本的分页查看器",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，用于一页一页地查看长文件内容。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnY1FguuSAiNcJ6VB4iZ4r6P",
+      "block_type": 31,
+      "children": [
+        "doxcnaLVVnJaUPFxQEJHnInJXNh"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnaLVVnJaUPFxQEJHnInJXNh"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnaLVVnJaUPFxQEJHnInJXNh",
+      "block_type": 32,
+      "children": [
+        "doxcnCIfBgMI0szgssQueAhMBwe"
+      ],
+      "parent_id": "doxcnY1FguuSAiNcJ6VB4iZ4r6P",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnCIfBgMI0szgssQueAhMBwe",
+      "block_type": 2,
+      "parent_id": "doxcnaLVVnJaUPFxQEJHnInJXNh",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nmore [选项] 文件名\nmore longfile.txt //查看文件\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "more +10 file.txt //从第10行开始",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcngjkWxEhpQzkkzD40AVpHCb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "less",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 是",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "more的增强版",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，支持向前向后滚动、搜索、标记等功能，且退出时不清屏。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6DfDwx9RFCu1GkTEsi4Czh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "echo",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "将文本内容输出到标准输出",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（通常是终端屏幕），是Shell脚本和命令行中最常用的输出工具。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcneY9xG2heh0gKLWS8sxF8Jc",
+      "block_type": 31,
+      "children": [
+        "doxcnPB8mYi82ZSLG66dz18uyEg"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnPB8mYi82ZSLG66dz18uyEg"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnPB8mYi82ZSLG66dz18uyEg",
+      "block_type": 32,
+      "children": [
+        "doxcnY76fd3XdgFOCxGtE5fubTI"
+      ],
+      "parent_id": "doxcneY9xG2heh0gKLWS8sxF8Jc",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnY76fd3XdgFOCxGtE5fubTI",
+      "block_type": 2,
+      "parent_id": "doxcnPB8mYi82ZSLG66dz18uyEg",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\necho [选项] [字符串/变量...]\necho \"Hello, World!\" //输出文本\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "echo $HOME //输出环境变量",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnV9QnX20TGuHxFnaECdht3d",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "head",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "显示文件的开头部分",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "内容，默认显示前10行，常用于快速预览文件开头或查看日志文件的最新条目。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnAMqz2HFhWZUqemHV0x5nCb",
+      "block_type": 31,
+      "children": [
+        "doxcn8phphz9byDQi6XmAgdz9Ch"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcn8phphz9byDQi6XmAgdz9Ch"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcn8phphz9byDQi6XmAgdz9Ch",
+      "block_type": 32,
+      "children": [
+        "doxcnUTQfEwTpBVZUQ3JN4hBIhf"
+      ],
+      "parent_id": "doxcnAMqz2HFhWZUqemHV0x5nCb",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnUTQfEwTpBVZUQ3JN4hBIhf",
+      "block_type": 2,
+      "parent_id": "doxcn8phphz9byDQi6XmAgdz9Ch",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nhead [选项] 文件名...\nhead file.txt //查看文件开头\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "head -5 file.txt  //显示前5行",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn00hZ42cUhbE8TMu9FMxlPg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "tail",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "显示文件的末尾部分",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "内容，默认显示最后10行，是监控日志文件、查看最新数据、实时跟踪文件变化的必备工具。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnKUW98gaOoOsjNRKQh34xNg",
+      "block_type": 31,
+      "children": [
+        "doxcnXKhkWMrGBjRzQLkOHngSvc"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnXKhkWMrGBjRzQLkOHngSvc"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnXKhkWMrGBjRzQLkOHngSvc",
+      "block_type": 32,
+      "children": [
+        "doxcn3Pi0crHI3wBeu2EP4Ydvtd"
+      ],
+      "parent_id": "doxcnKUW98gaOoOsjNRKQh34xNg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn3Pi0crHI3wBeu2EP4Ydvtd",
+      "block_type": 2,
+      "parent_id": "doxcnXKhkWMrGBjRzQLkOHngSvc",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ntail [选项] 文件名...\ntail file.log //查看文件末尾\ntail -5 file.log    //显示倒数5行\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "tail -f /var/log/syslog //实时监控变化",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnMrdExV2v1uK0BDUAFEyDLg",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "输出重定向",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "是将命令的标准输出（stdout）或标准错误（stderr）",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "重定向到文件",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "或其他位置，而不是显示在终端屏幕上。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnayigpgobsxQbHssrfpxNgA",
+      "block_type": 31,
+      "children": [
+        "doxcnFjTPXromIXzB94b8PkLMEb"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnFjTPXromIXzB94b8PkLMEb"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnFjTPXromIXzB94b8PkLMEb",
+      "block_type": 32,
+      "children": [
+        "doxcnoNhONeb1aoPaRVvY9DTwCd"
+      ],
+      "parent_id": "doxcnayigpgobsxQbHssrfpxNgA",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnoNhONeb1aoPaRVvY9DTwCd",
+      "block_type": 2,
+      "parent_id": "doxcnFjTPXromIXzB94b8PkLMEb",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nls -l > filelist.txt \ndate > current_time.txt\necho \"Hello World\" > greeting.txt //覆盖写没有将创建新的文件\n\n\n\nls -la >> filelist.txt\ndate >> log.txt\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "echo \"New entry\" >> data.txt  //追加写到末尾",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcn2S8B3nH7Hh9Lr9OKJzSwmh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "ln",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（link）命令用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "创建文件链接",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，包括硬链接和软链接（符号链接），是Linux文件系统的重要特性，用于创建文件别名、节省存储空间、维护多版本文件等。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnWu5B9GFu5ymZiXq7wqSoqe",
+      "block_type": 31,
+      "children": [
+        "doxcnOrU7A9ngvOoP2YNZW0bzzf"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnOrU7A9ngvOoP2YNZW0bzzf"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOrU7A9ngvOoP2YNZW0bzzf",
+      "block_type": 32,
+      "children": [
+        "doxcn1iSLaMiUAAJ4izpBPjcZ1g"
+      ],
+      "parent_id": "doxcnWu5B9GFu5ymZiXq7wqSoqe",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcn1iSLaMiUAAJ4izpBPjcZ1g",
+      "block_type": 2,
+      "parent_id": "doxcnOrU7A9ngvOoP2YNZW0bzzf",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nln -s [源文件/目录路径] [链接文件名] //创建文件软链接\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "ln -s /usr/local/app /opt/myapp //创建目录软链接",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnOL28faNi9jlcBV7S1Xco7f",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "history查看历史指令",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnqJtRb0qvFYyYPM0yRASpWb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "date 显示当前日期",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnwtwIyBCb1acvECcihHxT5c",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "find",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令是Linux中最强大的文件搜索工具，用于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "在指定目录树中递归搜索文件和目录",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，支持多种搜索条件和操作。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnUk7NcYVAwez8smCjKqahSf",
+      "block_type": 31,
+      "children": [
+        "doxcnP0ysfOw36501EvmG3G1AAe"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnP0ysfOw36501EvmG3G1AAe"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnP0ysfOw36501EvmG3G1AAe",
+      "block_type": 32,
+      "children": [
+        "doxcnziPV3fdUWC992mWdoBBARd"
+      ],
+      "parent_id": "doxcnUk7NcYVAwez8smCjKqahSf",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnziPV3fdUWC992mWdoBBARd",
+      "block_type": 2,
+      "parent_id": "doxcnP0ysfOw36501EvmG3G1AAe",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nfind [搜索路径] [搜索条件] [操作]\nfind /home -name \"file.txt\" //按名称搜索\nfind /var/log -type f -name \"*.log\" #按类型搜索\nfind /home -user alice //按用户搜索\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "find /var -size 10M  //按大小搜索",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnzTf71vFEW3M4XQRU10ivGb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "locate 基于",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "预建的数据库",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "快速定位文件，速度极快。但数据库非实时更新，新建文件需运行 ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "sudo updatedb",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令更新数据库后才能被找到。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnUgy8HxnLwl2vGK2NqBCNSt",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "which 查找某个",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "系统命令",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（可执行文件）的实际存放路径。比如ls在哪个目录",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnsIZxwmZOKvVRxcfSPrr53e",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": " ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "grep",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（Global Regular Expression Print）用于在文件或输入流中查找包含指定模式的行，支持正则表达式，是文本处理的核心工具。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcna2syT6FDFMIwsRSTVtFjSg",
+      "block_type": 31,
+      "children": [
+        "doxcn0v7qjjzWMZXmyQeuSPniud"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcn0v7qjjzWMZXmyQeuSPniud"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcn0v7qjjzWMZXmyQeuSPniud",
+      "block_type": 32,
+      "children": [
+        "doxcnJQZ8hHChYRP7BALPsZu9Rd"
+      ],
+      "parent_id": "doxcna2syT6FDFMIwsRSTVtFjSg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnJQZ8hHChYRP7BALPsZu9Rd",
+      "block_type": 2,
+      "parent_id": "doxcn0v7qjjzWMZXmyQeuSPniud",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ngrep [选项] \"搜索模式\" [文件名...]\n\ngrep \"error\" /var/log/syslog //在单个文件中搜索\ncat file.txt | grep \"pattern\" //管道传递搜索\ngrep -i \"error\" log.txt //忽略大小写\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnB7o4vG6SFob90Cojd8469g",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "gzip 用于压缩文件 gunzip用于解压的  .gz格式",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnxCqsUUMhrTgHJgNpOJ8DTh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "zip",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 和 ",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "unzip",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " 命令用于处理 .zip 格式的压缩文件，是跨平台（Windows/Linux/macOS）兼容性最好的压缩格式。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn0niAcSIezyTAj8x8fQtCWh",
+      "block_type": 31,
+      "children": [
+        "doxcnKdU4hc6iyDOqZ1ATTOmEhv"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnKdU4hc6iyDOqZ1ATTOmEhv"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnKdU4hc6iyDOqZ1ATTOmEhv",
+      "block_type": 32,
+      "children": [
+        "doxcnZqpWWdeuGhVJwt3kPnMGpf"
+      ],
+      "parent_id": "doxcn0niAcSIezyTAj8x8fQtCWh",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnZqpWWdeuGhVJwt3kPnMGpf",
+      "block_type": 2,
+      "parent_id": "doxcnKdU4hc6iyDOqZ1ATTOmEhv",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\nzip [选项] 压缩文件名.zip 文件/目录...\n\nzip archive.zip file.txt //压缩单个文件\nzip -r project.zip myproject/ //压缩目录\n\nunzip [选项] 压缩文件名.zip\nunzip archive.zip\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "unzip archive.zip -d /tmp/extracted/ //解压到指定目录",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnsDGd8AF3H4RdDTKScyKNOb",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "tar",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "（tape archive）命令是Linux中最常用的",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "归档工具",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "，用于将多个文件/目录打包成一个文件，常与压缩工具（gzip、bzip2、xz）结合使用。",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnhOsnilBUfPNccWYZ6v6wcg",
+      "block_type": 31,
+      "children": [
+        "doxcnAd48HQkDceMetPKWO5shyd"
+      ],
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg",
+      "table": {
+        "cells": [
+          "doxcnAd48HQkDceMetPKWO5shyd"
+        ],
+        "property": {
+          "column_size": 1,
+          "column_width": [
+            690
+          ],
+          "merge_info": [
+            {
+              "col_span": 1,
+              "row_span": 1
+            }
+          ],
+          "row_size": 1
+        }
+      }
+    },
+    {
+      "block_id": "doxcnAd48HQkDceMetPKWO5shyd",
+      "block_type": 32,
+      "children": [
+        "doxcnwdYTbgifav29c2esi6NVcd"
+      ],
+      "parent_id": "doxcnhOsnilBUfPNccWYZ6v6wcg",
+      "table_cell": {}
+    },
+    {
+      "block_id": "doxcnwdYTbgifav29c2esi6NVcd",
+      "block_type": 2,
+      "parent_id": "doxcnAd48HQkDceMetPKWO5shyd",
+      "text": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "Plain Text",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "text_color": 7,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": "\ntar [选项] 目标文件 源文件/目录...\n\ntar -cf archive.tar file1.txt file2.txt dir1/ //基本打包\n\ntar -xf archive.tar //解压文件\n\ntar -tf archive.tar//列出归档内容\n\ntar -rf archive.tar newfile.txt//向现有归档追加文件\n",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      }
+    },
+    {
+      "block_id": "doxcnkO4zbrb0HOtmO6cLOxY44d",
+      "block_type": 4,
+      "heading2": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "第十章：帮助指令",
+              "text_element_style": {
+                "bold": true,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6rqMJ3v4TV807RHRSwH5Zd",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "man 命令或配置文件",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          },
+          {
+            "text_run": {
+              "content": " man ls",
+              "text_element_style": {
+                "background_color": 15,
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcn6fQTrQfaA9vCcL3C0T9RRh",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "help 命令 获得shell内置命令的帮助信息",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    },
+    {
+      "block_id": "doxcnMXu4UloCFuvaSSPazar5Ab",
+      "block_type": 12,
+      "bullet": {
+        "elements": [
+          {
+            "text_run": {
+              "content": "百度",
+              "text_element_style": {
+                "bold": false,
+                "inline_code": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false
+              }
+            }
+          }
+        ],
+        "style": {
+          "align": 1,
+          "folded": false
+        }
+      },
+      "parent_id": "AmTUd2jCToDkXfxkgm5cjDlZngg"
+    }
+  ]
+}

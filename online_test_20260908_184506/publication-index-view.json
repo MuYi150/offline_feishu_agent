@@ -1,0 +1,98 @@
+{
+  "description": "Read-only export for inspection; runtime reads online.sqlite.",
+  "articles": [
+    {
+      "eligible": true,
+      "publication_confirmed": true,
+      "article": {
+        "document_id": "RZaedsHteoLTXcxXThAcLM1enxd",
+        "title": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0",
+        "wiki_name": "协同博弈",
+        "node_token": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+        "link": "https://test-dl7w781n82l3.feishu.cn/wiki/W6UwwAyM1iSsy9kwdc3cHarZnXb",
+        "content": "本文档描述了面向战中推演场景的物理因果双引擎协同展示系统的工程复现方案，旨在将物理仿真引擎、Tacview可视化与因果杀伤链展示界面串联，形成物理事件驱动、因果链路同步展示的演示环境。系统采用本机HTTP接口通信：物理引擎基于Fast Combat Simulation，主程序AirCombat_demo.exe读取1.json和2.json执行装备动作事件，在8090端口启动HTTP服务提供实时状态；因果引擎通过causal_sync_server.py监听5174端口，向前端提供状态与健康检查接口，并定时轮询物理引擎的deduction_realTime接口。前端浏览器每约700毫秒轮询服务端，将TT、FM、WAIT等物理事件按kill_chain_event_stage_mapping.json规则映射为F2T2EA杀伤链环节，以KC_TARGET_{targetId}形式聚合同一目标的发现、跟踪、打击与评估进度。工程要求Windows 10/11、Visual Studio 2022与Python 3.10以上环境，依赖datalink.dll等运行库，并需保持相对目录结构。复现通过两个顶层bat脚本按顺序启动：先启动5174因果界面服务，再启动8090物理引擎及Tacview。验证方法包括核对因果界面连接状态与链路推进、检查log目录下按时间戳生成的装备CSV日志字段变化、以及通过Tacview观察物理态势。完整样例配置18个装备和110个事件，简化样例配置2个装备和3个事件。",
+        "topics": [
+          "物理因果双引擎",
+          "战中推演",
+          "F2T2EA杀伤链",
+          "工程复现",
+          "物理仿真",
+          "因果诊断",
+          "实时接口通信",
+          "事件驱动"
+        ],
+        "technical_entities": [
+          "Python",
+          "UTF-8",
+          "Visual Studio 2022",
+          "MSVC v143",
+          "Windows SDK",
+          "Edge",
+          "Chrome",
+          "Tacview",
+          "Fast Combat Simulation",
+          "AirCombat_demo.exe",
+          "causal_sync_server.py",
+          "datalink.dll",
+          "wguazj.dll",
+          "msvcp140d.dll",
+          "vcruntime140d.dll",
+          "ucrtbased.dll",
+          "HTML/CSS/JS",
+          "app.js",
+          "JSON",
+          "CSV",
+          "HTTP"
+        ],
+        "key_parameters": [
+          "700 ms",
+          "5174",
+          "8090",
+          "Python 3.10",
+          "Windows 10/11",
+          "Debug x64",
+          "18个装备",
+          "红方11个",
+          "蓝方7个",
+          "10个动作队列",
+          "110个事件",
+          "2个装备",
+          "1个动作队列",
+          "3个事件"
+        ],
+        "summary_source": "ai_retrieval_overview",
+        "overview_model": "kimi-k2.6",
+        "overview_prompt_version": "retrieval_overview_v1",
+        "source_content_hash": "e206f71901694a82e6a6224f2c2f07f58ca954627e838ce54bf2079b07c689fe",
+        "source": "blocks",
+        "review_result": "",
+        "local_status": "已公示",
+        "source_updated_at": "2026/09/08 18:56:33",
+        "indexed_at": "2026-09-08T11:12:55.509458+00:00",
+        "methods": [
+          "HTTP轮询通信",
+          "双引擎协同",
+          "F2T2EA杀伤链映射",
+          "本地服务部署",
+          "因果诊断",
+          "实时状态同步",
+          "装备动作事件仿真"
+        ],
+        "application_scenarios": [
+          "战中推演展示",
+          "物理事件驱动与因果链路同步展示",
+          "工程复现与联调",
+          "目标杀伤链进度可视化"
+        ],
+        "validation_methods": [
+          "因果界面状态核对",
+          "CSV日志字段核对",
+          "Tacview态势核对",
+          "演示视频参考",
+          "端口连通性检查",
+          "样例工程运行验证"
+        ]
+      }
+    }
+  ]
+}

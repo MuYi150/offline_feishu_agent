@@ -7,4 +7,5 @@ build/
 outputs/
 local_state/
 .env
-
+online.json
+online_state/

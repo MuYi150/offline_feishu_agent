@@ -1,0 +1,15 @@
+{
+  "write": true,
+  "events": [
+    {
+      "action": "result_committed",
+      "job": "RZaedsHteoLTXcxXThAcLM1enxd-d8f5e066cc8be53f6da6",
+      "status": "AI通过待确认"
+    },
+    {
+      "action": "message_plan",
+      "delivery": "088f06da4f112781e04db5fca92915d9fae27596",
+      "role": "author"
+    }
+  ]
+}

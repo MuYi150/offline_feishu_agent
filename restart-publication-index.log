@@ -1,0 +1,13 @@
+{
+  "write": true,
+  "events": [
+    {
+      "action": "publication_index_plan",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb"
+    },
+    {
+      "action": "publication_indexed",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb"
+    }
+  ]
+}

@@ -79,7 +79,8 @@ def _trace(state: ReviewGraphState | dict[str, Any]) -> list[dict[str, Any]]:
 
 
 class ReviewWorkflow:
-    def __init__(self, settings: Settings, model: ReviewModel) -> None:   
+    def __init__(self, settings: Settings, model: ReviewModel, *, history_store=None,
+                 similarity_store=None, defer_commit: bool = False) -> None:
         self.settings = settings                                                  #初始化组件
         self.model = model
         self.fixture_source = FixtureDocumentSource()
@@ -88,7 +89,8 @@ class ReviewWorkflow:
         self.document_inputs = PdfDocumentInputPreparer(settings, self.pdf)
         self.mode_policy = ReviewModePolicy()
         self.similarity_profiles = SimilarityProfileBuilder(settings)
-        self.similarity_index = SimilarityIndexStore(settings.similarity_index_path)
+        self.defer_commit = defer_commit
+        self.similarity_index = similarity_store or SimilarityIndexStore(settings.similarity_index_path)
         self.similarity = LocalSimilarityRetriever(settings, self.similarity_index)
         self.article_overviews = ArticleOverviewValidator(settings)
         self.retrieval_overview_prompts = RetrievalOverviewPromptBuilder(settings)
@@ -105,7 +107,7 @@ class ReviewWorkflow:
         self.mapper = ReviewOutcomeMapper()
         self.notifications = NotificationRenderer()
         self.audit = AuditStore()
-        self.history = ReviewHistoryStore(settings.state_root)
+        self.history = history_store or ReviewHistoryStore(settings.state_root)
 
     def compile(self, checkpointer: Any) -> Any:                                    #创建 StateGraph 图
         builder = StateGraph(ReviewGraphState)
@@ -841,6 +843,8 @@ class ReviewWorkflow:
         return {}
 
     def persist_review_history(self, state: ReviewGraphState) -> dict[str, Any]:
+        if self.defer_commit:
+            return {"review_history_persisted": False}
         source = SourceDocument.model_validate(state.source_document)
         record = ReviewHistoryRecord(
             run_id=state.run_id,
@@ -852,6 +856,12 @@ class ReviewWorkflow:
         return {"review_history_persisted": True}
 
     def persist_similarity_profile(self, state: ReviewGraphState) -> dict[str, Any]:
+        if self.defer_commit:
+            atomic_replace_json(Path(state.output_dir) / "run_trace.json", {
+                "events": _trace(state), "result": state.parsed_review_result["result"],
+                "commit_policy": "external_after_sheet_confirmation",
+            })
+            return {"similarity_profile_persisted": False}
         output = Path(state.output_dir)
         source = SourceDocument.model_validate(state.source_document)
         result = ReviewResult.model_validate(state.parsed_review_result)

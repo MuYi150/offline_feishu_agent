@@ -1,0 +1,10 @@
+{
+  "write": true,
+  "events": [
+    {
+      "action": "obsolete",
+      "node": "W6UwwAyM1iSsy9kwdc3cHarZnXb",
+      "error": "sheet_review_state_changed"
+    }
+  ]
+}

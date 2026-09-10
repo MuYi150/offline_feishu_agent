@@ -1,0 +1,65 @@
+{
+  "job_id": "BKw3dYVkfowwhixI4NUcWFAunHb-098010df922444e6f936",
+  "node": "Uv7iwJ3twidXsOkZFwycifh1nie",
+  "obj": "BKw3dYVkfowwhixI4NUcWFAunHb",
+  "version": "2026/09/08 20:50:07",
+  "cycle": 0,
+  "record": {
+    "row": [
+      2,
+      "SemDiv论文复现笔记：语义多样队友生成与开放协作",
+      {
+        "text": "SemDiv论文复现笔记：语义多样队友生成与开放协作",
+        "link": "https://test-dl7w781n82l3.feishu.cn/wiki/Uv7iwJ3twidXsOkZFwycifh1nie",
+        "type": "url"
+      },
+      "协同博弈",
+      {
+        "category": "at-user-block",
+        "en_name": "杨挺",
+        "link": "https://s3-imfile.feishucdn.com/static-resource/v1/v3_00159_2f24dcfc-9e65-4eb3-9ec6-f123d2c0eb4g~?image_size=72x72&cut_type=default-face&quality=&format=jpeg&sticker_format=.webp",
+        "mentionNotify": false,
+        "mentionType": 0,
+        "name": "杨挺",
+        "not_notify": false,
+        "text": "@杨挺",
+        "token": "7682250113158269916",
+        "type": "mention"
+      },
+      "AI",
+      null,
+      "AI审稿中",
+      0,
+      "2026/09/08 20:50:07",
+      null,
+      null,
+      "Uv7iwJ3twidXsOkZFwycifh1nie",
+      "BKw3dYVkfowwhixI4NUcWFAunHb"
+    ],
+    "row_index": 3,
+    "title": "SemDiv论文复现笔记：语义多样队友生成与开放协作",
+    "link": "https://test-dl7w781n82l3.feishu.cn/wiki/Uv7iwJ3twidXsOkZFwycifh1nie",
+    "wiki_name": "协同博弈",
+    "author": "@杨挺",
+    "method": "AI",
+    "reviewer": "",
+    "status": "AI审稿中",
+    "round": 0,
+    "updated": "2026/09/08 20:50:07",
+    "reviewed": "",
+    "published": "",
+    "node": "Uv7iwJ3twidXsOkZFwycifh1nie",
+    "obj": "BKw3dYVkfowwhixI4NUcWFAunHb"
+  },
+  "source_hash": "49fd5325f7dbbb9429648403ef3d730148a70ef4c2af776efaa8d0d75f683ca4",
+  "errors": [],
+  "embedded": [],
+  "files": {
+    "attachment_metadata.json": "dc52671ca5d65d973d2377791f9f9db9bc9b9bd29830502d000f29d75a91530a",
+    "document_blocks.json": "340ba3dac556585d53789b2c91efe83d06e87b4a840275fbdb5b7d71e5957843",
+    "fixture_options.json": "ec95df7b1257b7ebdebb62e934cfd89255271412168992eb4f2a3f1836c221cf",
+    "raw_blocks.json": "c2b9fa5206ace2cb70426637a1968a12a589bbc44c992829c1f4c1d08668530d",
+    "source.pdf": "7666400e525ab3daf8e9391fbd940c4b641017cf0c2d1b58494773da2b865bb9",
+    "source_document.json": "a546659cdeb9271212503708a80cfc1a14bfb81d9c67234423f1ae1a8c363bea"
+  }
+}

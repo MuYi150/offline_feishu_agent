@@ -1,0 +1,348 @@
+{
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "【项目】物理因果双引擎协同展示系统 - 运行与复现说明 - v1.0"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1.背景与目标"
+    },
+    {
+      "type": "paragraph",
+      "text": "部分修改测试。"
+    },
+    {
+      "type": "paragraph",
+      "text": "本项目面向战中推演展示场景，将物理仿真引擎、Tacview 可视化和因果杀伤链展示界面串联起来，形成“物理事件驱动、因果链路同步展示”的双引擎演示系统。\n演示视频："
+    },
+    {
+      "type": "paragraph",
+      "text": "[新版-物理因果双引擎可视化界面修改版.mp4]"
+    },
+    {
+      "type": "paragraph",
+      "text": "物理引擎负责读取 1.json、2.json 并执行装备动作事件；因果引擎界面通过本地服务轮询物理引擎的实时接口，将 TT、FM、WAIT 等事件映射到 F2T2EA 杀伤链环节，用于展示每个目标的发现、定位、跟踪、目标指示、打击和评估进度。"
+    },
+    {
+      "type": "paragraph",
+      "text": "本文档重点解决工程复现问题：说明工程包内容、运行环境、启动顺序、接口关系、结果核对方式和常见排错方法。附件中的工程目录和演示视频由投稿人手动插入。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2.关键词"
+    },
+    {
+      "type": "list",
+      "text": "物理因果双引擎"
+    },
+    {
+      "type": "list",
+      "text": "战中仿真"
+    },
+    {
+      "type": "list",
+      "text": "F2T2EA 杀伤链"
+    },
+    {
+      "type": "list",
+      "text": "Tacview"
+    },
+    {
+      "type": "list",
+      "text": "JSON 事件队列"
+    },
+    {
+      "type": "list",
+      "text": "实时接口"
+    },
+    {
+      "type": "list",
+      "text": "因果诊断"
+    },
+    {
+      "type": "list",
+      "text": "Fast Combat Simulation"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3.工程内容概览"
+    },
+    {
+      "type": "paragraph",
+      "text": "当前工程若移动到其他目录，应保持目录内部相对结构不变，并优先使用最外层启动脚本。"
+    },
+    {
+      "type": "paragraph",
+      "text": "[物理-因果双引擎工程文件.zip]"
+    },
+    {
+      "type": "table",
+      "markdown": "| 文件或目录 | 作用 | 复现时是否必需 |\n| --- | --- | --- |\n| README-运行说明.md | 工程包顶层运行说明，记录推荐启动顺序和关键接口 | 建议保留 |\n| 启动因果引擎界面.bat | 启动本地因果引擎同步服务，并打开 http://127.0.0.1:5174/ | 必需 |\n| 启动物理引擎和Tacview.bat | 查找 AirCombat_demo.exe，启动物理仿真并尝试打开 Tacview | 必需 |\n| 因果引擎杀伤链同步界面/ | HTML/CSS/JS 前端和 causal_sync_server.py 本地服务 | 必需 |\n| 物理引擎-fz/ | FastCombatSimulation 物理仿真工程、Debug 程序、DLL、样例 JSON 和日志 | 必需 |\n| 战中因果方案工程工具包/ | 因果诊断脚本、F2T2EA 转换脚本、配置规则、样例和输出 | 建议保留 |\n| 新版-物理因果双引擎可视化界面修改版.mp4 | 演示视频，展示双引擎界面和可视化效果 | 作为附件手动插入 |"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1 有效源码与历史文件说明"
+    },
+    {
+      "type": "paragraph",
+      "text": "物理引擎有效工程入口为 物理引擎-fz\\FastCombatSimulation.sln，主工程为 物理引擎-fz\\AirCombat_demo\\AirCombat_demo.vcxproj，主程序入口为 物理引擎-fz\\Source\\Source\\demo\\AirCombat_demo.cpp。"
+    },
+    {
+      "type": "paragraph",
+      "text": "目录中存在 Source.zip、Source(2).zip、AirCombat_demo.cpp~、AirCombat_demo.cpp~~、AirCombat_demo.cpp(50)、interface.cpp.bak_event_stream、interface.cpp.bak_causal_sync、pycache、历史日志等开发过程文件。正式复现时以本文列出的当前工程文件和顶层启动脚本为准，历史备份文件不参与编译和运行。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4.前置准备"
+    },
+    {
+      "type": "table",
+      "markdown": "| 项目 | 要求或说明 |\n| --- | --- |\n| 操作系统 | Windows 10 / Windows 11 |\n| 物理引擎编译环境 | Visual Studio 2022，MSVC v143，Debug \\| x64 |\n| Windows SDK | 使用 Visual Studio 2022 默认安装的 Windows 10/11 SDK 即可 |\n| Python | 建议 Python 3.10 及以上；当前启动脚本优先使用 PATH 中的 python |\n| 浏览器 | Edge 或 Chrome；普通模式由脚本打开 http://127.0.0.1:5174/ |\n| Tacview | 如需物理可视化，需安装 Tacview；脚本默认路径为 本地路径\\steam\\steamapps\\common\\Tacview\\tacview64.exe，不一致时需手动修改或手动打开 Tacview |\n| 依赖 DLL | AirCombat_demo.exe 同目录需包含 datalink.dll、wguazj.dll、msvcp140d.dll、vcruntime140d.dll、ucrtbased.dll 等运行依赖 |\n| 端口 | 因果引擎界面使用 5174，物理引擎实时接口使用 8090 |\n| 日志编码 | CSV 字段名可能受本机编码影响出现乱码，建议使用 VS Code / Notepad++ 切换 UTF-8、UTF-8 with BOM 或 ANSI 查看 |"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5.核心数据流"
+    },
+    {
+      "type": "paragraph",
+      "text": "系统运行时的数据流如下："
+    },
+    {
+      "type": "paragraph",
+      "text": "1.json / 2.json -> 物理引擎 AirCombat_demo.exe -> 8090/deduction_realTime -> 因果同步服务 causal_sync_server.py -> 5174 Web 界面 -> F2T2EA 杀伤链展示"
+    },
+    {
+      "type": "paragraph",
+      "text": "物理端在 AirCombat_demo.cpp 中启动 8090 HTTP 服务，并在事件执行时更新杀伤链状态。因果端 causal_sync_server.py 监听 5174 端口，对前端提供 /api/state、/api/health、/api/rules 等接口，并主动读取物理端 http://127.0.0.1:8090/deduction_realTime。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5.1 两个引擎通信原理"
+    },
+    {
+      "type": "paragraph",
+      "text": "双引擎之间采用本机 HTTP 接口通信，不直接共享内存，也不由因果界面反向控制仿真主循环。物理引擎是运行时事实来源，因果引擎负责读取、转换和展示。"
+    },
+    {
+      "type": "table",
+      "markdown": "| 通信环节 | 实现方式 | 说明 |\n| --- | --- | --- |\n| 物理引擎发布状态 | AirCombat_demo.exe 启动 8090 端口 HTTP 服务 | 仿真主循环执行 EnvStep，并在事件执行过程中维护杀伤链运行状态 |\n| 实时状态接口 | POST http://127.0.0.1:8090/deduction_realTime | 因果同步服务通过该接口读取物理引擎当前事件流或杀伤链状态 |\n| 因果同步服务 | causal_sync_server.py 监听 127.0.0.1:5174 | 服务端定时访问 8090 接口，将物理事件转换为前端可显示的因果链状态 |\n| 前端页面取数 | 浏览器访问 /api/state、/api/health、/api/rules | app.js 每约 700 ms 轮询 /api/state，刷新连接状态、链路数量和各阶段进度 |\n| 映射规则 | config/kill_chain_event_stage_mapping.json | 定义 RD/WP/FC/XT/TT/FM/WAIT 到 Find/Fix/Track/Target/Engage/Assess 的映射关系 |"
+    },
+    {
+      "type": "paragraph",
+      "text": "通信过程可以理解为四步：第一，物理引擎读取 1.json 和 2.json 后进入仿真循环；第二，每当装备事件被执行，物理端根据 commandType、eventId、equipmentId、targetId、waitId、params 等信息更新运行时状态；第三，因果同步服务轮询 8090 实时接口，按映射规则把物理事件归入目标杀伤链；第四，浏览器前端轮询 5174 服务端接口，把每条 KC_TARGET_{targetId} 杀伤链的当前环节和完成状态显示出来。"
+    },
+    {
+      "type": "paragraph",
+      "text": "链路编号以攻击目标为核心，而不是以发射方装备或事件序号为核心。也就是说，同一个 targetId 被多个装备发现、跟踪、指示、打击或等待评估时，都会归入同一条 KC_TARGET_{targetId} 杀伤链。这样做可以让界面聚焦“某个目标的杀伤链走到哪一步”，而不是只展示离散事件列表。"
+    },
+    {
+      "type": "paragraph",
+      "text": "当前通信是近实时轮询机制，不是 WebSocket 推送。轮询的优点是实现简单、便于本地演示和排错；限制是界面刷新存在一个轮询周期级别的延迟，并且 8090 端口必须由当前物理引擎进程占用。causal_sync_server.py 中包含端口归属检查逻辑，如果 8090 被其他进程占用，页面会提示等待物理引擎或连接异常。"
+    },
+    {
+      "type": "paragraph",
+      "text": "需要注意的是，因果引擎界面不负责启动、暂停或改变物理仿真，也不会修改 1.json、2.json。它只是把物理引擎已经执行到的事件状态转换成 F2T2EA 视角的链路展示。因此排查联动问题时，应先确认物理引擎是否在 8090 正常提供实时状态，再检查 5174 因果同步服务和前端页面。"
+    },
+    {
+      "type": "table",
+      "markdown": "| commandType | 物理事件含义 | 因果链路映射 |\n| --- | --- | --- |\n| RD | 雷达状态指令 | Find |\n| WP | 航路点指令 | Fix |\n| FC | 飞控姿态/油门指令 | Fix |\n| XT | 悬停或等待 | Fix |\n| TT | 协同定位/追踪目标 | Track、Target |\n| FM | 发射导弹或毁伤目标 | Engage |\n| WAIT | 等待毁伤结果或超时 | Assess |"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6.运行步骤"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.1 解压与目录确认"
+    },
+    {
+      "type": "list",
+      "text": "将附件工程解压到本地目录。"
+    },
+    {
+      "type": "list",
+      "text": "确认根目录下存在 README-运行说明.md、启动因果引擎界面.bat、启动物理引擎和Tacview.bat 三个顶层文件。"
+    },
+    {
+      "type": "list",
+      "text": "确认 物理引擎-fz\\x64\\Debug 下存在 AirCombat_demo.exe、datalink.dll、wguazj.dll 和 zq\\1.json、zq\\2.json。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.2 启动因果引擎界面"
+    },
+    {
+      "type": "paragraph",
+      "text": "双击根目录下的 启动因果引擎界面.bat。脚本会定位 causal_sync_server.py，进入因果界面目录，打开浏览器并启动本地服务。"
+    },
+    {
+      "type": "paragraph",
+      "text": "cd /d 本地路径\\双引擎"
+    },
+    {
+      "type": "paragraph",
+      "text": "启动因果引擎界面.bat"
+    },
+    {
+      "type": "paragraph",
+      "text": "正常情况下浏览器会打开 http://127.0.0.1:5174/。如果物理引擎尚未启动，页面会显示等待连接，这是正常状态。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.3 启动物理引擎与 Tacview"
+    },
+    {
+      "type": "paragraph",
+      "text": "双击根目录下的 启动物理引擎和Tacview.bat。脚本会递归查找 AirCombat_demo.exe，默认使用 exe 同目录下的 zq 作为配置目录，使用 log 作为日志目录。"
+    },
+    {
+      "type": "paragraph",
+      "text": "cd /d 本地路径\\双引擎"
+    },
+    {
+      "type": "paragraph",
+      "text": "启动物理引擎和Tacview.bat"
+    },
+    {
+      "type": "paragraph",
+      "text": "脚本实际启动参数等价于："
+    },
+    {
+      "type": "paragraph",
+      "text": "\"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\AirCombat_demo.exe\" \"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\zq\" \"本地路径\\双引擎\\物理引擎-fz\\x64\\Debug\\log\""
+    },
+    {
+      "type": "paragraph",
+      "text": "其中第一个参数是配置目录，必须包含 1.json 和 2.json；第二个参数是日志目录，程序会在其中创建按时间戳命名的子目录。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.4 推荐启动顺序"
+    },
+    {
+      "type": "paragraph",
+      "text": "先启动因果引擎界面，确认浏览器打开 5174 页面。"
+    },
+    {
+      "type": "paragraph",
+      "text": "再启动物理引擎和 Tacview，等待 8090 实时接口启动。"
+    },
+    {
+      "type": "paragraph",
+      "text": "观察因果界面顶部状态是否从“等待物理引擎”变为“物理引擎已连接”。"
+    },
+    {
+      "type": "paragraph",
+      "text": "在 Tacview 中按原仿真流程查看物理态势和航迹。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.5 路径优先级说明"
+    },
+    {
+      "type": "paragraph",
+      "text": "本文以 本地路径\\双引擎 根目录下两个顶层 bat 脚本和本文命令为准。子目录 README、examples\\运行命令.txt 或历史脚本中若仍出现 D:\\Desktop\\fz、D:\\Desktop\\方案一工程工具包 等旧路径，仅作为开发历史记录，不作为当前复现依据。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7.样例与工程验证信息"
+    },
+    {
+      "type": "paragraph",
+      "text": "根据当前工程文件检查，完整样例位于 物理引擎-fz\\x64\\Debug\\zq，其中 1.json 配置 18 个装备，红方 11 个、蓝方 7 个；2.json 包含 10 个装备动作队列、110 个事件，指令类型包括 WP、RD、TT、FM、WAIT、XT。"
+    },
+    {
+      "type": "paragraph",
+      "text": "简化样例位于 物理引擎-fz\\x64\\Debug\\zq\\简化，其中 1.json 配置 2 个装备，2.json 包含 1 个动作队列、3 个事件，可用于最小化联调。"
+    },
+    {
+      "type": "paragraph",
+      "text": "当前工程保留了多轮运行日志，例如 物理引擎-fz\\x64\\Debug\\log\\20260904122231 下有 18 个装备 CSV 文件，与完整样例装备数量一致。战中因果方案工程工具包\\outputs\\causal_logs.md 中记录了输入事件数 110、诊断日志数 64，可作为因果诊断输出示例。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8.结果核对方法"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.1 因果界面核对"
+    },
+    {
+      "type": "paragraph",
+      "text": "打开 http://127.0.0.1:5174/，确认页面能显示杀伤链数量、当前同步时间和物理引擎连接状态。"
+    },
+    {
+      "type": "paragraph",
+      "text": "运行物理引擎后，查看目标杀伤链是否按 KC_TARGET_{targetId} 命名。"
+    },
+    {
+      "type": "paragraph",
+      "text": "确认 TT、FM、WAIT 等目标相关事件能推动 Track、Target、Engage、Assess 环节变化。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.2 CSV 日志核对"
+    },
+    {
+      "type": "paragraph",
+      "text": "打开 物理引擎-fz\\x64\\Debug\\log 下最新时间戳目录。"
+    },
+    {
+      "type": "paragraph",
+      "text": "检查是否生成与装备数量对应的 CSV 文件，例如 10010.csv、10011.csv、20010.csv。"
+    },
+    {
+      "type": "paragraph",
+      "text": "检查时间字段是否持续增长，经度、纬度、高度、姿态角、雷达捕获数量、是否发射、目标 ID、导弹剩余数量、是否存活等字段是否随仿真推进变化。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.3 Tacview 与视频核对"
+    },
+    {
+      "type": "paragraph",
+      "text": "如果本机 Tacview 路径正确，启动物理引擎脚本会尝试打开 Tacview。若脚本未能自动打开，可手动打开 Tacview 后按原仿真流程连接。演示视频 新版-物理因果双引擎可视化界面修改版.mp4 可作为界面效果参考，附件由投稿人手动插入。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9.常见问题"
+    },
+    {
+      "type": "table",
+      "markdown": "| 问题 | 可能原因 | 处理方法 |\n| --- | --- | --- |\n| 5174 页面打不开 | 因果服务未启动或 Python 不可用 | 保持 启动因果引擎界面.bat 窗口打开，确认 PATH 中有 python，或按脚本提示安装/配置 Python |\n| 页面一直等待物理引擎 | AirCombat_demo.exe 未运行，或 8090 端口不是当前工程占用 | 先运行 启动物理引擎和Tacview.bat；如仍失败，检查 8090 端口占用 |\n| 8090 端口占用 | 旧仿真进程或其他程序占用 | 执行 netstat -ano \\| findstr 8090 查看 PID，关闭占用进程后重试 |\n| 物理引擎启动后直接退出 | 参数目录错误、1.json/2.json 缺失或 DLL 缺失 | 确认 zq 目录下有 1.json/2.json，Debug 目录下有依赖 DLL |\n| Tacview 没有自动打开 | Tacview 安装路径与脚本默认路径不一致 | 修改脚本中的 TACVIEW_EXE，或手动打开 Tacview |\n| CSV 表头乱码 | 日志编码与查看软件默认编码不一致 | 用 VS Code 或 Notepad++ 切换 UTF-8、UTF-8 with BOM 或 ANSI 查看 |\n| 因果链路不更新 | 物理端实时接口未返回新事件，或目标事件没有 targetId | 检查 2.json 中 TT/FM/WAIT 的 params，确认目标 ID 可被映射规则解析 |\n| 旧路径导致运行失败 | 子目录文档或历史命令仍保留 D:\\Desktop\\fz 等路径 | 复现时以本文和顶层两个 bat 脚本为准 |"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "10. 总结"
+    },
+    {
+      "type": "paragraph",
+      "text": "本项目把物理仿真事件和因果杀伤链展示连接起来，使战中推演不仅能在 Tacview 中观察装备运动，也能在因果界面中同步查看每个目标的 F2T2EA 链路推进状态。"
+    },
+    {
+      "type": "paragraph",
+      "text": "复现时最重要的是保持工程相对目录结构不变，先启动 5174 因果界面，再启动 8090 物理引擎接口，并以顶层启动脚本和本文命令为准。"
+    }
+  ]
+}
